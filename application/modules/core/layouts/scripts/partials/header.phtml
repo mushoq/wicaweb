@@ -1,0 +1,31 @@
+<?php $lang = Zend_Registry::get('Zend_Translate'); ?>
+
+<?php if (Zend_Auth::getInstance ()->hasIdentity ()) :?>
+<?php 
+	$id = New Zend_Session_Namespace('id');
+	$user_name_info =$id->user_name_info;
+	$website_name_info = $id->website_name_info;
+?>
+<div class="span4 first_row_header">
+		<img src="/images/logo_wica.png" alt="WicaWeb 2.0 beta" height="66px" width="159px"/>
+</div>
+<div class="span4 center">
+	&nbsp;
+</div>
+<div class="span4 third_row_header pull-right">
+	<ul class="nav pull-right right">				
+		<li class="active">
+			<a href="/core/index/logout">
+	      		<?php echo mb_strtoupper($this->escape($lang->translate('Log Out'),'UTF-8')); ?>
+	      		<i class="icon-off"></i> 
+			</a>			
+		</li>					
+		<li class="active">
+	        <?php echo $this->escape($lang->translate('Website')).':'; ?> <?php if(isset($website_name_info)): echo $website_name_info; else: echo""; endif; ?>
+		</li>
+		<li class="active">
+		    <b><?php echo $this->escape($lang->translate('User')).': '; ?><?php if(isset($user_name_info)): echo $user_name_info; else: echo""; endif; ?></b>
+		</li>  																									
+	</ul>
+</div>
+<?php endif;?>

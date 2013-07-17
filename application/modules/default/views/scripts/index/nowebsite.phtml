@@ -1,0 +1,23 @@
+<!-- 
+ *	Index view
+ *
+ * @category   WicaWeb
+ * @package    Default_View
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @version    1.0
+ * @author	   David Rosales
+ -->
+
+<?php $lang = Zend_Registry::get('Zend_Translate'); ?>
+<div class="row-fluid line-top">
+	<div class="span12">
+		<div class="row-fluid center line">
+			<h3><?php echo $lang->translate('No Websites');?></h3>
+		</div>
+		<div class="row-fluid center line-top">
+			<h4 class="line"><?php echo $lang->translate('If you want to create a new website go to the administration.');?></h4>
+			<a class="btn btn-success btn-large" href="/core"><?php echo $lang->translate('Go to Administration'); ?></a>
+		</div>
+	</div>		  		  		
+</div>

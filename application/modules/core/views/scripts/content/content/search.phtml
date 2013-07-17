@@ -1,0 +1,51 @@
+<?php
+/**
+ * View that contains the results of a search
+ *
+ * @category   WicaWeb
+ * @package    Core_View
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @version    1.0
+ * @author	   Esteban
+ */
+
+//translate library
+$lang = Zend_Registry::get('Zend_Translate');
+?>
+
+<div class="row-fluid line">
+	<div class="span12 center page-header-wica">
+		<h1><?php echo $lang->translate('Search Contents')?></h1>
+	</div>
+</div>
+<div class="row-fluid line">
+	<div class="span12">
+		<h3><?php echo $lang->translate('Search Parameters')?>: <?php echo $this->content_search_params;?></h3>
+	</div>
+</div> 
+
+<?php if($this->content_results && count($this->content_results)>0):?>
+	<table class="table table-bordered pointer">
+		<tr>
+			<th><?php echo $lang->translate('Content');?></th>
+			<th><?php echo $lang->translate('Internal name');?></th>
+			<th><?php echo $lang->translate('Type');?></th>
+			<th><?php echo $lang->translate('Section');?></th>
+			<th><?php echo $lang->translate('Tools');?></th>
+		</tr>
+		<?php foreach ($this->content_results as $content):?>
+		<tr>
+			<td class="center"><?php echo GlobalFunctions::getContentPreviewForList($content);?></td>
+			<td><?php echo utf8_encode($content['internal_name']); ?></td>
+			<td class="center"><i class="<?php echo GlobalFunctions::getContentIcons(strtolower($content['type'])); ?>"></i></td>
+			<td><?php echo utf8_encode($content['section_name']);?></td>
+			<td><a id="edit_content_<?php echo $content['id']; ?>" content_id="<?php echo $content['id']; ?>" section_id="<?php echo $content['section_id']; ?>"><i class="icon-pencil"></i> </a></td>
+		</tr>	
+		<?php endforeach;?>
+	</table>
+<?php else:?>
+	<div class="row-fluid center">
+		<h3><?php echo $lang->translate('No Contents Found');?></h3>
+	</div>
+<?php endif;?>

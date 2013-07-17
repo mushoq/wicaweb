@@ -1,0 +1,84 @@
+<?php if(!$this->private || ($this->private && isset($_SESSION['external_user']))):?>
+<?php if($this->banners): ?>
+<?php $value = $this->banners; ?>
+<div class="row-fluid">		
+	<?php $today = date('Y-m-d'); ?>		
+	<?php $show_banner = false; ?>		
+	<?php if($value['publish_date'] || $value['expire_date']): ?>
+		<?php if($value['publish_date']): ?>				
+			<?php 
+				list($ysp, $msp, $dsp) = explode('-', $today);
+				list($yep, $mep, $dep) = explode('-', $value['publish_date']);
+				$now = mktime(0, 0, 0, $msp, $dsp, $ysp);
+				$publish = mktime(0, 0, 0, $mep, $dep, $yep);
+			?>
+			<?php if($publish < $now || $publish == $now): ?>			
+				<?php 	$show_banner = true; ?>				
+			<?php endif; ?>
+		<?php endif; ?>
+		
+		<?php if($value['expire_date']): ?>			
+			<?php $show_banner = false; ?>
+			<?php 
+				list($ysp, $msp, $dsp) = explode('-', $today);
+				list($yep, $mep, $dep) = explode('-', $value['expire_date']);
+				$now = mktime(0, 0, 0, $msp, $dsp, $ysp);
+				$expire = mktime(0, 0, 0, $mep, $dep, $yep);
+			?>
+			<?php if($expire > $now || $expire == $now): ?>					
+			<?php 	$show_banner = true; ?>
+			<?php endif; ?>				
+		<?php endif; ?>
+	<?php else: ?>
+		<?php if($value['count_hits']<$value['hits']): ?>
+			<?php $show_banner = true; ?>
+		<?php endif; ?>
+	<?php endif; ?>
+	
+	<?php if($show_banner): ?>
+	<div class="span12 no-margin overflow_hidden jump">
+		<div class="row-fluid">
+			<div class="fixed_internal_content">
+				<?php if($value['id'] && $value['content'] && $value['banner_type']): ?>
+				<?php 
+					switch ($value['banner_type'])
+					{
+						case 'flash' :
+							$return = '<div id="alignment_cont_'.$value['id'].'">
+							<object type="application/x-shockwave-flash" data="/uploads/banners/' . $value['content'] . '" width="320" height="240">
+							<param name="movie" value="/uploads/banners/'.$value['content'].'" />
+							<param name="quality" value="high" />
+							<param name="wmode" value="opaque" />
+							</object>
+							</div>';					
+							echo $return;
+							break;
+								
+						case 'image':
+							$return = '<div id="banner_'.$value['id'].'" class="overflow_hidden">';
+							if($value['link'])
+								$return .= '<a href="http://' . $value['link']. '" target="_blank" >';														
+							$return .= '<img src="/uploads/banners/'.$value['content'].'" />';
+							if($value['link'])
+								$return .= '</a>';							
+							$return .= '</div>';
+							echo  $return;
+							break;
+								
+						case 'html' :							
+							echo '<div id="banner_'.$value['id'].'">'.$value['content'].'</div>';
+							break;
+					}				
+				?>				
+				<?php endif; ?>					
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php elseif (!$this->login): ?>
+<div class="row-fluid">
+	<?php 	echo $this->previewHelper(null,null,$this->area); ?>
+</div>
+<?php endif; ?>

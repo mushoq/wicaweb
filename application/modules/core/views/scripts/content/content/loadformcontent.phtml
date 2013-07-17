@@ -1,0 +1,113 @@
+<!-- 
+ *	View that contains a content form to create a new element
+ *
+ * @category   WicaWeb
+ * @package    Core_Controller
+ * @copyright  Copyright (c) WicaWeb - Mushoq 
+ * @license    GNP
+ * @version    1.0
+ * @author	   Santiago Arellano
+ -->
+
+
+<?php $lang = Zend_Registry::get('Zend_Translate');?>
+<h1></h1>
+
+<div>
+
+<form class="form-horizontal" id="elements_form" action="">
+<?php if($this->element_type == 'radiobutton' || $this->element_type == 'dropdown'):?>
+
+	<div class="span5 margin-fancy">	
+		<div class="control-group">
+			<label class="span label_frm_cnt" for="frm_name"><?php echo '* '.$lang->translate('Name').":";?></label>
+			<div class="span3">
+				<input type="text" id="frm_name" name="frm_name" />
+				<span>
+					<label id="repeat_frm_name" class=" hide" for="frm_name" ><b><?php echo $lang->translate('The name of element already exist')?></b></label>
+				</span>								
+			</div>
+		</div>	
+	</div>
+
+	<div class="span5 margin-fancy">	
+		<div class="control-group">
+			<label class="span label_frm_cnt" for="frm_description"><?php echo '* '.$lang->translate('Description').":";?></label>
+			<div class="span3">
+				<textarea id="frm_description" name="frm_description" cols="50" rows="5"> </textarea>								
+			</div>
+		</div>	
+	</div>	
+	
+	<?php 
+	$band = 1;
+	
+	while($band <= $this->number){
+	?>
+		<div class="span5 margin-fancy">	
+			<div class="control-group">
+				<label class="span label_frm_cnt" for="<?php echo "frm_options_".$band; ?>"><?php echo '* '.$lang->translate('Option')." ".$band.":";?></label>
+				<div class="span3">
+					<input type="text" id="<?php echo "frm_option_".$band; ?>" name="<?php echo "frm_option_".$band; ?>" />								
+				</div>
+			</div>	
+		</div>		
+	<?php 
+	$band++; 
+	}
+	?>
+	
+	<div class="span5 margin-fancy">	
+		<div class="control-group">
+			<label class="span label_frm_cnt" ><?php echo $lang->translate('Required').":";?></label>
+			<div class="span3">
+				<div class="btn-group" data-toggle="buttons-radio">
+					<input type="button" class="btn btn-primary" id="frm_required_yes" name="frm_required" value="<?php echo $lang->translate('Yes');?>" element_value="yes" />
+					<input type="button" class="btn btn-primary active" id="frm_required_no" name="frm_required" value="<?php echo $lang->translate('No');?>" element_value="no" />
+				</div>					
+			</div>
+		</div>	
+	</div>	
+<?php else: ?>
+	<div class="span5 margin-fancy">	
+		<div class="control-group">
+			<label class="span label_frm_cnt" for="frm_name"><?php echo '* '.$lang->translate('Name').":";?></label>
+			<div class="span3">
+				<input type="text" id="frm_name" name="frm_name" />
+				<span>
+					<label id="repeat_frm_name" class=" hide" for="frm_name" ><b><?php echo $lang->translate('The name of element already exist')?></b></label>
+				</span>								
+			</div>
+		</div>	
+	</div>
+	
+	<div class="span5 margin-fancy">	
+		<div class="control-group">
+			<label class="span label_frm_cnt" for="frm_description"><?php echo '* '.$lang->translate('Description').":";?></label>
+			<div class="span3">
+				<textarea id="frm_description" name="frm_description" cols="50" rows="5"> </textarea>								
+			</div>
+		</div>	
+	</div>	
+		
+
+	<div class="span5 margin-fancy">	
+		<div class="control-group">
+			<label class="span label_frm_cnt" ><?php echo $lang->translate('Required').":";?></label>
+			<div class="span3">
+				<div class="btn-group" data-toggle="buttons-radio">
+					<input type="button" class="btn btn-primary" id="frm_required_yes" name="frm_required" value="<?php echo $lang->translate('Yes');?>" element_value="yes" />
+					<input type="button" class="btn btn-primary active" id="frm_required_no" name="frm_required" value="<?php echo $lang->translate('No');?>" element_value="no" />
+				</div>					
+			</div>
+		</div>	
+	</div>		
+	
+	
+
+<?php endif;?>
+<div class="span5 margin-fancy" align="center">
+	<input type="button" id="btn_add" class="btn btn-success" value="Guardar" >
+</div>
+</form>
+</div>

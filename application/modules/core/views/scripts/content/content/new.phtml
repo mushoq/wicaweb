@@ -1,0 +1,183 @@
+<!-- 
+ *	View that contains a content form to create a new element
+ *
+ * @category   WicaWeb
+ * @package    Core_Controller
+ * @copyright  Copyright (c) WicaWeb - Mushoq 
+ * @license    GNP
+ * @version    1.1
+ * @author	   Santiago Arellano, Jose Luis landazuri
+ -->
+
+
+<?php $lang = Zend_Registry::get('Zend_Translate');?>
+
+<div>
+	<?php echo $this->flashMessages();?>
+	
+<!-- 	Form -->
+	<form class="well form-horizontal <?php echo $this->form->getAttrib('class'); ?>" id="<?php echo $this->form->getAttrib('id'); ?>" method="<?php echo $this->form->getMethod(); ?>" enctype="multipart/form-data">		 
+<!-- 	Get elements from post -->
+		<?php
+		//print_r($this->form->getElements()) ;
+		//loops through all content elemnts
+		foreach($this->form->getElements() as $name => $element){ ?>
+			<?php if(strpos($name, 'hdnNameFile')=== false){ ?>		
+				<div class="row-fluid">
+<!-- 				Div only for separate elements -->
+				<div id="<?php echo $name."_span-separator";?>" class="span4 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg')){ echo 'hide'; }?>">&ensp;</div>
+				
+				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg')){ echo 'hide'; }?> ">
+					
+						<div class="control-group">
+						
+<!-- 						Control when label should be shown -->
+						<?php if(($this->form->$name->helper != 'formSubmit' && $this->form->$name->helper != 'formButton') || ($name == 'file' || $name == 'alternative_image' || $name == 'flash_file')) { ?>
+							<label id="<?php echo $name."_label"?>" class="control-label <?php if( ($this->form->$name->class == 'hide' || $this->form->$name->class == 'hide btn') && ($name != 'alternative_image' && $name != 'flash_file')) echo ' hide'?>"><?php if($name == 'file' || $name == 'alternative_image' || $name == 'flash_file'){ echo $this->form->$name->label_name;  }else{ echo $this->form->$name->getLabel(); }?></label>
+						<?php } ?>	
+							<?php if($name == 'alternative_image'){ ?>
+							<div class="span7">
+							<?php }else{ ?>
+							<div class="<?php if($name == 'content'){ echo 'span6'; } else {?>span4<?php }?>">
+							<?php }?>
+								<?php 
+// 								Div for carrusel multi image uploader
+									if($name == 'select_images'){
+										?>
+											<div></div><div id='multiple_img'></div>
+											<p class="help-block grey">(jpg,png,gif,jpeg)</p>
+											<input type="hidden" id="multiple_img_aux_validation" name="multiple_img_aux_validation" />
+										<?php
+									}else //Div for single image upload
+										if($name == 'aux_make_div_image'){?>
+												<div id='single_img'>
+												</div><p class="help-block grey">(jpg,png,gif,jpeg)</p><?php
+										}	
+										else	
+// 											Build blue special buttons to replace radio button elements
+											if($name == 'background' || $name == 'type' || $name == 'captcha' || $name == 'target'  || $name == 'resizeimg'){ 
+													$static_var = $name.'_values'; ?>
+													<div class="btn-group" data-toggle="buttons-radio">
+														<?php foreach ( Core_Model_Content::$$static_var as $k => $entry): ?>
+														<input type="button" class="btn btn-primary"  id="<?php echo $name.'-'.$k; ?>" name="<?php echo $name.'-'.$k; ?>" element_value="<?php echo $k; ?>" value="<?php echo $lang->translate($this->escape($entry)); ?>" />							
+														<?php endforeach; ?>							
+													</div>	<?php echo $this->form->$name->renderViewHelper(); 											
+											}
+											else
+// 												Extructure for file uploads
+												if($name == 'file' || $name == 'alternative_image' || $name=='flash_file'){?>
+													<div>
+														<input class="align-top hide" readonly type="text" id="<?php echo 'input_file_'.$name;?>" name="<?php echo 'input_file_'.$name;?>"/>
+														<?php $this->form->$name->class="hide btn align-top"; echo $this->form->$name->renderViewHelper(); ?>
+														<?php $hdn_name='hdnNameFile_'.$name; echo $this->form->$hdn_name->renderViewHelper(); ?>
+														<?php if($name == 'flash_file'){ ?>
+															<p class="help-block grey">(swf)</p>
+														<?php }?>
+														
+														<?php if($name == 'alternative_image'){ ?>
+															<p class="help-block grey">(jpg,png,gif,jpeg)</p>
+															<img id="<?php echo 'imageprw_'.$name; ?>" name="<?php echo 'imageprw_'.$name; ?>" src="" class="preview_img" />												
+															
+														<?php }?>
+													
+													</div>
+		
+												<?php }
+												else{	
+// 													center buttons														
+													if($this->form->$name->helper == 'formButton' || $this->form->$name->helper == 'formSubmit'){
+														//generate save button to print at the end
+														$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+													}else
+														if($name == 'url'){
+															echo $this->form->$name->removeDecorator('HtmlTag')->removeDecorator('Label');
+															?>
+															<?php 
+														}
+														else{
+															if($name == 'alternative_image')
+																$this->form->$name->class = '';
+		
+															echo $this->form->$name->removeDecorator('HtmlTag')->removeDecorator('Label');
+															if($name == 'content'){
+															?> <input type="hidden" name="hdn_content" id="hdn_content" value="" /> <?php 
+															}
+														}
+												}
+								?>								
+							</div>
+							
+							<input type="hidden" id="repeated_section_name" value="<?php echo $lang->translate('The internal name of content already exist');?>" />
+		
+						</div>	
+								
+				</div>	
+<!-- 				info youtube video -->
+							<?php if($name == 'url'){
+									?>
+									<br/><div id="youtube_separator" class="span3 ">&ensp;</div>
+										<div class="span7">
+											<img class="span2" id="img_youtube" name="img_youtube" src="" width="200px"/>
+											<div class="span4">
+												<div id="title_youtube" ></div>
+												<div id="url_youtube" ></div>
+								                <div id="description_youtube" style="text-align:justify;"></div>
+											</div>
+										</div><br/>
+									<?php 
+								}?>					
+				</div>	
+				<?php if($name == 'add'){ ?>
+					<div class="row-fluid">
+						<div class="span2"> &nbsp; </div>
+						<div class="span8">
+							<div class="row-fluid"> 
+								<div class="center line" id='form_elements'></div>
+								<div id='div_hidden_elements'></div>
+							</div>
+						</div>						
+						<div class="span2"> &nbsp; </div>
+					</div>
+				<?php } ?> 
+			<?php } ?>
+		<?php } 
+		//prints the save button at the end
+		echo $saveButton;
+		?>
+		<input type="hidden" id="approved" name="approved" value="<?php echo $this->approved_frm; ?>" />
+		<input type="hidden" id="section_details" name="section_details" value="<?php echo $this->section_id.'/'.$this->article;?>" />
+		<input type="hidden" id="section_temp" name="section_temp" value="<?php echo $this->section_temp; ?>" />
+		<input type="hidden" id="hdn_max_height_img" name="hdn_max_height_img" value="<?php echo $this->max_height; ?>" />
+		<input type="hidden" id="hdn_max_width_img" name="hdn_max_width_img" value="<?php echo $this->max_width; ?>" />
+	</form>
+	
+	<a id="anchor_add" class="hide" href="#formContent"></a>
+	<div style="display: none">
+<!-- form of elments on contetn form -->
+		<div class="span5" id="formContent">
+			
+		</div>
+
+	</div>
+<!-- 	table header of form elements -->
+	<input id="header_table" type="hidden" value='<?php echo '<label id="labl_no_elements"><h4>'.$lang->translate('No items entered').'</h4></label>
+															<div id="elements_table" class="hide">
+																<div class="row-fluid table-bordered-header">	
+																	<div class="span4"><b>'.$lang->translate('Name').'</b></div>
+																	<div class="span3"><b>'.$lang->translate('Type').'</b></div>
+																	<div class="span1"><b>'.$lang->translate('Order').'</b></div>
+																	<div class="span4 last"><b>'.$lang->translate('Tools').'</b></div>																	
+																</div>
+															</div>
+															<div id="sortable" class="row-fluid hide"></div>'?>' /> 
+															
+	<input type="hidden" id="repeat_content" value="<?php echo $lang->translate('The internal name of content already exist');?>" />															
+															
+														
+</div>
+
+<!-- flash player message -->
+<div id="no_flash_player" class="row-fluid hide center">
+	<label><b><?php echo $lang->translate("Your browser does not have Flash Player installed and/or activated"); ?></b></label><br/>
+	<img src="/images/flash_player.jpg" width="80px;">
+</div>

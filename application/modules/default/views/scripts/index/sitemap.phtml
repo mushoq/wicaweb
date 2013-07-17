@@ -1,0 +1,100 @@
+<!-- 
+ *	Sitemap view
+ *
+ * @category   WicaWeb
+ * @package    Default_View
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @version    1.0
+ * @author	   David Rosales
+ -->
+  
+<?php $lang = Zend_Registry::get('Zend_Translate');?>
+
+<?php foreach($this->areas as $area): ?>
+<?php 	$section_contents_tpl[$area->name] = '&nbsp;'; ?>
+<?php endforeach; ?>
+
+<!-- Section content rendered with its template -->
+<?php 
+	foreach($this->section_contents as $section => $key)
+	{	
+		//session storage vals
+		$session_render_vals = new Zend_Session_Namespace('render_vals_front');
+		$session_render_vals->area_width = $key['area_width'];
+		$session_render_vals->section_cols = $key['column_number'];
+				
+		if(array_key_exists($key['area'], $section_contents_tpl)){
+			if($section_contents_tpl[$key['area']] == '&nbsp;')
+				$section_contents_tpl[$key['area']] = '';
+			
+			$section_contents_tpl[$key['area']] = $section_contents_tpl[$key['area']].$this->partial("partials/".$key['filename'], array('contents' => $key['content'], 'col_number' => $key['column_number'], 'section_title' => $key['section_title'], 'section_subtitle' => $key['section_subtitle']));
+		}else
+			$section_contents_tpl[$key['area']] = $this->partial("partials/".$key['filename'], array('contents' => $key['content'], 'col_number' => $key['column_number'], 'section_title' => $key['section_title'], 'section_subtitle' => $key['section_subtitle']));
+		//delete session storage
+		Zend_Session::namespaceUnset('render_vals_front');		
+	}
+
+	if($this->menu)
+		$section_contents_tpl['menu'] = '<ul id="nav">
+											<li><a href="/default/"><i class="icon-home icon-white"></i></a></li>'.
+											$this->menu.'
+											<li><a href="/default/index/sitemap">'.$lang->translate('Sitemap').'</a></li> 					
+										</ul>';
+	
+	if($this->header['logo'])	
+		$section_contents_tpl['header_logo'] = '<ul class="header-website">
+													<li class="">
+														<img src="/uploads/website/'.$this->header['logo'].'" class="logo"/>
+													</li>
+												</ul>';
+	
+	if($this->header['name'])
+		$section_contents_tpl['header_name'] = '<h1>'.$this->header['name'].'</h1>';	
+	
+	if($this->footer)
+		$section_contents_tpl['footer'] = '<footer class="footer">
+												<p class="pull-right">
+													&copy; '.$this->footer['copyright'].'
+												</p>
+											</footer>';
+?>
+<!-- End Section contents -->
+
+<?php
+	$render = $this->templaterender;
+	
+	if($render)
+	{
+		foreach ($section_contents_tpl as $key => $section_content)
+		{
+			$view = '';		
+			if($section_content)
+			{
+				//last find of section_name
+				$pos_occ = strpos($render, $key);
+				if($pos_occ)
+				{
+					//next part of string after are_name as id			
+					$render_part = substr($render, $pos_occ);				
+					//then find >
+					$pos_grt = strpos($render_part, '>');				
+					//next part of string after >
+					$render_part = substr($render_part, $pos_grt);				
+					//then find </
+					$pos_lss = strpos($render_part, '</');
+					//next part of string after </
+					$render_part = substr($render_part, $pos_lss);			
+					
+					$view = substr_replace($render, $section_content, ($pos_occ+$pos_grt+1));
+					$view.= $render_part;			
+					$render = $view;
+				}
+			}
+		}
+	}
+?>
+
+<?php echo $render; ?>
+
+

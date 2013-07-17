@@ -1,0 +1,27 @@
+<?php 
+/**
+ * New View. Renders the view of the New action 
+ *
+ * @category   WicaWeb
+ * @package    Core_View_Template_View
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @author	   Santiago Arellano
+ * @version    1.0
+ *
+ */
+//translate library
+$lang = Zend_Registry::get('Zend_Translate');
+?>
+
+<div class="row-fluid">
+    <div class="span12">
+
+		       <?php 
+			       foreach($this->template_file as $f):
+			       		echo  $f ;
+			       endforeach;
+		       ?>
+
+    </div>
+</div> 

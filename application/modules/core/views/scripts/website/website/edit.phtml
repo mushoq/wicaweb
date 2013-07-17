@@ -1,0 +1,941 @@
+<?php 
+/**
+ * Edit View. Renders the view of the edit action 
+ *
+ * @category   WicaWeb
+ * @package    Core_View_Website_Edit
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @author	   Esteban
+ * @version    1.0
+ *
+ */
+
+//translate library
+$lang = Zend_Registry::get('Zend_Translate');
+$confirm = GlobalFunctions::arrayTranslate(Core_Model_Website::$confirm);
+$comments_type = GlobalFunctions::arrayTranslate(Core_Model_Website::$comments_type);
+?>
+<div class="line-top alert_messages_container line">
+	<?php echo $this->flashMessages();?>
+</div>
+
+<form id="<?php echo $this->form->getId(); ?>" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>" class="<?php //echo $this->form->getAttrib('class'); ?>" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >
+<div class="row-fluid">
+	<div class="span12">		
+			<div id="accordion1" class="accordion ">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle website_config_header" href="#collapseOptions" data-parent="#accordion1" data-toggle="collapse"> 
+							1. <?php echo $lang->translate('Option Configuration');?> 
+						</a>
+					</div>
+					<div id="collapseOptions" class="accordion-body collapse">
+						<div class="accordion-inner"> 
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->name->setAttrib('container','collapseOptions'); echo $this->form->name->renderViewHelper(); ?>
+											<input type="hidden" id="repeated_website_name" value="<?php echo $lang->translate('The website name already exist');?>" />
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="info_email"><?php echo $this->form->info_email->getDecorator('label')->getOption('requiredPrefix').$this->form->info_email->getLabel(); ?> <i class="icon-question-sign" title="<?php echo $lang->translate('Notification mail'); ?>"></i></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->info_email->setAttrib('container','collapseOptions'); echo $this->form->info_email->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="description"><?php echo  $this->form->description->getDecorator('label')->getOption('requiredPrefix').$this->form->description->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->description->setAttrib('container','collapseOptions'); echo $this->form->description->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="copyright"><?php echo $this->form->copyright->getDecorator('label')->getOption('requiredPrefix').$this->form->copyright->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->copyright->setAttrib('container','collapseOptions'); echo $this->form->copyright->renderViewHelper(); ?>
+										</div>
+									</div>
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="language_id"><?php echo $this->form->language_id->getDecorator('label')->getOption('requiredPrefix').$this->form->language_id->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->language_id->setAttrib('container','collapseOptions'); echo $this->form->language_id->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="keywords"><?php echo  $this->form->keywords->getDecorator('label')->getOption('requiredPrefix').$this->form->keywords->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->keywords->setAttrib('container','collapseOptions'); echo $this->form->keywords->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="icon"><?php echo $this->form->icon->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span5 form_field">
+											<div class=" upload_icon_container"> 
+												<div class='upload_icon'><?php echo $this->form->icon->removeDecorator('HtmlTag')->removeDecorator('Label'); ?></div>
+												<div class='delete_icon'><a id='delete_icon' class="pointer trash-icon"><i class='icon-trash'></i></a></div>
+											</div>
+											<p class="help-block grey">(jpg,png,gif,jpeg,ico)</p>
+											<input id="deleted_icon" type="hidden" value=""  name="deleted_icon">
+										</div>
+									</div>
+									<div class="row-fluid">
+										<div class="span5">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php echo $this->form->img_icon->removeDecorator('HtmlTag')->removeDecorator('Label'); ?><p id="website_icon"></p>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="website_url"><?php echo $this->form->website_url->getDecorator('label')->getOption('requiredPrefix').$this->form->website_url->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->website_url->setAttrib('container','collapseOptions'); echo $this->form->website_url->renderViewHelper(); ?>
+											<p class="help-block grey">www.google.com</p>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="logo"><?php echo $this->form->logo->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php echo $this->form->logo->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+											<p class="help-block grey">(jpg,png,gif,jpeg)</p>
+										</div>
+									</div>
+									<div class="row-fluid">
+										<div class="span5">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php echo $this->form->img_logo->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid center">
+								<input type="button" class="btn btn-warning" value="<?php echo $lang->translate('Continue');?>" id="continue_1" current="collapseOptions" next="collapseTemplates">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle website_config_header" href="#collapseTemplates" data-parent="#accordion1" data-toggle="collapse"> 
+							2. <?php echo $lang->translate('Templates');?> 
+						</a>
+					</div>
+					<div id="collapseTemplates" class="accordion-body collapse">
+						<div class="accordion-inner">
+							<div class="row-fluid">
+								<div class="center">
+									<?php $this->form->template_id->setAttrib('container','collapseTemplates'); echo $this->form->template_id->renderViewHelper(); ?>
+								</div>
+							</div>
+							
+							<div class="row-fluid">
+								<ul id="template_list_options" class="template_list" >
+									<?php foreach($this->template_list as $template):?>
+										<li class="template_list center">
+											<?php if($template->image):?>
+												<img alt="<?php echo $template->name; ?>" src="/uploads/template_img/<?php echo $template->image;?>" class="<?php if($this->selected_template == $template->id): echo "border_image"; endif;?>">
+											<?php else:?>
+												<div class="no_image">&nbsp;</div>
+											<?php endif;?>
+											<input type="button" id="template_opt_<?php echo $template->id?>" class="btn btn-primary <?php if($this->selected_template == $template->id): echo "active"; endif;?>" template="<?php echo $template->id;?>" value="<?php echo $template->name; ?>">
+										</li>
+									<?php endforeach;?>
+								</ul>
+							</div>
+							
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="row-fluid center">
+										<input type="button" class="btn btn-warning" value="<?php echo $lang->translate('Continue'); ?>" id="continue_2" current="collapseTemplates" next="collapseFormats">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle website_config_header" href="#collapseFormats" data-parent="#accordion1" data-toggle="collapse"> 
+							3. <?php echo $lang->translate('Formats');?> 
+						</a>
+					</div>
+					<div id="collapseFormats" class="accordion-body collapse">
+						<div class="accordion-inner"> 
+							<div class="row-fluid">
+								<div class="span3">&nbsp;</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="number_format"><?php echo  $this->form->number_format->getDecorator('label')->getOption('requiredPrefix').$this->form->number_format->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->number_format->setAttrib('container','collapseFormats'); echo $this->form->number_format->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span3">&nbsp;</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span3">&nbsp;</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="time_zone"><?php echo  $this->form->time_zone->getDecorator('label')->getOption('requiredPrefix').$this->form->time_zone->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->time_zone->setAttrib('container','collapseFormats'); echo $this->form->time_zone->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span3">&nbsp;</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span3">&nbsp;</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="date_format"><?php echo  $this->form->date_format->getDecorator('label')->getOption('requiredPrefix').$this->form->date_format->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->date_format->setAttrib('container','collapseFormats'); echo $this->form->date_format->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span3">&nbsp;</div>
+							</div>
+							<div class="row-fluid line">
+								<div class="span3">&nbsp;</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="hour_format"><?php echo '* '.$lang->translate('Hour Format').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">                    
+					                        <div class="btn-group" data-toggle="buttons-radio">
+					                            <?php $options_hour_format = Core_Model_Website::$hour_format; ?>
+					                            <?php foreach($options_hour_format as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->hour_format->getValue()==$k): echo 'active'; endif; ?>" id="hour_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+					                        <?php $this->form->hour_format->setAttrib('container','collapseFormats'); echo $this->form->hour_format->renderViewHelper(); ?>                   
+										</div>
+									</div>
+								</div>
+								<div class="span3">&nbsp;</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="row-fluid center">
+										<input type="button" class="btn btn-warning" value="<?php echo $lang->translate('Continue'); ?>" id="continue_3" current="collapseFormats" next="collapseSections">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle website_config_header" href="#collapseSections" data-parent="#accordion1" data-toggle="collapse"> 
+							4. <?php echo $lang->translate('Sections Configuration');?> 
+						</a>
+					</div>
+					<div id="collapseSections" class="accordion-body collapse">
+						<div class="accordion-inner"> 
+							<div class="row-fluid line">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="private_section"><?php echo '* '.$lang->translate('Use Private Sections').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->private_section->getValue()==$k): echo 'active'; endif; ?>" id="private_section_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->private_section->setAttrib('container','collapseSections'); echo $this->form->private_section->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="section_feature"><?php echo '* '.$lang->translate('Use Feature Section').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->section_feature->getValue()==$k): echo 'active'; endif; ?>" id="section_feature_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->section_feature->setAttrib('container','collapseSections'); echo $this->form->section_feature->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid line">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="section_highlight"><?php echo '* '.$lang->translate('Use Highlight Section').':' ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->section_highlight->getValue()==$k): echo 'active'; endif; ?>" id="section_highlight_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->section_highlight->setAttrib('container','collapseSections'); echo $this->form->section_highlight->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="section_images_number"><?php echo  $this->form->section_images_number->getDecorator('label')->getOption('requiredPrefix').$this->form->section_images_number->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field ">
+											<ul class="nav tools_list_container">
+												<li class="dropdown website_config_list">
+												    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="section_img_num_container" title="<?php echo $lang->translate('Section Images Number'); ?>">
+													   <span id="value_section_img_num">
+													   		<?php $aux_count=0;  
+													   			  while($aux_count<=3){
+													   			  	if($aux_count == $this->section_img_num)
+													   				  	echo  $aux_count;
+													   			  	  $aux_count++; 
+													   			   }?>	
+													   </span>
+													   <b class="caret"></b>
+												    </a>
+												    <ul class="dropdown-menu web_config_opt_list">
+												    	<?php $aux_count=0;
+												    		  while($aux_count<=3){ ?>
+												    			<li><a id="section_img_num_<?php echo $aux_count;?>" class="pointer" val="<?php echo $aux_count;?>"><?php echo $aux_count;?></a></li>
+												    	<?php $aux_count++; }?>
+												    </ul>
+											    </li>
+											</ul>
+											<?php $this->form->section_images_number->setAttrib('container','collapseSections'); echo $this->form->section_images_number->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>								
+							</div>
+							<div class="row-fluid line">
+
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="dictionary"><?php echo '* '.$lang->translate('Use Dictionary in FrontEnd').':' ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->dictionary->getValue()==$k): echo 'active'; endif; ?>" id="dictionary_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->dictionary->setAttrib('container','collapseSections'); echo $this->form->dictionary->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="section_author"><?php echo  '* '.$lang->translate('Use Section Author').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->section_author->getValue()==$k): echo 'active'; endif; ?>" id="section_author_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->section_author->setAttrib('container','collapseSections'); echo $this->form->section_author->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>								
+							</div>
+							<div class="row-fluid">
+
+								<div class="span6 line">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="sitemap_level"><?php echo $this->form->sitemap_level->getDecorator('label')->getOption('requiredPrefix').$this->form->sitemap_level->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<ul class="nav tools_list_container">
+												<li class="dropdown website_config_list">
+												    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="sitemap_container" title="<?php echo $lang->translate('Sitemap Levels'); ?>">
+													   <span id="value_sitemap_level">
+													   		<?php $aux_count=1;  
+													   			  while($aux_count<=6){
+													   			  	if($aux_count == $this->sitemap_level)
+													   				  	echo  $aux_count;
+													   			  	  $aux_count++; 
+													   			   }?>	
+													   </span>
+													   <b class="caret"></b>
+												    </a>
+												    <ul class="dropdown-menu web_config_opt_list">
+												    	<?php $aux_count=1;
+												    		  while($aux_count<=6){ ?>
+												    			<li><a id="sitemap_num_<?php echo $aux_count;?>" class="pointer" val="<?php echo $aux_count;?>"><?php echo $aux_count;?></a></li>
+												    	<?php $aux_count++; }?>
+												    </ul>
+											    </li>
+											</ul>
+											<?php $this->form->sitemap_level->setAttrib('container','collapseSections'); echo $this->form->sitemap_level->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="prints"><?php echo  '* '.$lang->translate('Count Prints').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->prints->getValue()==$k): echo 'active'; endif; ?>" id="prints_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->prints->setAttrib('container','collapseSections'); echo $this->form->prints->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>								
+							</div>
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="publication_approve"><?php echo  '* '.$lang->translate('Publication Approval').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->publication_approve->getValue()==$k): echo 'active'; endif; ?>" id="publication_approve_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->publication_approve->setAttrib('container','collapseSections'); echo $this->form->publication_approve->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="row-fluid center">
+										<input type="button" class="btn btn-warning" value="<?php echo $lang->translate('Continue');?>" id="continue_4" current="collapseSections" next="collapseCommentsManagement">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle website_config_header" href="#collapseCommentsManagement" data-parent="#accordion1" data-toggle="collapse"> 
+							5. <?php echo $lang->translate('Comments Configuration');?> 
+						</a>
+					</div>
+					<div id="collapseCommentsManagement" class="accordion-body collapse">
+						<div class="accordion-inner"> 
+							<div class="row-fluid line">
+								<div class="span3">&nbsp;</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="section_comments_management"><?php echo  '* '.$lang->translate('Comments Management').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->section_comments_management->getValue()==$k): echo 'active'; endif; ?>" id="section_comments_management_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->section_comments_management->setAttrib('container','collapseCommentsManagement'); echo $this->form->section_comments_management->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span3">&nbsp;</div>
+							</div>
+							<div class="row-fluid" id="section_comments_container">
+								<div class="span3">&nbsp;</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="section_comments"><?php echo  $this->form->section_comments->getDecorator('label')->getOption('requiredPrefix').$this->form->section_comments->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field ">
+											<?php $this->form->section_comments->setAttrib('container','collapseCommentsManagement'); echo $this->form->section_comments->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span3">&nbsp;</div>
+							</div>
+							<div class="row-fluid line" id="section_comments_type_container">
+								<div class="span3">&nbsp;</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="section_comments_type"><?php echo  '* '.$lang->translate('Comments Type').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($comments_type as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->section_comments_type->getValue()==$k): echo 'active'; endif; ?>" id="section_comments_type_btn_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->section_comments_type->setAttrib('container','collapseCommentsManagement'); echo $this->form->section_comments_type->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span3">&nbsp;</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="row-fluid center">
+										<input type="button" class="btn btn-warning" value="<?php echo $lang->translate('Continue');?>" id="continue_5" current="collapseCommentsManagement" next="collapseSMTPConfig">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle website_config_header" href="#collapseSMTPConfig" data-parent="#accordion1" data-toggle="collapse"> 
+							6. <?php echo $lang->translate('SMTP Configuration');?> 
+						</a>
+					</div>
+					<div id="collapseSMTPConfig" class="accordion-body collapse">
+						<div class="accordion-inner"> 
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="smtp_hostname"><?php echo  $this->form->smtp_hostname->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_hostname->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field ">
+											<?php $this->form->smtp_hostname->setAttrib('container','collapseSMTPConfig'); echo $this->form->smtp_hostname->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="smtp_username"><?php echo  $this->form->smtp_username->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_username->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->smtp_username->setAttrib('container','collapseSMTPConfig'); echo $this->form->smtp_username->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="smtp_port"><?php echo  $this->form->smtp_port->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_port->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field ">
+											<?php $this->form->smtp_port->setAttrib('container','collapseSMTPConfig'); echo $this->form->smtp_port->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="smtp_password"><?php echo  $this->form->smtp_password->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_password->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->smtp_password->setAttrib('container','collapseSMTPConfig'); echo $this->form->smtp_password->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="row-fluid center">
+										<input type="button" class="btn btn-warning" value="<?php echo $lang->translate('Continue');?>" id="continue_6" current="collapseSMTPConfig" next="collapseOther" >
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle website_config_header" href="#collapseOther" data-parent="#accordion1" data-toggle="collapse"> 
+							7. <?php echo $lang->translate('Other Configurations');?> 
+						</a>
+					</div>
+					<div id="collapseOther" class="accordion-body collapse">
+						<div class="accordion-inner"> 
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="section_rss"><?php echo  '* '.$lang->translate('RSS Sections').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->section_rss->getValue()==$k): echo 'active'; endif; ?>" id="section_rss_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->section_rss->setAttrib('container','collapseOther'); echo $this->form->section_rss->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="watermark"><?php echo  $this->form->watermark->getDecorator('label')->getOption('requiredPrefix').$this->form->watermark->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field ">
+											<?php echo $this->form->watermark->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+											<p class="help-block grey">(jpg,png,gif,jpeg)</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid line">
+								<div class="span6">
+									<div class="row-fluid line">
+										<div class="span4 form_label">
+											<label class="required" for="tiny_url"><?php echo  '* '.$lang->translate('Tiny Url').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->tiny_url->getValue()==$k): echo 'active'; endif; ?>" id="tiny_url_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->tiny_url->setAttrib('container','collapseOther'); echo $this->form->tiny_url->renderViewHelper(); ?>
+										</div>
+									</div>
+									
+									<div class="row-fluid line">
+										<div class="span4 form_label">
+											<label class="required" for="friendly_url"><?php echo '* '.$lang->translate('Friendly Url').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->friendly_url->getValue()==$k): echo 'active'; endif; ?>" id="friendly_url_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->friendly_url->setAttrib('container','collapseOther'); echo $this->form->friendly_url->renderViewHelper(); ?>
+										</div>
+									</div>
+									
+									<div class="row-fluid line">
+										<div class="span4 form_label">
+											<label class="required" for="log"><?php echo '* '.$lang->translate('Logs').':' ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->log->getValue()==$k): echo 'active'; endif; ?>" id="log_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->log->setAttrib('container','collapseOther'); echo $this->form->log->renderViewHelper(); ?>
+										</div>
+									</div>
+									
+									<div class="row-fluid line">
+										<div class="span4 form_label">
+											<label class="required" for="section_expiration"><?php echo  '* '.$lang->translate('Use Expiration Time').':'; ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->section_expiration->getValue()==$k): echo 'active'; endif; ?>" id="section_expiration_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->section_expiration->setAttrib('container','collapseOther'); echo $this->form->section_expiration->renderViewHelper(); ?>
+										</div>
+									</div>
+									
+									<div id="section_storage_container" class="row-fluid line hide">
+										<div class="span4 form_label">
+											<label class="required" for="section_storage"><?php echo  $lang->translate('Section Storage').':' ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field form-inline">
+											<div class="btn-group" data-toggle="buttons-radio">
+					                            <?php foreach($confirm as $k => $opt): ?>
+					                            <input type="button" class="btn btn-primary <?php if($this->form->section_storage->getValue()==$k): echo 'active'; endif; ?>" id="section_storage_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
+					                            <?php endforeach; ?>                       
+					                        </div>
+											<?php $this->form->section_storage->setAttrib('container','collapseOther'); echo $this->form->section_storage->renderViewHelper(); ?>
+										</div>
+									</div>	
+									
+									<div id="section_expiration_time_container" class="row-fluid line hide">
+										<div class="span4 form_label">
+											<label class="required" for="section_expiration_time"><?php echo  '* '.$lang->translate('Expiration Time').':' ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->section_expiration_time->setAttrib('container','collapseOther'); echo $this->form->section_expiration_time->renderViewHelper(); ?>
+										</div>
+									</div>																		
+									
+									<div class="row-fluid line">
+										<div class="span4 form_label">
+											<label class="required" for="analytics"><?php echo  $this->form->analytics->getLabel(); ?> <a href="http://www.google.com/analytics" target="_blank"><i class="icon-question-sign"></i></a></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->analytics->setAttrib('container','collapseOther'); echo $this->form->analytics->renderViewHelper(); ?>
+										</div>
+									</div>	
+									<div class="row-fluid line">
+										<div class="span4 form_label">
+											<label class="required" for="max_height"><?php echo  $lang->translate('Loaded image max height').':'; ?> </label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->max_height->setAttrib('container','collapseOther'); echo $this->form->max_height->renderViewHelper(); ?>
+										</div>
+									</div>	
+									<div class="row-fluid line">
+										<div class="span4 form_label">
+											<label class="required" for="max_width"><?php echo  $lang->translate('Loaded image max width').':'; ?> </label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->max_width->setAttrib('container','collapseOther'); echo $this->form->max_width->renderViewHelper(); ?>
+										</div>
+									</div>										
+								</div>
+								<div class="span6">
+									<div class="row-fluid line-top line <?php if($this->watermark==''): echo 'hide'; endif;?>" id="watermark_pos_container">
+										<div class="span4 form_label">
+											<label class="required" for="watermark_pos"><?php echo  $lang->translate('Watermark Location').':'; ?> </label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<input type="button" id="wmk_pos_TL" class="btn watermark_pos_selector" value="" pos="TL">
+											<input type="button" id="wmk_pos_T" class="btn watermark_pos_selector" value="" pos="T">
+											<input type="button" id="wmk_pos_TR" class="btn watermark_pos_selector" value="" pos="TR"> <br/>
+											<input type="button" id="wmk_pos_L" class="btn watermark_pos_selector" value="" pos="L">
+											<input type="button" id="wmk_pos_C" class="btn watermark_pos_selector" value="" pos="C">
+											<input type="button" id="wmk_pos_R" class="btn watermark_pos_selector" value="" pos="R"> <br/>
+											<input type="button" id="wmk_pos_BL" class="btn watermark_pos_selector" value="" pos="BL">
+											<input type="button" id="wmk_pos_B" class="btn watermark_pos_selector" value="" pos="B">
+											<input type="button" id="wmk_pos_BR" class="btn watermark_pos_selector" value="" pos="BR">
+										</div>
+										<?php echo $this->form->watermark_pos->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+									</div>
+									<div class="row-fluid">
+										<div class="span5">&nbsp;</div>
+										<div class="span6 form_field watermark_show_container <?php if($this->watermark==''): echo 'hide'; endif;?>">
+											<?php echo $this->form->img_watermark->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="row-fluid center">
+										<input type="button" class="btn btn-warning" value="<?php echo $lang->translate('Continue');?>" id="continue_7" current="collapseOther" next="collapseStates" >
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle website_config_header" href="#collapseStates" data-parent="#accordion1" data-toggle="collapse"> 
+						8. <?php echo $lang->translate('Website Status Configuration');?> 
+						</a>
+					</div>
+					<div id="collapseStates" class="accordion-body collapse">
+						<div class="accordion-inner"> 
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="website_status"><?php echo  $this->form->website_status->getDecorator('label')->getOption('requiredPrefix').$this->form->website_status->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field ">
+											<?php $this->form->website_status->setAttrib('container','collapseStates'); echo $this->form->website_status->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="offline_text"><?php echo  $this->form->offline_text->getDecorator('label')->getOption('requiredPrefix').$this->form->offline_text->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field ">
+											<?php $this->form->offline_text->setAttrib('container','collapseStates'); echo $this->form->offline_text->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="offline_image"><?php echo  $this->form->offline_image->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php echo $this->form->offline_image->removeDecorator('HtmlTag')->removeDecorator('Label');  ?>
+											<p class="help-block grey">(jpg,png,gif,jpeg)</p>
+										</div>
+									</div>
+									<div class="row-fluid">
+										<div class="span5">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php echo $this->form->img_offline->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="coming_soon_text"><?php echo  $this->form->coming_soon_text->getDecorator('label')->getOption('requiredPrefix').$this->form->coming_soon_text->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field ">
+											<?php $this->form->coming_soon_text->setAttrib('container','collapseStates'); echo $this->form->coming_soon_text->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="coming_soon_image"><?php echo  $this->form->coming_soon_image->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php echo $this->form->coming_soon_image->removeDecorator('HtmlTag')->removeDecorator('Label');  ?>
+											<p class="help-block grey">(jpg,png,gif,jpeg)</p>
+										</div>
+									</div>
+									<div class="row-fluid">
+										<div class="span5">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php echo $this->form->img_coming_soon->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+										</div>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="center">
+										<div class="row-fluid">
+											<?php echo $this->form->id->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>				
+		</div>
+	</div>	
+</div>
+</form>
+
+<div class="row-fluid">
+	<div class="center well">
+		<div class="row-fluid">			
+			<?php echo $this->form->submit->renderViewHelper(); ?>			
+			&nbsp;&nbsp;
+			<?php echo $this->form->cancel->renderViewHelper(); ?>
+		</div>
+	</div>
+</div>

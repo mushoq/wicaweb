@@ -1,0 +1,185 @@
+<?php 
+/**
+ * Edit View. Renders the view of the edit action 
+ *
+ * @category   WicaWeb
+ * @package    Core_View_Website_Edit
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @author	   Esteban
+ * @version    1.0
+ *
+ */
+
+//translate library
+$lang = Zend_Registry::get('Zend_Translate');
+?>
+<script type="text/javascript" charset="utf-8">
+	var username_remote_message = "<?php echo $lang->translate('Username already exist');?>";
+    var confirm_password_message = "<?php echo $lang->translate('Passwords does not match');?>";
+</script>
+<div class="row-fluid">
+	<div class="span12 page-header-wica center line">
+		<h1><?php echo $lang->translate('Update').' '.$lang->translate('User');?></h1>
+	</div>
+</div>
+
+<div class="line-top alert_messages_container">
+     <?php echo $this->flashMessages();?>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+      <form id="<?php echo $this->form->getId() ?>" action="" method="<?php echo $this->form->getMethod() ?>" class="well" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >  
+          <div class="row-fluid">
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->name->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="lastname"><?php echo $this->form->lastname->getDecorator('label')->getOption('requiredPrefix').$this->form->lastname->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->lastname->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="row-fluid">
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="identification"><?php echo $this->form->identification->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->identification->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="email"><?php echo $this->form->email->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->email->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="row-fluid">
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="phone"><?php echo  $this->form->phone->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->phone->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="username"><?php echo $this->form->username->getDecorator('label')->getOption('requiredPrefix').$this->form->username->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->username->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="row-fluid line">
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="password_checkbox"><?php echo $this->form->password_checkbox->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->password_checkbox->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    
+                </div>
+          </div>
+          <div class="row-fluid" id="password_container">
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="password"><?php echo  $this->form->password->getDecorator('label')->getOption('requiredPrefix').$this->form->password->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->password->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="confirm_password"><?php echo $this->form->confirm_password->getDecorator('label')->getOption('requiredPrefix').$this->form->confirm_password->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->confirm_password->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="row-fluid">
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="profile"><?php echo  $this->form->profile->getDecorator('label')->getOption('requiredPrefix').$this->form->profile->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->profile->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4 form_label">
+                            <label class="required" for="status"><?php echo  $this->form->status->getDecorator('label')->getOption('requiredPrefix').$this->form->status->getLabel(); ?></label>
+                        </div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span4 form_field">
+                            <?php echo $this->form->status->renderViewHelper(); ?>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="row-fluid">
+				<?php echo $this->form->id->renderViewHelper(); ?>
+		  </div>  
+         </form>
+          <div class="row-fluid">
+				<div class="center well">
+					<div class="row-fluid">
+						
+						<?php echo $this->form->submit->renderViewHelper(); ?>
+						&nbsp;&nbsp;
+						<?php echo $this->form->cancel->renderViewHelper(); ?>
+					</div>
+				</div>
+		  </div>
+    </div>
+</div>

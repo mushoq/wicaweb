@@ -1,0 +1,202 @@
+<!-- 
+ *	Index view
+ *
+ * @category   WicaWeb
+ * @package    Default_View
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @version    1.0
+ * @author	   David Rosales
+ -->
+
+<?php $lang = Zend_Registry::get('Zend_Translate'); ?>
+
+<?php foreach($this->areas as $area): ?>
+<?php 	$section_contents_tpl[$area->name] = '&nbsp;'; ?>
+<?php endforeach; ?>
+
+<div class="line-top alert_messages_container">
+	<?php echo $this->flashMessages();?>
+</div>
+
+<!-- Section contents -->
+<?php 
+$band_one_private = array();
+	foreach($this->section_contents as $section => $key)
+	{
+		//session storage vals
+		$session_render_vals = new Zend_Session_Namespace('render_vals_front');
+		$session_render_vals->area_width = $key['area_width'];
+		$session_render_vals->section_cols = $key['column_number'];
+
+		//check if a login was already render on private area
+		if(array_key_exists($key['area'], $section_contents_tpl)){
+			if($section_contents_tpl[$key['area']] == '&nbsp;')
+				$section_contents_tpl[$key['area']] = '';
+			
+			if(in_array($key['area'], $band_one_private))
+				$section_contents_tpl[$key['area']] = $section_contents_tpl[$key['area']].$this->partial("partials/".$key['filename'], array('login'=> true, 'area'=>$key['area'], 'private' => $key['private'], 'contents' => $key['content'], 'articles' => $key['article'], 'col_number' => $key['column_number'], 'section_title' => $key['section_title'], 'section_subtitle' => $key['section_subtitle']));
+			else 
+				$section_contents_tpl[$key['area']] = $section_contents_tpl[$key['area']].$this->partial("partials/".$key['filename'], array('login'=> false, 'area'=>$key['area'], 'private' => $key['private'], 'contents' => $key['content'], 'articles' => $key['article'], 'col_number' => $key['column_number'], 'section_title' => $key['section_title'], 'section_subtitle' => $key['section_subtitle']));
+		}else{
+			if($section_contents_tpl[$key['area']] == '&nbsp;')
+				$section_contents_tpl[$key['area']] = '';			
+			
+			if(in_array($key['area'], $band_one_private))
+				$section_contents_tpl[$key['area']] = $this->partial("partials/".$key['filename'], array('login'=> true, 'area'=>$key['area'], 'private' => $key['private'], 'contents' => $key['content'], 'articles' => $key['article'], 'col_number' => $key['column_number'], 'section_title' => $key['section_title'], 'section_subtitle' => $key['section_subtitle']));
+			else
+				$section_contents_tpl[$key['area']] = $this->partial("partials/".$key['filename'], array('login'=> false, 'area'=>$key['area'], 'private' => $key['private'], 'contents' => $key['content'], 'articles' => $key['article'], 'col_number' => $key['column_number'], 'section_title' => $key['section_title'], 'section_subtitle' => $key['section_subtitle']));
+		}
+		//save private areas
+		if($key['private']){
+			array_push($band_one_private, $key['area']);
+		}
+		//delete session storage
+		Zend_Session::namespaceUnset('render_vals_front');
+	}	
+
+	foreach($this->module_contents as $module)
+	{
+		if($module['contents'])
+		{
+			foreach($module['contents'] as $k)
+			{
+				if(array_key_exists($k['area'], $section_contents_tpl)){
+					if($section_contents_tpl[$key['area']] == '&nbsp;')
+						$section_contents_tpl[$key['area']] = '';					
+					
+					if(in_array($k['area'], $band_one_private))					
+						$section_contents_tpl[$k['area']] = $section_contents_tpl[$k['area']].$this->partial("partials/".$module['partial'], strtolower($module['module_name']), array('private' => $module['private'], strtolower($module['module_name']) => $k));
+					else
+						$section_contents_tpl[$k['area']] = $section_contents_tpl[$k['area']].$this->partial("partials/".$module['partial'], strtolower($module['module_name']), array('private' => $module['private'], strtolower($module['module_name']) => $k));
+				}else{
+					if($section_contents_tpl[$key['area']] == '&nbsp;')
+						$section_contents_tpl[$key['area']] = '';					
+					
+					if(in_array($k['area'], $band_one_private))
+						$section_contents_tpl[$k['area']] = $this->partial("partials/".$module['partial'], strtolower($module['module_name']), array('private' => $module['private'], strtolower($module['module_name']) => $k));
+					else
+						$section_contents_tpl[$k['area']] = $this->partial("partials/".$module['partial'], strtolower($module['module_name']), array('private' => $module['private'], strtolower($module['module_name']) => $k));
+				}	
+				
+				
+			}
+		}
+	}	
+	if($this->menu)
+		$section_contents_tpl['menu'] = '<ul id="nav">
+											<li><a href="/default/"><i class="icon-home icon-white"></i></a></li>'.
+											$this->menu.'
+											<li><a href="/index/sitemap">'.$lang->translate('Sitemap').'</a></li> 					
+										</ul>';
+	
+	if($this->header['logo'])	
+		$section_contents_tpl['header_logo'] = '<ul class="header-website">
+													<li class="">
+														<img src="/uploads/website/'.$this->header['logo'].'" class="logo"/>
+													</li>
+												</ul>';
+	
+	if($this->header['name'])
+		$section_contents_tpl['header_name'] = '<h1>'.$this->header['name'].'</h1>';	
+	
+
+	if($this->header['name'])
+		if(isset($_SESSION['external_user']))
+			$section_contents_tpl['header_name'] .= '<div class="row-fluid right"><a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a></div>';
+	else
+		if(isset($_SESSION['external_user']))
+			$section_contents_tpl['header_name'] = '<div class="row-fluid right"><a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a></div>';
+
+	if($this->showold == 'yes')
+		$section_contents_tpl['header_name'] .= '<div class="row-fluid right">'.$lang->translate("View past publication").': &ensp;<input class="hide" type="text" id="view_old_plublications" name="view_old_plublications" /></div>';
+	
+	if($this->footer)
+		$section_contents_tpl['footer'] = '<div class="footer">
+												<p class="pull-right">
+													&copy; '.$this->footer['copyright'].'
+												</p>
+											</div>';
+?>
+<!-- End Section contents -->
+
+<?php
+	$render = $this->templaterender;
+	
+	if($render)
+	{
+		foreach ($section_contents_tpl as $key => $section_content)
+		{
+			$view = '';		
+			if($section_content)
+			{
+				//last find of section_name
+				$pos_occ = strpos($render, $key);
+				if($pos_occ)
+				{
+					//next part of string after are_name as id			
+					$render_part = substr($render, $pos_occ);	
+					//then find >
+					$pos_grt = strpos($render_part, '>');				
+					//next part of string after >
+					$render_part = substr($render_part, $pos_grt);				
+					//then find </
+					$pos_lss = strpos($render_part, '</');
+					//next part of string after </
+					$render_part = substr($render_part, $pos_lss);			
+
+					$view = substr_replace($render, $section_content, ($pos_occ+$pos_grt+1));
+					$view.= $render_part;			
+					$render = $view;
+				}
+			}
+		}
+		$render.='
+		
+				<a id="anchor_change_psw" href="#form_change_psw"></a>
+				
+				<div class="hide">
+					<form class="span8 form-horizontal margin-fancy" id="form_change_psw" name="form_change_psw" action="">
+						<div class="row-fluid center">
+							<h3>'.$lang->translate("Change password").'</h3>
+						</div><br/>
+						<div class="row-fluid center">
+							<span><label>'.$lang->translate("For security you should change your password, please enter a new password").': </label></span>
+						</div><br/>						
+						<div class="row-fluid">
+				      		<div class="span6">				      							      		
+				      			<div class="control-group">
+									<label class="control-label">'.$lang->translate("Password").'</label>
+									<div class="controls">
+										<input type="password" id="public_user_change_psw" name="public_user_change_psw" />
+									</div>
+								</div>
+				      		</div>	
+				      		<div class="span6">				      							      		
+				      			<div class="control-group">
+									<label class="control-label">'.$lang->translate("Confirm Password").'</label>
+									<div class="controls">
+										<input type="password" id="public_user_change_cpsw" name="public_user_change_cpsw" />
+									</div>
+								</div>
+				      		</div>								      								      												
+						</div>
+						<div class="row-fluid center">
+							<input class="btn " type="button" id="btn_register_change_psw" name="btn_register_change_psw" value="'.$lang->translate("Save").'" />
+						</div>																																				
+					</form>
+				</div>
+	
+		
+				<div id="loader_spinner">
+					<div id="ajax_bg_loader"></div>
+					<div class="ajax_loader" id="ajax_loader">
+						<img src="/../../../images/ajax_loader.gif"/>
+						<h2>'. $lang->translate('Loading').'..</h2>
+					</div>
+				</div>
+				<input type="hidden" id="change_psw" name="change_psw" value="'.$this->change_psw.'" />';
+	}
+?>
+
+<?php echo $render; ?>
