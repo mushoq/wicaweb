@@ -1,0 +1,406 @@
+﻿WicaWeb>WicaWeb|
+User>User|
+Password>Password|
+Language>Language|
+Template>Template|
+Website Name>Website Name|
+Description>Description|
+Keywords>Keywords|
+Website Url> Website Url|
+Default Page>Default Page|
+Logo>Logo|
+Icon>Icon|
+Info Email>Info Email|
+Time Zone>Time Zone|
+Date Format>Date Format|
+Hour Format>Hour Format|
+Number Format>Number Format|
+Copyright>Copyright|
+Publication Approval>Publication Approval|
+Count Prints>Count Prints|
+Friendly Url>Friendly Url|
+Logs>Logs|
+Sitemap Levels>Sitemap Levels|
+Use Dictionary in FrontEnd> Use Dictionary in FrontEnd|
+Use Private Sections> Use Private Sections|
+Use Expiration Time>Use Expiration Time|
+Use Section Author>Use Section Author|
+Use Feature Section> Use Feature Section|
+Use Highlight Section> Use Highlight Section|
+Comments Management>Comments Management|
+Comments Place>Comments Place|
+Comments Type>Comments Type|
+Section Images Number>Section Images Number|
+Section Storage>Section Storage|
+Section name>Section name|
+RSS Sections> RSS Sections|
+Watermark>Watermark|
+Hostname>Hostname|
+Port>Port|
+Username>Username|
+Save>Save|
+Save order>Save order|
+Current Image Logo>Current Image Logo|
+Current Image Icon>Current Image Icon|
+Current Image Watermark>Current Image Watermark|
+This field is required.>This field is required.|
+Please fix this field.>Please fix this field.|
+Please enter a valid email address.>Please enter a valid email address.|
+Please enter a valid URL.>Please enter a valid URL.|
+Please enter a valid date.>Please enter a valid date.|
+Please enter a valid date (ISO).>Please enter a valid date (ISO).|
+Please enter a valid number.>Please enter a valid number.|
+Please enter a valid percentage.>Please enter a valid percentage.|
+Please enter only digits.>Please enter only digits.|
+Please enter only characters.>Please enter only characters.|
+Please enter a valid credit card number.>Please enter a valid credit card number.|
+Please enter the same value again as in field above.>Please enter the same value again as in field above.|
+Please enter a different value.>Please enter a different value.|
+Please enter a value with a valid extension. Valid Extensions are {0}>Please enter a value with a valid extension. Valid Extensions are {0}|
+Please enter no more than {0} characters.>Please enter no more than {0} characters.|
+Please enter at least {0} characters.>Please enter at least {0} characters.|
+Please enter a value between {0} and {1} characters long.>Please enter a value between {0} and {1} characters long.|
+Please enter a value between {0} and {1}.>Please enter a value between {0} and {1}.|
+Please enter a value less than or equal to {0}.>Please enter a value less than or equal to {0}.|
+Please enter a value greater than or equal to {0}.>Please enter a value greater than or equal to {0}.|
+Please enter valid CI.>Please enter valid CI.|
+Please enter a Date less than or equal to {0}.>Please enter a Date less than or equal to {0}.|
+Please enter a Date more than to {0}.>Please enter a Date more than to {0}.|
+Please enter a Date more than or equal to {0}.>Please enter a Date more than or equal to {0}.|
+Selected>-Select-|
+Required content>Select at least one content|
+Required section>Select at least one section|
+Publish>Publish|
+Published>Published|
+Nonpublished>Nonpublished|
+Public>Public|
+Private>Private|
+Yes>Yes|
+No>No|
+Self>Self|
+Blank>Blank|
+Section list>Sections|
+New section>New section|
+New subsection>New subsection of|
+Subsection name>Subsection name|
+Subsections list>Subsections|
+Update subsection>Update subsection of|
+Update section>Update section|
+Update>Update|
+Number>Number|
+Internal name>Internal name|
+Title>Title|
+Actions>Actions|
+Subtitle>Subtitle|
+Browser title>Browser title|
+Synopsis>Synopsis|
+Keywords>Keywords|
+Author>Author|
+Section type>Section type|
+Content type>Content type|
+Content list>Contents|
+Publish date>Publish date|
+Expire date>Expire date|
+Show publish date>Show publish date|
+Publication status>Publication status|
+Feature>Feature|
+Highlight>Highlight|
+RSS>RSS|
+External link>External link|
+Link>Link|
+Target>Target|
+Comments>Comments|
+Image>Image|
+Name>Name|
+Delete>Delete|
+Connect>Connect|
+Disconnect>Disconnect|
+Success saved>Success saved|
+Errors in saving data> Errors in saving data|
+Errors in disconnecting data> Errors in disconnecting data|
+Success deleted>Success deleted|
+Success disconnected>The content has been disconnected successfully|
+Errors in deleting data> Errors in deleting data|
+Invalid Form>Invalid Form|
+Internal>Internal|
+External>External|
+None>None|
+All>All|
+Section>Section|
+Article>Article|
+Website Configuration>Website Configuration|
+SMTP Configuration>SMTP Configuration|
+Website Status>Website Status|
+Status>Status|
+Offline Text>Offline Text|
+Offline Image>Offline Image|
+Coming Soon Text>Coming Soon Text|
+Coming Soon Image>Coming Soon Image|
+Online>Online|
+Offline>Offline|
+Coming Soon>Coming Soon|
+No Websites>No Websites|
+No profiles>No profiles|
+New Website>New Website|
+Current Image Offline>Current Image Offline|
+Current Image Comming Soon>Current Image Comming Soon|
+Website List>Website List|
+Registered Website>Registered Website|
+No Access Permissions>Access Permissions|
+Login to the Administration>Login to the Administration|
+Website Create?>Website Create?|
+HOME>HOME|
+Log Out>Log Out|
+January>January|
+February>February|
+March>March|
+April>April|
+May>May|
+June>June|
+July>July|
+August>August|
+September>September|
+October>October|
+November>November|
+December>December|
+January abbreviation>Jan|
+February abbreviation>Feb|
+March abbreviation>Mar|
+April abbreviation>Apr|
+May abbreviation>May|
+June abbreviation>Jun|
+July abbreviation>Jul|
+August abbreviation>Aug|
+September abbreviation>Sep|
+October abbreviation>Oct|
+November abbreviation>Nov|
+December abbreviation>Dec|
+Monday abbreviation>Mon|
+Tuesday abbreviation>Tue|
+Wednesday abbreviation>Wed| 
+Thursday abbreviation>Thu|
+Friday abbreviation>Fri|
+Saturday abbreviation>Sat|
+Sunday abbreviation>Sun|
+New Section>New Section|
+New Content>New Content|
+Link Content>Link Content|
+Link to section>Link to section|
+Content>Content|
+Search>Search|
+Search Parameters>Search Parameters|
+Search Sections>Search Sections|
+Search Contents>Search Contents|
+No Sections Found>No Sections Found|
+No Contents Found>No Contents Found|
+Sitemap>Sitemap|
+Default Site>Default Site|
+Websites>Websites|
+Upload External Files>Upload External Files|
+Add New File>Add New File|
+No External Files Available Yet>No External Files Available Yet|
+Success removed>Success removed|
+Upload New External File>Upload New External File|
+Filename>Filename|
+Add to all Websites?>Add to all Websites?|
+Success uploaded>Success uploaded|
+Errors in uploading>Errors in uploading|
+File>File|
+Type>Type|
+Upload External Files>Upload External Files|
+Profiles>Profiles|
+Profile name>Profile name|
+Required profile name>Required profile name|
+Required profile status>Required profile status|
+Modules>Modules|
+Sections>Sections|
+Section config not required>Section config not required|
+Search criteria>Search criteria|
+Search results>Search results|
+Content internal name>Content internal name|
+Required website selection>Required website selection|
+Required module selection>Required module selection|
+Required section selection>Required section selection|
+Lastname>Lastname|
+active>Active|
+inactive>Inactive|
+Active>Active|
+Inactive>Inactive|
+User List> User List|
+New User> New User|
+ID>Identification|
+Email>Email|
+Phone>Phone|
+Confirm Password>Confirm Password|
+Profile>Profile|
+Profile list>Profile list|
+New profile>New profile|
+Edit profile>Edit profile|
+Required profiles for user>Required profiles for user|
+Supplied credential is invalid.>Supplied credential is invalid.|
+User status inactive.>User status inactive.|
+More than one record matches the supplied identity.>More than one record matches the supplied identity. Contact the administrator.|
+A record with the supplied identity could not be found.>A record with the supplied identity could not be found.|
+Section access denied>Section access denied|
+Profile access denied>Profile access denied|
+Selected invalid user>Selected invalid user|
+Website access denied>Website access denied|
+Content access denied>Content access denied|
+Username already exist>Username already exist|
+Login>Login|
+Tools>Tools|
+Default Website> Default Website|
+Content List>Content List|
+Text>Text|
+Form>Form|
+Flash Video>Flash Video|
+Continue>Continue|
+New Text Content>New Text Content|
+New Image Content>New Image Content|
+Picture foot>Picture foot|
+Format>Format|
+- Select ->- Select -|
+Frame>Frame|
+No frame>No frame|
+New Form Content>New Form Content|
+Element type>Element type|
+Add>Add|
+New Flash Content>New Flash Content|
+Background>Background|
+Dinamic>Dinamic|
+Alternative Image>Alternative Image|
+Transparent>Transparent|
+Opaque>Opaque|
+Edit Text Content>Edit Text Content|
+Edit Form Content>Edit Form Content|
+Edit Image Content>Edit Image Content|
+Edit Flash Content>Edit Flash Content|
+Edit Flash Video Content>Edit Flash Video Content|
+HTML code>HTML code|
+New Flash Video Content>New Flash Video Content|
+Text area>Text area|
+Text field>Text field|
+Radio button>Radio button|
+Dropdown list>Dropdown list|
+Checkbox>Checkbox|
+Comment>Comment|
+Required>Required|
+Option>Option|
+New Carousel Content>New Carousel Content|
+Edit Carousel Content>Edit Carousel Content|
+Carousel>Carousel|
+Edit>Edit|
+New Link Content>New Link Content|
+Internal Link>Internal Link|
+External Link>External Link|
+File type>File type|
+Edit Link Content>Edit Link Content|
+Other>Other|
+Cancel>Cancel|
+Continue>Continue|
+Finish>Finish|
+Option Configuration>Option Configuration|
+Formats>Formats|
+Sections Configuration>Sections Configuration|
+Comments Configuration>Comments Configuration|
+Other Configurations> Other Configurations|
+Website Status Configuration> Website Status Configuration|
+Next step>Next|
+Back step>Back|
+Passwords does not match>Passwords does not match|
+Change Password>Change Password|
+Js Files>Js Files|
+Css Files>Css Files|
+Order>Order|
+Success saved order>Success saved order|
+No Content Available>No Content Available|
+No Sections Available>No Sections Available|
+Link Contents>Link Contents|
+Control Panel> Control Panel|
+Users>Users|
+External Files>External Files|
+No Users Found>No Users Found|
+No items entered>No items entered|
+The name of element already exist>The name of element already exist|
+Show in menu>Show in menu|
+The internal name of content already exist>The internal name of content already exist|
+The website name already exist>The website name already exist|
+Set as homepage>Set as homepage|
+Actual homepage>Actual homepage|
+of>of|
+Columns>Columns|
+Align>Align|
+Left>Left|
+Center>Center|
+Right>Right|
+Website>Website|
+Create>Create|
+LinkUp>LinkUp|
+Select Images>Select Images|
+Continue>Continue|
+Back>Back|
+Basic>Basic|
+Images>Images|
+Publication dates>Publication dates|
+Additional setup>Additional setup|
+Supported files>File type is not valid. Only supported .jpg to .png or .gif|
+Maximum size>Size File size is very large. (máx: 2MB)|
+Google Analytics ID>Google Analytics ID|
+Contents>Contents|
+New article>New article|
+Articles list>Articles list|
+Update article>Update article|
+Subsection>Subsection|
+Main section>Main section|
+All section info and its contents will be deleted. Would you like to continue?>All section info and its contents will be deleted. Would you like to continue?|
+Current Content>Current Content|
+Templates>Templates|
+Has Subsections>Has Subsections|
+Expand>Expand|
+Reduce>Reduce|
+Change Default Website>Change Default Website|
+Location>Location|
+View External File> View External File|
+File Content> File Content|
+View>View|
+Insert the security code>Insert the security code|
+Save changes>Save changes|
+Invalid code>Invalid code|
+Loaded image max height>Loaded image max height|
+Loaded image max width>Loaded image max width|
+Flash file>Flash file|
+Notification mail>Notification mail|
+Your browser does not have Flash Player installed or activated>Your browser does not have Flash Player installed or activated|
+If you want to create a new website go to the administration.>If you want to create a new website go to the administration.|
+Go to Administration> Go to Administration|
+Selected invalid dictionary>Selected invalid dictionary|
+Words>Words| 
+words>words|
+New Dictionary>New Dictionary|
+Dictionary List>Dictionary List|
+Status>Status|
+Upload New Template>Upload New Template|
+Template thumbnail>Template thumbnail|
+Template file>Template file|
+Not found any valid area>Not found any valid area|
+Empty file>Empty file|
+File error>File error|
+The template name already exist>The template name already exist|
+Edit Template>Edit Template|
+View Template File>View Template File| 
+View code>View code|
+Css files>Css files|
+Js files>Js files|
+Images>Images|
+See Files>See Files|
+No Dictionaries Found>No Dictionaries Found|
+Dictionary>Dictionary|
+Preview>Preview|
+Watermark Location>Watermark Location|
+Dictionary name already exist>Dictionary name already exist|
+Upload Template>Upload Template|
+Available Templates>Available Templates|
+Template image>Template image|
+File already exist>File already exist|
+The file size is too big>The file size is too big|
+Invalid extension>Invalid extension

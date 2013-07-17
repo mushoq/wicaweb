@@ -1,0 +1,43 @@
+﻿WicaWeb Installer>Instalador WicaWeb|
+WicaWeb Installer Wizard>Asistente de Instalación de WicaWeb|
+Welcome>Bienvenido|
+Install Process>Proceso de Instalación|
+Welcome Message>Mensaje de Bienvenida|
+Welcome_Message_Text>Bienvenido al instalador de WicaWeb.|
+Install_Requirements_Text>A continuación se indicarán los componentes que necesita antes de continuar:|
+Php Installed>Instalación de Php|
+MySql Installed>Instalación de MySql|
+Write Permissions on application.ini file>Permisos de lectura y escritura en el archivo application.ini|
+Write Permissions on the folders>Permisos de lectura y escritura en las siguientes carpetas|
+File path:>Ruta del Archivo:|
+Step>Paso|
+Next>Siguiente|
+Choose the installer language>Seleccione el idioma para el instalador|
+Database Configuration>Configuración de Base de Datos|
+Database Name>Nombre de la Base de Datos|
+Database User>Usuario de la Base de Datos|
+Database Password>Contraseña de la Base de Datos|
+Database Host> Host Base de Datos|
+Test Connection>Probar la Conexión|
+Create Database if it doesn't exist?>Crear la Base de Datos si no existe?|
+Super Admin Configuration> Configuración del Super Administrador|
+DB User must have the corresponding permissions to perform this operation>El usuario de la Base de Datos debe tener los permisos necesarios para realizar esta operación|
+Choose one website configuration>Seleccione un tipo de configuración de Portales|
+DB User must have root permissions to create a Database>El Usuario debe tener los permisos de "root" para poder crear una Base de Datos|
+Loading>Cargando|
+Website Configuration Type>Tipo de Configuración de Portal|
+The express configuration shows a form with the basic Website Options>La configuración rápida muestra un formulario con las opciones básicas para configurar un portal.|
+To Continue click on> Para continuar haga click en| 
+Express>Rápida|
+Advanced>Avanzada|
+The advanced configuration will redirect you to the advanced website configuration form>La configuración avanzada le redireccionará al formulario avanzado de configuración de portales|
+Coming Soon Website>Portal en Construcción|
+Offline Website>Portal fuera de línea|
+Could not connect to the DB with those parameters>No se puede conectar a la Base de Datos con los parámetros ingresados|
+Spaces and Special Chars are not allowed>Espacios y caracteres especiales no son permitidos|
+Could not create DB with those parameters>No se puede crear la Base de Datos con los parámetros ingresados|
+Preview installation was found.>Una instalación anterior ha sido detectada.|
+Website sucesfully created. Welcome to WicaWeb>Portal creado con éxito. Bienvenido a WicaWeb|
+DB connection successfull>Conexión con la Base de Datos exitosa|
+The Application.ini file is corrupted>El archivo application.ini está dañado|
+Click here to go to the WicaWeb administration>Click aquí para ir a la administración de WicaWeb
