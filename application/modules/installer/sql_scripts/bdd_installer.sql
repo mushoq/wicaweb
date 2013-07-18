@@ -172,6 +172,7 @@ CREATE  TABLE IF NOT EXISTS `wc_section` (
   `comments` ENUM('yes', 'no') NOT NULL ,
   `external_comment_script` TEXT NULL ,
   `display_menu` ENUM('yes', 'no') NOT NULL ,
+  `display_menu2` enum('yes','no') DEFAULT 'no',
   `homepage` ENUM('yes', 'no') NOT NULL ,
   `article` ENUM('yes', 'no') NOT NULL ,
   PRIMARY KEY (`id`, `website_id`) ,
