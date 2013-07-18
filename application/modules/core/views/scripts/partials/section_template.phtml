@@ -130,7 +130,7 @@
 <?php endif; ?>
 
 <?php if($this->articles): ?>
-<div class="row-fluid">
+<div class="row-fluid listNews">
 <?php foreach($this->articles as $key => $value): ?>
 	<?php if ($value['feature']=='no'):?>
 	<div class="row-fluid no-margin">
@@ -173,10 +173,29 @@
 			<?php 	$show_article = true; ?>
 			<?php endif; ?>
 			
-			<?php if($show_article): ?>
+			<?php if($show_article): 
+                        $content_field = new Core_Model_ContentField();
+				$data_content_field = $content_field->find ( 'wc_content_field', array ('content_id' => $value['image']['id']) );
+				if($data_content_field){
+				$imagenArtThumb = imageRender::cache_image($data_content_field [4]->value, array('width' => '120'));
+				?>
 			<a href="/default/index/index?id=<?php echo $value['article_id']; ?>">
-				<b> <?php echo $this->escape($value['title']); ?> </b>
+                    <?php 
+                                echo '<img src="'.$imagenArtThumb.'" style="float:left; margin: 0 10px 10px 0;" />';				?>
+                                    </a>
+                                    <?php
+				}
+                            ?>
+                    <h3>
+                        <a href="/default/index/index?id=<?php echo $value['article_id']; ?>">
+				<?php echo $this->escape($value['title']); ?>
 			</a>
+                    </h3>
+                <?php 
+				echo $value['synopsis']; ?>
+                    <a href="/default/index/index?id=<?php echo $value['article_id']; ?>" class="readmore">
+				+ read more
+                                </a>
 			<?php endif; ?>
 		</div>			
 	</div>
@@ -191,9 +210,11 @@
 </div>
 <?php endif; ?>
 <?php elseif (!$this->login): ?>
+<div class="row-fluid">
 	<?php 	if($this->isstorage == 'yes'):?>									
 	<?php 		echo $this->previewHelper(null,null,$this->area); ?>
 	<?php 	else:?>
 	<?php 		echo $this->previewHelper(null,null,$this->area); ?>
 	<?php 	endif;?>
+</div>
 <?php endif; ?>

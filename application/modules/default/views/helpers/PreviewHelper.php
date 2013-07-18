@@ -6,8 +6,8 @@
  * @package    Core_view_helpers
  * @copyright  Copyright (c) WicaWeb - Mushoq
  * @license	   GNP
- * @author	   Santiago Arellano
- * @version    1.0
+ * @version    1.1
+ * @author      Jose Luis Santiago Arellano
  */
 
 class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
@@ -94,7 +94,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									break;
 													
 					case 'image':					
-									$return = '<div class="front_image_container" align="'.$content_by_section_data[0]->align.'">';
+									$return = '<div class="front_image_container item" align="'.$content_by_section_data[0]->align.'">';
 																
 									$return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="http://' . str_replace ('http://', '', $data_content_field [3]->value) . '"><img' : '<img';
 														

@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Bootstrap class store settings that will be available through the application
+ *
+ * @category   wicaWeb
+ * @package    Application GlobalFunctions
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license	   GNP
+ * @version    1.1
+ * @author      Jose Luis Landazuri - Santiago Arellano
+ */
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	
 	/*
@@ -83,8 +94,47 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	}
 	
 
+public function _initRoute()
+	
+	{
+	
+		// get instance of front controller
+	
+		$frontController  = Zend_Controller_Front::getInstance();
+	
+		// define new route class
+	
+		// this route with define the route for
+	
+		// http://www.example.com/explore/product/10
+	
+		// the id of the product found under variable name �id�
+	
+		// to retrive it $this->getRequest->getParam(�id)
+	
+		// in the index action of product controller
+	
+		$route = new Zend_Controller_Router_Route(
+	
+				'content/section/:id/:title',array(
+	
+						'controller' => 'index',
+	
+						'module' => 'default' ,
+	
+						'action' => 'index',
+	
+						'id' => 1,
+						
+						'title' => ''));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('user',$route);
+                                                
 }
-
+}
 class ModuleLayoutLoader extends Zend_Controller_Action_Helper_Abstract// looks up layout by module in application.ini
 {
 	public function preDispatch() {

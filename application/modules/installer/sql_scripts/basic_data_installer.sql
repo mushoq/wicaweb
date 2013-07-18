@@ -30,7 +30,8 @@ INSERT INTO `wc_section_template` (`id`, `name`, `file_name`, `column_number`, `
 (2, '2 Columns', 'sectemplate2.phtml', 2, 'both'),
 (3, '3 Columns', 'sectemplate3.phtml', 3, 'both'),
 (4, '4 Columns', 'sectemplate4.phtml', 4, 'both'),
-(5, 'login template', 'logintemplate.phtml', 1, 'both');
+(5, 'Carrousel', 'seccarousel1.phtml', 1, 'section'),
+(6, 'login template', 'logintemplate.phtml', 1, 'both');
 
 --
 -- Volcar la base de datos para la tabla `wc_website_language`

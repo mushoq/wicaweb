@@ -5,8 +5,8 @@
  * @package    Core_Controller
  * @copyright  Copyright (c) WicaWeb - Mushoq 
  * @license    GNP
- * @version    1.1
- * @author	   Santiago Arellano, Jose Luis landazuri
+ * @version    1.2
+ * @author      Jose Luis landazuri
  -->
 
 
@@ -85,9 +85,11 @@
 												<?php }
 												else{	
 // 													center buttons														
-													if($this->form->$name->helper == 'formButton' || $this->form->$name->helper == 'formSubmit'){
+													if($this->form->$name->helper == 'formSubmit'){
 														//generate save button to print at the end
 														$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+													}elseif($this->form->$name->helper == 'formButton'){
+														echo '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';													
 													}else
 														if($name == 'url'){
 															echo $this->form->$name->removeDecorator('HtmlTag')->removeDecorator('Label');

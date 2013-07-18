@@ -4,3 +4,6 @@ README.txt
 demos/
 extras/documentation
 
+/nbproject/private/
+/docs/db/scripts/bdd_20120828.sql
+/docs/db/scripts/basic_data.sql

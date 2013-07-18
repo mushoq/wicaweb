@@ -55,7 +55,7 @@ $(document).ready(function() {
 	
 	$("[id^='myCarousel_']").each(function(){
 		$(this).carousel({
-			interval : 2000
+			interval : 8000
 		});
 
 		$(this).bind("mouseenter", function(){
@@ -77,6 +77,9 @@ $(document).ready(function() {
 			$(this).carousel('next');
 		});				
 	});
+        if(document.getElementById("myCarousel_4") !== null){
+            $("#myCarousel_4").carousel('next');
+            }
 	
 	//search form contents
 	$("[id^='content_form_']").each(function(){

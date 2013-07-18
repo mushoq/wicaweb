@@ -6,8 +6,8 @@
  * @package    Core_Model
  * @copyright  Copyright (c) WicaWeb - Mushoq
  * @license    GNP
- * @version    1.0
- * @author	   Esteban
+ * @version    1.1
+ * @author      Jose Luis Landazuri - Esteban
  */
 
 class Core_Model_User extends Core_Model_Factory
@@ -29,6 +29,7 @@ class Core_Model_User extends Core_Model_Factory
 				JOIN wc_module_action ma ON map.module_action_id = ma.id
 				JOIN wc_module m ON ma.module_id = m.id
 				WHERE map.profile_id = ?
+				AND m.status = "active"
 				GROUP BY ma.module_id';
 		 
 		$data = $adapter->query($sql,array($profile));

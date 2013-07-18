@@ -31,6 +31,7 @@ position:absolute;
 display:none;
 width:12em;
 top:1.5em;
+z-index:50000;
 }
 
 #nav li ul a{

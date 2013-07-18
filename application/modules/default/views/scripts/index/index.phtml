@@ -1,16 +1,4 @@
-<!-- 
- *	Index view
- *
- * @category   WicaWeb
- * @package    Default_View
- * @copyright  Copyright (c) WicaWeb - Mushoq
- * @license    GNP
- * @version    1.0
- * @author	   David Rosales
- -->
-
 <?php $lang = Zend_Registry::get('Zend_Translate'); ?>
-
 <?php foreach($this->areas as $area): ?>
 <?php 	$section_contents_tpl[$area->name] = '&nbsp;'; ?>
 <?php endforeach; ?>
@@ -90,10 +78,14 @@ $band_one_private = array();
 											<li><a href="/index/sitemap">'.$lang->translate('Sitemap').'</a></li> 					
 										</ul>';
 	
+	if($this->menu2)
+		$section_contents_tpl['menu_bottom'] = '<ul id="nav_inferior">'.
+		$this->menu2.'
+		</ul>';
 	if($this->header['logo'])	
 		$section_contents_tpl['header_logo'] = '<ul class="header-website">
 													<li class="">
-														<img src="/uploads/website/'.$this->header['logo'].'" class="logo"/>
+														<a href="/"><img src="/uploads/website/'.$this->header['logo'].'" class="logo"/></a>
 													</li>
 												</ul>';
 	

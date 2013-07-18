@@ -6,8 +6,8 @@
  * @package    Core_Controller
  * @copyright  Copyright (c) WicaWeb - Mushoq
  * @license    GNP
- * @version    1.0
- * @author	   David Rosales
+ * @version    1.1
+ * @author      Jose Luis Landazuri - David Rosales
  */
 
 class Default_IndexController extends Zend_Controller_Action
@@ -132,6 +132,36 @@ class Default_IndexController extends Zend_Controller_Action
 		    		$html_list = GlobalFunctions::buildHtmlSectionMenu($sections_tree, false, NULL, $section_id);    		
 		    	}    	
 		    	$this->view->menu = $html_list;
+                        /*******
+		    	 * menu 2
+		    	 */        	
+		    	$section2 = new Core_Model_Section();
+		    	//find existent sections on db according website and to be displayed on menu
+		    	$sections_list2 = $section2->personalized_find('wc_section',array(array('website_id','=',$front_ids->website_id), array('display_menu2','=','yes'), array('approved','=','yes'), array('publication_status','=','published')),'order_number');
+		    	//section_id passed in URL
+		    	$section_id = $this->_getParam('id');
+		    	$sections_arr2 = array();    	
+		    	//sections list array
+		    	if($sections_list2)
+		    	{
+		    		foreach ($sections_list2 as $sec2)
+		    		{
+		    			$sections_arr2[] = array('id'=>$sec2->id,
+		    					'section_parent_id'=>$sec2->section_parent_id,
+		    					'title'=>$sec2->title
+		    			);
+		    		}
+		    	}
+		    	//string with sections tree html
+		    	$html_list2 = '';
+		    	if(count($sections_arr2)>0)
+		    	{
+		    		//sections tree - parents and children as array
+		    		$sections_tree2 = GlobalFunctions::buildSectionTree($sections_arr2);
+		    		//sections tree as menu
+		    		$html_list2 = GlobalFunctions::buildHtmlSectionMenu2($sections_tree2, false, NULL, $section_id);    		
+		    	}    	
+		    	$this->view->menu2 = $html_list2;
 	    	}
 	    	else{
 	    		return $this->nowebsiteAction();

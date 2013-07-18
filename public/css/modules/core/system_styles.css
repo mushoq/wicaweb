@@ -836,3 +836,9 @@ div#preview_words ul li{
 .icon-indent-left{
 	background-position: -388px -48px;
 }
+div.option_bar_container ul li.selected{
+        background-color: #4292D7;
+}
+div.option_bar_container ul li.selected a{
+        color: #FFFFFF;
+}

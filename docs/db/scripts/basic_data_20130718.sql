@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-04-2012 a las 12:18:22
--- Versión del servidor: 5.1.61
--- Versión de PHP: 5.3.9-ZS5.6.0
+-- Tiempo de generaci�n: 19-12-2012 
+-- Versi�n del servidor: 5.1.61
+-- Versi�n de PHP: 5.3.9-ZS5.6.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -26,26 +26,20 @@ SET FOREIGN_KEY_CHECKS = 0;
 --
 
 INSERT INTO `wc_section_template` (`id`, `name`, `file_name`, `column_number`, `type`) VALUES
-(1, 'template sec 1', 'sectemplate1.phtml', 1, 'both'),
-(2, 'template sec 2', 'sectemplate2.phtml', 2, 'both'),
-(3, 'template sec 3', 'sectemplate3.phtml', 3, 'both'),
-(4, 'template sec 4', 'sectemplate4.phtml', 4, 'both'),
-(5, 'login template', 'logintemplate.phtml', 1, 'both');
-
---
--- Volcar la base de datos para la tabla `wc_user`
---
-
-INSERT INTO `wc_user` (`id`, `profile_id`, `name`, `lastname`, `identification`, `email`, `phone`, `username`, `password`, `creation_date`, `last_update_date`, `status`) VALUES
-(1, 1, 'Administrador', 'Sistema', NULL, NULL, NULL, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '2012-05-20 03:09:49', '2012-05-24 11:47:10', 'active');
+(1, '1 Column', 'sectemplate1.phtml', 1, 'both'),
+(2, '2 Columns', 'sectemplate2.phtml', 2, 'both'),
+(3, '3 Columns', 'sectemplate3.phtml', 3, 'both'),
+(4, '4 Columns', 'sectemplate4.phtml', 4, 'both'),
+(5, 'Carrousel', 'seccarousel1.phtml', 1, 'section'),
+(6, 'login template', 'logintemplate.phtml', 1, 'both');
 
 --
 -- Volcar la base de datos para la tabla `wc_website_language`
 --
 
 INSERT INTO `wc_website_language` (`id`, `name`, `abbreviation`, `description`) VALUES
-(1, 'Español', 'es', NULL),
-(2, 'Inglés', 'en', NULL);
+(1, 'Espa�ol', 'es', NULL),
+(2, 'Ingl�s', 'en', NULL);
 
 --
 -- Volcar la base de datos para la tabla `wc_website_template`
@@ -56,6 +50,7 @@ INSERT INTO `wc_website_template` (`id`, `name`, `file_name`, `image`, `css_file
 (2, 'template web 2', 'webtemplate2.phtml', 'template2.jpg', 'NULL', 'NULL', 'NULL', 'NULL'),
 (3, 'template web 3', 'webtemplate3.phtml', 'template3.jpg', 'NULL', 'NULL', 'NULL', 'NULL'),
 (4, 'template web 4', 'webtemplate4.phtml', 'template4.jpg', 'NULL', 'NULL', 'NULL', 'NULL');
+
 
 --
 -- Volcar la base de datos para la tabla `wc_area`
@@ -163,3 +158,68 @@ INSERT INTO `wc_module_action_profile` (`id`, `profile_id`, `module_action_id`) 
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+
+--
+-- Volcar la base de datos para la tabla `wc_content_type`
+--
+
+INSERT INTO `wc_content_type` (`id`, `name`, `description`, `status`) VALUES
+(1, 'Text', NULL, 'active'),
+(2, 'Image', NULL, 'active'),
+(3, 'Link', NULL, 'active'),
+(4, 'Form', NULL, 'active'),
+(5, 'Flash', NULL, 'active'),
+(6, 'Flash Video', NULL, 'active'),
+(7, 'Carousel', NULL, 'active');
+
+--
+-- Volcar la base de datos para la tabla `wc_field`
+--
+
+INSERT INTO `wc_field` (`id`, `content_type_id`, `name`, `type`, `required`, `order_item`) VALUES 
+  (1,1,'Content','textarea','yes',1),
+  (2,2,'Picture foot','textfield','no',1),
+  (3,2,'Description','textarea','no',2),
+  (4,2,'Target','radio','no',3),
+  (5,2,'Link','textfield','yes',4),
+  (6,2,'Image','image','yes',5),
+  (7,2,'Format','select','yes',6),
+  (8,2,'Save image','button','no',7),
+  (9,2,'Resizeimg','radio','yes',8),
+  (10,1,'Save','button','no',1),
+  (11,3,'Type','radio','yes',1),
+  (12,3,'Internal section','select','yes',1),
+  (13,3,'Link','textfield','yes',1),
+  (14,3,'Email','textfield','yes',1),
+  (15,3,'File','file','yes',1),
+  (16,3,'File type','select','yes',1),
+  (17,3,'Text','textarea','no',1),
+  (18,3,'Save','button','no',1),
+  (19,4,'Description','textarea','yes',1),
+  (20,4,'Email','textfield','no',1),
+  (21,4,'Captcha','radio','yes',1),
+  (22,4,'Element type','select','yes',1),
+  (23,4,'Number','textfield','no',1),
+  (24,4,'Add','button','no',1),
+  (25,4,'Save form','button','no',1),
+  (26,5,'Description','textarea','no',1),
+  (27,5,'Background','radio','yes',1),
+  (28,5,'Flash file','file','yes',1),
+  (29,5,'Alternative Image','file','no',1),
+  (30,5,'Save','button','no',1),
+  (31,6,'URL','textfield','no',1),
+  (32,6,'HTML code','textarea','no',1),
+  (33,6,'Save','button','no',1),
+  (34,7,'Select Images','select_images','no',1),
+  (35,7,'Save image','button','no',1);
+
+
+--
+-- Volcar la base de datos para la tabla `wc_external_files`
+--
+
+INSERT INTO `wc_external_files` (`id`, `website_id`, `name`, `path`, `type`, `order_number`) VALUES
+(1, NULL, 'jcarousel js', 'jquery.jcarousel.min_1347989829.js', 'js', 1),
+(2, NULL, 'jcarousel css', 'skin_1347989853.css', 'css', 1),
+(3, NULL, 'productos', 'products_1347990812.js', 'js', 2),
+(4, NULL, 'jquery', 'jquery-ui-1.8.23.custom_1348005941.css', 'css', 2);

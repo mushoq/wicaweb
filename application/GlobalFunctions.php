@@ -7,8 +7,8 @@
  * @package    Application GlobalFunctions
  * @copyright  Copyright (c) WicaWeb - Mushoq
  * @license	   GNP
- * @author	   Santiago Arellano
- * @version    1.0
+ * @version    1.1
+ * @author      Jose Luis Landazuri - Santiago Arellano
  */
 
 
@@ -376,12 +376,46 @@ class GlobalFunctions {
 				if(isset($item['title'])){
 					
 					if(!$storage)
-						$html.= '<a href="/index/index?id='.$item['id'].'">';
+						$html.= '<a href="/content/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
 					else 
 						$html.= '<a href="/indexold_indexold/index?id='.$item['id'].'">';
 					//$html.= !isset($item['children'])? '<a class="dropdown-toggle" data-toggle="dropdown" href="#menu'.$item['id'].'">' : '<a>';
 															
 					$html.= $item['title'];
+					$html.='</a>';
+				}
+				//children
+				if (isset($item['children']) && count($item['children'])>0) {
+					//$html.= '<ul class="children" id="'.$item['id'].'">'.self::buildHtmlSectionTree($item['children'], true).'</ul>';
+					if(!$storage)
+						$html.= '<ul>'.self::buildHtmlSectionMenu($item['children'], true).'</ul>';
+					else
+						$html.= '<ul>'.self::buildHtmlSectionMenu($item['children'], true, 'storage').'</ul>';
+				}
+				$html.= '</li>';
+			}
+                         //$html.= '<li><a href="/contact.php" rel="shadowbox;width=320;height=436">CONTACT</a></li>';
+		}		
+		return $html;
+	}
+        public static function buildHtmlSectionMenu2($tree = array(), $isChild = false, $storage=NULL, $selectedId=NULL) {
+		$html = '';
+		if (count($tree)) {
+			foreach ($tree as $item) {
+				//$html.= !isset($item['children'])? '<li class="dropdown" id="menu'.$item['id'].'">' : '<li>';
+				$html.= '<li'; 
+				if($item['id'] == $selectedId){
+					$html.= ' class="seccSelected" ';				
+				}
+				$html.= '>';
+				//parent section
+				if(isset($item['title'])){
+					if(!$storage)
+						$html.= '<a href="/content/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
+					else 
+						$html.= '<a href="/indexold_indexold/index?id='.$item['id'].'">';
+					//$html.= !isset($item['children'])? '<a class="dropdown-toggle" data-toggle="dropdown" href="#menu'.$item['id'].'">' : '<a>';
+					$html.= '['.$item['title'].']';
 						
 					$html.='</a>';
 				}
@@ -467,12 +501,12 @@ class GlobalFunctions {
 				$content_field = new Core_Model_ContentField();
 				$content_field_temp = new Core_Model_ContentFieldTemp();
 				
-				if($content['temp']){
+				/*if($content['temp']){
 					$content_temp = new Core_Model_ContentTemp();
 					$content_temp_obj = $content_temp->find('wc_content_temp', array('content_id'=>$content['id'])); 
 					$data_content_field = $content_field->find ( 'wc_content_field_temp', array ('content_temp_id' => $content_temp_obj[0]->id) );
 				}
-				else
+				else*/
 					$data_content_field = $content_field->find ( 'wc_content_field', array ('content_id' => $content['id']) );
 				
 				//create the html to show the preview list

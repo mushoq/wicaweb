@@ -6,8 +6,8 @@
  * @package    Core_Model
  * @copyright  Copyright (c) WicaWeb - Mushoq
  * @license    GNP
- * @version    1.0
- * @author	   Jorge Tenorio - David Rosales
+ * @version    1.1
+ * @author      Jose Luis Landazuri - Jorge Tenorio - David Rosales
  */
 
 class Core_Model_Factory {
@@ -91,6 +91,50 @@ class Core_Model_Factory {
 		return $return;
 	}
 	
+	/**
+	 * Returns an object array with results with LIMIT
+	 * @param string $tableName
+	 * @param array $criteria
+         * @param array $limit1
+         * @param array $limit2
+	 * @return array
+	 */
+	public function limit_find($tableName,$criteria = array(), $order_params = array(), $limit1, $limit2)
+	{
+		//get criteria
+		$where = '1=1 ';
+		if($criteria)
+		{	
+			foreach($criteria as $field => $value){
+				if(!$value)
+					$where .= 'and '.$field.' IS NULL ';
+				else
+					$where .= 'and '.$field.' = "'.$value.'" ';
+			}
+		}	
+		$order=NULL;
+		if($order_params)
+		{
+			foreach ($order_params as $field_order => $way){				
+				$order = $field_order.' '.$way;
+			}
+		}
+		$table = new Zend_Db_Table($tableName);	
+		$result = $table->fetchAll($where, $order, $limit1, $limit2);
+		$return = array();
+		foreach($result as $row)
+		{
+			$temp = array();
+			foreach($row as $col=>$value)
+			{
+				$temp[$col] = utf8_encode($value);
+			}
+			//convert into object
+			$obj = (object)$temp;
+			array_push($return, $obj);
+		}
+		return $return;
+	}
 	/**
 	 * Save object into table
 	 * @param string $tableName
