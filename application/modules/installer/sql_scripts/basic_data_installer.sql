@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-12-2012 
--- Versión del servidor: 5.1.61
--- Versión de PHP: 5.3.9-ZS5.6.0
+-- Tiempo de generaciï¿½n: 19-12-2012 
+-- Versiï¿½n del servidor: 5.1.61
+-- Versiï¿½n de PHP: 5.3.9-ZS5.6.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -26,10 +26,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 --
 
 INSERT INTO `wc_section_template` (`id`, `name`, `file_name`, `column_number`, `type`) VALUES
-(1, 'template sec 1', 'sectemplate1.phtml', 1, 'both'),
-(2, 'template sec 2', 'sectemplate2.phtml', 2, 'both'),
-(3, 'template sec 3', 'sectemplate3.phtml', 3, 'both'),
-(4, 'template sec 4', 'sectemplate4.phtml', 4, 'both'),
+(1, '1 Column', 'sectemplate1.phtml', 1, 'both'),
+(2, '2 Columns', 'sectemplate2.phtml', 2, 'both'),
+(3, '3 Columns', 'sectemplate3.phtml', 3, 'both'),
+(4, '4 Columns', 'sectemplate4.phtml', 4, 'both'),
 (5, 'login template', 'logintemplate.phtml', 1, 'both');
 
 --
@@ -37,8 +37,8 @@ INSERT INTO `wc_section_template` (`id`, `name`, `file_name`, `column_number`, `
 --
 
 INSERT INTO `wc_website_language` (`id`, `name`, `abbreviation`, `description`) VALUES
-(1, 'Español', 'es', NULL),
-(2, 'Inglés', 'en', NULL);
+(1, 'Espaï¿½ol', 'es', NULL),
+(2, 'Inglï¿½s', 'en', NULL);
 
 --
 -- Volcar la base de datos para la tabla `wc_website_template`
@@ -184,24 +184,25 @@ INSERT INTO `wc_field` (`id`, `content_type_id`, `name`, `type`, `required`, `or
   (6,2,'Image','image','yes',5),
   (7,2,'Format','select','yes',6),
   (8,2,'Save image','button','no',7),
-  (9,1,'Save','button','no',1),
-  (10,3,'Type','radio','yes',1),
-  (11,3,'Internal section','select','yes',1),
-  (12,3,'Link','textfield','yes',1),
-  (13,3,'Email','textfield','yes',1),
-  (14,3,'File','file','yes',1),
-  (15,3,'File type','select','yes',1),
-  (16,3,'Text','textarea','no',1),
-  (17,3,'Save','button','no',1),
-  (18,4,'Description','textarea','yes',1),
-  (19,4,'Email','textfield','no',1),
-  (20,4,'Captcha','radio','yes',1),
-  (21,4,'Element type','select','yes',1),
-  (22,4,'Number','textfield','no',1),
-  (23,4,'Add','button','no',1),
-  (24,4,'Save form','button','no',1),
-  (25,5,'Description','textarea','no',1),
-  (26,5,'Background','radio','yes',1),
+  (9,2,'Resizeimg','radio','yes',8),
+  (10,1,'Save','button','no',1),
+  (11,3,'Type','radio','yes',1),
+  (12,3,'Internal section','select','yes',1),
+  (13,3,'Link','textfield','yes',1),
+  (14,3,'Email','textfield','yes',1),
+  (15,3,'File','file','yes',1),
+  (16,3,'File type','select','yes',1),
+  (17,3,'Text','textarea','no',1),
+  (18,3,'Save','button','no',1),
+  (19,4,'Description','textarea','yes',1),
+  (20,4,'Email','textfield','no',1),
+  (21,4,'Captcha','radio','yes',1),
+  (22,4,'Element type','select','yes',1),
+  (23,4,'Number','textfield','no',1),
+  (24,4,'Add','button','no',1),
+  (25,4,'Save form','button','no',1),
+  (26,5,'Description','textarea','no',1),
+  (27,5,'Background','radio','yes',1),
   (28,5,'Flash file','file','yes',1),
   (29,5,'Alternative Image','file','no',1),
   (30,5,'Save','button','no',1),
@@ -209,8 +210,7 @@ INSERT INTO `wc_field` (`id`, `content_type_id`, `name`, `type`, `required`, `or
   (32,6,'HTML code','textarea','no',1),
   (33,6,'Save','button','no',1),
   (34,7,'Select Images','select_images','no',1),
-  (35,7,'Save image','button','no',1),
-  (36,2,'Resizeimg','radio','yes',8);
+  (35,7,'Save image','button','no',1);
 
 
 --
