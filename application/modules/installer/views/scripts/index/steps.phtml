@@ -53,10 +53,29 @@
 	        <ul id="pre_instal_req_list" class="left line-top">
 	        	<li><?php echo $lang->translate('Php Installed'); ?></li>
 	        	<li><?php echo $lang->translate('MySql Installed'); ?></li>
-	        	<li><?php echo $lang->translate('Write Permissions on application.ini file').' (777). <br/>'.$lang->translate('File path:')." <b> /application/configs/application.ini  </b>"; ?></li>
-	        	<li><?php echo $lang->translate('Write Permissions on the folders').' (777) : <b>'."/public/, /public/uploads/, /public/uploads/cache/, /public/uploads/website/, /public/uploads/template_img/, /public/uploads/content/,
-				/public/website/, /public/content/, /public/images/, /public/images/captcha, /public/js/, /public/js/modules/, /public/css/, /public/css/modules/, /public/images/controlPanel/, /application/modules/core/layouts/scripts/partials/, 
-	            /public/uploads/, /public/uploads/tmp/, /public/uploads/banners/, /public/uploads/products/, /application/modules/ (Para módulos externos)".'</b>'; ?></li>
+	        	<li><?php echo $lang->translate('Write Permissions on application.ini file').' (777). <ul><li>'.$lang->translate('File path:')." <b> /application/configs/application.ini  </b></li></ul>"; ?></li>
+	        	<li><?php echo $lang->translate('Write Permissions on the folders').' (777) : <b><ul>
+                            <li>/public/</li>
+                            <li>/public/uploads/</li>
+                            <li>/public/uploads/cache/</li>
+                            <li>/public/uploads/website/</li>
+                            <li>/public/uploads/template_img/</li>
+                            <li>/public/uploads/content/</li>
+                            <li>/public/uploads/</li>
+                            <li>/public/uploads/tmp/</li>
+                            <li>/public/uploads/banners/</li>
+                            <li>/public/uploads/products/</li>                            
+                            <li>/public/website/</li>
+                            <li>/public/content/</li>
+                            <li>/public/images/</li>
+                            <li>/public/images/captcha</li>
+                            <li>/public/images/controlPanel/</li>                            
+                            <li>/public/js/</li>
+                            <li>/public/js/modules/</li>
+                            <li>/public/css/</li>
+                            <li>/public/css/modules/</li>
+                            <li>/application/modules/core/layouts/scripts/partials/</li>                            
+                            <li>/application/modules/ (Para módulos externos)</li></ul></b>'; ?></li>                      
 	        </ul>
 	    </div>
         <div class="span2 left">&nbsp;</div>
@@ -137,7 +156,8 @@
 	        	<div class="control-group">
 					<label class="control-label"><?php echo '* '.$lang->translate('Database Host').':';?></label>
 					<div class="controls">
-						<input type="text" name="db_host" id="db_host" value="127.0.0.1"> (127.0.0.1 = localhost)
+						<input type="text" name="db_host" id="db_host" value="127.0.0.1"> 
+                                                <br/>(127.0.0.1 = localhost)
 					</div>
 				</div>
 	      	</div>
