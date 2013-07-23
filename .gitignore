@@ -1,9 +1,10 @@
 INSTALL.txt
 LICENSE.txt
 README.txt
+
+application/configs/
 demos/
 extras/documentation
-
-/nbproject/private/
-/docs/db/scripts/bdd_20120828.sql
-/docs/db/scripts/basic_data.sql
+nbproject/private/
+docs/db/scripts/bdd_20120828.sql
+docs/db/scripts/basic_data.sql
