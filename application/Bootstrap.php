@@ -71,7 +71,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		}else{
 			$locale->setLocale(Zend_Locale::BROWSER);
 		}
-		
+		$locale->setlocale(LC_ALL, 'en');
 		
 		// setting the right locale
 		if ($translate->isAvailable($locale->getLanguage())) {
