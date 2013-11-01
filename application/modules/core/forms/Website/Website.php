@@ -355,7 +355,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$smtp_username->setAttrib('style', 'width:100%');
 		
 		//Password
-		$smtp_password = New Zend_Form_Element_Text('smtp_password');
+		$smtp_password = New Zend_Form_Element_Password('smtp_password');
 		$smtp_password->setLabel($lang->translate('Password').':');
 		$smtp_password->setFilters(array( new Zend_Filter_StringTrim()));
 		$smtp_password->setAttrib('style', 'width:100%');
