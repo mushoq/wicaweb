@@ -41,7 +41,9 @@ $(document).ready(function() {
 		
 		if($("#frmTemplate").valid()){
 			if($('#hdn_template_file').val()){
-				jQuery.get("/uploads/tmp/"+$('#hdn_template_file').val(),function(data) {
+			        var filePart =($('#hdn_template_file').val()).split(".");			       
+				fileNameTemplate = filePart[0];
+				jQuery.get("/uploads/tmp/"+fileNameTemplate+".whtml",function(data) {
 					if(data!='')
 					{
 						$("#div_read_file").html(data);

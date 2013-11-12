@@ -17,7 +17,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	 * Initialize GlobalFunctions file 
 	 */
 	protected function _initGlobalFunctions(){
-		require_once 'GlobalFunctions.php';
+            if (get_magic_quotes_gpc()) {
+
+            function stripMagicQuotes(&$value) {
+                $value = (is_array($value)) ? array_map('stripMagicQuotes', $value) : stripslashes($value);
+                return $value;
+            }
+
+            stripMagicQuotes($_GET);
+            stripMagicQuotes($_POST);
+            stripMagicQuotes($_COOKIE);
+        }
+        require_once 'GlobalFunctions.php';
 	}
 	
 	protected function _initPhpThumbHelper(){

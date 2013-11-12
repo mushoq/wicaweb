@@ -99,7 +99,7 @@ class Core_Template_TemplateController extends Zend_Controller_Action
     			
     			$template_obj->name = $formData['name'];
     			
-    			//move files from tmp
+    			//move files from tmp;
     			$template_file = GlobalFunctions::uploadFiles ( $formData['hdn_template_file'], APPLICATION_PATH . '/../application/modules/default/views/scripts/partials/' );
     			$template_obj->file_name = $template_file;
     			GlobalFunctions::removeOldFiles ( $formData['hdn_template_file'], APPLICATION_PATH . '/../public/uploads/tmp/' );    			
@@ -615,9 +615,10 @@ class Core_Template_TemplateController extends Zend_Controller_Action
     	}
     	
     	if (! is_dir ($directory)) {
+                $old_umask = umask(0);
     		$path = $directory;
-    		mkdir ( $path );
-    		chmod ( $path, 0777 );		
+    		mkdir ( $path, 0777, TRUE );
+    		//chmod ( $path, 0777 );		
     	}    	
     	if($_FILES["content_file"]["size"]!=0){
 	    	if ($_FILES["content_file"]["size"] <= $maxSize) {//DETERMINING IF THE SIZE OF THE FILE UPLOADED IS VALID
@@ -642,9 +643,23 @@ class Core_Template_TemplateController extends Zend_Controller_Action
 	    						}
 	    					}else{
 		    					do {
+		    					    $isTemplate = false;
+		    					    $tempNameWica= '';		    					        
+		    					    if($path_parts['extension']=='phtml'){
+		    					        //$path_parts['extension'] = 'whtml';
+		    					         $isTemplate = true;
+		    					         $time4file = time();
+		    					         $tempNameWica = 'file_' . $time4file . '.whtml';
+		    					         $tempName = 'file_' . $time4file . '.' . $path_parts['extension'];
+		    					    }else{
 		    						$tempName = 'file_' . time() . '.' . $path_parts['extension'];
+		    					    }
 		    					} while (file_exists($directory . $tempName));
 		    					move_uploaded_file($_FILES["content_file"]["tmp_name"], $directory . $tempName);
+		    					//if file template duplicate file to extension html to get file a review it through jquery
+		    					if($isTemplate){
+		    					    copy($directory . $tempName, $directory . $tempNameWica);
+		    					}
 		    					echo $tempName;
 	    					}
 	    				} else {//ITS NOT A DIRECTORY
