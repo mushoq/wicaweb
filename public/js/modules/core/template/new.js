@@ -43,12 +43,13 @@ $(document).ready(function() {
 			if($('#hdn_template_file').val()){
 			        var filePart =($('#hdn_template_file').val()).split(".");			       
 				fileNameTemplate = filePart[0];
-				jQuery.get("/uploads/tmp/"+fileNameTemplate+".whtml",function(data) {
-					if(data!='')
-					{
+				jQuery.get("/uploads/tmp/"+fileNameTemplate+".html",function(data) {
+					if(data!=='')
+					{                                           
 						$("#div_read_file").html(data);
 						var hdn_areas='';
-						var error = 0;						
+						var error = 0;	
+                                                
 						$("[id^='wica_area_']").each(function(){
 							if($(this).parent().attr("class") && $(this).attr("id")){							
 								hdn_areas+=$(this).attr("id")+","+$(this).parent().attr("class").split(' ')[0]+';';

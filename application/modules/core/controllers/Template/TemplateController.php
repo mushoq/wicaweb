@@ -99,10 +99,12 @@ class Core_Template_TemplateController extends Zend_Controller_Action
     			
     			$template_obj->name = $formData['name'];
     			
+                        $old_umask = umask(0);
     			//move files from tmp;
     			$template_file = GlobalFunctions::uploadFiles ( $formData['hdn_template_file'], APPLICATION_PATH . '/../application/modules/default/views/scripts/partials/' );
     			$template_obj->file_name = $template_file;
     			GlobalFunctions::removeOldFiles ( $formData['hdn_template_file'], APPLICATION_PATH . '/../public/uploads/tmp/' );    			
+                        chmod( APPLICATION_PATH . '/../application/modules/default/views/scripts/partials/' . $formData['hdn_template_file'], 0777 );
 
     			//move files from tmp
     			if($formData['hdn_template_image']){
@@ -132,6 +134,7 @@ class Core_Template_TemplateController extends Zend_Controller_Action
     				foreach($css_files as $css){
     					copy(APPLICATION_PATH. '/../public/uploads/tmp/css_'.$formData['template_folder'].'/'.$css, $path_css.$css);
     					GlobalFunctions::removeOldFiles ( $css, APPLICATION_PATH. '/../public/uploads/tmp/css/' );
+                                        chmod ( $path_css.$css, 0777 );
     					$template_obj->css_files = $formData['hdn_css_files'];
     				}
     			}
@@ -162,6 +165,7 @@ class Core_Template_TemplateController extends Zend_Controller_Action
     				foreach($js_files as $js){
     					copy(APPLICATION_PATH. '/../public/uploads/tmp/js_'.$formData['template_folder'].'/'.$js, $path_js.$js);
     					GlobalFunctions::removeOldFiles ( $js, APPLICATION_PATH. '/../public/uploads/tmp/js/' );
+                                        chmod ( $path_js.$js, 0777 );
     					$template_obj->js_files = $formData['hdn_js_files'];
     				}
     			}
@@ -187,6 +191,7 @@ class Core_Template_TemplateController extends Zend_Controller_Action
     				foreach($image_files as $image){
     					copy(APPLICATION_PATH. '/../public/uploads/tmp/images_'.$formData['template_folder'].'/'.$image, $path_image.$image);
     					GlobalFunctions::removeOldFiles ( $image, APPLICATION_PATH. '/../public/uploads/tmp/images/' );
+                                        chmod ( $path_image.$image, 0777 );
     					$template_obj->images_files = $formData['hdn_image_files'];
     				}
     			}    			
@@ -349,8 +354,10 @@ class Core_Template_TemplateController extends Zend_Controller_Action
     			
     				$path_css = APPLICATION_PATH . '/../public/css/templates/'. $formData['name'] .'/';
     				foreach($css_files as $css){
-    					if(copy(APPLICATION_PATH. '/../public/uploads/tmp/css_'.$formData['template_folder'].'/'.$css, $path_css.$css))
+    					if(copy(APPLICATION_PATH. '/../public/uploads/tmp/css_'.$formData['template_folder'].'/'.$css, $path_css.$css)){
     						GlobalFunctions::removeOldFiles ( $css, APPLICATION_PATH. '/../public/uploads/tmp/css/' );
+                                                chmod ( $path_css.$css, 0777 );
+                                        }
     				}
     				$template_obj->css_files = $formData['hdn_css_files'];
     			}else
@@ -380,8 +387,10 @@ class Core_Template_TemplateController extends Zend_Controller_Action
     				 
     				$path_js = APPLICATION_PATH . '/../public/js/templates/'. $formData['name'] .'/';
     				foreach($js_files as $js){
-    					if(copy(APPLICATION_PATH. '/../public/uploads/tmp/js_'.$formData['template_folder'].'/'.$js, $path_js.$js))
+    					if(copy(APPLICATION_PATH. '/../public/uploads/tmp/js_'.$formData['template_folder'].'/'.$js, $path_js.$js)){
     						GlobalFunctions::removeOldFiles ( $js, APPLICATION_PATH. '/../public/uploads/tmp/js/' );
+                                                chmod ( $path_js.$js, 0777 );
+                                        }
     				}
     				$template_obj->js_files = $formData['hdn_js_files'];
     			}else
@@ -406,9 +415,11 @@ class Core_Template_TemplateController extends Zend_Controller_Action
     				 
     				$path_image = APPLICATION_PATH . '/../public/images/templates/'. $formData['name'] .'/';
     				foreach($image_files as $image){
-    					if(copy(APPLICATION_PATH. '/../public/uploads/tmp/images_'.$formData['template_folder'].'/'.$image, $path_image.$image))
+    					if(copy(APPLICATION_PATH. '/../public/uploads/tmp/images_'.$formData['template_folder'].'/'.$image, $path_image.$image)){
     						GlobalFunctions::removeOldFiles ( $image, APPLICATION_PATH. '/../public/uploads/tmp/images/' );
-    				}
+                                                chmod ( $path_image.$image, 0777 );
+                                        }
+                                }
     				$template_obj->images_files = $formData['hdn_image_files'];
     			}else
     				$template_obj->images_files = $arr_data['images_files'];    			
@@ -646,16 +657,18 @@ class Core_Template_TemplateController extends Zend_Controller_Action
 		    					    $isTemplate = false;
 		    					    $tempNameWica= '';		    					        
 		    					    if($path_parts['extension']=='phtml'){
-		    					        //$path_parts['extension'] = 'whtml';
+		    					        //$path_parts['extension'] = 'html';
 		    					         $isTemplate = true;
 		    					         $time4file = time();
-		    					         $tempNameWica = 'file_' . $time4file . '.whtml';
+		    					         $tempNameWica = 'file_' . $time4file . '.html';
 		    					         $tempName = 'file_' . $time4file . '.' . $path_parts['extension'];
 		    					    }else{
 		    						$tempName = 'file_' . time() . '.' . $path_parts['extension'];
 		    					    }
 		    					} while (file_exists($directory . $tempName));
-		    					move_uploaded_file($_FILES["content_file"]["tmp_name"], $directory . $tempName);
+		    					$old_umask = umask(0);
+                                                        move_uploaded_file($_FILES["content_file"]["tmp_name"], $directory . $tempName);                                                        
+                                                        chmod( $directory . $tempName, 0777 );
 		    					//if file template duplicate file to extension html to get file a review it through jquery
 		    					if($isTemplate){
 		    					    copy($directory . $tempName, $directory . $tempNameWica);
