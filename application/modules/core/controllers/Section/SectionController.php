@@ -7,8 +7,8 @@
  * @package    Core_Controller
  * @copyright  Copyright (c) WicaWeb - Mushoq 
  * @license    GNP
- * @version    1.0
- * @author	   David Rosales
+ * @version    1.01
+ * @author	David Rosales, Jose Luis Landazuri
  */
 
 class Core_Section_SectionController extends Zend_Controller_Action
@@ -1263,6 +1263,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 								$section_obj->comments = GlobalFunctions::value_cleaner($stored_section_data[0]->comments);
 								$section_obj->external_comment_script = GlobalFunctions::value_cleaner($stored_section_data[0]->external_comment_script);
 								$section_obj->display_menu = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu);
+                                                                $section_obj->display_menu2 = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu2);
 								$section_obj->homepage = GlobalFunctions::value_cleaner($stored_section_data[0]->homepage);
 								$section_obj->order_number = GlobalFunctions::value_cleaner($count);
 								$section_obj->article = GlobalFunctions::value_cleaner($stored_section_data[0]->article);
@@ -1303,6 +1304,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 								$section_obj->comments = GlobalFunctions::value_cleaner($stored_section_data[0]->comments);
 								$section_obj->external_comment_script = GlobalFunctions::value_cleaner($stored_section_data[0]->external_comment_script);
 								$section_obj->display_menu = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu);
+                                                                $section_obj->display_menu2 = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu2);
 								$section_obj->homepage = GlobalFunctions::value_cleaner($stored_section_data[0]->homepage);
 								$section_obj->order_number = GlobalFunctions::value_cleaner($count);
 								$section_obj->article = GlobalFunctions::value_cleaner($stored_section_data[0]->article);
@@ -1438,6 +1440,13 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			$parent_show_menu->removeDecorator('Label');
 			$parent_show_menu->removeDecorator('HtmlTag');
 			$section_form->addElement($parent_show_menu);
+                        
+                        //set hidden parent show menu2
+			$parent_show_menu2 = New Zend_Form_Element_Hidden('parent_show_menu2');
+			$parent_show_menu2->setValue($section_arr['display_menu2']);
+			$parent_show_menu2->removeDecorator('Label');
+			$parent_show_menu2->removeDecorator('HtmlTag');
+			$section_form->addElement($parent_show_menu2);
 			
 			$approved_frm = new Zend_Form_Element_Hidden('approved');
 			$approved_frm->removeDecorator('Label');
@@ -1653,6 +1662,8 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		
 		//menu
 		$section_arr['menu'] = $section_data[0]->display_menu;
+                //menu2
+		$section_arr['menu2'] = $section_data[0]->display_menu2;
 	
 		//section images
 		$section_image = new Core_Model_SectionImage();
@@ -1720,6 +1731,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			
 			$this->view->parent_section = $section_parent_arr;
 			$section_arr['parent_show_menu'] = $section_parent_arr['display_menu'];
+                        $section_arr['parent_show_menu2'] = $section_parent_arr['display_menu2'];
 		}
 	
 		//fill the form with stored data		
@@ -1842,6 +1854,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_nothome->comments = GlobalFunctions::value_cleaner($section_home[0]->comments);
 					$section_nothome->external_comment_script = GlobalFunctions::value_cleaner($section_home[0]->external_comment_script);
 					$section_nothome->display_menu = GlobalFunctions::value_cleaner($section_home[0]->display_menu);
+                                        $section_nothome->display_menu2 = GlobalFunctions::value_cleaner($section_home[0]->display_menu2);
 					$section_nothome->homepage = 'no';
 					$section_nothome->article = $section_home[0]->article;
 					//Save data
@@ -1928,6 +1941,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			$section_act->comments = GlobalFunctions::value_cleaner($formData['comments']);
 			$section_act->external_comment_script = NULL;
 			$section_act->display_menu = GlobalFunctions::value_cleaner($formData['menu']);
+                        $section_act->display_menu2 = GlobalFunctions::value_cleaner($formData['menu2']);
 			$section_act->homepage = $homepage_opt;
 			$section_act->article = 'no';
 			$saved_section_id = $section->save('wc_section', $section_act);
@@ -1994,6 +2008,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_tmp->comments = GlobalFunctions::value_cleaner($formData['comments']);
 					$section_tmp->external_comment_script = NULL;
 					$section_tmp->display_menu = GlobalFunctions::value_cleaner($formData['menu']);
+                                        $section_tmp->display_menu2 = GlobalFunctions::value_cleaner($formData['menu2']);
 					$section_tmp->homepage = $homepage_opt;
 					$section_tmp->article = 'no';
 					$section_tmp_id = $section_temp->save('wc_section_temp',$section_tmp);
@@ -2051,6 +2066,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_act->comments = GlobalFunctions::value_cleaner($formData['comments']);
 					$section_act->external_comment_script = NULL;
 					$section_act->display_menu = GlobalFunctions::value_cleaner($formData['menu']);
+                                        $section_act->display_menu2 = GlobalFunctions::value_cleaner($formData['menu2']);
 					$section_act->homepage = $homepage_opt;
 					$section_act->article = 'no';
 					$saved_section_id = $section->save('wc_section', $section_act);
@@ -2110,6 +2126,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_tmp->comments = GlobalFunctions::value_cleaner($formData['comments']);
 					$section_tmp->external_comment_script = NULL;
 					$section_tmp->display_menu = GlobalFunctions::value_cleaner($formData['menu']);
+                                        $section_tmp->display_menu2 = GlobalFunctions::value_cleaner($formData['menu2']);
 					$section_tmp->homepage = $homepage_opt;
 					$section_tmp->article = 'no';
 					$section_tmp_id = $section_temp->save('wc_section_temp',$section_tmp);
@@ -2171,6 +2188,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_tmp->comments = GlobalFunctions::value_cleaner($formData['comments']);
 					$section_tmp->external_comment_script = NULL;
 					$section_tmp->display_menu = GlobalFunctions::value_cleaner($formData['menu']);
+                                        $section_tmp->display_menu2 = GlobalFunctions::value_cleaner($formData['menu2']);
 					$section_tmp->homepage = $homepage_opt;
 					$section_tmp->article = 'no';
 					$section_tmp_id = $section_temp->save('wc_section_temp',$section_tmp);
@@ -4047,6 +4065,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 						$section_obj->comments = GlobalFunctions::value_cleaner($stored_section_data[0]->comments);
 						$section_obj->external_comment_script = GlobalFunctions::value_cleaner($stored_section_data[0]->external_comment_script);
 						$section_obj->display_menu = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu);
+                                                $section_obj->display_menu2 = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu2);
 						$section_obj->homepage = GlobalFunctions::value_cleaner($stored_section_data[0]->homepage);
 						$section_obj->order_number = GlobalFunctions::value_cleaner($stored_section_data[0]->order_number);
 						$section_obj->article = GlobalFunctions::value_cleaner($stored_section_data[0]->article);
@@ -4439,6 +4458,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			$section_obj->comments = GlobalFunctions::value_cleaner($stored_section_data[0]->comments);
 			$section_obj->external_comment_script = GlobalFunctions::value_cleaner($stored_section_data[0]->external_comment_script);
 			$section_obj->display_menu = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu);
+                        $section_obj->display_menu2 = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu2);
 			$section_obj->homepage = GlobalFunctions::value_cleaner($stored_section_data[0]->homepage);
 			$section_obj->order_number = GlobalFunctions::value_cleaner($stored_section_data[0]->order_number);
 			$section_obj->article = GlobalFunctions::value_cleaner($stored_section_data[0]->article);

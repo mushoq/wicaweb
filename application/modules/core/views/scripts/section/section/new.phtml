@@ -5,8 +5,8 @@
  * @package    Core_View
  * @copyright  Copyright (c) WicaWeb - Mushoq 
  * @license    GNP
- * @version    1.0
- * @author	   David Rosales
+ * @version    1.01
+ * @author	   David Rosales, Jose Luis Landazuri
  -->
 
 <?php $lang = Zend_Registry::get('Zend_Translate'); ?>
@@ -185,24 +185,46 @@
 						<?php echo $this->form->section_area->renderViewHelper(); ?> 					
 					</div>																							
 	      		</div>
-	     		     		      		
-	      		<?php echo $this->form->parent_show_menu->renderViewHelper(); ?>
-	      		<div class="span6" id="menu_opt_container">	
-					<div class="control-group">
-						<label class="control-label"><?php echo '* '.$lang->translate('Show in menu').':'; ?></label>
-						<div class="controls">
-							<div class="btn-group" data-toggle="buttons-radio">
-								<?php $default_area_arr = array_keys($confirm_options);
-									$default_area_opt = $default_area_arr[0]; ?>
-								<?php foreach($confirm_options as $k => $opt): ?>
-								<input type="button" class="btn btn-primary" id="menu-<?php echo $k; ?>" value="<?php echo $opt; ?>">							
-								<?php endforeach; ?>							
-							</div>
-							<?php echo $this->form->menu->renderViewHelper(); ?> <?php //if($default_area_opt == $k): echo 'active'; endif; ?> 																		
-						</div>
-					</div>	
-				</div>
-			</div>
+	     		 
+                            
+	      		
+                       <div class="span6" id="menus">
+                            <?php echo $this->form->parent_show_menu->renderViewHelper(); ?>
+                            <div class="span6" id="menu_opt_container">	
+                                            <div class="control-group">
+                                                    <label class="control-label"><?php echo '* '.$lang->translate('Show in menu').':'; ?></label>
+                                                    <div class="controls">
+                                                            <div class="btn-group" data-toggle="buttons-radio">
+                                                                    <?php $default_area_arr = array_keys($confirm_options);
+                                                                            $default_area_opt = $default_area_arr[0]; ?>
+                                                                    <?php foreach($confirm_options as $k => $opt): ?>
+                                                                    <input type="button" class="btn btn-primary" id="menu-<?php echo $k; ?>" value="<?php echo $opt; ?>">							
+                                                                    <?php endforeach; ?>							
+                                                            </div>
+                                                            <?php echo $this->form->menu->renderViewHelper(); ?> <?php //if($default_area_opt == $k): echo 'active'; endif; ?> 																		
+                                                    </div>
+                                            </div>	
+                                    </div>
+                            
+                            
+                            <?php echo $this->form->parent_show_menu2->renderViewHelper(); ?>
+                            <div class="span6" id="menu2_opt_container">	
+                                            <div class="control-group">
+                                                    <label class="control-label"><?php echo '* '.$lang->translate('Show in menu').':'; ?> 2</label>
+                                                    <div class="controls">
+                                                            <div class="btn-group" data-toggle="buttons-radio">
+                                                                    <?php $default_area_arr = array_keys($confirm_options);
+                                                                            $default_area_opt = $default_area_arr[0]; ?>
+                                                                    <?php foreach($confirm_options as $k => $opt): ?>
+                                                                    <input type="button" class="btn btn-primary" id="menu2-<?php echo $k; ?>" value="<?php echo $opt; ?>">							
+                                                                    <?php endforeach; ?>							
+                                                            </div>
+                                                            <?php echo $this->form->menu2->renderViewHelper(); ?> <?php //if($default_area_opt == $k): echo 'active'; endif; ?> 																		
+                                                    </div>
+                                            </div>	
+                                    </div>
+                            </div>
+                        </div>    
 			
 			<div class="row-fluid">			      		
 	      		<div class="span6">	

@@ -190,6 +190,14 @@ function createNextButton(i) {
 					$('#menu_opt_container').show();
 			}
 		}
+                
+		//show on menu2
+		if(!$('#parent_show_menu2').val() || $('#parent_show_menu2').val()=='yes'){
+			if($('#area option:selected').attr('type')=='variable'){
+				if($("#menu2").val()=='yes' || $("#menu2").val()=='no')
+					$('#menu2_opt_container').show();
+			}
+		}                
 		
 		//dependent field when link selected
 		if($('#link').val()=="yes"){
@@ -265,6 +273,23 @@ function createNextButton(i) {
 				}else{
 					$('#menu').val('no');
 				}
+                                
+                                //for menu2
+                                if(!$('#parent_show_menu2').val() || $('#parent_show_menu2').val()=='yes'){			
+					$('#menu2_opt_container').removeClass("hide");
+					$('#menu2_opt_container').show();
+					$('#menu2').val('');			
+					$("#menu2").rules("add", {
+						 required: true
+					});	
+					
+					$("[id^='menu2-']").each(function(){		
+						if($(this).hasClass('active'))
+							$(this).removeClass('active');
+					});				
+				}else{
+					$('#menu2').val('no');
+				}
 				
 			}else{
 				if(!$('#parent_show_menu').val() || $('#parent_show_menu').val()=='yes'){
@@ -282,14 +307,38 @@ function createNextButton(i) {
 				}else{
 					$('#menu').val('no');
 				}
-			}			
+                                
+                                //for menu2
+                                if(!$('#parent_show_menu2').val() || $('#parent_show_menu2').val()=='yes'){
+					if($('#menu2_opt_container').css('display')!='none'){
+						$('#menu2_opt_container').hide();				
+					}
+					
+					$('#menu2').val('no');
+					$("#menu2").rules("remove");
+					
+					$("[id^='menu2-']").each(function(){		
+						if($(this).hasClass('active'))
+							$(this).removeClass('active');
+					});
+				}else{
+					$('#menu2').val('no');
+				}
+			}
+                        
 		});
 		
 		$('input[id^="menu-"]').each(function(){		
 			$(this).click(function(){
 				$("#menu").val(this.id.replace('menu-',''));			
 			});
-		});	
+		});
+                
+                $('input[id^="menu2-"]').each(function(){		
+			$(this).click(function(){
+				$("#menu2").val(this.id.replace('menu2-',''));			
+			});
+		});
 		
 		//homepage
 		$('input[id^="homepage-"]').each(function(){		
