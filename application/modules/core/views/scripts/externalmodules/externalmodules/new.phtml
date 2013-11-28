@@ -62,7 +62,7 @@ $lang = Zend_Registry::get('Zend_Translate');
                     <div class="row-fluid">
                     <div class="span2">&nbsp;</div>
                         <div class="span4 form_label">
-                            <label class="required" for="description"><?php echo  $this->form->description->getLabel(); ?></label>
+                            <label class="required" for="description"><?php echo  $this->form->description->getDecorator('label')->getOption('requiredPrefix').$this->form->description->getLabel(); ?></label>
                         </div>
                         <div class="span4 form_field">
                             <?php $this->form->description->setAttrib('container','collapseOptions'); echo $this->form->description->renderViewHelper();  ?>
@@ -76,7 +76,7 @@ $lang = Zend_Registry::get('Zend_Translate');
                     <div class="row-fluid">
                     <div class="span2">&nbsp;</div>
                         <div class="span4 form_label">
-                            <label class="required" for="action"><?php echo $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->action->getLabel(); ?></label>
+                            <label class="required" for="action"><?php echo $this->form->action->getDecorator('label')->getOption('requiredPrefix').$this->form->action->getLabel(); ?></label>
                         </div>
                         <div class="span4 form_field">
                             <?php $this->form->action->setAttrib('container','collapseOptions'); echo $this->form->action->renderViewHelper();  ?>

@@ -72,7 +72,7 @@ class Core_Externalmodules_ExternalmodulesController extends Zend_Controller_Act
     	//after submit the form
     	if ($this->getRequest()->isPost()) {
     		$formData = $this->getRequest()->getPost();
-    		if (true) {//if ($form->isValid($formData)) { // validation not working
+                if ($form->isValid($formData)) { 
     			//Recover the uploaded values
     			$uploadedData = $form->getValues(); 
     			$filename = $uploadedData['file'];

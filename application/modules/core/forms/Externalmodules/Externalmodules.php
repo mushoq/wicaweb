@@ -44,6 +44,7 @@ class Core_Form_Externalmodules_Externalmodules extends Zend_Form
 		$description->setLabel($lang->translate('Description').':');
 		$description->setRequired(true);
 		$description->setAttribs(array('cols' => 40, 'rows' => 5));
+                $description->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$description->setAttrib('style', 'width:47%');
 		
 		//action
@@ -59,6 +60,7 @@ class Core_Form_Externalmodules_Externalmodules extends Zend_Form
 		$image->addValidator('Count', false, 1);
 		$image->addValidator('Extension', false, 'jpg,png,gif,jpeg');
 		$image->setAttrib('style', 'width:100%');
+                $image->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		
 		$preview_img = New Zend_Form_Element_Image('preview_img');
 		$preview_img->setAttrib('onclick', 'return false;');
