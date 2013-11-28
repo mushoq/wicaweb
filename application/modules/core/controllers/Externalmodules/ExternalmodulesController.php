@@ -72,7 +72,7 @@ class Core_Externalmodules_ExternalmodulesController extends Zend_Controller_Act
     	//after submit the form
     	if ($this->getRequest()->isPost()) {
     		$formData = $this->getRequest()->getPost();
-    		if ($form->isValid($formData)) {
+    		if (true) {//if ($form->isValid($formData)) { // validation not working
     			//Recover the uploaded values
     			$uploadedData = $form->getValues(); 
     			$filename = $uploadedData['file'];
@@ -81,7 +81,7 @@ class Core_Externalmodules_ExternalmodulesController extends Zend_Controller_Act
     			//Descompress .zip package installer
     			$zip_path = APPLICATION_PATH. '/../public/uploads/tmp/'.$filename;
     			$zip = new ZipArchive;
-    			if ($zip->open($zip_path) === TRUE) {
+    			if ($zip->open($zip_path) === TRUE) {                            
     				$zip->extractTo(APPLICATION_PATH.'/../public/uploads/tmp/');
     				chmod(APPLICATION_PATH.'/../public/uploads/tmp/'.$filebase,0777);
     				$zip->close();
@@ -90,14 +90,13 @@ class Core_Externalmodules_ExternalmodulesController extends Zend_Controller_Act
    				
     				//Check if destination folder "modules" exist and have permissions
     				if(is_dir(APPLICATION_PATH. '/modules/'))
-    				{
+    				{                                    
     					//Check "external module" folder in the installation folder 
     					if(is_dir(APPLICATION_PATH. '/../public/uploads/tmp/'.$filebase.'/'.$filebase.'/')){
-    						
+                                                umask(0);
     						//Copy all folder of external module to modules folder
     						$this->full_copy(APPLICATION_PATH. '/../public/uploads/tmp/'.$filebase.'/'.$filebase.'/', APPLICATION_PATH. '/modules/'.$filebase.'/');
     						chmod(APPLICATION_PATH. '/modules/'.$filebase.'/',0777);
-
     						//Check if external module folder is installed correctly
     						if(is_dir(APPLICATION_PATH. '/modules/'.$filebase.'/')){
     							
@@ -428,7 +427,8 @@ class Core_Externalmodules_ExternalmodulesController extends Zend_Controller_Act
      */
     public function full_copy( $source, $target ) {
     	if ( is_dir( $source ) ) {
-    		@mkdir( $target );
+                umask(0);                
+    		mkdir( $target );
     		chmod($target,0777);
     		$d = dir( $source );
     		while ( FALSE !== ( $entry = $d->read() ) ) {
