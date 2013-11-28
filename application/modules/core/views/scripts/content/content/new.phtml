@@ -89,7 +89,12 @@
 														//generate save button to print at the end
 														$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
 													}elseif($this->form->$name->helper == 'formButton'){
-														echo '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';													
+														if($this->form->$name->getName() == 'save_image'){
+															//generate save button to print at the end
+															$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+														}else{
+															echo '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span10 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+														}
 													}else
 														if($name == 'url'){
 															echo $this->form->$name->removeDecorator('HtmlTag')->removeDecorator('Label');
@@ -140,7 +145,8 @@
 						</div>						
 						<div class="span2"> &nbsp; </div>
 					</div>
-				<?php } ?> 
+				<?php
+				} ?> 
 			<?php } ?>
 		<?php } 
 		//prints the save button at the end

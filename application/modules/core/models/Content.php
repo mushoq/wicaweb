@@ -7,7 +7,7 @@
 * @copyright  Copyright (c) WicaWeb - Mushoq
 * @license    GNP
 * @version    1.1
-* @author	  Santiago Arellano, José Luis Landazuri
+* @author	  Santiago Arellano, JosÃ© Luis Landazuri
 */
 
 class Core_Model_Content extends Core_Model_Factory
