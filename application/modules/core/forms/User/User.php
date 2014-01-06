@@ -83,6 +83,22 @@ class Core_Form_User_User extends Zend_Form
 		$password->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$password->setFilters(array( new Zend_Filter_StringTrim()));
 		$password->setAttrib('style','width:100%');
+                
+                //old_password
+		$old_password = New Zend_Form_Element_Password('old_password');
+		$old_password->setLabel($lang->translate('Old Password').':');
+				
+		$old_password->getDecorator('label')->setOption('requiredPrefix', ' * ');
+		$old_password->setFilters(array( new Zend_Filter_StringTrim()));
+		$old_password->setAttrib('style','width:100%');
+                
+                //new_password
+		$new_password = New Zend_Form_Element_Password('new_password');
+		$new_password->setLabel($lang->translate('New Password').':');
+				
+		$new_password->getDecorator('label')->setOption('requiredPrefix', ' * ');
+		$new_password->setFilters(array( new Zend_Filter_StringTrim()));
+		$new_password->setAttrib('style','width:100%');
 		
 		//confirm password
 		$confirm_password = New Zend_Form_Element_Password('confirm_password');
@@ -158,6 +174,8 @@ class Core_Form_User_User extends Zend_Form
 		
 		$this->addElements(array(
 				$password,
+                                $old_password,
+                                $new_password,
 				$confirm_password,
 				$profile,
 				

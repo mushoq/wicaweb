@@ -512,4 +512,8 @@ already exist on js external files> ya existe en los archivos externos js|
 already exist on css external files> ya existe en los archivos externos css|
 The image>La imagen|
 already exist into images folder>ya existe en la carpeta imágenes|
-Features>Características
+Features>Características|
+Change Password>Cambiar Contraseña|
+New Password>Contraseña Nueva|
+Invalid old password>Contraseña anterior inválida|
+Old Password>Contraseña anterior

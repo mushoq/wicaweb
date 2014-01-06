@@ -245,4 +245,73 @@ class Core_User_UserController extends Zend_Controller_Action
     			echo json_encode(true);
     	}
     }
+    
+     /**
+     * Change password of the current User.
+     * Check the current password
+     */
+    public function changepassAction()
+    {
+    	//translate library
+    	$lang = Zend_Registry::get('Zend_Translate');
+    	
+    	$user = new Core_Model_User;
+    	$request_params = $this->getRequest()->getParams();
+    	
+    	$form = New Core_Form_User_User($request_params['action']);
+    	$form->setMethod('post');
+    	$id = $this->_getParam('id');
+    	$data = $user->find('wc_user', array('id'=>$id)); //get the selected user data
+   	if(!$data)
+    	{
+    		$this->_helper->flashMessenger->addMessage(array('error'=>$lang->translate('Selected invalid user')));
+    		$this->_helper->redirector('index','user_user','core');
+    	}
+    	
+    	$arr_data = get_object_vars($data[0]); //make an array of the object data
+    	//add profile
+    	$arr_data['profile'] = $data[0]->profile_id;
+ 	    	    	    	    	
+    	$this->view->form = $form;
+    	
+    	if ($this->getRequest()->isPost())
+    	{
+    		$formData  = $this->_request->getPost();
+    		{    			
+    			//set Data
+    			$user =  new Core_Model_User();
+    			$user_obj = $user->getNewRow('wc_user');
+    			$user_obj->id = $arr_data['id'];    			
+    			$user_obj->name = $arr_data['name'];
+    			$user_obj->lastname = $arr_data['lastname'];
+    			$user_obj->identification = $arr_data['identification'];
+    			$user_obj->email = $arr_data['email'];
+    			$user_obj->phone = $arr_data['phone'];
+    			$user_obj->username = $arr_data['username'];
+    			$user_obj->password = md5($formData['new_password']);
+    			$user_obj->profile_id = $arr_data['profile'];
+    			$user_obj->creation_date = $arr_data['creation_date'];
+    			$user_obj->last_update_date = date('Y-m-d h%i%s');    			
+    			$user_obj->status = $arr_data['status'];
+                        
+                        //Check the current password
+                        if(md5($formData['old_password']) == $arr_data['password']){
+                            // Save data with the new password
+                            
+			    $saved_user = $user->save('wc_user',$user_obj);
+                            if($saved_user)
+	    		{   																														
+			    //success message
+			    $this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success saved')));
+			    $this->_helper->redirector('controlpanel','index','core');
+			}
+                        }
+                        else
+                        {
+                            $this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Invalid old password')));
+                            $this->_helper->redirector('changepass','user_user','core',array('id'=>$id) );
+                        }
+    		}
+    	}
+    }
 }
