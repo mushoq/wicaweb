@@ -24,13 +24,30 @@ class Default_IndexController extends Zend_Controller_Action
     	if($installation_file)
     	{
     		Zend_Session::namespaceUnset('ids');
+                
+                $website = new Core_Model_Website();
+                
+                //Check the current url and get the website name.
+                $websiteName = $this->getRequest()->getParam('name');
+                if ($websiteName)
+                {
+                    $website_obj = $website->personalized_find('wc_website', 
+                    array(array('name','=',$websiteName)));
+                    
+                     //if the name given was wrong then go to the default page.
+                    if (!$website_obj)
+                    {
+                        $website_obj = $website->personalized_find('wc_website', 
+                        array(array('default_page','=','yes')));     
+                    }   
+                }
+                //if the parameter 'name' does not exist then go to the default page.
+                else 
+                {
+                    $website_obj = $website->personalized_find('wc_website', 
+                    array(array('default_page','=','yes')));   
+                }           
     		    		
-	    	//This shows the default site.
-	    	$website = new Core_Model_Website();
-	    	$website_obj = $website->personalized_find('wc_website', array(
-	    			array('default_page','=','yes')
-	    	));
-	    	
 	    	//TODO:get the current website id when the site is not the default one
 	    	if(count($website_obj)>0)
 	    	{ 
@@ -215,7 +232,7 @@ class Default_IndexController extends Zend_Controller_Action
 	    	//activation account
 	    	if($this->_getParam('email') && $this->_getParam('key'))
 	    	{
-				$activation_email = $this->_getParam('email');    	
+			$activation_email = $this->_getParam('email');    	
 		    	$activation_key = $this->_getParam('key');
 		    	
 		    	$public_user = new Core_Model_PublicUser();
