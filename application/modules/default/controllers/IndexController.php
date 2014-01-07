@@ -28,13 +28,13 @@ class Default_IndexController extends Zend_Controller_Action
                 $website = new Core_Model_Website();
                 
                 //Check the current url and get the website name.
-                $websiteName = $this->getRequest()->getParam('name');
-                if ($websiteName)
+                $websiteId = $this->getRequest()->getParam('siteid');
+                if ($websiteId && $websiteId<=count($website->find('wc_website')))
                 {
                     $website_obj = $website->personalized_find('wc_website', 
-                    array(array('name','=',$websiteName)));
+                    array(array('id','=',$websiteId)));
                     
-                     //if the name given was wrong then go to the default page.
+                    //if the name given was wrong then go to the default page.
                     if (!$website_obj)
                     {
                         $website_obj = $website->personalized_find('wc_website', 

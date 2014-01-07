@@ -20,7 +20,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 	{
 		//session
 		$id = New Zend_Session_Namespace('id');
-				
+            
 		$section = new Core_Model_Section();
 		$section_temp = new Core_Model_SectionTemp();
 		$sections_arr = array();
