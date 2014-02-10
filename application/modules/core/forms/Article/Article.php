@@ -41,6 +41,10 @@ class Core_Form_Article_Article extends Zend_Form{
 		$section_parent_id  = new Zend_Form_Element_Hidden('section_parent_id ');
 		$section_parent_id->removeDecorator('Label');
 		$section_parent_id->removeDecorator('HtmlTag');
+                
+                //subsection of
+                $subsection = new Zend_Form_Element_Button('subsection_of');
+                $subsection->setAttrib('class', 'btn');
 		
 		//template
 		$template = New Zend_Form_Element_Select('section_template_id');
@@ -254,6 +258,7 @@ class Core_Form_Article_Article extends Zend_Form{
 		$this->addElements(array(
 				$id,
 				$section_parent_id,
+                                $subsection,
 				$template,
 				$area,
 				$area_id,

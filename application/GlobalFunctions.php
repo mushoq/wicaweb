@@ -337,9 +337,9 @@ class GlobalFunctions {
 						$html.= '<a';
 					if($item['area_type']=='variable'){
 						if($storage)
-							$html.= ' href="/default/indexold_indexold/index?id='.$item['id'].'">';
+							$html.= ' href="/site/1/indexold_indexold/index?id='.$item['id'].'">';
 						else
-							$html.= ' href="/default/index/index?id='.$item['id'].'">';
+							$html.= ' href="/site/1/index/index?id='.$item['id'].'">';
 					}else
 						$html.= ' href="#">';
 					
@@ -363,6 +363,9 @@ class GlobalFunctions {
 	 * @return string
 	 */
 	public static function buildHtmlSectionMenu($tree = array(), $isChild = false, $storage=NULL, $selectedId=NULL) {
+            
+            //Get information about the current website
+            $front_ids = New Zend_Session_Namespace('ids');
 		$html = '';
 		if (count($tree)) {
 			foreach ($tree as $item) {
@@ -375,8 +378,9 @@ class GlobalFunctions {
 				//parent section
 				if(isset($item['title'])){
 					
+                                    //new route with the new parameter : siteid 
 					if(!$storage)
-						$html.= '<a href="/content/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
+						$html.= '<a href="/site/'.$front_ids->website_id.'/content/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
 					else 
 						$html.= '<a href="/indexold_indexold/index?id='.$item['id'].'">';
 					//$html.= !isset($item['children'])? '<a class="dropdown-toggle" data-toggle="dropdown" href="#menu'.$item['id'].'">' : '<a>';
@@ -399,6 +403,10 @@ class GlobalFunctions {
 		return $html;
 	}
         public static function buildHtmlSectionMenu2($tree = array(), $isChild = false, $storage=NULL, $selectedId=NULL) {
+            
+            //Get information about the current website
+            $front_ids = New Zend_Session_Namespace('ids');
+            
 		$html = '';
 		if (count($tree)) {
 			foreach ($tree as $item) {
@@ -410,8 +418,9 @@ class GlobalFunctions {
 				$html.= '>';
 				//parent section
 				if(isset($item['title'])){
+                                    //new route with the new parameter : siteid 
 					if(!$storage)
-						$html.= '<a href="/content/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
+						$html.= '<a href="/site/'.$front_ids->website_id.'/content/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
 					else 
 						$html.= '<a href="/indexold_indexold/index?id='.$item['id'].'">';
 					//$html.= !isset($item['children'])? '<a class="dropdown-toggle" data-toggle="dropdown" href="#menu'.$item['id'].'">' : '<a>';

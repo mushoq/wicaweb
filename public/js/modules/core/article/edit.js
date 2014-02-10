@@ -77,7 +77,16 @@ $(document).ready(function(){
 	$("#cancel_button").bind('click',function(){
 		window.location = "/core/section_section/index";
 	});	
-	
+        //subsection_of						
+	$("#subsection_opt").fancybox();
+	$("#subsection_of").bind('click',function(){
+	     $('#subsections_container').load("/core/section_section/sectionstreelist",{
+	          is_temp : $('#section_temp').val()
+		  },function(){
+		      $.getScript('/js/modules/core/section/sectionstreelist.js');
+		      $("#subsection_opt").click();
+		});			
+	});	
 	//save section
 	$('#submit_button').bind('click', function() {		
 		if($("#frmArticle").valid()){			

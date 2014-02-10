@@ -127,7 +127,9 @@ public function _initRoute()
 	
 		$route = new Zend_Controller_Router_Route(
 	
-				'content/section/:id/:title',array(
+				'site/:siteid/content/section/:id/:title',array(
+                                    
+                                                'siteid' => '1',
 	
 						'controller' => 'index',
 	

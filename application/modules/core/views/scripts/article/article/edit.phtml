@@ -65,13 +65,20 @@
 						<?php echo $this->form->id->renderViewHelper(); ?>	      							      			
 						<?php echo $this->form->section_parent_id->renderViewHelper(); ?>
 						<?php echo $this->form->section_temp->renderViewHelper(); ?>
-		      		 	<div class="control-group">
+                                            <div class="control-group">
+                                                        <label class="control-label"><?php echo '* '.$lang->translate('Subsection').' '.$lang->translate('of').':'; ?></label>
+                                                        <div class="controls">
+                                                                <?php echo $this->form->subsection_of->renderViewHelper(); ?>
+                                                                <a id="subsection_opt" class="hide" href="#subsections_container"></a>                                                                        
+                                                        </div>                                                
+                                            </div>
+		      		 	    <div class="control-group">
 							<label class="control-label"><?php echo $this->form->section_template_id->getLabel(); ?></label>
 							<div class="controls">
 								<?php echo $this->form->section_template_id->renderViewHelper(); ?>									
 							</div>
 							<input type="hidden" id="repeated_section_name" value="<?php echo $lang->translate('The internal name of content already exist');?>" />
-						</div>
+					    </div>
 					</div>
 					<div class="row-fluid">
 						<div class="control-group">
@@ -115,12 +122,15 @@
 					</div>																												
 	      		</div>				      		
 	      		<div class="span6">				      							      							      		
-	      			<div class="control-group">
+	      		     <div class="control-group">
 						<label class="control-label"><?php echo $this->form->synopsis->getLabel(); ?></label>
 						<div class="controls">
 							<?php echo $this->form->synopsis->renderViewHelper(); ?>									
 						</div>
-					</div>																												
+			     </div>
+                             <div class="hide">
+                                 <div id="subsections_container"></div>
+                             </div>
 	      		</div>				      		
 			</div>	
 		</div>
