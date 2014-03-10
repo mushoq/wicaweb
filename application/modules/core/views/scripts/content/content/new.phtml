@@ -84,7 +84,8 @@
 		
 												<?php }
 												else{	
-// 													center buttons														
+// 													center buttons	
+                                                                                                                    //echo $this->form->$name->helper;
 													if($this->form->$name->helper == 'formSubmit'){
 														//generate save button to print at the end
 														$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
@@ -93,7 +94,8 @@
 															//generate save button to print at the end
 															$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
 														}else{
-															echo '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span10 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+                                                                                                                    $saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+															//echo '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span10 center">'.$this->form->$name->renderViewHelper().'</div></div>';
 														}
 													}else
 														if($name == 'url'){
@@ -150,7 +152,7 @@
 			<?php } ?>
 		<?php } 
 		//prints the save button at the end
-		//echo $saveButton;
+                    echo $saveButton;
 		?>
 		<input type="hidden" id="approved" name="approved" value="<?php echo $this->approved_frm; ?>" />
 		<input type="hidden" id="section_details" name="section_details" value="<?php echo $this->section_id.'/'.$this->article;?>" />
