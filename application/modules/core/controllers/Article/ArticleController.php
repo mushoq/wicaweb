@@ -666,9 +666,33 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 			$this->view->parent_section = $section_parent_arr;
 		}
 	
-		//fill the form with stored data
-		$article_form->populate($article_arr);
-		$this->view->form = $article_form;
+		$section = new Core_Model_Section();
+                $section_temp = new Core_Model_SectionTemp();	
+                                $subsection = new Zend_Form_Element_Button('subsection_of');
+                $subsection->setAttrib('class', 'btn');
+
+                if($section_parent_id)
+                {
+                $parent_temp = $section_temp->find('wc_section_temp',array('section_id'=>$section_parent_id));
+
+                if($parent_temp)
+                {	
+                $subsection->setLabel($parent_temp[0]->title);
+                }
+                else
+                {
+                $parent = $section->find('wc_section',array('id'=>$section_parent_id));
+                $subsection->setLabel($parent[0]->title);
+                }
+                }
+                else
+                {
+                $subsection->setLabel($lang->translate('Main section'));
+                }
+                                //fill the form with stored data
+                $article_form->populate($article_arr);
+                $article_form->addElement($subsection);
+                $this->view->form = $article_form;
 	
 		//website		
 		$this->view->website_db = $website_db;

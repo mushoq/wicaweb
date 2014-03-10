@@ -1,5 +1,5 @@
 <?php $count_contents = 0; ?>
-<?php if(!$this->private || ($this->private && isset($_SESSION['external_user']))):?>	
+<?php if(!$this->private || ($this->private && isset($_SESSION['external_user']))): ?>	
 <div class="row-fluid">
 	<div class="section_title_container">
 		<h1><?php echo $this->section_title;?></h1>
@@ -34,18 +34,18 @@
 				</div>
 				<?php endif; ?>
 					
-				<?php if($value['content_id'] && $value['section_id']): ?>		
+				<?php if($value['content_id'] && $value['section_id']): ?>	
 				<?php 	if($this->isstorage == 'yes'):?>									
 				<?php 		echo $this->previewHelperStorage($value['section_id'], $value['content_id']); ?>
 				<?php 	else:?>
 				<?php 		echo $this->previewHelper( $value['content_id']); ?>
-				<?php 	endif;?>												
+				<?php 	endif;?>
 				<?php endif; ?>
 				<?php if(isset($value['content'])): ?>
 				<?php 	echo $value['content']; ?>
 				<?php endif; ?>
 				
-				<?php $count_contents++; ?>
+				<?php $count_contents++;?>
 			</div>
 		</div>
 	</div>		
@@ -190,7 +190,7 @@
 	&nbsp;
 </div>
 <?php endif; ?>
-<?php elseif (!$this->login): ?>
+<?php elseif (!$this->login):?>
 <div class="row-fluid">
 	<?php 	if($this->isstorage == 'yes'):?>									
 	<?php 		echo $this->previewHelper(null,null,$this->area); ?>

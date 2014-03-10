@@ -251,6 +251,7 @@ class Products_IndexController extends Zend_Controller_Action
     	
     	// render final layout
     	echo $layout->render();
+        
     }
     
     /**
@@ -273,6 +274,7 @@ class Products_IndexController extends Zend_Controller_Action
 	 */
 	public function indexAction()
     {
+            
     	
     	$this->_helper->layout->disableLayout ();
     	$this->_helper->viewRenderer->setNoRender();
