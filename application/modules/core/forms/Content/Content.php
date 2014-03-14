@@ -145,6 +145,9 @@ class Core_Form_Content_Content extends Zend_Form {
 							'StringTrim'
 					) );
 					$this->addElement ( $hidden_aux_div );
+
+                                        $images_order = new Zend_Form_Element_Hidden ( 'images_order' );
+					$this->addElement ( $images_order );	
 					
 					break;
 				

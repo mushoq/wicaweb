@@ -178,7 +178,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 		if ($this->getRequest ()->isPost ()) 
 		{			
 			$formData = $this->_request->getPost ();
-			
+			//var_dump($formData);die();
 			$field = new Core_Model_Field ();
 			$get_fields = $field->find ( 'wc_field', array ('content_type_id' => $formData ['content_type_id']) );
 			if (! $get_fields ) {
@@ -676,10 +676,13 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 						}
 					} else if (str_replace ( ' ', '_', strtolower ( $fields->name ) ) == 'html_code'){
 						$content_field_obj->value = utf8_decode( $formData [str_replace ( ' ', '_', strtolower ( $fields->name ) )] );
+                                        //for carrusel
 					}else if ($fields->type == 'select_images') {
 
 						$uploads_dir = APPLICATION_PATH . "/../public/uploads/tmp/";
 						$value = '';
+                                                $current_images_order = $formData['images_order'];
+                                                $content_field_obj->value =  $current_images_order;
 
 						if(count($_FILES["Filedata"]["error"]) > 0){
 							if(count($_FILES["Filedata"]["error"]) < 2) {
@@ -696,10 +699,9 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 									case 'doc':
 									case 'txt':
 										
-										move_uploaded_file($tmp_name, $uploads_dir."/".$name);
-										
+										move_uploaded_file($tmp_name, $uploads_dir."/".$name);										
 										$img = GlobalFunctions::uploadFiles ($name , APPLICATION_PATH . '/../public/uploads/content/' . date ( 'Y' ) . '/' . date ( 'm' ) . '/' );
-										$content_field_obj->value = date ( 'Y' ) . '/' . date ( 'm' ) . '/' . $img;
+										$content_field_obj->value = $current_images_order.date ( 'Y' ) . '/' . date ( 'm' ) . '/' . $img.',';
 										GlobalFunctions::removeOldFiles ( $name, APPLICATION_PATH . '/../public/uploads/tmp/' );
 											
 										break;
@@ -708,7 +710,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 										break;
 								}
 							} else {
-
+                                                                //multiple images
 								if($_FILES["Filedata"]["error"])	
 								foreach ($_FILES["Filedata"]["error"] as $key => $error) {
 									if ($error == UPLOAD_ERR_OK) {
@@ -737,22 +739,28 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 									}
 										
 								}
-								$content_field_obj->value = $value;
+								$content_field_obj->value =  $current_images_order.$value;
 							}
 						}
-						
+                                                
+                                                //delete old images from ../uploads/content/...
+                                                $deleted_images = $formData['deleted_images'];
+                                                $array_images = explode ($deleted_images );
+                                                foreach ( $array_images as $ai ) {
+                                                        if (! GlobalFunctions::removeOldFiles ( $ai, APPLICATION_PATH . '/../public/uploads/content/' )) {
+                                                                throw new Zend_Exception ( "CUSTOM_EXCEPTION:FILE NOT DELETED." );
+                                                        }
+                                                }
 						if($formData['id']){
-							if($content_field_obj->value)
-							{
+							if($content_field_obj->value)							{
 								$array_images = explode ( ',', $arr_data [str_replace ( ' ', '_', strtolower ( $fields->name ) )] );
 								if(count($array_images)>1)
-									array_pop ( $array_images );
-	
-								foreach ( $array_images as $ai ) {
-									if (! GlobalFunctions::removeOldFiles ( $ai, APPLICATION_PATH . '/../public/uploads/content/' )) {
-										throw new Zend_Exception ( "CUSTOM_EXCEPTION:FILE NOT DELETED." );
-									}
-								}
+									array_pop ( $array_images );                       
+//								foreach ( $array_images as $ai ) {
+//									if (! GlobalFunctions::removeOldFiles ( $ai, APPLICATION_PATH . '/../public/uploads/content/' )) {
+//										throw new Zend_Exception ( "CUSTOM_EXCEPTION:FILE NOT DELETED." );
+//									}
+//								}
 							}		
 						}						
 							
@@ -1047,7 +1055,13 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 			else
 				$arr_data [str_replace ( ' ', '_', strtolower ( $data_field [0]->name ) )] = $df->value;
 		}
-		
+		//for loading current images in a sortable list
+                if($arr_data['content_type_id']==7){
+                    $images = (explode("," ,$arr_data['select_images']));
+                    array_pop($images);
+                    $this->view->images = $images;
+                    $this->view->images_order = $arr_data['select_images'];
+                }
 		$content_form->populate ( $arr_data );
 		$this->view->form = $content_form;
 		$this->view->content_id = $content_id;
