@@ -426,15 +426,47 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 				}
 			}
 			else
+                            
 			{
+                            //multiple images upload
+                             $imagesArray = array('1'=>1);
+                            if($formData['content_type_id']==2){
+                                $uploads_dir = APPLICATION_PATH . "/../public/uploads/tmp/";
+                                $imagesArray = array();
+                                $namenew ;
+                                if($_FILES["Filedata"]["error"])	
+                                    foreach ($_FILES["Filedata"]["error"] as $key => $error) {
+                                            if ($error == UPLOAD_ERR_OK) {
+                                                    $tmp_name = $_FILES["Filedata"]["tmp_name"][$key];
+                                                    $name = $_FILES["Filedata"]["name"][$key];
+                                                    //$namenew.= $name.',';
+                                                    array_push($imagesArray, $name);
+                                                     //print_r($imagesArray);
+
+                                                    }
+                                            }
+//                                         $debug = new Core_Model_Content ();
+//                                         $debug_obj = $debug->getNewRow ( 'debug' );
+//                                         $debug_obj->detalle =$namenew;
+//                                         $debug->save('debug',$debug_obj );
+//                                         die();
+
+                                    }
+                                    
+                                 //begin foreach
+                               foreach ($imagesArray as $key){                            
 				//INSERT
 				//content
 				$content = new Core_Model_Content ();
 				$content_obj = $content->getNewRow ( 'wc_content' );
 				$content_obj->content_type_id = $formData ['content_type_id'];
 				$content_obj->website_id = $session_id->website_id;
-				$content_obj->internal_name = GlobalFunctions::value_cleaner ( $formData ['internal_name'] );
-				$content_obj->title = GlobalFunctions::value_cleaner ( $formData ['title'] );
+                                if ($formData['content_type_id']==2){
+				   $content_obj->internal_name = GlobalFunctions::value_cleaner ( $formData ['internal_name'].'_'.$key );
+                                } else {
+                                   $content_obj->internal_name = GlobalFunctions::value_cleaner ( $formData ['internal_name']);    
+                                }
+                                $content_obj->title = GlobalFunctions::value_cleaner ( $formData ['title'] );
 				$content_obj->created_by = $session_id->user_id;
 				$content_obj->creation_date = date ( 'Y-m-d h%i%s' );
 				$content_obj->approved = $formData ['approved'];
@@ -581,7 +613,11 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 						}
 					}
 				}
+                             }
+                                //end foreach
 			}
+                        
+                        foreach ($imagesArray as $key){ 
 			
 			if (! is_dir ( APPLICATION_PATH . '/../public/uploads/content/' )) {
 				$path = APPLICATION_PATH . '/../public/uploads/content/';
@@ -823,6 +859,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 					}	
 				}
 			}
+                }
 
 			if ($formData['content_type_id'] == 4) 
 			{
