@@ -12,7 +12,17 @@
 
 class Core_Article_ArticleController extends Zend_Controller_Action
 {
-	/**
+    /**
+     *
+     * @var Core_Model_Section 
+     */
+    private $_modelSection=null;
+    
+    public function init()
+    { 
+        $this->_modelSection = new Core_Model_Section();
+    }
+    /**
 	 * Loads articles' contents
 	 */
 	public function articledetailsAction()
@@ -665,6 +675,8 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 				$section_parent_arr = get_object_vars($parent_section[0]);				
 			$this->view->parent_section = $section_parent_arr;
 		}
+                $article_arr['order_highlight_value'] = $article_data[0]->order_highlight;
+                $article_arr['order_feature_value'] = $article_data[0]->order_feature;
 	
 		$section = new Core_Model_Section();
                 $section_temp = new Core_Model_SectionTemp();	
@@ -806,7 +818,9 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 			}
 			$article_act->author = GlobalFunctions::value_cleaner($formData['author']);
 			$article_act->feature = GlobalFunctions::value_cleaner($formData['feature']);
+                        $article_act->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 			$article_act->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
+                        $article_act->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
 			$article_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
 			$article_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
 			$article_act->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
@@ -872,7 +886,9 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 					}
 					$article_tmp->author = GlobalFunctions::value_cleaner($formData['author']);
 					$article_tmp->feature = GlobalFunctions::value_cleaner($formData['feature']);
+                                        $article_tmp->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 					$article_tmp->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
+                                        $article_tmp->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
 					$article_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
 					$article_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
 					$article_tmp->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
@@ -929,7 +945,9 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 					}
 					$article_act->author = GlobalFunctions::value_cleaner($formData['author']);
 					$article_act->feature = GlobalFunctions::value_cleaner($formData['feature']);
+                                        $article_act->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 					$article_act->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
+                                        $article_act->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
 					$article_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
 					$article_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
 					$article_act->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
@@ -988,7 +1006,9 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 					}
 					$article_tmp->author = GlobalFunctions::value_cleaner($formData['author']);
 					$article_tmp->feature = GlobalFunctions::value_cleaner($formData['feature']);
+                                        $article_tmp->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 					$article_tmp->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
+                                        $article_tmp->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
 					$article_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
 					$article_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
 					$article_tmp->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
@@ -1049,7 +1069,9 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 					}
 					$article_tmp->author = GlobalFunctions::value_cleaner($formData['author']);
 					$article_tmp->feature = GlobalFunctions::value_cleaner($formData['feature']);
+                                        $article_tmp->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 					$article_tmp->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
+                                        $article_tmp->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
 					$article_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
 					$article_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
 					$article_tmp->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
@@ -1556,6 +1578,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 		$this->_helper->layout->disableLayout ();
 		// disable autorendering for this action
 		$this->_helper->viewRenderer->setNoRender();
+                $content_by_section = new Core_Model_ContentBySection();
 	
 		if ($this->getRequest()->isPost())
 		{
@@ -1593,7 +1616,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 						$section_temp = new Core_Model_SectionTemp();
 						$section_obj_temp = $section_temp->find('wc_section_temp', array('section_id' => $session_id->section_id));
 						
-						$content_by_section = new Core_Model_ContentBySection();
+						
 						$content_by_section_temp = new Core_Model_ContentBySectionTemp();
 						
 						if(count($content_obj_temp)>0 && count($section_obj_temp))
@@ -1715,4 +1738,81 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 			$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success saved order')));
 		}
 	}
+        public function orderAction() {
+            $this->_helper->layout->disableLayout (); 
+            $post = $this->getRequest()->getParams();
+          
+            $section = new Core_Model_Section();
+            if(isset($post['feature'])){
+                //$articles_list = $section->find('wc_section', array('article'=>'yes', 'feature'=>'yes'), array('order_feature'=>'ASC'));
+                $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('feature','=','yes'),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_feature ASC'));
+                $typeArticle ='feature';
+            }
+            if(isset($post['highlight'])){
+                //$articles_list = $section->find('wc_section', array('article'=>'yes', 'highlight'=>'yes'), array('order_highlight'=>'ASC'));
+                $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('highlight','=','yes'),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_highlight ASC'));
+                $typeArticle ='highlight';
+            }
+            if(isset($post['homepage'])){
+                //$articles_list = $section->find('wc_section', array('article'=>'yes', 'homepage_down'=>'yes'), array('order_hompeage_down'=>'ASC'));
+                $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('homepage_down','=','yes'),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_hompeage_down ASC'));
+                $typeArticle ='homepage';
+            }
+            $this->view->articles = $articles_list;
+            $this->view->typeArticle =$typeArticle;
+            $this->view->idArticle = $post['idArticle'];
+        }
+        public function saveorderAction() {
+            $this->_helper->layout->disableLayout (); 
+            $post = $this->getRequest()->getParams(); 
+            $order_list = GlobalFunctions::value_cleaner($post['section_order']);
+            $order_arr = explode(',', $order_list);
+            if(count($order_arr) > 0){
+                foreach ($order_arr as $orden => $item) {
+                    $section_id = str_replace ('_','', $item);
+                    if($post['identifier']=='feature'){
+                         $data = array('order_feature'=>$orden+1); 
+                         $this->_modelSection->saveOrderArticle($data, $section_id);
+                        
+                    }
+                    if($post['identifier']=='highlight'){
+                         $data = array('order_highlight'=>$orden+1); 
+                         $this->_modelSection->saveOrderArticle($data, $section_id);
+                        
+                    }
+                     if($post['identifier']=='homepage'){
+                         $data = array('order_hompeage_down'=>$orden+1); 
+                         $this->_modelSection->saveOrderArticle($data, $section_id);
+                        
+                    }
+                   if($post['idArticle'] ==$section_id){
+                        echo json_encode(array("opcion" =>$post['identifier'], "orden"=>($orden+1)));
+                      
+                   }
+                    
+                }
+            }
+            //echo $result;
+            die();
+            
+        }
+        public function ubicacionAction() {
+             $this->_helper->layout->disableLayout ();
+             $post = $this->getRequest()->getParams();
+            
+             $this->view->position = $post['position'];
+             $this->view->colorTexto = ($post['colorTexto']!='')?$post['colorTexto']:'ffffff';
+             
+        }
+        
+        public function saveconfigAction() {
+             $this->_helper->layout->disableLayout ();
+             $post = $this->getRequest()->getParams();
+             $data = array($post['opcion']=>$post['valorOpcion']);
+             $this->_modelSection->saveConfigArticle($data, $post['idArticle']);
+             die(); 
+             
+            
+        }
+        
 }

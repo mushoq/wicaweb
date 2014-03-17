@@ -178,7 +178,14 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 		if ($this->getRequest ()->isPost ()) 
 		{			
 			$formData = $this->_request->getPost ();
-			
+                        $position_post=strpos($formData['watermark_position'], ',');
+                        $formData['watermark_position']= substr($formData['watermark_position'],0,$position_post);
+                        //$formData['watermark_position']= ($formData['id'])?substr($formData['watermark_position'],0, -2):substr($formData['watermark_position'],0, -1);
+//                        echo '<pre>';
+//                        print_r($formData);
+//                        echo '</pre>';
+//                        die(); 
+//			
 			$field = new Core_Model_Field ();
 			$get_fields = $field->find ( 'wc_field', array ('content_type_id' => $formData ['content_type_id']) );
 			if (! $get_fields ) {
@@ -585,20 +592,25 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 			
 			if (! is_dir ( APPLICATION_PATH . '/../public/uploads/content/' )) {
 				$path = APPLICATION_PATH . '/../public/uploads/content/';
-				mkdir ( $path );
-				chmod ( $path, 0777 );
+                                if (!mkdir($path, 0777, true)) {
+                                    die('Failed to create folders...');
+                                }
+//				mkdir ( $path );
+//				chmod ( $path, 0777 );
 			}
 	
 			if (! is_dir ( APPLICATION_PATH . '/../public/uploads/content/' . date ( 'Y' ) )) {
 				$path = APPLICATION_PATH . '/../public/uploads/content/' . date ( 'Y' );
-				mkdir ( $path );
-				chmod ( $path, 0777 );
+				if (!mkdir($path, 0777, true)) {
+                                    die('Failed to create folders...');
+                                }
 			}
 	
 			if (! is_dir ( APPLICATION_PATH . '/../public/uploads/content/' . date ( 'Y' ) . '/' . date ( 'm' ) )) {
 				$path = APPLICATION_PATH . '/../public/uploads/content/' . date ( 'Y' ) . '/' . date ( 'm' );
-				mkdir ( $path );
-				chmod ( $path, 0777 );
+				if (!mkdir($path, 0777, true)) {
+                                    die('Failed to create folders...');
+                                }
 			}
 			if($formData['id']){
 				$array_foreach = $data_content_field;
@@ -1032,7 +1044,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 		if(isset($arr_data['content_id']))
 			$arr_data['id'] = $arr_data['content_id'];
 		$this->view->preview = $arr_data['id'];
-		
+		$arr_data['watermark_position']='C';
 		foreach ( $data_content_field as $df ) 
 		{
 			$field = new Core_Model_Field ();			

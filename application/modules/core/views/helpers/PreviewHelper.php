@@ -30,6 +30,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 		//session
 		$session_id = New Zend_Session_Namespace('id');
 		
+                
 		if ( $data_content) 
 		{
 			$content_type = new Core_Model_ContentType ();
@@ -64,6 +65,8 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 				$content_by_section_data = $content_by_section->find('wc_content_by_section', array('section_id'=> $session_id->section_id, 'content_id'=> $content_id));
 				$data_content_field = $content_field->find ( 'wc_content_field', array ('content_id' => $content_id) );
 			}
+                        
+                     
 	
 			//Proceed according to object type			
 			switch (str_replace ( ' ', '_', strtolower ( $data_content_type [0]->name ) )) 
@@ -139,9 +142,13 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 					$id = new Zend_Session_Namespace('id');
 					//get watermark info
 					$watermark_data =  GlobalFunctions::getWatermark($id->website_id);
-					
-					$return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" ';
-					$return .= ' style="'.GlobalFunctions::checkImageSize($data_content_field [4]->value,$content_width);
+                                        
+                                        if($data_content_field[8]->value =='yes'){
+                                            $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)) .'" ';
+                                        }else{
+                                            $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0)) .'" ';
+                                        }
+                                        $return .= ' style="'.GlobalFunctions::checkImageSize($data_content_field [4]->value,$content_width);
 					}
 					
 					if($data_content_field [5]->value == 'frame'){

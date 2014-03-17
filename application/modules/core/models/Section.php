@@ -43,5 +43,21 @@ class Core_Model_Section extends Core_Model_Factory
 	
 		return $sections;
 	}
+        public static function saveOrderArticle($data, $idArticle) {
+            //get table adapter
+            $field = key($data);
+            $order = $data[$field];
+		$adapter = Zend_Db_Table::getDefaultAdapter();
+                $sql = "UPDATE wc_section SET " . $field." = ".$order. " WHERE id=$idArticle";
+                return  $adapter->query($sql);
+        }
+        public static function saveConfigArticle($data, $idArticle) {
+             //get table adapter
+            $field = key($data);
+            $order = $data[$field];
+		$adapter = Zend_Db_Table::getDefaultAdapter();
+                $sql = "UPDATE wc_section SET " . $field . " = '".$order. "' WHERE id=$idArticle"; 
+                return  $adapter->query($sql);
+        }
 		
 }

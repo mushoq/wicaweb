@@ -2794,7 +2794,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			
 			$search_results = array();
 			
-			$sections_arr = $section->personalized_find('wc_section', array(array('internal_name', 'LIKE', $internal_name), array('article', '=', 'no'), array('website_id','=',$session->website_id)));
+			$sections_arr = $section->personalized_find('wc_section', array(array('internal_name', 'LIKE', $internal_name), array('website_id','=',$session->website_id)));
 			if(count($sections_arr)>0)
 			{
 				foreach ($sections_arr as &$sar)

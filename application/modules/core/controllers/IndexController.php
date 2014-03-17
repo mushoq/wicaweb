@@ -64,6 +64,7 @@ class Core_IndexController extends Zend_Controller_Action {
 	 * Login process authenticate valid user and password
 	 */	
 	public function loginAction() {
+            
 		$request = $this->getRequest ();
 		$this->_helper->_layout->setLayout('login');
 		

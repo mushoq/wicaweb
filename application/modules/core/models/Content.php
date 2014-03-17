@@ -40,6 +40,9 @@ class Core_Model_Content extends Core_Model_Factory
 									'transparent' => 'Transparent',
 									'opaque' => 'Opaque'
 							);
+       public static $watermarkimg_values = array (
+									'yes' =>  'Yes' ,
+									'no' =>  'No');
 	
 	
 	/**

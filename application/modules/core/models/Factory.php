@@ -91,6 +91,56 @@ class Core_Model_Factory {
 		return $return;
 	}
 	
+        /**
+	 * Returns an object array with results
+	 * @param string $tableName
+	 * @param array $criteria
+	 * @return array
+	 */
+	public function findMultipleParent($tableName,$criteria = array(), $order_params = array())
+	{
+		//get criteria
+		$where = '1=1 ';
+		if($criteria)
+		{	
+                        $count = 0;
+			foreach($criteria as $field => $value){
+                        $count++;
+				if($count == 1)
+					$where .= 'and section_parent_id = "'.$value.'" ';
+				else
+					$where .= 'or section_parent_id = "'.$value.'" ';
+			}
+                        $where .= ' and article = "yes" ';
+		}	
+		$order=NULL;
+		if($order_params)
+		{
+			foreach ($order_params as $field_order => $way){				
+				$order = $field_order.' '.$way;
+			}
+		}
+
+		$table = new Zend_Db_Table($tableName);	
+		$result = $table->fetchAll($where, $order);
+
+		$return = array();
+		foreach($result as $row)
+		{
+			$temp = array();
+			foreach($row as $col=>$value)
+			{
+				$temp[$col] = utf8_encode($value);
+			}
+	
+			//convert into object
+			$obj = (object)$temp;
+			array_push($return, $obj);
+		}
+	
+		return $return;
+	}
+        
 	/**
 	 * Returns an object array with results with LIMIT
 	 * @param string $tableName
@@ -265,6 +315,9 @@ class Core_Model_Factory {
 						case '==':
 							$where .= 'and '.'LOWER('.$value[0].') = _utf8 "'.$value[2].'" COLLATE utf8_bin';
 							break;
+                                                case '<':
+                                                        $where .=" and ". $value[0] ." < '" . $value[2] . "'";
+                                                        break;
 							
 						default:
 							if($value[1] == '=' && !$value[2])
@@ -302,5 +355,67 @@ class Core_Model_Factory {
 			
 		return $return;
 	}
+        
+        public function find_between($tableName,$criteria = array(),$order_by = null) {
+            //get criteria
+		$where = '1=1 ';
+		if($criteria)
+		{
+			foreach($criteria as $value){
+                           
+                           
+				if($value)
+				{     if(count($value)==3){
+					switch($value[1]){
+						case 'LIKE':
+							$where .= 'and '.'LOWER('.$value[0].') LIKE _utf8 "%'.$value[2].'%" COLLATE utf8_bin';
+							break;
+						case '==':
+							$where .= 'and '.'LOWER('.$value[0].') = _utf8 "'.$value[2].'" COLLATE utf8_bin';
+							break;
+							
+						default:
+							if($value[1] == '=' && !$value[2])
+								$where .= ' and '.$value[0].' IS NULL ';
+							else
+								$where .= ' and '.$value[0].' '.$value[1].' "'.$value[2].'" ';
+							break;
+					}
+                                    }elseif(count($value)==4 && $value[1]=='BETWEEN') {
+                                        $where .=" and '".$value[0]."' BETWEEN ".$value[2]." AND ".$value[3];
+                                     }else{
+                                         return NULL;
+                                     }
+				}
+				else {
+					return NULL;
+				}	
+			}
+                        
+		}
+		else{
+			return NULL;
+		}
+                //Zend_Debug::dump($where); 
+                
+		$table = new Zend_Db_Table($tableName);
+		$result = $table->fetchAll($where,$order_by);
+		
+		$return = array();
+		foreach($result as $row)
+		{
+			$temp = array();
+			foreach($row as $col=>$value)
+			{
+				$temp[$col] = utf8_encode($value);
+			}
+	
+			//convert into object
+			$obj = (object)$temp;
+			array_push($return, $obj);
+		}
+			
+		return $return;
+        }
 	
 }

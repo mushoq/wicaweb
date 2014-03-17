@@ -93,37 +93,52 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									return $return;
 									break;
 													
-					case 'image':					
-									$return = '<div class="front_image_container item" align="'.$content_by_section_data[0]->align.'">';
-																
-									$return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="http://' . str_replace ('http://', '', $data_content_field [3]->value) . '"><img' : '<img';
-														
-									//recover render values
+					case 'image':		           
+                                                                       $return = '<div class="front_image_container item" align="'.$content_by_section_data[0]->align.'">';
+                                                                        //recover render values
 									$session_render_vals = new Zend_Session_Namespace('render_vals_front');
 									$content_width = GlobalFunctions::getImageWithForRender($session_render_vals->area_width, $session_render_vals->section_cols, $content_by_section_data[0]->column_number);
-										
-									if( $data_content_field[7]->value == 'no'){
-										$return .= ' src="/uploads/content/'.$data_content_field[4]->value.'" style="max-width:none;"';
-									}else{
 									//getWebsiste id
 									$id = new Zend_Session_Namespace('ids');
-									//get watermark info
-									$watermark_data =  GlobalFunctions::getWatermark($id->website_id);
-																
-									$return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" ';
-									$return .= ' style="'.GlobalFunctions::checkImageSize($data_content_field [4]->value,$content_width);
+                                                                        //get watermark info
+									$watermark_data =  GlobalFunctions::getWatermark($id->website_id);							
+									//$return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>1000,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" ><img';
+									$hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0));
+                                                                        
+                                                                        $return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value  . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. $hrefImg .'" ><img';					
+									
+										
+									if( $data_content_field[7]->value == 'no'){
+                                                                            $path = APPLICATION_PATH.'/../public/uploads/content/';
+                                                                            //get the image size
+                                                                            $image_data = getimagesize($path.$data_content_field[4]->value);
+                                                                            $widthImg = $image_data[0].'px';
+                                                                            $heightImg = $image_data[1];
+                                                                            $return .= ' src="/uploads/content/'.$data_content_field[4]->value.'" style="width:100%; max-width:'.$widthImg.';';
+									}else{
+									
+									
+									//$return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" ';
+									 if($data_content_field[8]->value =='yes'){
+                                                                            $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)) .'" ';
+                                        }                               else{
+                                                                            $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0)) .'" ';
+                                                                        }                               
+                                                                        
+                                                                        $return .= ' style="'.GlobalFunctions::checkImageSize($data_content_field [4]->value,$content_width);
 									}
 									
-									if($data_content_field [5]->value == 'frame'){
-										$return.= ' border: thin solid; color: black !important;';
-									}
+									
 									
 									$return .= '"';
+                                                                        if($data_content_field [5]->value == 'frame'){
+										$return.= ' class="image-frame"';
+									}
 									$return .='/>';
 									
-									$return .= $data_content_field [3]->value? '</a>' : '';
+									$return .= $data_content_field [3]->value? '</a>' : '</a>';
 									
-									if($data_content_field [4]->value != '')
+									if($data_content_field [0]->value != '')
 										$return .= '<p>'.$data_content_field [0]->value.'</p>';
 									
 									$return .= '</div>';

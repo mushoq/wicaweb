@@ -24,10 +24,10 @@ class Core_ErrorController extends Zend_Controller_Action
         }
         
         /*FOR DEBUG*/
-//         echo'<pre>';
-//         print_r($errors);
-//         echo'</pre>';
-//         echo $errors->exception->getMessage();
+        echo'<pre>';
+         print_r($errors); 
+         echo'</pre>';
+        echo $errors->exception->getMessage();
 //         die();
         /*END FOR DEBUG*/
         switch ($errors->type) {

@@ -175,6 +175,8 @@ CREATE  TABLE IF NOT EXISTS `wc_section` (
   `display_menu2` enum('yes','no') DEFAULT 'no',
   `homepage` ENUM('yes', 'no') NOT NULL ,
   `article` ENUM('yes', 'no') NOT NULL ,
+  `order_feature` smallint(6) DEFAULT NULL,
+  `order_highlight` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`, `website_id`) ,
   INDEX `fk_section_website` (`website_id` ASC) ,
   INDEX `fk_section_section1` (`section_parent_id` ASC) ,

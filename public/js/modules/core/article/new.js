@@ -111,6 +111,46 @@ $(document).ready(function(){
 			});
 		}			
 	});	
+        //Orden de artículos
+        $('#order_feature').bind('click', function() {
+            //alert($('#section_parent_id').val());
+             $.fancybox({
+            'width': '80%',
+            'height': '80%',
+            'autoScale': true,
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'href': '/core/article_article/order/feature/1',
+            'type': 'ajax',
+            'onClosed': function() {
+                //window.location.href = "f?p=&APP_ID.:211:&SESSION.::&DEBUG.::";
+            }
+
+        });
+
+            return false;
+            
+        });
+        $('#order_highlight').bind('click', function() {
+            //alert($('#section_parent_id').val());
+             $.fancybox({
+            'width': '80%',
+            'height': '80%',
+            'autoScale': true,
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'href': '/core/article_article/order/highlight/1',
+            'type': 'ajax',
+            'onClosed': function() {
+                //window.location.href = "f?p=&APP_ID.:211:&SESSION.::&DEBUG.::";
+            }
+
+        });
+
+            return false;
+            
+        });
+        checkOptions('highlight', 'order_highlight');
 });
 
 /*WIZARD FUNCTIONS*/
@@ -276,4 +316,36 @@ function selectStep(i) {
 		$("#bar_step_" + (i-1)).addClass("active");
 		
 	}
+}
+
+/**
+ * FUNCIÓN PARA MOSTAR EL BOTÓN DE ORDEN
+ * @param {obj} obj
+ * @param {obj} btnOrden
+ * @returns {undefined}
+ */
+
+function checkOptions(obj, btnOrden){
+   
+    if($("#" + obj).val()=='yes'){
+         //$("#" + btnOrden).show();
+         if(obj=='highlight'){
+             $("#position_highlight").show();
+         }
+    }
+    $('#' + obj + '_yes').bind('click', function(){
+         //$("#" + btnOrden).show();
+          if(obj=='highlight'){
+             $("#position_highlight").show();
+         }
+    });
+     $('#' + obj + '_no').bind('click', function(){
+        
+        $("#" + btnOrden).hide();
+        if(obj=='highlight'){
+             $("#position_highlight").hide();
+         }
+    });
+                        
+    
 }

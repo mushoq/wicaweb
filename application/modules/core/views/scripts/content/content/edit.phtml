@@ -18,18 +18,21 @@
 </div>
 
 <div class="row-fluid">
-<div id="div_content" class="span6">
+<div id="div_content" class="span6"  style="z-index:5; position: relative;">
 	<?php echo $this->flashMessages(); ?>
 <!-- 	Form -->	
 	<form class="well form-horizontal <?php echo $this->form->getAttrib('class'); ?>" id="<?php echo $this->form->getAttrib('id'); ?>" method="<?php echo $this->form->getMethod(); ?>" enctype="multipart/form-data">		
 	<!-- 	Get elements from post -->
-		<?php foreach($this->form->getElements() as $name => $element){ /*Zend_Debug::dump($this->form->getElements()); die;*/?>
+		<?php foreach($this->form->getElements() as $name => $element){ 
+//                        echo $name;
+//                        echo '<br>';
+                    ?>
 			<?php if(strpos($name, 'hdnNameFile')=== false){ ?>		
 				<div class="row-fluid">
 				<!-- 				Div only for separate elements -->
-				<div id="<?php echo $name."_span-separator";?>" class="span1 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg')){ echo 'hide'; }?>">&ensp;</div>
+				<div id="<?php echo $name."_span-separator";?>" class="span1 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?>">&ensp;</div>
 				
-				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg')){ echo 'hide'; }?> ">
+				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?> ">
 					
 						<div class="control-group">
 <!-- 						Control when label should be show -->						
@@ -54,16 +57,43 @@
 												<?php
 										}	
 										else	
-// 											Build blue special buttons to replace radio button elements											
-											if($name == 'background' || $name == 'type' || $name == 'captcha' || $name == 'target'  || $name == 'resizeimg'){ 
+// 											Build blue special buttons to replace radio button elements
+                                                                                    
+											if($name == 'background' || $name == 'type' || $name == 'captcha' || $name == 'target'  || $name == 'resizeimg' || $name=='watermarkimg'){ 
 													$static_var = $name.'_values'; ?>
 													<div class="btn-group" data-toggle="buttons-radio">
 														<?php foreach ( Core_Model_Content::$$static_var as $k => $entry): ?>
 														<input type="button" class="btn btn-primary"  id="<?php echo $name.'-'.$k; ?>" name="<?php echo $name.'-'.$k; ?>" element_value="<?php echo $k; ?>" value="<?php echo $lang->translate($this->escape($entry)); ?>" />							
 														<?php endforeach; ?>							
-													</div>	<?php echo $this->form->$name->renderViewHelper(); 											
+													</div>	
+                                                                                                     <?php echo $this->form->$name->renderViewHelper();
+                                                                                                       
+                                                                                           if($name=='watermarkimg'){
+                                                                                  ?>
+                                                                                        <br>
+                                                                                        <label class="control-label control-label-edit" id="watermark_position_label">Position</label>
+                                                                                       <br>
+                                                                                        <div>
+                                                                                            
+                                                                                            <input type="button" pos="TL" value="" class="btn watermark_pos_selector" id="wmk_pos_TL">
+                                                                                            <input type="button" pos="T" value="" class="btn watermark_pos_selector" id="wmk_pos_T">
+                                                                                            <input type="button" pos="TR" value="" class="btn watermark_pos_selector" id="wmk_pos_TR"> <br>
+                                                                                            <input type="button" pos="L" value="" class="btn watermark_pos_selector" id="wmk_pos_L">
+                                                                                            <input type="button" pos="C" value="" class="btn watermark_pos_selector" id="wmk_pos_C">
+                                                                                            <input type="button" pos="R" value="" class="btn watermark_pos_selector" id="wmk_pos_R"> <br>
+                                                                                            <input type="button" pos="BL" value="" class="btn watermark_pos_selector" id="wmk_pos_BL">
+                                                                                            <input type="button" pos="B" value="" class="btn watermark_pos_selector" id="wmk_pos_B">
+                                                                                            <input type="button" pos="BR" value="" class="btn watermark_pos_selector" id="wmk_pos_BR">
+                                                                                        </div>
+                                                                                       
+                                                                                  <?php
+                                                                                        echo $this->form->watermark_position->renderViewHelper();
+                                                                                               
+                                                                                           }           
+                                                                                                       
 											}
 											else
+                                                                                                
 // 												Extructure for file uploads												
 												if($name == 'file' || $name == 'alternative_image' || $name=='flash_file'){?>
 													<div>
@@ -105,7 +135,8 @@
 																?> <input type="hidden" name="hdn_content" id="hdn_content" value="" /> <?php
 															}
 														}
-								?>								
+								?>
+                                                                                                                                
 							</div>
 							
 							<input type="hidden" id="repeated_section_name" value="<?php echo $lang->translate('The internal name of content already exist');?>" />
@@ -183,7 +214,7 @@
 ?>
 
 <!-- preview column -->
-<div  class="span6">	
+<div  class="span6" style="z-index:1; position: relative;">	
 	<div  id="div_preview" class="well">
 		<h3><?php echo $lang->translate('Current Content'); ?></h3><br><br>
 	

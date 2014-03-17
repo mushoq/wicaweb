@@ -51,7 +51,6 @@ class Core_Externalmodules_ExternalmodulesController extends Zend_Controller_Act
     	
     	$external_modules = new Core_Model_Module();
     	$external_modules_list = $external_modules->getExternalModules();
-            print_r($external_modules_list);
     	
     	$this->view->external_modules_list = $external_modules_list;
     	

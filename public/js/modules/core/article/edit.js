@@ -76,7 +76,8 @@ $(document).ready(function(){
 	//cancel button
 	$("#cancel_button").bind('click',function(){
 		window.location = "/core/section_section/index";
-	});	
+	});
+        
         //subsection_of						
 	$("#subsection_opt").fancybox();
 	$("#subsection_of").bind('click',function(){
@@ -86,7 +87,9 @@ $(document).ready(function(){
 		      $.getScript('/js/modules/core/section/sectionstreelist.js');
 		      $("#subsection_opt").click();
 		});			
-	});	
+	});
+			
+	
 	//save section
 	$('#submit_button').bind('click', function() {		
 		if($("#frmArticle").valid()){			
@@ -115,6 +118,47 @@ $(document).ready(function(){
 			});
 		}			
 	});	
+        //Orden de articulos
+        $('#order_feature').bind('click', function() {
+           
+             $.fancybox({
+            'width': '80%',
+            'height': '80%',
+            'autoScale': true,
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'href': '/core/article_article/order/feature/1/idArticle/' + $('#id').val(),
+            'type': 'ajax',
+            'onClosed': function() {
+                //window.location.href = "f?p=&APP_ID.:211:&SESSION.::&DEBUG.::";
+            }
+
+        });
+
+            return false;
+            
+        });
+        $('#order_highlight').bind('click', function() {
+            
+             $.fancybox({
+            'width': '80%',
+            'height': '80%',
+            'autoScale': true,
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'href': '/core/article_article/order/highlight/1/idArticle/' + $('#id').val(),
+            'type': 'ajax',
+            'onClosed': function() {
+                //window.location.href = "f?p=&APP_ID.:211:&SESSION.::&DEBUG.::";
+            }
+
+        });
+
+            return false;
+            
+        });
+        checkOptions('feature', 'order_feature'); 
+        checkOptions('highlight', 'order_highlight');
 });
 
 /*WIZARD FUNCTIONS*/
@@ -283,4 +327,52 @@ function selectStep(i) {
 		$("#bar_step_" + (i-1)).addClass("active");
 		
 	}
+}
+/**
+ * FUNCI�N PARA MOSTAR EL BOT�N DE ORDEN
+ * @param {obj} obj
+ * @param {obj} btnOrden
+ * @returns {undefined}
+ */
+
+function checkOptions(obj, btnOrden){
+   //alert(obj);
+    if($("#" + obj).val()=='yes'){
+         $("#" + btnOrden).show();
+        
+    }
+    $('#' + obj + '_yes').bind('click', function(){
+         $("#" + btnOrden).show();
+         
+         //guardar opcion
+         $.ajax({
+                type: 'POST',
+                async: false,
+                url: '/core/article_article/saveconfig/opcion/' + obj + '/valorOpcion/yes',
+                data: {idArticle:$('#id').val()},
+                success: function(data) {									
+                        //alert(data); 
+                        $('#messge-save-config').html("Configuraci\xF3n activada");
+                }								
+        });
+         
+    });
+     $('#' + obj + '_no').bind('click', function(){
+        
+        $("#" + btnOrden).hide();
+        
+          //guardar opci�n
+         $.ajax({
+                type: 'POST',
+                async: false,
+                url: '/core/article_article/saveconfig/opcion/' + obj + '/valorOpcion/no',
+                data: {idArticle:$('#id').val()},
+                success: function(data) {									
+                        //alert(data);
+                        $('#messge-save-config').html("Configuraci\xF3n desactivada");
+                }								
+        });
+    });
+                        
+    
 }

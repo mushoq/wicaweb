@@ -359,6 +359,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$smtp_password->setLabel($lang->translate('Password').':');
 		$smtp_password->setFilters(array( new Zend_Filter_StringTrim()));
 		$smtp_password->setAttrib('style', 'width:100%');
+                $smtp_password->renderPassword = true;
 		
 		//Submit Button
 		$submit = New Zend_Form_Element_Button('submit');

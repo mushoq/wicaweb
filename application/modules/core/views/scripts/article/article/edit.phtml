@@ -127,11 +127,11 @@
 						<div class="controls">
 							<?php echo $this->form->synopsis->renderViewHelper(); ?>									
 						</div>
-			     </div>
-                             <div class="hide">
-                                 <div id="subsections_container"></div>
-                             </div>
-	      		</div>				      		
+					</div>																												
+	      		</div>
+                         <div class="hide">
+                             <div id="subsections_container"></div>
+                         </div>
 			</div>	
 		</div>
 		
@@ -242,9 +242,14 @@
 							<div class="btn-group" data-toggle="buttons-radio">							
 								<?php foreach($confirm_options as $k => $opt): ?>
 								<input type="button" class="btn btn-primary <?php if($this->form->feature->getValue()==$k){ ?> active <?php }?>" id="feature_<?php echo $k; ?>" value="<?php echo $opt; ?>">							
-								<?php endforeach; ?>							
+								<?php endforeach; ?>
+                                                              
+                                                                <button class="btn hide btn-warning" style="margin-left: 5px;" type="button" id="order_feature" name="order_feature">Ordenar</button>
 							</div>
-							<?php echo $this->form->feature->renderViewHelper(); ?>
+							<?php 
+                                                        echo $this->form->feature->renderViewHelper(); 
+                                                        echo $this->form->order_feature_value->renderViewHelper();
+                                                        ?>
 						</div>
 					</div>	
 				</div>						
@@ -265,9 +270,13 @@
 							<div class="btn-group" data-toggle="buttons-radio">							
 								<?php foreach($confirm_options as $k => $opt): ?>
 								<input type="button" class="btn btn-primary <?php if($this->form->highlight->getValue()==$k){ ?> active <?php }?>" id="highlight_<?php echo $k; ?>" value="<?php echo $opt; ?>">							
-								<?php endforeach; ?>							
+								<?php endforeach; ?>
+                                                                <button class="btn hide btn-warning" style="margin-left: 5px;" type="button" id="order_highlight" name="order_highlight">Ordenar</button>
+                                                                <button class="btn hide btn-info" style="margin-left: 5px;" type="button" id="position_highlight" name="position_highlight">Ubicaci&oacute;n</button>
 							</div>		
-							<?php echo $this->form->highlight->renderViewHelper(); ?>
+							<?php echo $this->form->highlight->renderViewHelper(); 
+                                                              echo $this->form->order_highlight_value->renderViewHelper();
+						         ?>
 						</div>
 					</div>	
 				</div>						
@@ -347,6 +356,9 @@
 
 <div class="row-fluid">
 	<div class="center well">
+             <div class="row-fluid">
+                 <label class="error_validation" id="messge-save-config"></label>
+            </div>
 		<div class="row-fluid">					
 			<?php echo $this->form->submit_button->renderViewHelper(); ?>
 			&nbsp;&nbsp;

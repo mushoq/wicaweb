@@ -62,11 +62,11 @@ $(document).ready(function() {
 					});
 				
 				//call ckeditor_styles.js file to fill the dropdown styles on ckeditor				
-				$.getScript('/js/external/ckeditor_styles.js',function(data){
-					if(data){
-						CKEDITOR.config.stylesSet = 'external:/js/external/ckeditor_styles.js';
-					}
-				});
+//				$.getScript('/js/external/ckeditor_styles.js',function(data){
+//					if(data){
+//						CKEDITOR.config.stylesSet = 'external:/js/external/ckeditor_styles.js';
+//					}
+//				});
 				
 				//save content through ajax
 				$('#save').bind('click', function() {
@@ -113,7 +113,8 @@ $(document).ready(function() {
 										if(params[1]=='yes'){
 											//load section details with serial section just for simulate redirect
 											$('#cms_container').load("/core/article_article/articledetails", {
-												id: parseInt(params[0])
+												id: parseInt(params[0]),
+                                                                                                is_section_temp : parseInt($('#section_temp').val())
 											},function(){		
 												// resize tree height according content
 												setSectionTreeHeight();
@@ -148,7 +149,7 @@ $(document).ready(function() {
 				
 				//check if browser does have flash player 
 				var flashPlayer = function(d,c){try{c=new ActiveXObject(d+c+"."+d+c).GetVariable("$version")}catch(f){c=navigator.plugins[d+" "+c];c=c?c.description:""}return c.match(/\s\d+/)}("Shockwave","Flash");
-
+                                $('#watermark_position').val('C');
 				if(flashPlayer) {
 					
 					$("#target").val('');
@@ -161,7 +162,13 @@ $(document).ready(function() {
 					//set value on radio aux validation
 					$("input[id^='resizeimg']").bind("click",function(){
 						$("#resizeimg").val($(this).attr('element_value'));
-					});						
+					});
+                                         $("#watermarkimg-"+$("#watermarkimg").val()).attr("class",'btn btn-primary active');
+                                        //set value on radio aux validation
+                                        $("input[id^='watermarkimg']").bind("click",function(){
+                                                $("#watermarkimg").val($(this).attr('element_value'));
+                                        });
+                                        
 					//validation
 					$("#frmContent").validate({
 						wrapper: "span",
@@ -227,8 +234,19 @@ $(document).ready(function() {
 					$("#frmContent").empty();
 					$("#frmContent").hide();
 					$("#no_flash_player").show();
-				  }	
-				
+				  }
+                                  
+				//default watermark pos
+                                if($('#watermark_position').val()!=''){
+                                        $("[id^='wmk_pos_']").each(function(){
+                                                if($(this).attr('pos')==$('#watermark_position').val()){
+                                                        $(this).addClass('btn-success');
+                                                        $('#img_watermark').parent('div').removeClass('hide');
+                                                        setWatermarkPos();
+                                                        $(this).click();
+                                                }
+                                        });
+                                }
 				break;
 				
 			case '3': //Content Link
@@ -1572,5 +1590,107 @@ function parseresults(data) {
         $('#title_youtube').html('');
         $('#url_youtube').html('');
         $('#description_youtube').html('');		
+	}
+}
+/**
+ * Add action to the watermark position selector panel
+ */
+function setWatermarkPos(){
+	//default
+	//$('#watermark_pos_container').removeClass('hide');
+	setTimeout("setPosition($('#watermark_position').val())",30);
+	
+	//listeners
+	$("[id^='wmk_pos_']").each(function(){
+		$(this).bind('click',function(){
+                    //alert('entra');
+			clearWatermarkPos();
+			$(this).addClass('btn-success');
+			//save value
+			$('#watermark_position').val($(this).attr('pos'));
+			// change the position of the displayed image
+			var pos = $(this).attr('pos');
+			 setPosition(pos);
+		});
+	});
+}
+
+/**
+ * Add action to the watermark position selector panel
+ */
+function clearWatermarkPos(){
+	$("[id^='wmk_pos_']").each(function(){
+		$(this).removeClass('btn-success');
+	});
+}
+
+/**
+ * Add action to the watermark position selector panel
+ */
+function setPosition(pos){
+	//img size
+	var height = $('#img_watermark').height();
+	var top = (210/2)-(height/2);
+	switch(pos){
+		case 'TL':
+			$('#img_watermark').css('bottom','');
+			$('#img_watermark').css('right','');
+			$('#img_watermark').css('top','0');
+			$('#img_watermark').css('left','0');
+			break;
+		case 'T':
+			$('#img_watermark').css('bottom','');
+			$('#img_watermark').css('right','');
+			$('#img_watermark').css('top','0');
+			$('#img_watermark').css('left','33%');
+			break;
+		case 'TR':
+			$('#img_watermark').css('bottom','');
+			$('#img_watermark').css('left','');
+			$('#img_watermark').css('top','0');
+			$('#img_watermark').css('right','0');
+			break;
+		case 'L':
+			$('#img_watermark').css('bottom','');
+			$('#img_watermark').css('right','');
+			$('#img_watermark').css('top',top+'px');
+			$('#img_watermark').css('left','0');
+			break;
+		case 'C':
+			$('#img_watermark').css('bottom','');
+			$('#img_watermark').css('right','');
+			$('#img_watermark').css('top',top+'px');
+			$('#img_watermark').css('left','33%');
+			break;
+		case 'R':
+			$('#img_watermark').css('bottom','');
+			$('#img_watermark').css('left','');
+			$('#img_watermark').css('top',top+'px');
+			$('#img_watermark').css('right','0');
+			break;
+		case 'BL':
+			$('#img_watermark').css('top','');
+			$('#img_watermark').css('right','');
+			$('#img_watermark').css('bottom','0');
+			$('#img_watermark').css('left','0');
+			break;
+		case 'B':
+			$('#img_watermark').css('top','');
+			$('#img_watermark').css('right','');
+			$('#img_watermark').css('bottom','0');
+			$('#img_watermark').css('left','33%');
+			break;
+		case 'BR':
+			$('#img_watermark').css('top','');
+			$('#img_watermark').css('left','');
+			$('#img_watermark').css('bottom','0');
+			$('#img_watermark').css('right','0');
+			break;
+		default:
+			$('#img_watermark').css('top','');
+			$('#img_watermark').css('left','');
+			$('#img_watermark').css('bottom','0');
+			$('#img_watermark').css('right','0');
+			break;
 	}
 }

@@ -254,6 +254,8 @@ class Core_Form_Article_Article extends Zend_Form{
 		$section_temp = new Zend_Form_Element_Hidden('section_temp');
 		$section_temp->removeDecorator('Label');
 		$section_temp->removeDecorator('HtmlTag');													
+                $order_highlight = new Zend_Form_Element_Hidden('order_highlight_value');
+                $order_feature = new Zend_Form_Element_Hidden('order_feature_value');
 					
 		$this->addElements(array(
 				$id,
@@ -281,7 +283,9 @@ class Core_Form_Article_Article extends Zend_Form{
 				$approved,
 				$section_temp,
 				$publication_status,
-				$approved							
+				$approved,							
+                                $order_highlight,
+                                $order_feature
 		));						
 		
 		//submit button
