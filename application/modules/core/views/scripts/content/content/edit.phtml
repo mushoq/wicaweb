@@ -32,58 +32,22 @@
 				<!-- 				Div only for separate elements -->
 				<div id="<?php echo $name."_span-separator";?>" class="span1 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?>">&ensp;</div>
 				
-<<<<<<< HEAD
 				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?> ">
 					
-=======
-				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg')){ echo 'hide'; }?> ">
-				<?php if($name == 'select_images'){ ?>
-                                  
-                                    <div class="control-group">
-                                       <label id="carrusel_images_order" class="control-label control-label-edit<?php if( ($this->form->$name->class == 'hide' || $this->form->$name->class == 'hide btn') && ($name != 'alternative_image' && $name != 'flash_file')) echo ' hide'?>"><?php if($name == 'file' || $name == 'alternative_image' || $name == 'flash_file'){ echo 'Orden Actual:';  }else{ echo 'Orden Actual:'; }?></label>
-                                       <div class="span5">
-                                       <div id="sortable_header" class="span5" style="background-color:#B9B9B9; ">
-                                            <div class="span1"><b><?php echo '#'; ?></b></div>                                            
-                                            <div class="span1"><b><?php echo 'Imagen'; ?></b></div>  
-                                            <div class="span1 center"><b><?php echo 'Mover'; ?></b></div>  
-                                            <div class="span1"><b><?php echo 'Herramientas'; ?></b></div>  
-                                        </div>
-                                       <div id="sortable" >                                                                
-                                            <?php foreach ($this->images as $k=>$img):?>
-                                            <div id="<?php echo $img; ?>" style="border: 1px solid #000000; border-style: dashed;" class="span5">
-                                                <div class="span1"><?php echo $k; ?></div>  
-                                                <div class="span1"><img  src="<?php echo '../uploads/content/'.$img; ?>" width="100%"> </div>  
-                                                <div class="span1 center"><a class="pointer" ><i class="icon-move"></i></a></div>  
-                                                <div class="span1 center"><a class="pointer"><i id="delete_<?php echo $img; ?>" class="icon-trash"></i></a></div>     
-                                            </div>
-                                            <?php endforeach;?>
-                                        </div> 
-                                           </div> 
-                                           
-                                        <input type="hidden" id="images_order" name="images_order" value="" />
-                                        <input type="hidden" id="deleted_images" name="deleted_images" value="" />	 
-                                    </div>
-           
-                                    
-                                <?php } ?>	<div id="<?php echo $name."_span-separator";?>" class="span1 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg')){ echo 'hide'; }?>">&ensp;</div>
-				
-                                    
->>>>>>> 00a48ccfb2f96e645b52921c63dd9fe44237ac71
 						<div class="control-group">
 <!-- 						Control when label should be show -->						
 						<?php if(($this->form->$name->helper != 'formSubmit' && $this->form->$name->helper != 'formButton') || ($name == 'file' || $name == 'alternative_image' || $name == 'flash_file')) { ?>
-							<label id="<?php echo $name."_label"?>" class="control-label control-label-edit<?php if( ($this->form->$name->class == 'hide' || $this->form->$name->class == 'hide btn') && ($name != 'alternative_image' && $name != 'flash_file')) echo ' hide'?>"><?php if($name == 'file' || $name == 'alternative_image' || $name == 'flash_file'){ echo $this->form->$name->label_name;  }else{ echo $this->form->$name->getLabel(); }?></label>						<?php } ?>
-                                                        
+							<label id="<?php echo $name."_label"?>" class="control-label control-label-edit<?php if( ($this->form->$name->class == 'hide' || $this->form->$name->class == 'hide btn') && ($name != 'alternative_image' && $name != 'flash_file')) echo ' hide'?>"><?php if($name == 'file' || $name == 'alternative_image' || $name == 'flash_file'){ echo $this->form->$name->label_name;  }else{ echo $this->form->$name->getLabel(); }?></label>
+						<?php } ?>	
 
 							<div class="span<?php if($this->form->$name->helper == 'formButton') echo '3 center'; else if($name == 'content') echo'4';?>">
 					
 								<?php 
 // 								Div for carrusel multi image uploader								
-							if($name == 'select_images'){ ?>
-                                                            	<div id='multiple_img'></div>
-								<p class="help-block grey">(jpg,png,gif,jpeg)</p> 
-                                                                
-
+									if($name == 'select_images'){
+										?>
+											<div id='multiple_img'></div>
+											<p class="help-block grey">(jpg,png,gif,jpeg)</p>
 										<?php
 									}else//Div for single image upload
 										if($name == 'aux_make_div_image'){?>
@@ -177,7 +141,7 @@
 							
 							<input type="hidden" id="repeated_section_name" value="<?php echo $lang->translate('The internal name of content already exist');?>" />
 		
-						</div>	                                   
+						</div>	
 								
 				</div>	
 <!-- 				info youtube video -->				
@@ -205,7 +169,6 @@
 		//prints the save button at the end
 		echo $saveButton;
 		?>
-                <div id="deleted_array" style="visibility:hidden"></div>
 		<input type="hidden" id="approved" name="approved" value="<?php echo $this->approved_frm; ?>" />		
 		<input type="hidden" id="section_details" name="section_details" value="<?php echo $this->section_id.'/'.$this->article;?>" />
 		<input type="hidden" id="section_temp" name="section_temp" value="<?php echo $this->section_temp; ?>" />

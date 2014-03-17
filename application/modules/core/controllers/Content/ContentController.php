@@ -178,7 +178,6 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 		if ($this->getRequest ()->isPost ()) 
 		{			
 			$formData = $this->_request->getPost ();
-<<<<<<< HEAD
                         $position_post=strpos($formData['watermark_position'], ',');
                         $formData['watermark_position']= substr($formData['watermark_position'],0,$position_post);
                         //$formData['watermark_position']= ($formData['id'])?substr($formData['watermark_position'],0, -2):substr($formData['watermark_position'],0, -1);
@@ -187,9 +186,6 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 //                        echo '</pre>';
 //                        die(); 
 //			
-=======
-			//var_dump($formData);die();
->>>>>>> 00a48ccfb2f96e645b52921c63dd9fe44237ac71
 			$field = new Core_Model_Field ();
 			$get_fields = $field->find ( 'wc_field', array ('content_type_id' => $formData ['content_type_id']) );
 			if (! $get_fields ) {
