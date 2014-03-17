@@ -25,9 +25,9 @@
 			<?php if(strpos($name, 'hdnNameFile')=== false){ ?>		
 				<div class="row-fluid">
 <!-- 				Div only for separate elements -->
-				<div id="<?php echo $name."_span-separator";?>" class="span4 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?>">&ensp;</div>
+				<div id="<?php echo $name."_span-separator";?>" class="span4 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg')){ echo 'hide'; }?>">&ensp;</div>
 				
-				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?> ">
+				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg')){ echo 'hide'; }?> ">
 					
 						<div class="control-group">
 						
@@ -50,43 +50,18 @@
 										<?php
 									}else //Div for single image upload
 										if($name == 'aux_make_div_image'){?>
-												<div></div><div id='multiple_img'></div>
-                                                                                                <p class="help-block grey">(jpg,png,gif,jpeg)</p>
-                                                                                               <?php
-                                                                                               
+												<div id='single_img'>
+												</div><p class="help-block grey">(jpg,png,gif,jpeg)</p><?php
 										}	
 										else	
 // 											Build blue special buttons to replace radio button elements
-											if($name == 'background' || $name == 'type' || $name == 'captcha' || $name == 'target'  || $name == 'resizeimg' || $name=='watermarkimg'){ 
+											if($name == 'background' || $name == 'type' || $name == 'captcha' || $name == 'target'  || $name == 'resizeimg'){ 
 													$static_var = $name.'_values'; ?>
 													<div class="btn-group" data-toggle="buttons-radio">
 														<?php foreach ( Core_Model_Content::$$static_var as $k => $entry): ?>
 														<input type="button" class="btn btn-primary"  id="<?php echo $name.'-'.$k; ?>" name="<?php echo $name.'-'.$k; ?>" element_value="<?php echo $k; ?>" value="<?php echo $lang->translate($this->escape($entry)); ?>" />							
 														<?php endforeach; ?>							
-													</div>	<?php echo $this->form->$name->renderViewHelper();
-                                                                                              if($name=='watermarkimg'){
-                                                                                  ?>
-                                                                                        <br>
-                                                                                        <label class="control-label control-label-edit" id="watermark_position_label">Position</label>
-                                                                                       <br>
-                                                                                       <br>
-                                                                                        <div>
-                                                                                            
-                                                                                            <input type="button" pos="TL" value="" class="btn watermark_pos_selector" id="wmk_pos_TL">
-                                                                                            <input type="button" pos="T" value="" class="btn watermark_pos_selector" id="wmk_pos_T">
-                                                                                            <input type="button" pos="TR" value="" class="btn watermark_pos_selector" id="wmk_pos_TR"> <br>
-                                                                                            <input type="button" pos="L" value="" class="btn watermark_pos_selector" id="wmk_pos_L">
-                                                                                            <input type="button" pos="C" value="" class="btn watermark_pos_selector" id="wmk_pos_C">
-                                                                                            <input type="button" pos="R" value="" class="btn watermark_pos_selector" id="wmk_pos_R"> <br>
-                                                                                            <input type="button" pos="BL" value="" class="btn watermark_pos_selector" id="wmk_pos_BL">
-                                                                                            <input type="button" pos="B" value="" class="btn watermark_pos_selector" id="wmk_pos_B">
-                                                                                            <input type="button" pos="BR" value="" class="btn watermark_pos_selector" id="wmk_pos_BR">
-                                                                                        </div>
-                                                                                       
-                                                                                  <?php
-                                                                                        echo $this->form->watermark_position->renderViewHelper();    
-                                                                                               
-                                                                                           }                  
+													</div>	<?php echo $this->form->$name->renderViewHelper(); 											
 											}
 											else
 // 												Extructure for file uploads
@@ -177,17 +152,14 @@
 			<?php } ?>
 		<?php } 
 		//prints the save button at the end
-<<<<<<< HEAD
-		echo $saveButton;
-=======
                     echo $saveButton;
->>>>>>> 00a48ccfb2f96e645b52921c63dd9fe44237ac71
 		?>
 		<input type="hidden" id="approved" name="approved" value="<?php echo $this->approved_frm; ?>" />
 		<input type="hidden" id="section_details" name="section_details" value="<?php echo $this->section_id.'/'.$this->article;?>" />
 		<input type="hidden" id="section_temp" name="section_temp" value="<?php echo $this->section_temp; ?>" />
 		<input type="hidden" id="hdn_max_height_img" name="hdn_max_height_img" value="<?php echo $this->max_height; ?>" />
 		<input type="hidden" id="hdn_max_width_img" name="hdn_max_width_img" value="<?php echo $this->max_width; ?>" />
+                </div>
 	</form>
 	
 	<a id="anchor_add" class="hide" href="#formContent"></a>

@@ -1485,6 +1485,11 @@ $(document).ready(function(){
 		break;
 		
 	case '7'://Content carrusel
+
+                 $( "#sortable" ).sortable();  
+                 $( "#deleted_array" ).sortable();
+                 $( "#sortable" ).disableSelection();                
+        
 		
 		//check if browser does have flash player 
 		var flashPlayer = function(d,c){try{c=new ActiveXObject(d+c+"."+d+c).GetVariable("$version")}catch(f){c=navigator.plugins[d+" "+c];c=c?c.description:""}return c.match(/\s\d+/)}("Shockwave","Flash");
@@ -1567,10 +1572,25 @@ $(document).ready(function(){
 				//auto height containers
 				autoHeightContent();
 			},5000);
+                
+                //remove an image from the carrusel and register the name of it
+                $("[id^='delete_']").each(function(){
+		    $(this).bind("click", function(){			
+		    var imageId = this.id.replace("delete_","");                    
+                    var element = document.getElementById(imageId);
+                    jQuery(element).detach().appendTo('#deleted_array')                    
+		    });	
+	        });
 
 			
-			//save content through flash
+                //save content through flash
 	    	$("#save_image").bind("click",function(){
+                        //for saving image order
+                        var section_list = $("#sortable").sortable("toArray");           
+			$('#images_order').val(section_list.join(','));
+                        //for deleting images from the directory
+                        var deleted_list= $("#deleted_array").sortable("toArray");           
+			$('#deleted_images').val(deleted_list.join(','));
 	    		if($("#frmContent").valid())
 	    			document.getElementById('agileUploaderSWF').submit();
 	    	});	

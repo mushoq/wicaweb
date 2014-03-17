@@ -192,6 +192,16 @@ $(document).ready(function() {
 							},
 							format:{
 								required:true
+							},
+                                                        multiple_img_aux_validation:{
+								required: {
+									depends:function(){
+										if(!$("#agileUploaderFileList").html())
+											return true;
+										else
+											return false;
+									}
+								}
 							}
 			            },
 			            messages:{
@@ -206,23 +216,19 @@ $(document).ready(function() {
 					$('#title').keyup(function(){
 						$('#internal_name').val($(this).val());
 					});
-	
+                                        	
 					//call upload plugin, only resize jpg images, agile flash variables
-					$('#single_img').agileUploaderSingle({
-				    		submitRedirect: 'redirect_to_content/'+$("#section_details").val()+'/'+parseInt($('#section_temp').val()),//this is a custom redirect
-				    		formId: 'frmContent',
-				    		progressBarColor: '#00ff00',
-				    		flashVars: {
-								firebug: true,
-								file_limit: 1,
-								max_width: parseInt($("#hdn_max_width_img").val()),
-								max_height : parseInt($("#hdn_max_height_img").val()),
-					    		form_action: '/core/content_content/save',
-					    		preview_jpg_quality: 100,
-					    		preview_max_height: 200,
-					    		preview_max_width: 200,
-					    		resize: 'jpg,jpeg'
-				    		}	
+					$('#multiple_img').agileUploader({
+			    		submitRedirect: 'redirect_to_content/'+$("#section_details").val()+'/'+parseInt($('#section_temp').val()),//this is a custom redirect
+			    		formId: 'frmContent',
+			    		flashVars: {
+							firebug: true,
+							file_limit: 10,
+							max_width: parseInt($("#hdn_max_width_img").val()),
+							max_height : parseInt($("#hdn_max_height_img").val()),
+							resize: 'jpg,jpeg,gif,png',
+				    		form_action: '/core/content_content/save'
+			    		}	
 			    	}); 
 			    	
 					//save content through flash

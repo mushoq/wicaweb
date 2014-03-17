@@ -178,6 +178,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 		if ($this->getRequest ()->isPost ()) 
 		{			
 			$formData = $this->_request->getPost ();
+<<<<<<< HEAD
                         $position_post=strpos($formData['watermark_position'], ',');
                         $formData['watermark_position']= substr($formData['watermark_position'],0,$position_post);
                         //$formData['watermark_position']= ($formData['id'])?substr($formData['watermark_position'],0, -2):substr($formData['watermark_position'],0, -1);
@@ -186,6 +187,9 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 //                        echo '</pre>';
 //                        die(); 
 //			
+=======
+			//var_dump($formData);die();
+>>>>>>> 00a48ccfb2f96e645b52921c63dd9fe44237ac71
 			$field = new Core_Model_Field ();
 			$get_fields = $field->find ( 'wc_field', array ('content_type_id' => $formData ['content_type_id']) );
 			if (! $get_fields ) {
@@ -433,15 +437,47 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 				}
 			}
 			else
+                            
 			{
+                            //multiple images upload
+                             $imagesArray = array('1'=>1);
+                            if($formData['content_type_id']==2){
+                                $uploads_dir = APPLICATION_PATH . "/../public/uploads/tmp/";
+                                $imagesArray = array();
+                                $namenew ;
+                                if($_FILES["Filedata"]["error"])	
+                                    foreach ($_FILES["Filedata"]["error"] as $key => $error) {
+                                            if ($error == UPLOAD_ERR_OK) {
+                                                    $tmp_name = $_FILES["Filedata"]["tmp_name"][$key];
+                                                    $name = $_FILES["Filedata"]["name"][$key];
+                                                    //$namenew.= $name.',';
+                                                    array_push($imagesArray, $name);
+                                                     //print_r($imagesArray);
+
+                                                    }
+                                            }
+//                                         $debug = new Core_Model_Content ();
+//                                         $debug_obj = $debug->getNewRow ( 'debug' );
+//                                         $debug_obj->detalle =$namenew;
+//                                         $debug->save('debug',$debug_obj );
+//                                         die();
+
+                                    }
+                                    
+                                 //begin foreach
+                               foreach ($imagesArray as $key){                            
 				//INSERT
 				//content
 				$content = new Core_Model_Content ();
 				$content_obj = $content->getNewRow ( 'wc_content' );
 				$content_obj->content_type_id = $formData ['content_type_id'];
 				$content_obj->website_id = $session_id->website_id;
-				$content_obj->internal_name = GlobalFunctions::value_cleaner ( $formData ['internal_name'] );
-				$content_obj->title = GlobalFunctions::value_cleaner ( $formData ['title'] );
+                                if ($formData['content_type_id']==2){
+				   $content_obj->internal_name = GlobalFunctions::value_cleaner ( $formData ['internal_name'].'_'.$key );
+                                } else {
+                                   $content_obj->internal_name = GlobalFunctions::value_cleaner ( $formData ['internal_name']);    
+                                }
+                                $content_obj->title = GlobalFunctions::value_cleaner ( $formData ['title'] );
 				$content_obj->created_by = $session_id->user_id;
 				$content_obj->creation_date = date ( 'Y-m-d h%i%s' );
 				$content_obj->approved = $formData ['approved'];
@@ -588,7 +624,11 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 						}
 					}
 				}
+                             }
+                                //end foreach
 			}
+                        
+                        foreach ($imagesArray as $key){ 
 			
 			if (! is_dir ( APPLICATION_PATH . '/../public/uploads/content/' )) {
 				$path = APPLICATION_PATH . '/../public/uploads/content/';
@@ -688,10 +728,13 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 						}
 					} else if (str_replace ( ' ', '_', strtolower ( $fields->name ) ) == 'html_code'){
 						$content_field_obj->value = utf8_decode( $formData [str_replace ( ' ', '_', strtolower ( $fields->name ) )] );
+                                        //for carrusel
 					}else if ($fields->type == 'select_images') {
 
 						$uploads_dir = APPLICATION_PATH . "/../public/uploads/tmp/";
 						$value = '';
+                                                $current_images_order = $formData['images_order'];
+                                                $content_field_obj->value =  $current_images_order;
 
 						if(count($_FILES["Filedata"]["error"]) > 0){
 							if(count($_FILES["Filedata"]["error"]) < 2) {
@@ -708,10 +751,9 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 									case 'doc':
 									case 'txt':
 										
-										move_uploaded_file($tmp_name, $uploads_dir."/".$name);
-										
+										move_uploaded_file($tmp_name, $uploads_dir."/".$name);										
 										$img = GlobalFunctions::uploadFiles ($name , APPLICATION_PATH . '/../public/uploads/content/' . date ( 'Y' ) . '/' . date ( 'm' ) . '/' );
-										$content_field_obj->value = date ( 'Y' ) . '/' . date ( 'm' ) . '/' . $img;
+										$content_field_obj->value = $current_images_order.date ( 'Y' ) . '/' . date ( 'm' ) . '/' . $img.',';
 										GlobalFunctions::removeOldFiles ( $name, APPLICATION_PATH . '/../public/uploads/tmp/' );
 											
 										break;
@@ -720,7 +762,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 										break;
 								}
 							} else {
-
+                                                                //multiple images
 								if($_FILES["Filedata"]["error"])	
 								foreach ($_FILES["Filedata"]["error"] as $key => $error) {
 									if ($error == UPLOAD_ERR_OK) {
@@ -749,22 +791,28 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 									}
 										
 								}
-								$content_field_obj->value = $value;
+								$content_field_obj->value =  $current_images_order.$value;
 							}
 						}
-						
+                                                
+                                                //delete old images from ../uploads/content/...
+                                                $deleted_images = $formData['deleted_images'];
+                                                $array_images = explode ($deleted_images );
+                                                foreach ( $array_images as $ai ) {
+                                                        if (! GlobalFunctions::removeOldFiles ( $ai, APPLICATION_PATH . '/../public/uploads/content/' )) {
+                                                                throw new Zend_Exception ( "CUSTOM_EXCEPTION:FILE NOT DELETED." );
+                                                        }
+                                                }
 						if($formData['id']){
-							if($content_field_obj->value)
-							{
+							if($content_field_obj->value)							{
 								$array_images = explode ( ',', $arr_data [str_replace ( ' ', '_', strtolower ( $fields->name ) )] );
 								if(count($array_images)>1)
-									array_pop ( $array_images );
-	
-								foreach ( $array_images as $ai ) {
-									if (! GlobalFunctions::removeOldFiles ( $ai, APPLICATION_PATH . '/../public/uploads/content/' )) {
-										throw new Zend_Exception ( "CUSTOM_EXCEPTION:FILE NOT DELETED." );
-									}
-								}
+									array_pop ( $array_images );                       
+//								foreach ( $array_images as $ai ) {
+//									if (! GlobalFunctions::removeOldFiles ( $ai, APPLICATION_PATH . '/../public/uploads/content/' )) {
+//										throw new Zend_Exception ( "CUSTOM_EXCEPTION:FILE NOT DELETED." );
+//									}
+//								}
 							}		
 						}						
 							
@@ -827,6 +875,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 					}	
 				}
 			}
+                }
 
 			if ($formData['content_type_id'] == 4) 
 			{
@@ -1059,7 +1108,13 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 			else
 				$arr_data [str_replace ( ' ', '_', strtolower ( $data_field [0]->name ) )] = $df->value;
 		}
-		
+		//for loading current images in a sortable list
+                if($arr_data['content_type_id']==7){
+                    $images = (explode("," ,$arr_data['select_images']));
+                    array_pop($images);
+                    $this->view->images = $images;
+                    $this->view->images_order = $arr_data['select_images'];
+                }
 		$content_form->populate ( $arr_data );
 		$this->view->form = $content_form;
 		$this->view->content_id = $content_id;
