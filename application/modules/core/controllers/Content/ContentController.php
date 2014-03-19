@@ -163,7 +163,6 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 	 * Saves a new content or updates a content
 	 */
 	public function saveAction(){
-
 		// translate library
 		$lang = Zend_Registry::get ( 'Zend_Translate' );		
 		
@@ -438,6 +437,8 @@ class Core_Content_ContentController extends Zend_Controller_Action {
                             //multiple images upload
                              $imagesArray = array('1'=>1);
                              $multipleId = array();
+                             $current_section = new Core_Model_Section();
+                             $current_section_obj = $current_section->find('wc_section', array('id'=>$formData['section_id']));
                             if($formData['content_type_id']==2){
                                 $uploads_dir = APPLICATION_PATH . "/../public/uploads/tmp/";
                                 $imagesArray = array();
@@ -462,7 +463,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
                             }
                                     
                                  //begin foreach
-                               foreach ($imagesArray as $key){                            
+                               foreach ($imagesArray as $key=>$value){                            
 				//INSERT
 				//content
 				$content = new Core_Model_Content ();
@@ -470,7 +471,9 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 				$content_obj->content_type_id = $formData ['content_type_id'];
 				$content_obj->website_id = $session_id->website_id;
                                 if (count($imagesArray)>1){
-				   $content_obj->internal_name = GlobalFunctions::value_cleaner ( $formData ['internal_name'].'_'.$key );
+				   $content_obj->internal_name = GlobalFunctions::value_cleaner 
+                                           (str_replace ( ' ', '_', strtolower ( $current_section_obj[0]->internal_name ) ).
+                                           '_'.$formData ['internal_name'].'_'.$key );
                                 } else {
                                    $content_obj->internal_name = GlobalFunctions::value_cleaner ( $formData ['internal_name']);    
                                 }
