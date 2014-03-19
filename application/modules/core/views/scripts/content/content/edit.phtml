@@ -33,7 +33,34 @@
 				<div id="<?php echo $name."_span-separator";?>" class="span1 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?>">&ensp;</div>
 				
 				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?> ">
-					
+			<?php if($name == 'select_images'){ ?>                                  
+                                    <div class="control-group">
+                                       <label id="carrusel_images_order" class="control-label control-label-edit<?php if( ($this->form->$name->class == 'hide' || $this->form->$name->class == 'hide btn') && ($name != 'alternative_image' && $name != 'flash_file')) echo ' hide'?>"><?php if($name == 'file' || $name == 'alternative_image' || $name == 'flash_file'){ echo 'Orden Actual:'; }else{ echo 'Orden Actual:'; }?></label>
+                                       <div class="span5">
+                                       <div id="sortable_header" class="span5" style="background-color:#B9B9B9; ">
+                                            <div class="span1"><b><?php echo '#'; ?></b></div>
+                                            <div class="span1"><b><?php echo 'Imagen'; ?></b></div>
+                                            <div class="span1 center"><b><?php echo 'Mover'; ?></b></div>
+                                            <div class="span1"><b><?php echo 'Herramientas'; ?></b></div>
+                                        </div>
+                                       <div id="sortable" >
+                                            <?php foreach ($this->images as $k=>$img):?>
+                                            <div id="<?php echo $img; ?>" style="border: 1px solid #000000; border-style: dashed;" class="span5">
+                                                <div class="span1"><?php echo $k; ?></div>
+                                                <div class="span1"><img src="<?php echo '../uploads/content/'.$img; ?>" width="100%"> </div>
+                                                <div class="span1 center"><a class="pointer" ><i class="icon-move"></i></a></div>
+                                                <div class="span1 center"><a class="pointer"><i id="delete_<?php echo $img; ?>" class="icon-trash"></i></a></div>
+                                            </div>
+                                            <?php endforeach;?>
+                                        </div>
+                                           </div>
+                                           
+                                        <input type="hidden" id="images_order" name="images_order" value="" />
+                                        <input type="hidden" id="deleted_images" name="deleted_images" value="" />	
+                                    </div>        
+                          <?php } ?>	<div id="<?php echo $name."_span-separator";?>" class="span1 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target' && $name != 'resizeimg')){ echo 'hide'; }?>">&ensp;</div>
+
+
 						<div class="control-group">
 <!-- 						Control when label should be show -->						
 						<?php if(($this->form->$name->helper != 'formSubmit' && $this->form->$name->helper != 'formButton') || ($name == 'file' || $name == 'alternative_image' || $name == 'flash_file')) { ?>
@@ -169,6 +196,7 @@
 		//prints the save button at the end
 		echo $saveButton;
 		?>
+                <div id="deleted_array" style="visibility:hidden"></div>
 		<input type="hidden" id="approved" name="approved" value="<?php echo $this->approved_frm; ?>" />		
 		<input type="hidden" id="section_details" name="section_details" value="<?php echo $this->section_id.'/'.$this->article;?>" />
 		<input type="hidden" id="section_temp" name="section_temp" value="<?php echo $this->section_temp; ?>" />
