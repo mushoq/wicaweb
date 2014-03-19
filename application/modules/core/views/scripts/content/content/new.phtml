@@ -176,4 +176,43 @@
 				} ?> 
 			<?php } ?>
 		<?php } 
-		
+		//prints the save button at the end
+		echo $saveButton;
+		?>
+		<input type="hidden" id="approved" name="approved" value="<?php echo $this->approved_frm; ?>" />
+		<input type="hidden" id="section_details" name="section_details" value="<?php echo $this->section_id.'/'.$this->article;?>" />
+		<input type="hidden" id="section_temp" name="section_temp" value="<?php echo $this->section_temp; ?>" />
+		<input type="hidden" id="hdn_max_height_img" name="hdn_max_height_img" value="<?php echo $this->max_height; ?>" />
+		<input type="hidden" id="hdn_max_width_img" name="hdn_max_width_img" value="<?php echo $this->max_width; ?>" />
+	</form>
+	
+	<a id="anchor_add" class="hide" href="#formContent"></a>
+	<div style="display: none">
+<!-- form of elments on contetn form -->
+		<div class="span5" id="formContent">
+			
+		</div>
+
+	</div>
+<!-- 	table header of form elements -->
+	<input id="header_table" type="hidden" value='<?php echo '<label id="labl_no_elements"><h4>'.$lang->translate('No items entered').'</h4></label>
+															<div id="elements_table" class="hide">
+																<div class="row-fluid table-bordered-header">	
+																	<div class="span4"><b>'.$lang->translate('Name').'</b></div>
+																	<div class="span3"><b>'.$lang->translate('Type').'</b></div>
+																	<div class="span1"><b>'.$lang->translate('Order').'</b></div>
+																	<div class="span4 last"><b>'.$lang->translate('Tools').'</b></div>																	
+																</div>
+															</div>
+															<div id="sortable" class="row-fluid hide"></div>'?>' /> 
+															
+	<input type="hidden" id="repeat_content" value="<?php echo $lang->translate('The internal name of content already exist');?>" />															
+															
+														
+</div>
+
+<!-- flash player message -->
+<div id="no_flash_player" class="row-fluid hide center">
+	<label><b><?php echo $lang->translate("Your browser does not have Flash Player installed and/or activated"); ?></b></label><br/>
+	<img src="/images/flash_player.jpg" width="80px;">
+</div>
