@@ -1575,10 +1575,18 @@ $(document).ready(function(){
                 
                 //remove an image from the carrusel and register the name of it
                 $("[id^='delete_']").each(function(){
-		    $(this).bind("click", function(){			
-		    var imageId = this.id.replace("delete_","");                    
-                    var element = document.getElementById(imageId);
-                    jQuery(element).detach().appendTo('#deleted_array')                    
+		    $(this).bind("click", function(){
+                    var current_images = $("#sortable").sortable("toArray"); 
+                    if (current_images.length > 1){
+                        var imageId = this.id.replace("delete_","");                    
+                        var element = document.getElementById(imageId);
+                        jQuery(element).detach().appendTo('#deleted_array')      
+                    } else {
+                        $(this).attr('disabled','disabled');
+                        alert("No puede eliminar todas las imágenes");
+                    }
+                    		
+		                        
 		    });	
 	        });
 
