@@ -405,3 +405,4 @@ File already exist>File already exist|
 The file size is too big>The file size is too big|
 Invalid extension>Invalid extension|
 Change Password>Cambiar Contraseña|
+Generate Backup>Generar Respaldo|

@@ -939,4 +939,74 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     			echo json_encode ( TRUE );
     	}
     }
+    
+    /**
+     * Generate a backup (zip) that contains the content folder and 
+     * a script of the current database.
+     */
+    public function backupAction()
+    {
+        $source='../public/uploads/content/';
+        $date = str_replace(' ', '_', date("Y-m-d H:i:s"));
+        $destination = 'wicawebBCK_'.$date.'.zip';
+        //retrieve parameters from de application.ini
+        $config = Zend_Controller_Front::getInstance()->getParam('bootstrap');
+        $db = $config->getOption('resources');
+        $host=$db['db']['params']['host'];
+        $dbUsername=$db['db']['params']['username'];
+        $dbPassword=$db['db']['params']['password'];
+        $dbName=$db['db']['params']['dbname'];        
+        $filedb = 'wicawebBCK' . $date . '.sql';        
+        $command = sprintf("
+            mysqldump -u %s --password=%s -d %s --skip-no-data > %s",
+            escapeshellcmd($dbUsername),
+            escapeshellcmd($dbPassword),
+            escapeshellcmd($dbName),            
+            escapeshellcmd($filedb)
+        );
+        //generate sql script
+        exec($command);
+        //create de zip file
+        $zip = new ZipArchive();
+        $zip->open($destination, ZIPARCHIVE::CREATE);
+        $source = str_replace('\\', '/', realpath($source));
+        //recursive add (to zip file) of content folder
+        if (is_dir($source) === true)
+        {
+            $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+
+            foreach ($files as $file)
+            {
+                $file = str_replace('\\', '/', $file);
+
+                // Ignore "." and ".." folders
+                if( in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
+                    continue;
+
+                $file = realpath($file);
+
+                if (is_dir($file) === true)
+                {
+                    $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
+                }
+                else if (is_file($file) === true)
+                {
+                    $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+                }
+            }
+        }
+        else if (is_file($source) === true)
+        {
+            $zip->addFromString(basename($source), file_get_contents($source));
+        }
+        //add sql script to zip file
+        $zip->addFile($filedb);
+        $zip->close();
+         //force download
+         header("Content-disposition: attachment; filename=$destination");
+         readfile($destination);
+         //remove files 
+         unlink($filedb);
+         unlink($destination);
+        }
 }

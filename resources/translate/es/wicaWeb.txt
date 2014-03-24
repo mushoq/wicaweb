@@ -516,4 +516,5 @@ Features>Características|
 Change Password>Cambiar Contraseña|
 New Password>Contraseña Nueva|
 Invalid old password>Contraseña anterior inválida|
-Old Password>Contraseña anterior
+Old Password>Contraseña anterior|
+Generate Backup>Generar Respaldo|

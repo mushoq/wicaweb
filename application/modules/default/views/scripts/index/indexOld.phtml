@@ -42,7 +42,7 @@ $band_one_private = array();
 		//delete session storage
 		Zend_Session::namespaceUnset('render_vals_front');
 	}
-        //var_dump($this->header);die();
+        var_dump($this->header);die();
 
 	foreach($this->module_contents as $module)
 	{
@@ -94,10 +94,13 @@ $band_one_private = array();
 		$section_contents_tpl['header_name'] = '<h1>'.$this->header['name'].'</h1>';	
 	
 
-	if($this->header['name'])
-			$section_contents_tpl['header_name'] .= '<div class="row-fluid right">
-                            <a class="pointer" id="profile" >'.$lang->translate('Profile').'  </a><i class="icon-user"></i>
-                            <a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a><i class="icon-off"></i> </div>';
+	if($this->header['name'])   
+		if(isset($_SESSION['external_user']))
+			$section_contents_tpl['header_name'] .= '<div class="row-fluid right"><a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a></div>';
+	else
+		if(isset($_SESSION['external_user']))
+			$section_contents_tpl['header_name'] = '<div class="row-fluid right"><a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a></div>';
+
 	if($this->showold == 'yes')
 		$section_contents_tpl['header_name'] .= '<div class="row-fluid right">'.$lang->translate("View past publication").': &ensp;<input class="hide" type="text" id="view_old_plublications" name="view_old_plublications" /></div>';
 	

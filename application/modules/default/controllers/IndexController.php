@@ -29,7 +29,6 @@ class Default_IndexController extends Zend_Controller_Action
                 
                 //Check the current url and get the website ID.
                 $websiteId = $this->getRequest()->getParam('siteid');
-                print_r($websiteId);
                 if ($websiteId && $websiteId<=count($website->find('wc_website')))
                 {
                     $website_obj = $website->personalized_find('wc_website', 
@@ -1045,7 +1044,7 @@ class Default_IndexController extends Zend_Controller_Action
     	$select->where("status = ?",'active');    	
 
     	$result = $table->fetchAll($select);
-    	
+
     	if($result->count()>0){
 			echo json_encode($result[0]->id);
     		$_SESSION['external_user'] = $result[0]->id;
@@ -1087,7 +1086,7 @@ class Default_IndexController extends Zend_Controller_Action
     	
     	$this->_helper->layout->disableLayout ();
     	// disable autorendering for this action
-    	$this->_helper->viewRenderer->setNoRender();
+    	//$this->_helper->viewRenderer->setNoRender();
     	
     	//translate library
     	$lang = Zend_Registry::get ( 'Zend_Translate' );
@@ -1189,6 +1188,21 @@ class Default_IndexController extends Zend_Controller_Action
     			echo json_encode(TRUE);
     		}
     	}    	
+    }
+    /**
+     * Check if email already has been registered
+     */
+    public function profileAction(){
+    	
+    	$this->_helper->layout->disableLayout ();
+    	// disable autorendering for this action
+    	//$this->_helper->viewRenderer->setNoRender();
+    	 
+    	//translate library
+    	//$lang = Zend_Registry::get ( 'Zend_Translate' );
+    	//$email = $this->_request->getPost ('public_user_email_'.$this->_request->getPost ('area'));
+        echo ('Profile');
+    	     	
     }
     
     /**

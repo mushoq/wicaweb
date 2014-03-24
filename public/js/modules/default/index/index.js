@@ -79,8 +79,8 @@ $(document).ready(function() {
 	});
         if(document.getElementById("myCarousel_4") !== null){
             $("#myCarousel_4").carousel('next');
-            }
-	
+            }            
+       
 	//search form contents
 	$("[id^='content_form_']").each(function(){
 		var content_id = $(this).attr('content_id');
@@ -208,10 +208,33 @@ $(document).ready(function() {
 			}
 		});
 	});
+        
+         $("#profile").bind("click",function(){
+		
+                    $.ajax({
+                            type: 'POST',
+                            async: false,
+                            url: '/default/index/profile',
+                            //dataType: 'json',
+
+                            success: function(data) {
+
+//
+                                $('#wica_main_area').load("/default/index/profile", {
+
+                                },function(){						
+                                        $.getScript('/js/modules/default/index/index.js');
+                                });
+
+                            }
+                    });
+			
+		});   
+	
 	
 	$("[id^='register_']").each(function(){
 		var area_reg = $(this).attr('area');
-		$(this).fancybox({
+		$("[id^='register_']").fancybox({
 			'onClosed':  function(){
 				$("#form_register_"+area_reg+" input[id^='public_user_']").each(function(){
 					$("input.error_validation").removeClass('error_validation');

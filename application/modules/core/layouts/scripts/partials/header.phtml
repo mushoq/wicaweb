@@ -32,6 +32,18 @@
                     </b>
 		</li>
         </ul>
+        <ul class="nav pull-right right">
+         <!--Only admin user can generate backups-->
+        <?php if ($id->user_profile == 1) { ?>
+        <li class="active">
+            <a href='/core/website_website/backup' >
+                <?php echo ($this->escape($lang->translate
+                    ('Generate Backup'),'UTF-8')); ?>
+                <i class="icon-download-alt"></i> 
+            </a>			
+        </li>                    
+        <?php } ?>
+        </ul>
     	<ul class="nav pull-right right">
                 <li class="active">
                     <a href="/core/index/logout">
