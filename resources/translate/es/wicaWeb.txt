@@ -1,0 +1,520 @@
+﻿WicaWeb>WicaWeb|
+User>Usuario|
+Password>Contraseña|
+Language>Idioma|
+Template>Plantilla|
+Website Name>Nombre del Portal|
+Description>Descripción|
+Keywords>Palabras Clave|
+Website Url> Url del Sitio|
+Default Page>Página por Defecto|
+Logo>Logo|
+Icon>Icono|
+Info Email>Comunicar a|
+Time Zone>Zona Horaria|
+Date Format>Formato de Fecha|
+Hour Format>Formato de Hora|
+Number Format>Formato de Número|
+Copyright>Derechos de Autor|
+Publication Approval>Aprobar Publicaciones|
+Count Prints>Usar Contador de Impresiones|
+Friendly Url>Usar Urls Amigables|
+Logs>Usar Logs|
+Sitemap Levels>Niveles del Mapa del Sitio|
+Use Dictionary in FrontEnd> Usar Diccionario en el sitio|
+Use Private Sections> Usar Secciones Privadas|
+Use Expiration Time>Usar Tiempo de Expiración|
+Use Section Author>Usar Autores por Sección|
+Use Feature Section> Usar Secciones Destacadas|
+Use Highlight Section> Usar Secciones Sobresalientes|
+Comments Management>Manejar Comentarios|
+Comments Place>Dónde se van a incluir comentarios?|
+Comments Type>Tipo de Comentarios|
+Section Images Number>Número de Imágenes por Sección|
+Section Storage>Archivar Secciones|
+Section name>Nombre de Sección|
+RSS Sections> Generar RSS para Secciones|
+Watermark>Marca de Agua|
+Hostname>Hostname|
+Port>Puerto|
+Username>Nombre de Usuario|
+Save>Guardar|
+Save order>Guardar orden|
+Current Image Logo>Imagen Actual de Logo|
+Current Image Icon>Imagen Actual de Icono|
+Current Image Watermark>Imagen Actual de Marca de Agua|
+This field is required.>Este campo es obligatorio.|
+Please fix this field.>Por favor corrija este campo.|
+Please enter a valid email address.>Ingrese una dirección de email válida.|
+Please enter a valid URL.>Ingrese una url valida.|
+Please enter a valid date.>Ingrese una fecha valida.|
+Please enter a valid date (ISO).>Ingrese una fecha valida (ISO).|
+Please enter a valid number.>Ingrese un número válido.|
+Please enter a valid percentage.>Ingrese un porcentaje válido.|
+Please enter only digits.>Ingrese sólo dígitos.|
+Please enter only characters.>Ingrese sólo texto.|
+Please enter a valid credit card number.>Ingrese un número de tarjeta válido.|
+Please enter the same value again as in field above.>Ingrese el mismo valor del campo anterior.|
+Please enter a different value.>Ingrese un valor diferente.|
+Please enter a value with a valid extension. Valid Extensions are {0}>Ingrese una extension válida. Las extensiones válidas son: {0}|
+Please enter no more than {0} characters.>No es posible ingresar mas de {0} catacteres|
+Please enter at least {0} characters.>Ingrese al menos {0} caracteres|
+Please enter a value between {0} and {1} characters long.>Ingrese un valor con un minimo de {0} y maximo {1} caracteres|
+Please enter a value between {0} and {1}.>Ingrese un valor entre {0} y {1} caracteres.|
+Please enter a value less than or equal to {0}.>Ingrese un valor menor o igual a {0}.|
+Please enter a value greater than or equal to {0}.>Ingrese un valor mayor o igual a {0}.|
+Please enter valid CI.>Ingrese una cédula válida.|
+Please enter a Date less than or equal to {0}.>Ingrese una fecha menor o igual a {0}.|
+Please enter a Date more than to {0}.>Ingrese una fecha mayor que {0}.|
+Please enter a Date more than or equal to {0}.>Ingrese una fecha mayor o igual que {0}.|
+Please enter only alphanumeric characters.>Ingrese sólo caracteres alfanuméricos.| 
+Selected>-Seleccione-|
+Required content>Debe seleccionar al menos un contenido|
+Required section>Debe seleccionar una sección|
+Publish>Publicar|
+Published>Publicado|
+Nonpublished>No Publicado|
+Public>Pública|
+Private>Privada|
+Yes>Si|
+No>No|
+Self>Actual|
+Blank>Nueva|
+Section list>Secciones|
+New section>Nueva Sección|
+New subsection>Nueva Subsección de|
+Subsection name>Nombre de la Subsección|
+Subsections list>Subsecciones|
+Update subsection>Actualizar Subsección de|
+Update section>Editar Sección|
+Update>Editar|
+Number>Número|
+Internal name>Nombre Interno|
+Title>Título|
+Actions>Acciones|
+Subtitle>Subtítulo|
+Browser title>Título en el Navegador|
+Synopsis>Sinopsis|
+Keywords>Palabras Clave|
+Author>Autor|
+Section type>Tipo de Sección|
+Content type>Tipo de Contenido|
+Content list>Contenidos|
+Publish date>Fecha publicacion|
+Expire date>Fecha caducidad|
+Show publish date>Presentar fecha de publicación|
+Publication status>Estado de la publicación|
+Feature>Destacar|
+Highlight>Resaltar|
+RSS>RSS|
+External link>Vínculo externo|
+Url external link>Url vínculo externo|
+Target>Ventana de visualización|
+Comments>Comentarios|
+Image>Imagen|
+Name>Nombre|
+Delete>Borrar|
+Connect>Relacionar|
+Disconnect>Desvincular|
+Success saved>La información se ha guardado con éxito|
+Success updated>La información se ha actualizado con éxito|
+Errors in saving data> Existieron errores al guardar|
+Errors in disconnecting data> Existieron errores al desvincular|
+Success deleted>La información se ha borrado con éxito|
+Success disconnected>El contenido ha sido desvinculado de la sección con éxito|
+Errors in deleting data> Existieron errores al borrar|
+Invalid Form>Formulario Inválido|
+Internal>Internos|
+External>Externos|
+None>Ninguno|
+All>Todos|
+Section>Sección|
+Article>Artículo|
+Website Configuration>Configuración del Portal|
+SMTP Configuration>Configuración SMTP|
+Website Status>Estados del Portal|
+Status>Estado|
+Offline Text>Texto Fuera de Línea|
+Offline Image>Imagen Fuera de Línea|
+Coming Soon Text>Texto Próximamente|
+Coming Soon Image>Imagen Próximamente|
+Online>En línea|
+Offline>Fuera de línea|
+Coming Soon>Próximamente|
+No Websites>No existen Portales Disponibles|
+No profiles>No existen Perfiles Disponibles|
+New Website>Nuevo Portal|
+Current Image Offline>Imagen actual de estado Fuera de Línea|
+Current Image Comming Soon>Imagen actual de estado Próximamente|
+Website List>Listado de Portales|
+Registered Website>Portal Registrado|
+No Access Permissions>Usted no tiene permisos para ingresar a esta página|
+Login to the Administration>Ingresar al Sistema|
+Website Create?>Crear un nuevo Portal?|
+HOME>Inicio|
+Log Out>Salir|
+January>Enero|
+February>Febrero|
+March>Marzo|
+April>Abril|
+May>Mayo|
+June>Junio|
+July>Julio|
+August>Agosto|
+September>Septiembre|
+October>Octubre|
+November>Noviembre|
+December>Diciembre|
+January abbreviation>Ene|
+February abbreviation>Feb|
+March abbreviation>Mar|
+April abbreviation>Abr|
+May abbreviation>May|
+June abbreviation>Jun|
+July abbreviation>Jul|
+August abbreviation>Ago|
+September abbreviation>Sep|
+October abbreviation>Oct|
+November abbreviation>Nov|
+December abbreviation>Dic|
+Monday abbreviation>Lun|
+Tuesday abbreviation>Mar|
+Wednesday abbreviation>Mie| 
+Thursday abbreviation>Jue|
+Friday abbreviation>Vie|
+Saturday abbreviation>Sab|
+Sunday abbreviation>Dom|
+New Section>Nueva Sección|
+New Content>Nuevo Contenido|
+Link Content>Vincular Contenido|
+Link to section>Vincular a sección|
+Content>Contenido|
+Search>Buscar|
+Search Parameters>Parámetros de Búsqueda|
+Search Sections>Buscar Secciones|
+Search Contents>Buscar Contenidos|
+No Sections Found>No se encontraron secciones|
+No Contents Found>No se encontraron contenidos|
+Sitemap>Mapa del Sitio|
+Default Site>Portal por Defecto|
+Websites>Portales|
+Upload External Files>Subir Archivos Externos|
+Add New File>Añadir Nuevo Archivo|
+No External Files Available Yet>Aún no existen Archivos Externos disponibles|
+Success removed>Eliminado con éxito|
+Upload New External File>Subir Nuevo Archivo Externo|
+Filename>Nombre del Archivo|
+Add to all Websites?>Añadir a todos los Portales?|
+Success uploaded>Archivo subido con éxito|
+Errors in uploading>Errores al subir el archivo|
+File>Archivo|
+Type>Tipo|
+Upload External Files>Subir Archivos Externos|
+Profiles>Perfiles|
+Profile name>Nombre de Perfil|
+Required profile name>El Nombre de Perfil es obligatorio|
+Required profile status>El Estado de Perfil es obligatorio|
+Modules>Módulos|
+Sections>Secciones|
+Section config not required>No debe configurar secciones ya que no ha seleccionado el módulo CMS. Proceda a finalizar|
+Search criteria>Criterios de búsqueda|
+Search results>Resultados de búsqueda|
+Content internal name>Nombre interno de contenido|
+Required website selection>Debe seleccionar al menos un Portal|
+Required module selection>Debe seleccionar al menos un Módulo|
+Required section selection>Debe seleccionar al menos una Sección|
+Lastname>Apellido|
+active>Activo|
+inactive>Inactivo|
+Active>Activo|
+Inactive>Inactivo|
+User List> Lista de Usuarios|
+New User> Nuevo Usuario|
+ID>Identificación|
+Email>Dirección Email|
+Phone>Teléfono|
+Confirm Password>Confirmar Contraseña|
+Profile>Perfil|
+Profile list>Listado de Perfiles|
+New profile>Nuevo Perfil|
+Edit profile>Editar Perfil|
+Required profiles for user>Debe ingresar al menos un perfil para crear usuarios|
+Supplied credential is invalid.>Las credenciales ingresadas no son válidas.|
+User status inactive.>El estado del usuario es inactivo.|
+More than one record matches the supplied identity.>Existen varios usuarios con las mismas credenciales. Comuníquese con el Administrador.|
+A record with the supplied identity could not be found.>No existe un usuario con esas credenciales|
+Section access denied>Intentó ingresar a una sección inválida|
+Profile access denied>Intentó ingresar a un perfil inválido|
+Selected invalid user>Seleccionó un usuario inválido|
+Website access denied>Intentó ingresar a un portal inválido|
+Content access denied>Intentó ingresar a un contenido inválido|
+Username already exist>El nombre de usuario ya existe|
+Login>Ingresar|
+Tools>Herramientas|
+Default Website> Portal por Defecto|
+Content List>Listado de Contenidos|
+Text>Texto|
+Form>Formulario|
+Flash Video>Video Flash|
+Continue>Continuar|
+New Text Content>Nuevo Contenido Texto|
+New Image Content>Nuevo Contenido Imagen|
+Picture foot>Pie de imagen|
+Format>Formato|
+- Select ->- Seleccione -|
+Frame>Con borde|
+No frame>Sin borde|
+New Form Content>Nuevo Contenido Formulario|
+Element type>Tipo de elemento|
+Add>Agregar|
+New Flash Content>Nuevo Contenido Flash|
+Background>Fondo|
+Dinamic>Dinámico|
+Alternative Image>Imagen Alternativa|
+Transparent>Transparente|
+Opaque>Opaco|
+Edit Text Content>Editar Contenido Texto|
+Edit Form Content>Editar Contenido Formulario|
+Edit Image Content>Editar Contenido Imagen|
+Edit Flash Content>Editar Contenido Flash|
+Edit Flash Video Content>Editar Contenido Video Flash|
+HTML code>Código HTML|
+New Flash Video Content>Nuevo Contenido Video Flash|
+Text area>Área de Texto|
+Text field>Campo de Texto|
+Radio button>Botón radio|
+Dropdown list>Lista desplegable|
+Checkbox>Casilla de verificación|
+Comment>Comentario|
+Required>Requerido|
+Option>Opción|
+New Carousel Content>Nuevo Contenido Carrusel|
+Edit Carousel Content>Editar Contenido Carrusel|
+Carousel>Carrusel|
+Edit>Editar|
+New Link Content>Nuevo Contenido Vínculo|
+Internal Link>Vínculo interno|
+External Link>Vínculo externo|
+File type>Tipo de Archivo|
+Edit Link Content>Editar Contenido Vínculo|
+Other>Otro|
+Cancel>Cancelar|
+Continue>Continuar|
+Finish>Finalizar|
+Option Configuration>Configuración de Opciones|
+Formats>Formatos|
+Sections Configuration>Configuración de Secciones|
+Comments Configuration>Configuración de Comentarios|
+Other Configurations> Otras Configuraciones|
+Website Status Configuration> Configuración de Estados de Portal|
+Next step>Siguiente|
+Back step>Atrás|
+Passwords does not match>Las contraseñas no coinciden|
+Change Password>Cambiar contraseña|
+Js Files>Archivos JS|
+Css Files>Archivos CSS|
+Order>Ordenar|
+Success saved order>Orden guardado con éxito|
+No Content Available>No existen contenidos disponibles|
+No Sections Available>No existen secciones disponibles|
+Link Contents>Vincular Contenidos|
+Control Panel> Panel de Control|
+Users>Usuarios|
+External Files>Archivos Externos|
+No Users Found>No existen usuarios disponibles|
+No items entered>No existen elementos insertados|
+The name of element already exist>El nombre del elemento ya existe|
+Show in menu>Presentar en menú|
+The internal name of content already exist>El nombre interno ya existe|
+The website name already exist>El nombre de portal ya existe|
+Set as homepage>Usar como página inicio|
+Actual homepage>Página inicio actual|
+of>de|
+Columns>Columnas|
+Align>Alineación|
+Left>Izquierda|
+Center>Centro|
+Right>Derecha|
+Website>Portal|
+Create>Crear|
+LinkUp>Vincular|
+Select Images>Seleccionar Imágenes|
+Continue>Continuar|
+Back>Volver|
+Basic>Básico|
+Images>Imágenes|
+Publication dates>Fechas de publicación|
+Additional setup>Otras configuraciones|
+Supported files>El tipo de archivo no es válido, sólo se aceptan archivos .jpg o .png o .gif|
+Maximum size>El tamaño del archivo es muy grande. (máx: 2MB)|
+Google Analytics ID> ID de Google Analytics|
+Contents>Contenidos|
+New article>Nuevo Artículo|
+Articles list>Artículos|
+Update article>Editar Artículo|
+Subsection>Subsección|
+Main section>Sección principal|
+All section info and its contents will be deleted. Would you like to continue?>Toda la información de la sección y sus contenidos van a ser eliminados. Desea continuar?|
+Current Content>Contenido Actual|
+Templates>Plantillas|
+Has Subsections>Tiene Subsecciones|
+Expand>Expandir|
+Reduce>Contraer|
+Change Default Website>Cambiar el Portal por Defecto|
+Location>Ubicación|
+View External File> Ver Archivo Externo|
+File Content> Contenido del Archivo|
+View>Ver|
+Insert the security code>Introduzca el código de seguridad|
+Save changes>Guardar cambios|
+Invalid code>Código inválido|
+Loaded image max height>Altura máxima de imagen cargada|
+Loaded image max width>Ancho máximo de imagen cargada|
+Flash file>Archivo flash|
+Notification mail>Correo al cual llegarán las notificaciones del portal|
+Your browser does not have Flash Player installed or activated>Su navegador no tiene Flash Player instalado o activado|
+If you want to create a new website go to the administration.> Si desea crear un nuevo portal, ingrese a la administración.|
+Go to Administration> Ir a la Administración|
+Selected invalid dictionary> El Diccionario seleccionado es inválido|
+Words>Palabras| 
+words>palabras|
+New Dictionary>Nuevo Diccionario|
+Dictionary List>Listado de Diccionarios|
+Status>Estado|
+Upload New Template>Carga de Nueva Plantilla|
+Template thumbnail>Miniatura de la Plantilla|
+Template file>Archivo de la Plantilla|
+Not found any valid area>No se ha encontrado ningún área válida|
+Empty file>Archivo vacío|
+File error>Error en el Archivo|
+The template name already exist>El nombre de la Plantilla ya existe|
+Edit Template>Editar Plantilla|
+View Template File>Ver Archivo de la Plantilla| 
+View code>Ver código|
+Css files>Archivos css|
+Js files>Archivos js|
+Images>Imágenes|
+See Files>Ver Archivos|
+No Dictionaries Found>No hay diccionarios encontrados|
+Dictionary>Diccionario|
+Preview>Vista previa|
+Watermark Location>Posición de la marca de agua|
+Dictionary name already exist>El nombre del diccionario ya existe|
+Upload Template>Carga de Plantillas|
+Available Templates>Plantillas Disponibles|
+Template image>Imagen miniatura de la plantilla|
+File already exist>El archivo ya existe|
+The file size is too big>El tamaño del archivo es demasiado grande|
+Invalid extension>Extensión no válida|
+Success send>Envio exitoso|
+Errors sending>Error al enviar|
+The username or password are wrong>El usuario o la contraseña no son correctos|
+This user is inactive>Este usuario se encuentra inactivo|
+Register>Registro|
+Forgot your password>Olvidó su contraseña|
+Register Form>Formulario de Registro|
+Last Name>Apellido|
+Identification>Identificación|
+Send>Enviar|
+Password Reset>Restablecimiento de Contraseña|
+The email address already has been registered>La dirección de correo ya ha sido registrada por otro usuario|
+The password reset has been canceled>El restablecimiento de contraseña ha sido cancelado|
+Some errors occurred during the process>Ocurrieron errores durante el proceso|
+Your account has been activated>Su cuenta ha sido activada|
+Your account hasn't been activated>Su cuenta no ha sido activada|
+To complete this registry is necessary to do>Para completar el registro es necesario hacer|
+click here>clic aquí|
+to activate your account, or copy the next link on your browser>para activar su cuenta, o copie el siguiente enlace en su navegador|
+Your password has been reset successfully>Su contraseña ha sido restablecida correctamente|
+If you don't want to reset your password, please>Si usted no desea restablecer su contraseña, por favor hacer|
+You will receive an email with your new password>Usted recibirá un mail con su nueva contraseña|
+The email with your new password has not been sent>El mail con su nueva contraseña no pudo ser enviado
+Your password has been changed>Su contraseña ha sido cambiada|
+Your password has not been changed>Su contraseña no ha sido cambiada|
+Change password>Cambiar contraseña|
+For security you should change your password, please enter a new password>Por su seguridad usted debería cambiar su contraseña, por favor ingrese su nueva contraseña|
+Your registration has been completed, please check your email>Su registro ha sido completado, por favor revise su email|
+Your registration has not been completed>Su registro no ha sido completado|
+The activation email has not been sent>El mail de activación no pudo ser enviado|
+Logout>Salir|
+The username already has been registered>El usuario ya ha sido registrado|
+All changes will be published. Would you like to continue?>Todos los cambios van a ser publicados. Desea continuar?|
+Changes will not take effect. Would you like to continue?>No se van a aplicar los cambios, y estos serán eliminados. Desea continuar?|
+Dismiss changes to keep your website as it is published.>Cancelar los cambios y mantener el portal como se encuentra publicado.|
+Expiration Time>Tiempo de expiración|
+days>dias|
+Add New Template>Agregar Nueva Plantilla|
+New Banner>Nuevo Banner|
+Edit Banner>Editar Banner|
+Banner name already exist>El nombre del banner ya existe|
+Banner Name>Nombre de Banner|
+Banners list>Listado de Banners|
+Image Banner>Banner imagen|
+Assign to other section>Asignar también a|
+Calendar>Calendario|
+Flash Banner>Banner Flash|
+HTML code>Código HTML|
+Publication Type>Tipo de Publicación|
+Link Banner>Vincular Banner|
+Link Banners>Vincular Banners|
+Banner to section>Banner a sección|
+Banner type>Tipo de Banner|
+No Banners Found>No se encontraron Banners|
+image>imagen|
+There are no publications on date selected>No existen publicaciones para la fecha seleccionada|
+You are viewing a past publication, to view the current publication please click>Usted esta viendo una publicacion pasada, para ver la publicación actual por favor haga click|
+View past publication>Ver una publicación pasada|
+here>aqui|
+Products>Productos|
+Available>Disponible|
+Products catalog>Catálogo de productos|
+Add feature>Agregar característica|
+Code>Código|
+Price>Precio|
+Sale price>Precio oferta|
+Weight>Peso|
+Product feature>Característica de producto|
+New Product>Nuevo producto|
+Edit Product>Editar producto|
+Products list>Listado de productos|
+Product name>Nombre de producto|
+No products found>No se encontraron productos|
+External Modules>Módulos Externos|
+External Modules List>Lista de Módulos Externos|
+Install External Module>Instalar Modulo Externo|
+No External Modules Available Yet>No existen módulos externos disponibles|
+Install>Instalar|
+or>o|
+file>archivo|
+The module name already exist>El nombre del módulo ya existe|
+Partial .phtml file not found. Errors in the installation>EL archivo partial .phtml no existe. Errores en la instalación.|
+External module folder not exist in installation folder. Errors in the installation>La carpeta del módulo externo no existe en la carpeta de instalación. Errores en la instalación.|
+Modules folder not exist o dont have permissions. Errors in the installation>La carpeta "application/modules/" no existe o no tiene permisos|
+External public folder not exist in installation folder. Errors in the installation>La carpeta public no existe en la carpeta de instalación. Errores en la instalación.|
+Public folder not exist or dont have permissions. Errors in the installation>La carpeta "public" no existe o no tiene permisos.|
+Errors in the installation>Errores en la instalación|
+Installation succesfully>El módulo fue instalado exitosamente|
+Action>Acción|
+Invalid structure>Estructura inválida|
+Your language is inappropriate to send this form>Su lenguaje no es apropiado para enviar este formulario|
+Price Sale>Precio de Venta|
+Catalog>Catálogo|
+Insert the words separated by commas. Ej. Hello, world>Inserte las palabras separadas por comas. Ej. Hola, mundo|
+Prints>Impresiones|
+Success keep current>Los cambios no fueron aplicados correctamente|
+The form can not be submitted yet because there are still files being resized>No se puede enviar el formulario aún, porque existen archivos cargándose|
+Attachments exceed maximum size limit>Los archivos adjuntos exceden el límite de tamaño máximo|
+File limit hit, try removing a file first>Intente eliminar un archivo primero|
+This file has already been attached>Este archivo ya ha sido adjuntado|
+remove all>Eliminar todo|
+The file>El archivo|
+already exist on js external files> ya existe en los archivos externos js|
+already exist on css external files> ya existe en los archivos externos css|
+The image>La imagen|
+already exist into images folder>ya existe en la carpeta imágenes|
+Features>Características|
+Change Password>Cambiar Contraseña|
+New Password>Contraseña Nueva|
+Invalid old password>Contraseña anterior inválida|
+Old Password>Contraseña anterior|
+Generate Backup>Generar Respaldo|

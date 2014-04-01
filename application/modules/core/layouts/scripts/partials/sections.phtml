@@ -1,0 +1,29 @@
+<?php $lang = Zend_Registry::get('Zend_Translate'); ?>
+
+<?php if($this->sections) : ?>
+<?php
+	$id = New Zend_Session_Namespace('id');
+	$website_name_info = $id->website_name_info;
+?>
+<div class="row-fluid section_tree_container" id="section_tree_container">
+	<ul class="sections_tree" id="sections_tree">
+		<li>
+			<div class="parent_section" id="parent_section">
+				<a id="website_tree_link" href="/core/section_section/index">
+				      <i class="icon-home"></i> <b><?php if(isset($website_name_info)): echo $website_name_info; else: echo $this->escape($lang->translate('Webstie')); endif; ?></b>  
+				</a>
+			</div>
+		</li>
+		<?php echo $this->sections; ?>
+	</ul>
+	<div id="tree_legend_container">
+		<ul class="tree_legend_list" id="tree_legend_list">
+			<li><i class="icon-file"></i> <?php echo $lang->translate('Article')?></li>
+			<li><i class="icon-folder-close"></i> <?php echo $lang->translate('Subsection')?></li>
+			<li><i class="icon-plus"></i> <?php echo $lang->translate('Expand')?></li>
+			<li><i class="icon-minus"></i> <?php echo $lang->translate('Reduce')?></li>
+		</ul>
+	</div>
+</div>
+
+<?php endif;?>

@@ -5,7 +5,10 @@ demos/
 extras/documentation
 
 /nbproject/private/
+/nbproject
 /docs/db/scripts/bdd_20120828.sql
 /docs/db/scripts/basic_data.sql
 application/configs
 /public/installer.lock
+/public/uploads
+/public/uploads/cache

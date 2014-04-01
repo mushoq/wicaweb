@@ -1,0 +1,353 @@
+<!-- 
+ *	View that contains an article form to create a new element
+ *
+ * @category   WicaWeb
+ * @package    Core_View
+ * @copyright  Copyright (c) WicaWeb - Mushoq 
+ * @license    GNP
+ * @version    1.0
+ * @author	   David Rosales, Jose Luis Landazuri
+ -->
+
+<?php $lang = Zend_Registry::get('Zend_Translate'); ?>
+
+<script type="text/javascript" charset="utf-8">
+	var next_step = "<?php echo $lang->translate('Continue');?>";
+	var back_step = "<?php echo $lang->translate('Back');?>";	
+</script>
+
+<div class="row-fluid line">
+	<div class="span12">
+		<div class="page-header-wica center">
+			<h1><?php echo $lang->translate('New article'); ?></h1>		
+		</div>
+	</div>	
+</div>
+
+<div class="row-fluid line">
+	<div class="span12"></div>	
+</div>
+
+<div class="row-fluid">
+	<div class="span4 center">&nbsp;</div>
+	<div class="span4 center">
+		<div class="btn-group">
+			<input type="button" class="btn btn-primary" id="bar_step_beg" value="<?php echo $lang->translate('Basic');?>">			
+			<?php if($this->website_db->section_expiration =='yes'): ?>
+			<input type="button" class="btn btn-primary wizard_step_bar" value="<?php echo $lang->translate('Publication dates');?>">
+			<?php endif; ?>
+			<?php if($this->website_db->section_author =='yes' || $this->website_db->private_section =='yes' || $this->website_db->section_feature =='yes' || $this->website_db->section_highlight =='yes' || $this->website_db->section_comments =='section' || $this->website_db->section_rss =='yes'): ?>
+			<input type="button" class="btn btn-primary wizard_step_bar" value="<?php echo $lang->translate('Additional setup');?>">
+			<?php endif; ?>
+		</div>
+	</div>
+</div>	
+
+<div class="row-fluid line">
+	<div class="span12">
+		&nbsp;
+	</div>	
+</div>
+
+<form class="well <?php echo $this->form->getAttrib('class'); ?>" id="<?php echo $this->form->getAttrib('id'); ?>" method="<?php echo $this->form->getMethod(); ?>" enctype="multipart/form-data">
+<?php 	$confirm_options = GlobalFunctions::arrayTranslate(Core_Model_Section::$confirm); 
+		$type_options = GlobalFunctions::arrayTranslate(Core_Model_Section::$section_type);	?>
+		
+<div class="row-fluid">
+	<div class="span12">					
+		<!-- BASIC SECTION CONFIG -->
+		<div class="step_containers">
+			<div class="row-fluid">
+				<div class="span6">
+					<div class="row-fluid">							
+						<?php echo $this->form->id->renderViewHelper(); ?>	      							      			
+						<?php echo $this->form->section_parent_id->renderViewHelper(); ?>
+						<?php echo $this->form->section_temp->renderViewHelper(); ?>
+		      		 	<div class="control-group">
+							<label class="control-label"><?php echo $this->form->section_template_id->getLabel(); ?></label>
+							<div class="controls">
+								<?php echo $this->form->section_template_id->renderViewHelper(); ?>
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label"><?php echo $this->form->title->getLabel(); ?></label>
+							<div class="controls">
+								<?php echo $this->form->title->renderViewHelper(); ?>
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label"><?php echo $this->form->internal_name->getLabel(); ?></label>
+							<div class="controls">
+								<?php echo $this->form->internal_name->renderViewHelper(); ?>
+							</div>
+							<input type="hidden" id="repeated_section_name" value="<?php echo $lang->translate('The internal name of content already exist');?>" />
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label"><?php echo $this->form->subtitle->getLabel(); ?></label>
+							<div class="controls">
+								<?php echo $this->form->subtitle->renderViewHelper(); ?>
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label"><?php echo $this->form->title_browser->getLabel(); ?></label>
+							<div class="controls">
+								<?php echo $this->form->title_browser->renderViewHelper(); ?>
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label"><?php echo $this->form->keywords->getLabel(); ?></label>
+							<div class="controls">
+								<?php echo $this->form->keywords->renderViewHelper(); ?>
+							</div>
+						</div>
+					</div>					
+	      		</div>				      		
+	      		<div class="span6">				      							      							      		
+	    			<div class="control-group">
+						<label class="control-label"><?php echo $this->form->synopsis->getLabel(); ?></label>
+						<div class="controls">
+							<?php echo $this->form->synopsis->renderViewHelper(); ?>
+						</div>
+					</div>  																												
+	      		</div>				      		
+			</div>
+		</div>		
+		
+		<!-- SECTION FIELDS ACCORDING WEBSITE CONFIG -->				
+		<!-- publication dates -->
+		<?php if($this->website_db->section_expiration =='yes'): ?>	
+		<div class="step_containers">			
+			<div class="row-fluid">
+				<div class="span4"> &nbsp; </div>
+				<div class="span6">	
+					<div class="control-group">
+						<label class="control-label"><?php echo $this->form->publish_date->getLabel(); ?></label>
+						<div class="controls">
+							<?php echo $this->form->publish_date->renderViewHelper(); ?>									
+						</div>
+					</div>
+				</div>				
+			</div>			
+			<div class="row-fluid">
+				<div class="span4"> &nbsp; </div>
+				<div class="span6">	
+					<div class="control-group">
+						<label class="control-label"><?php echo $this->form->expire_date->getLabel(); ?></label>
+						<div class="controls">
+							<?php echo $this->form->expire_date->renderViewHelper(); ?>									
+						</div>
+					</div>
+				</div>
+			</div>			
+			<div class="row-fluid">
+				<div class="span4"> &nbsp; </div>
+				<div class="span6">	
+					<div class="control-group">
+						<label class="control-label"><?php echo $lang->translate('Show publish date').':'; ?></label>
+						<div class="controls">
+							<div class="btn-group" data-toggle="buttons-radio">	
+								<?php $default_publish_arr = array_keys($confirm_options);
+									$default_publish_opt = $default_publish_arr[1]; ?>						
+								<?php foreach($confirm_options as $k => $opt): ?>
+								<input type="button" class="btn btn-primary <?php if($default_publish_opt == $k): echo 'active'; endif; ?>" id="publish_<?php echo $k; ?>" value="<?php echo $opt; ?>">							
+								<?php endforeach; ?>							
+							</div>					
+							<?php echo $this->form->show_publish_date->renderViewHelper(); ?>
+						</div>
+					</div>	
+				</div>						
+			</div>			
+		</div>
+		<?php else: ?>
+		<div class="row-fluid">
+			<?php echo $this->form->publish_date->renderViewHelper(); ?>
+			<?php echo $this->form->expire_date->renderViewHelper(); ?>
+			<?php echo $this->form->show_publish_date->renderViewHelper(); ?>			
+		</div>
+		<?php endif; ?>
+		
+		<!-- other setup -->	
+		<?php if($this->website_db->section_author =='yes' || $this->website_db->private_section =='yes' || $this->website_db->section_feature =='yes' || $this->website_db->section_highlight =='yes' || $this->website_db->section_comments =='section' || $this->website_db->section_rss =='yes'): ?>
+		<div class="step_containers">
+		<?php endif; ?>
+			<?php if($this->website_db->section_author =='yes'): ?>		
+			<div class="row-fluid">
+				<div class="span4"> &nbsp; </div>
+				<div class="span6">	
+					<div class="control-group">
+						<label class="control-label"><?php echo $this->form->author->getLabel(); ?></label>
+						<div class="controls">
+							<?php echo $this->form->author->renderViewHelper(); ?>								
+						</div>
+					</div>	
+				</div>						
+			</div>
+			<?php else: ?>
+			<div class="row-fluid">
+				<?php echo $this->form->author->renderViewHelper(); ?>
+			</div>
+			<?php endif; ?>
+			
+			<?php if($this->website_db->private_section =='yes'): ?>		
+			<div class="row-fluid">
+				<div class="span4"> &nbsp; </div>
+				<div class="span6">	
+					<div class="control-group">
+						<label class="control-label"><?php echo $lang->translate('Section type').':'; ?></label>
+						<div class="controls">						
+							<div class="btn-group" data-toggle="buttons-radio">
+								<?php $default_type_arr = array_keys($type_options);
+									$default_type_opt = $default_type_arr[0]; ?>		
+								<?php $type_options = GlobalFunctions::arrayTranslate(Core_Model_Section::$section_type); ?>
+								<?php foreach($type_options as $k => $opt): ?>
+								<input type="button" class="btn btn-primary <?php if($default_type_opt == $k): echo 'active'; endif; ?>" id="type_<?php echo $k; ?>" value="<?php echo $opt; ?>">							
+								<?php endforeach; ?>							
+							</div>					
+							<?php echo $this->form->type->renderViewHelper(); ?>			
+						</div>
+					</div>	
+				</div>						
+			</div>
+			<?php else: ?>
+			<div class="row-fluid">
+				<?php echo $this->form->type->renderViewHelper(); ?>
+			</div>
+			<?php endif; ?>
+					
+			<?php if($this->website_db->section_feature =='yes'): ?>		
+			<div class="row-fluid">
+				<div class="span4"> &nbsp; </div>
+				<div class="span6">	
+					<div class="control-group">
+						<label class="control-label"><?php echo $lang->translate('Feature').':'; ?></label>
+						<div class="controls">
+							<div class="btn-group" data-toggle="buttons-radio">	
+								<?php $default_feature_arr = array_keys($confirm_options);
+									$default_feature_opt = $default_feature_arr[1]; ?>							
+								<?php foreach($confirm_options as $k => $opt): ?>
+								<input type="button" class="btn btn-primary <?php if($default_feature_opt == $k): echo 'active'; endif; ?>" id="feature_<?php echo $k; ?>" value="<?php echo $opt; ?>">							
+								<?php endforeach; ?>							
+							</div>
+							<?php echo $this->form->feature->renderViewHelper(); ?>
+						</div>
+					</div>	
+				</div>						
+			</div>
+			<?php else: ?>
+			<div class="row-fluid">
+				<?php echo $this->form->feature->renderViewHelper(); ?>			
+			</div>
+			<?php endif; ?>
+			
+			<?php if($this->website_db->section_highlight =='yes'): ?>		
+			<div class="row-fluid">
+				<div class="span4"> &nbsp; </div>
+				<div class="span6">	
+					<div class="control-group">
+						<label class="control-label"><?php echo $lang->translate('Highlight').':'; ?></label>
+						<div class="controls">
+							<div class="btn-group" data-toggle="buttons-radio">	
+								<?php $default_highlight_arr = array_keys($confirm_options);
+									$default_highlight_opt = $default_highlight_arr[1]; ?>							
+								<?php foreach($confirm_options as $k => $opt): ?>
+								<input type="button" class="btn btn-primary <?php if($default_highlight_opt == $k): echo 'active'; endif; ?>" id="highlight_<?php echo $k; ?>" value="<?php echo $opt; ?>">							
+								<?php endforeach; ?>							
+							</div>		
+							<?php echo $this->form->highlight->renderViewHelper(); ?>
+						</div>
+					</div>	
+				</div>						
+			</div>
+			<?php else: ?>
+			<div class="row-fluid">
+				<?php echo $this->form->highlight->renderViewHelper(); ?>			
+			</div>
+			<?php endif; ?>
+			
+			<?php if($this->website_db->section_comments =='section'): ?>		
+			<div class="row-fluid">
+				<div class="span4"> &nbsp; </div>
+				<div class="span6">	
+					<div class="control-group">
+						<label class="control-label"><?php echo $lang->translate('Comments').':'; ?></label>
+						<div class="controls">
+							<div class="btn-group" data-toggle="buttons-radio">								
+								<?php $default_comments_arr = array_keys($confirm_options);
+									$default_comments_opt = $default_comments_arr[1]; ?>
+								<?php foreach($confirm_options as $k => $opt): ?>
+								<input type="button" class="btn btn-primary <?php if($default_comments_opt == $k): echo 'active'; endif; ?>" id="comments_<?php echo $k; ?>" value="<?php echo $opt; ?>">							
+								<?php endforeach; ?>							
+							</div>		
+							<?php echo $this->form->comments->renderViewHelper(); ?>													
+						</div>
+					</div>	
+				</div>						
+			</div>
+			<?php else: ?>
+			<div class="row-fluid">
+				<?php echo $this->form->comments->renderViewHelper(); ?>			
+			</div>
+			<?php endif; ?>				
+			
+			<?php if($this->website_db->section_rss =='yes'): ?>		
+			<div class="row-fluid">
+				<div class="span4"> &nbsp; </div>
+				<div class="span6">	
+					<div class="control-group">
+						<label class="control-label"><?php echo $lang->translate('RSS').':'; ?></label>
+						<div class="controls">
+							<div class="btn-group" data-toggle="buttons-radio">								
+								<?php $default_rss_available_arr = array_keys($confirm_options);
+									$default_rss_opt = $default_rss_available_arr[1]; ?>
+								<?php foreach($confirm_options as $k => $opt): ?>
+								<input type="button" class="btn btn-primary <?php if($default_rss_opt == $k): echo 'active'; endif; ?>" id="rss_<?php echo $k; ?>" value="<?php echo $opt; ?>">							
+								<?php endforeach; ?>							
+							</div>	
+							<?php echo $this->form->rss_available->renderViewHelper(); ?>												
+						</div>
+					</div>	
+				</div>						
+			</div>
+			<?php else: ?>
+			<div class="row-fluid">
+				<?php echo $this->form->rss_available->renderViewHelper(); ?>			
+			</div>
+			<?php endif; ?>
+			
+			<?php if($this->website_db->publication_approve =='yes'): ?>		
+			<div class="row-fluid">
+				<?php echo $this->form->approved->renderViewHelper(); ?>
+				<?php echo $this->form->publication_status->renderViewHelper(); ?>
+			</div>
+			<?php else: ?>
+			<div class="row-fluid">
+				<?php echo $this->form->approved->renderViewHelper(); ?>
+				<?php echo $this->form->publication_status->renderViewHelper(); ?>
+			</div>
+			<?php endif; ?>						
+		<?php if($this->website_db->section_author =='yes' || $this->website_db->private_section =='yes' || $this->website_db->section_feature =='yes' || $this->website_db->section_highlight =='yes' || $this->website_db->section_comments =='section' || $this->website_db->section_rss =='yes'): ?>
+		</div>
+		<?php endif; ?>
+	</div>
+</div>
+</form>
+
+<div class="row-fluid">
+	<div class="center well">
+		<div class="row-fluid">					
+			<?php echo $this->form->submit_button->renderViewHelper(); ?>
+			&nbsp;&nbsp;
+			<?php echo $this->form->cancel_button->renderViewHelper(); ?>		
+		</div>
+	</div>
+</div>

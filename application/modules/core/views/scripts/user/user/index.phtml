@@ -1,0 +1,72 @@
+<?php 
+/**
+ * Index View. Renders the view of the index action 
+ *
+ * @category   WicaWeb
+ * @package    Core_View_User_Index
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @author	   Esteban
+ * @version    1.0
+ *
+ */
+//translate library
+$lang = Zend_Registry::get('Zend_Translate');
+?>
+
+<?php foreach($this->user_links as $action_id => $opt): ?>
+<?php if($opt['action']=='new'): ?>
+<div class="row-fluid option_bar_container">
+	<ul class="nav nav-pills pull-right">
+        <li>
+            <a href="/core/user_user/new"><?php echo $lang->translate('New User'); ?></a>
+        </li>
+    </ul>
+</div>
+<?php endif; ?>
+<?php endforeach; ?>
+
+<div class="line-top alert_messages_container">
+	<?php echo $this->flashMessages();?>
+</div>
+
+<div class="row-fluid center">
+	<div class="span12 page-header-wica">
+    	<h1> <?php echo $lang->translate('User List');?> </h1>
+	</div>    
+</div>
+<?php if($this->users && count($this->users)>0):?>
+ <div class="row-fluid">
+     <table class="table table-bordered table-bordered-wica">
+		<tr>
+			<th> <?php echo $lang->translate('Username');?> </th>
+			<th> <?php echo $lang->translate('Name');?> </th>
+			<th> <?php echo $lang->translate('Lastname');?> </th>
+			<th> <?php echo $lang->translate('Status');?> </th>
+			<th> <?php echo $lang->translate('Tools');?> </th>
+		</tr>
+		<?php foreach ($this->users as $k=>$user):?>
+		<tr class="<?php if(($k+1)%2): echo "odd"; endif;?>">
+			<td><?php echo $user->username;?></td>
+			<td><?php echo $user->name;?></td>
+			<td><?php echo $user->lastname;?></td>
+			<td><?php echo $lang->translate($user->status);?></td>
+			<td>
+				<?php if($user->id != 1):?>
+					<?php foreach($this->user_links as $action_id => $opt): ?>
+						<?php if($opt['action']=='edit'): ?>
+							<a href='/core/user_user/edit?id=<?php echo $user->id;?>' title="<?php echo $lang->translate('Update'); ?>"><i class="icon-pencil"></i></a>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php endif;?>						
+			</td>
+		</tr>	
+		<?php endforeach;?>
+	</table>
+ </div>
+<?php else:?>
+	 <div class="row-fluid center">
+		<h3><?php echo $lang->translate('No Users Found');?></h3>
+	 </div>
+<?php endif;?>
+</div>

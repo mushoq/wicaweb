@@ -1,0 +1,41 @@
+<?php $lang = Zend_Registry::get('Zend_Translate'); ?>
+
+<?php if (Zend_Auth::getInstance ()->hasIdentity ()) :?>
+	<?php if($this->page != 'controlpanel'):?>
+		<ul class="nav nav-pills">
+			<li class="">
+		        <a href="/core/index/controlpanel">
+		      		<?php echo $this->escape($lang->translate('HOME')); ?> 
+				</a>     
+			</li>
+			<?php $id = New Zend_Session_Namespace('id');?>
+			<?php //check if website config should be displayed or not
+				$show = false;
+				if($id->user_modules):
+					$aux = array();
+					foreach($this->user_modules as $module):
+						$aux[] = $module['id'];
+					endforeach;
+				endif;
+				if(in_array('1', $aux))
+					$show = true;
+			?>
+			<?php if($id->website_id && $show):?>
+				<li class="">
+			        <a href="/core/website_website/edit?id=<?php echo $id->website_id;?>">
+			      		<?php echo $this->escape($lang->translate('Website Configuration')); ?> 
+					</a>     
+			    </li>
+		    <?php endif;?>
+			<?php if($id->user_modules):?>
+				<?php foreach($this->user_modules as $module):?>
+					<li class="">
+				        <a href="/<?php echo $module['action'];?>">
+				      		<?php echo $this->escape($lang->translate($module['name'])); ?> 
+						</a>
+					</li>
+				<?php endforeach;?>
+			<?php endif;?>
+		</ul>		
+	<?php endif;?>
+<?php endif;?>

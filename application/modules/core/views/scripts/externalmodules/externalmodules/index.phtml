@@ -1,0 +1,60 @@
+<?php 
+/**
+ * Index View. Renders the view of the index action 
+ *
+ * @category   WicaWeb
+ * @package    Core_View_Website_Index
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @author	   Esteban
+ * @version    1.0
+ *
+ */
+//translate library
+$lang = Zend_Registry::get('Zend_Translate');
+?>
+
+<?php foreach($this->external_modules_links as $action_id => $opt): ?>
+<?php if($opt['action']=='install'): ?>
+<div class="row-fluid option_bar_container">
+	<ul class="nav nav-pills pull-right">
+        <li>
+            <a href="/core/externalmodules_externalmodules/new"><?php echo $lang->translate('Install External Module'); ?></a>
+        </li>
+    </ul>
+</div>
+<?php endif; ?>
+<?php endforeach; ?>
+
+<div class="line-top alert_messages_container">
+	<?php echo $this->flashMessages();?>
+</div>
+
+<div class="row-fluid">
+	<div class=" page-header-wica span12 center line">
+		<h1> <?php echo $lang->translate('External Modules List');?> </h1>
+	</div>
+</div>
+
+<div class="row-fluid">
+<?php if($this->external_modules_list && count($this->external_modules_list)>0):?>
+			<div class="row-fluid table-bordered-header">	
+				<div class="span6"><b><?php echo $lang->translate('Name'); ?></b></div>
+				<div class="span6 last"><b><?php echo $lang->translate('Description'); ?></b></div>
+			</div>
+			
+			<div class="line">    
+				<?php foreach ($this->external_modules_list as $k => $module): ?> 
+				<div class="row-fluid table-bordered-content <?php if(($k+1)%2): echo "odd"; endif;?>" id="<?php echo $module->id; ?>">	
+					<div class="span6"><?php echo $module['name']; ?></div>
+					<div class="span6 last"><?php echo $module['description']; ?></div>	
+				</div>					
+				<?php endforeach; ?>
+			</div>
+
+<?php else:?>
+	<div class="row-fluid center">
+		<h3><?php echo $lang->translate('No External Modules Available Yet');?></h3>
+	</div>
+<?php endif;?>
+</div>

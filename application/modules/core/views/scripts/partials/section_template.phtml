@@ -1,0 +1,201 @@
+<?php $count_contents = 0; ?>
+<?php if(!$this->private || ($this->private && isset($_SESSION['external_user']))): ?>	
+<div class="row-fluid">
+	<div class="section_title_container">
+		<h1><?php echo $this->section_title;?></h1>
+	</div>
+</div>
+
+<?php if($this->section_subtitle): ?>
+<div class="row-fluid">
+	<div class="section_title_container">
+		<h3><?php echo $this->section_subtitle;?></h3>
+	</div>
+</div>
+<?php endif; ?>
+
+<?php $ite = 0; ?>
+<div class="row-fluid" id="content_container">
+<?php foreach($this->contents as $key => $value): ?>
+	<?php $section_cols = $this->col_number; ?>
+	<?php $used_cols = $value['columns']; ?>	
+	<?php $row_factor = 12 / $section_cols; ?>
+	<?php if($used_cols): ?>
+	<?php $col_factor = $row_factor * $used_cols; ?>
+	<?php else: ?>
+	<?php $col_factor = 12; ?>
+	<?php endif; ?>
+	<?php $ite+= $used_cols; ?>
+	<div class="span<?php echo $col_factor; ?> no-margin overflow_hidden <?php if($ite > $section_cols): echo 'jump'; $ite = $used_cols; endif; ?>" id="mov_content_<?php echo $value['content_id']; ?>"><div class="row-fluid"> <div id="alignment_container_<?php echo $value["content_id"]; ?>"> <?php echo $value["alignment_fields"]; ?> </div> </div><div class="row-fluid">
+			<div class="fixed_internal_content">
+				<?php if($value['title']): ?>
+				<div class="page-header">
+					<h2><?php echo utf8_encode($value['title']); ?></h2>					
+				</div>
+				<?php endif; ?>
+					
+				<?php if($value['content_id'] && $value['section_id']): ?>	
+				<?php 	if($this->isstorage == 'yes'):?>									
+				<?php 		echo $this->previewHelperStorage($value['section_id'], $value['content_id']); ?>
+				<?php 	else:?>
+				<?php 		echo $this->previewHelper( $value['content_id']); ?>
+				<?php 	endif;?>
+				<?php endif; ?>
+				<?php if(isset($value['content'])): ?>
+				<?php 	echo $value['content']; ?>
+				<?php endif; ?>
+				
+				<?php $count_contents++;?>
+			</div>
+		</div>
+	</div>		
+<?php endforeach; ?>
+	<input type="hidden" id="section_cols" name="section_cols" value="<?php echo $this->col_number; ?>">
+</div>
+
+<?php if($this->articles): ?>
+<?php $ite = 0; ?>
+<div class="row-fluid">
+<?php foreach($this->articles as $key => $value): ?>
+	<?php $section_cols = $this->col_number; ?>
+	<?php $used_cols = 1; ?>	
+	<?php $row_factor = 12 / $section_cols; ?>
+	<?php if($used_cols): ?>
+	<?php $col_factor = $row_factor * $used_cols; ?>
+	<?php else: ?>
+	<?php $col_factor = 12; ?>
+	<?php endif; ?>
+	<?php $ite+= $used_cols; ?>
+	
+	<?php if ($value['feature']=='yes'):?>
+		<?php $today = date('Y-m-d'); ?>		
+		<?php $show_article = false; ?>
+		<?php $show_publish = false; ?>
+		<?php if($value['publish_date'] || $value['expire_date']): ?>
+			<?php if($value['publish_date']): ?>				
+				<?php 
+					list($ysp, $msp, $dsp) = explode('-', $today);
+					list($yep, $mep, $dep) = explode('-', $value['publish_date']);
+					$now = mktime(0, 0, 0, $msp, $dsp, $ysp);
+					$publish = mktime(0, 0, 0, $mep, $dep, $yep);
+				?>
+				<?php if($publish < $now || $publish == $now): ?>			
+				<?php 	$show_article = true; ?>
+				<?php 	$show_publish = true; ?>
+				<?php endif; ?>
+			<?php else: ?>
+				<?php 	$show_publish = true; ?>
+			<?php endif; ?>
+			
+			<?php if($value['expire_date']): ?>
+			<?php if($show_publish): ?>
+				<?php $show_article = false; ?>
+					<?php 
+						list($ysp, $msp, $dsp) = explode('-', $today);
+						list($yep, $mep, $dep) = explode('-', $value['expire_date']);
+						$now = mktime(0, 0, 0, $msp, $dsp, $ysp);
+						$expire = mktime(0, 0, 0, $mep, $dep, $yep);
+					?>
+					<?php if($expire > $now || $expire == $now): ?>					
+					<?php 	$show_article = true; ?>
+					<?php endif; ?>
+				<?php endif; ?>
+			<?php endif; ?>
+		<?php else: ?>
+		<?php 	$show_article = true; ?>
+		<?php endif; ?>
+		
+		<?php if($show_article): ?>
+		<div class="span<?php echo $col_factor; ?> no-margin <?php if($ite > $section_cols): echo 'jump'; $ite = 0; endif; ?>">				
+			<div class="row-fluid">	
+				<a href="/default/index/index?id=<?php echo $value['article_id']; ?>">						
+					<?php echo $value['publish_date']; ?> <b> <?php echo $this->escape($value['title']); ?> </b>
+				</a>
+			</div>
+			<div class="row-fluid">		
+				<?php if($value['image']!=null):?>				
+				<div class="span<?php echo (12/($col_factor/2)); ?>">					
+					<?php echo GlobalFunctions::getContentPreviewForList($value['image']);?>				 
+				</div>
+				<?php endif; ?>
+				<div class="span<?php if($value['image']):?><?php echo (12/($col_factor/2)); ?> <?php else: ?> <?php echo $col_factor; ?> <?php endif; ?>">				
+					<?php echo $value['synopsis']; ?>
+				</div>							
+			</div>
+		</div>
+		<?php endif; ?>
+	<?php endif; ?>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+
+<?php if($this->articles): ?>
+<div class="row-fluid">
+<?php foreach($this->articles as $key => $value): ?>
+	<?php if ($value['feature']=='no'):?>
+	<div class="row-fluid no-margin">
+		<div class="row-fluid">
+			<?php $today = date('Y-m-d'); ?>		
+			<?php $show_article = false; ?>
+			<?php $show_publish = false; ?>
+			<?php if($value['publish_date'] || $value['expire_date']): ?>
+				<?php if($value['publish_date']): ?>				
+					<?php 
+						list($ysp, $msp, $dsp) = explode('-', $today);
+						list($yep, $mep, $dep) = explode('-', $value['publish_date']);
+						$now = mktime(0, 0, 0, $msp, $dsp, $ysp);
+						$publish = mktime(0, 0, 0, $mep, $dep, $yep);
+					?>
+					<?php if($publish < $now || $publish == $now): ?>
+					<?php 	echo $value['publish_date']; ?>
+					<?php 	$show_article = true; ?>
+					<?php 	$show_publish = true; ?>
+					<?php endif; ?>
+				<?php else: ?>
+					<?php 	$show_publish = true; ?>
+				<?php endif; ?>
+				
+				<?php if($value['expire_date']): ?>
+				<?php if($show_publish): ?>
+					<?php $show_article = false; ?>
+						<?php 
+							list($ysp, $msp, $dsp) = explode('-', $today);
+							list($yep, $mep, $dep) = explode('-', $value['expire_date']);
+							$now = mktime(0, 0, 0, $msp, $dsp, $ysp);
+							$expire = mktime(0, 0, 0, $mep, $dep, $yep);
+						?>
+						<?php if($expire > $now || $expire == $now): ?>					
+						<?php 	$show_article = true; ?>
+						<?php endif; ?>
+					<?php endif; ?>
+				<?php endif; ?>
+			<?php else: ?>
+			<?php 	$show_article = true; ?>
+			<?php endif; ?>
+			
+			<?php if($show_article): ?>
+			<a href="/default/index/index?id=<?php echo $value['article_id']; ?>">
+				<b> <?php echo $this->escape($value['title']); ?> </b>
+			</a>
+			<?php endif; ?>
+		</div>			
+	</div>
+	<?php endif; ?>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+	
+<?php if(!$count_contents): ?>
+<div class="row-fluid">
+	&nbsp;
+</div>
+<?php endif; ?>
+<?php elseif (!$this->login):?>
+<div class="row-fluid">
+	<?php 	if($this->isstorage == 'yes'):?>									
+	<?php 		echo $this->previewHelper(null,null,$this->area); ?>
+	<?php 	else:?>
+	<?php 		echo $this->previewHelper(null,null,$this->area); ?>
+	<?php 	endif;?>
+</div>
+<?php endif; ?>
