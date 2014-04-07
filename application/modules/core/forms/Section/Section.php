@@ -167,7 +167,17 @@ class Core_Form_Section_Section extends Zend_Form{
                         $publish_date->setLabel($lang->translate('Publish date').':');
                         //expire date
                         $expire_date = new Zend_Form_Element_Text('expire_date');
-                        $expire_date->setLabel($lang->translate('Expire date').':');                                                
+                        $expire_date->setLabel($lang->translate('Expire date').':');
+                        //start time
+                        $start_time = new Zend_Form_Element_Text('hora_inicio');
+                        $start_time->setLabel('Hora inicio:')
+                                    ->setAttrib('class', 'date-calendar')
+                                    ->setAttrib('placeholder', 'hh:mm:ss');
+                        //end time
+                        $end_time = new Zend_Form_Element_Text('hora_fin');
+                        $end_time->setLabel('Hora fin:')
+                                    ->setAttrib('class', 'date-calendar')
+                                    ->setAttrib('placeholder', 'hh:mm:ss');
                 }
                 else
                 {
@@ -177,7 +187,15 @@ class Core_Form_Section_Section extends Zend_Form{
                         
                         $expire_date = new Zend_Form_Element_Hidden('expire_date');
                         $expire_date->removeDecorator('Label');
-                        $expire_date->removeDecorator('HtmlTag');                        
+                        $expire_date->removeDecorator('HtmlTag');
+                        
+                        $start_time = new Zend_Form_Element_Hidden('hora_inicio');
+                        $start_time->removeDecorator('Label');
+                        $start_time->removeDecorator('HtmlTag');
+                        
+                        $end_time = new Zend_Form_Element_Hidden('hora_fin');
+                        $end_time->removeDecorator('Label');
+                        $end_time->removeDecorator('HtmlTag');
                 }
                 
                 //show_publish_date - yes / no -
@@ -324,7 +342,9 @@ class Core_Form_Section_Section extends Zend_Form{
                                 $parent_show_menu,
                                 $menu2,
                                 $parent_show_menu2,
-                                $homepage                        
+                                $homepage,
+                                $start_time,
+                                $end_time
                 ));
                                 
                 if($website_db->section_images_number !=0)

@@ -134,10 +134,25 @@ class Core_Form_Article_Article extends Zend_Form{
 		{
 			//publish date
 			$publish_date = new Zend_Form_Element_Text('publish_date');
-			$publish_date->setLabel($lang->translate('Publish date').':');
+			$publish_date->setLabel($lang->translate('Publish date').':')
+                                     ->setValue(date('d/m/Y'));
 			//expire date
 			$expire_date = new Zend_Form_Element_Text('expire_date');
-			$expire_date->setLabel($lang->translate('Expire date').':');						
+			$expire_date->setLabel($lang->translate('Expire date').':')
+                                    ->setValue(date('d/m/Y'));
+                        
+                        //start time
+                        $start_time = new Zend_Form_Element_Text('hora_inicio');
+                        $start_time->setLabel('Hora inicio:')
+                                    ->setAttrib('class', 'date-calendar')
+                                    ->setValue('00:00:01');
+                                    
+                        //end time
+                        $end_time = new Zend_Form_Element_Text('hora_fin');
+                        $end_time->setLabel('Hora fin:')
+                                    ->setAttrib('class', 'date-calendar')
+                                    ->setValue('23:59:59');
+                                 
 		}
 		else
 		{
@@ -147,7 +162,15 @@ class Core_Form_Article_Article extends Zend_Form{
 			
 			$expire_date = new Zend_Form_Element_Hidden('expire_date');
 			$expire_date->removeDecorator('Label');
-			$expire_date->removeDecorator('HtmlTag');			
+			$expire_date->removeDecorator('HtmlTag');
+                        
+                        $start_time = new Zend_Form_Element_Hidden('hora_inicio');
+                        $start_time->removeDecorator('Label');
+                        $start_time->removeDecorator('HtmlTag');
+                        
+                        $end_time = new Zend_Form_Element_Hidden('hora_fin');
+                        $end_time->removeDecorator('Label');
+                        $end_time->removeDecorator('HtmlTag');
 		}
 		
 		//show_publish_date - yes / no -
@@ -285,7 +308,9 @@ class Core_Form_Article_Article extends Zend_Form{
 				$publication_status,
 				$approved,							
                                 $order_highlight,
-                                $order_feature
+                                $order_feature,
+                                $start_time,
+                                $end_time
 		));						
 		
 		//submit button

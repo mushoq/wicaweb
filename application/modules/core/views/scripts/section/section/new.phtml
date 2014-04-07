@@ -10,14 +10,14 @@
  -->
 
 <?php $lang = Zend_Registry::get('Zend_Translate'); ?>
-<link rel="Stylesheet" href="/css/external/jquery.ui.timepicker.css" type="text/css">
+
 <script type="text/javascript" charset="utf-8">
 	var next_step = "<?php echo $lang->translate('Continue');?>";
 	var back_step = "<?php echo $lang->translate('Back');?>";
 	var max_size = "<?php echo $lang->translate('Maximum size');?>";
 	var supported_extension = "<?php echo $lang->translate('Supported files');?>";
 </script>
-<script type="text/javascript" src="/js/jquery.ui.timepicker.js?v=0.3.3" ></script>		
+		
 
 <div class="row-fluid line">
 	<div class="span12">
@@ -298,8 +298,8 @@
 						<label class="control-label"><?php echo $this->form->publish_date->getLabel(); ?></label>
                                                 <div class="controls">
 							<?php echo $this->form->publish_date->renderViewHelper(); 
-                                                              echo '&nbsp;<span>Hora Inicio:</span>';
-                                                              echo $this->formText('hora_inicio', '00:00', array('class'=>'date-calendar'));
+                                                              echo '&nbsp;<span>Hora:</span>';
+                                                              echo $this->form->hora_inicio->renderViewHelper();
                                                         ?>
                                                     
                                                     
@@ -314,8 +314,8 @@
 						<label class="control-label"><?php echo $this->form->expire_date->getLabel(); ?></label>
 						<div class="controls">
 							<?php echo $this->form->expire_date->renderViewHelper();
-                                                              echo '&nbsp;<span>Hora Fin:</span>';
-                                                              echo $this->formText('hora_fin', '23:59', array('style' =>'width: 70px;'));
+                                                              echo '&nbsp;<span>Hora:</span>';
+                                                              echo $this->form->hora_fin->renderViewHelper();
                                                         
                                                         ?>									
 						</div>

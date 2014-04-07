@@ -1,4 +1,7 @@
 $(document).ready(function(){	
+         $.validator.addMethod("time24", function(value, element) { 
+            return /^([01]?[0-9]|2[0-3])(:[0-5][0-9]){2}$/.test(value);
+        }, "Formato de hora no v\xE1lida.");
 	/*WIZARD*/
 	count=0;	
 	//step number
@@ -283,6 +286,12 @@ function addNextButton(i, stepName){
 	if($("input[type=text][id=publish_date]").length > 0 && $("input[type=text][id=expire_date]").length > 0)
 	{
 		setDefaultCalendar($('#publish_date'),$('#expire_date'));
+                 $("#hora_inicio").rules("add", {
+				 time24: true
+			});
+                 $("#hora_fin").rules("add", {
+				 time24: true
+			});
 	}
 	
 	//re calculate the section tree height

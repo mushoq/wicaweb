@@ -657,11 +657,15 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 		//article as array to populate form
 		$article_arr = get_object_vars($article_data[0]);*/
 	
-		if($article_arr['publish_date'])
+		if($article_arr['publish_date']){
+                        $article_arr['hora_inicio'] = substr($article_arr['publish_date'], -8);
 			$article_arr['publish_date'] = GlobalFunctions::getFormattedDate($article_arr['publish_date']);
+                }
 	
-		if($article_arr['expire_date'])
+		if($article_arr['expire_date']){
+                        $article_arr['hora_fin'] = substr($article_arr['expire_date'], -8);
 			$article_arr['expire_date'] = GlobalFunctions::getFormattedDate($article_arr['expire_date']);
+                }
 		
 		if($article_arr['section_parent_id'])
 		{
@@ -821,8 +825,8 @@ class Core_Article_ArticleController extends Zend_Controller_Action
                         $article_act->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 			$article_act->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
                         $article_act->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
-			$article_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-			$article_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+			$article_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+			$article_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 			$article_act->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 			$article_act->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 			$article_act->external_link = 'no';
@@ -889,8 +893,8 @@ class Core_Article_ArticleController extends Zend_Controller_Action
                                         $article_tmp->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 					$article_tmp->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
                                         $article_tmp->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
-					$article_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-					$article_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+					$article_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+					$article_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 					$article_tmp->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 					$article_tmp->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 					$article_tmp->external_link = 'no';
@@ -948,8 +952,8 @@ class Core_Article_ArticleController extends Zend_Controller_Action
                                         $article_act->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 					$article_act->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
                                         $article_act->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
-					$article_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-					$article_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+					$article_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+					$article_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 					$article_act->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 					$article_act->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 					$article_act->external_link = 'no';
@@ -1009,8 +1013,8 @@ class Core_Article_ArticleController extends Zend_Controller_Action
                                         $article_tmp->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 					$article_tmp->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
                                         $article_tmp->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
-					$article_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-					$article_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+					$article_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+					$article_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 					$article_tmp->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 					$article_tmp->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 					$article_tmp->external_link = 'no';
@@ -1072,8 +1076,8 @@ class Core_Article_ArticleController extends Zend_Controller_Action
                                         $article_tmp->order_feature =GlobalFunctions::value_cleaner($formData['order_feature_value']);
 					$article_tmp->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
                                         $article_tmp->order_highlight =GlobalFunctions::value_cleaner($formData['order_highlight_value']);
-					$article_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-					$article_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+					$article_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+					$article_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 					$article_tmp->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 					$article_tmp->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 					$article_tmp->external_link = 'no';

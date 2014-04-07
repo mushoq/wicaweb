@@ -69,44 +69,8 @@
 	<?php $ite+= $used_cols; ?>
 	
 	<?php if ($value['feature']=='yes'):?>
-		<?php $today = date('Y-m-d'); ?>		
-		<?php $show_article = false; ?>
-		<?php $show_publish = false; ?>
-		<?php if($value['publish_date'] || $value['expire_date']): ?>
-			<?php if($value['publish_date']): ?>				
-				<?php 
-					list($ysp, $msp, $dsp) = explode('-', $today);
-					list($yep, $mep, $dep) = explode('-', $value['publish_date']);
-					$now = mktime(0, 0, 0, $msp, $dsp, $ysp);
-					$publish = mktime(0, 0, 0, $mep, $dep, $yep);
-				?>
-				<?php if($publish < $now || $publish == $now): ?>			
-				<?php 	$show_article = true; ?>
-				<?php 	$show_publish = true; ?>
-				<?php endif; ?>
-			<?php else: ?>
-				<?php 	$show_publish = true; ?>
-			<?php endif; ?>
-			
-			<?php if($value['expire_date']): ?>
-			<?php if($show_publish): ?>
-				<?php $show_article = false; ?>
-					<?php 
-						list($ysp, $msp, $dsp) = explode('-', $today);
-						list($yep, $mep, $dep) = explode('-', $value['expire_date']);
-						$now = mktime(0, 0, 0, $msp, $dsp, $ysp);
-						$expire = mktime(0, 0, 0, $mep, $dep, $yep);
-					?>
-					<?php if($expire > $now || $expire == $now): ?>					
-					<?php 	$show_article = true; ?>
-					<?php endif; ?>
-				<?php endif; ?>
-			<?php endif; ?>
-		<?php else: ?>
-		<?php 	$show_article = true; ?>
-		<?php endif; ?>
-		
-		<?php if($show_article): ?>
+				
+		<?php //if($show_article): ?>
 		<div class="span<?php echo $col_factor; ?> no-margin <?php if($ite > $section_cols): echo 'jump'; $ite = 0; endif; ?>">				
 			<div class="row-fluid">	
 				<a href="/default/index/index?id=<?php echo $value['article_id']; ?>">						
@@ -124,7 +88,7 @@
 				</div>							
 			</div>
 		</div>
-		<?php endif; ?>
+		<?php //endif; ?>
 	<?php endif; ?>
 <?php endforeach; ?>
 </div>

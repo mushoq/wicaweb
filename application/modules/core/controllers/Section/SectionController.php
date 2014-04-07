@@ -1626,11 +1626,16 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		$section_arr['approved'] = $publication_approved;
 		$section_arr['publication_status'] = $publication_status;
 		
-		if($section_arr['publish_date'])
+		if($section_arr['publish_date']){
+                         $section_arr['hora_inicio']= substr($section_arr['publish_date'], -8);
 			$section_arr['publish_date'] = GlobalFunctions::getFormattedDate($section_arr['publish_date']);
+                        
+                }
 	
-		if($section_arr['expire_date'])
+		if($section_arr['expire_date']){
+                        $section_arr['hora_fin']= substr($section_arr['expire_date'], -8);
 			$section_arr['expire_date'] = GlobalFunctions::getFormattedDate($section_arr['expire_date']);
+                }
 	
 		if($section_arr['external_link'])
 			$section_arr['link'] = 'yes';
@@ -1932,8 +1937,8 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			$section_act->author = GlobalFunctions::value_cleaner($formData['author']);
 			$section_act->feature = GlobalFunctions::value_cleaner($formData['feature']);
 			$section_act->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
-			$section_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-			$section_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+			$section_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+			$section_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 			$section_act->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 			$section_act->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 			$section_act->external_link = GlobalFunctions::value_cleaner($formData['external_link']);
@@ -1999,8 +2004,8 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_tmp->author = GlobalFunctions::value_cleaner($formData['author']);
 					$section_tmp->feature = GlobalFunctions::value_cleaner($formData['feature']);
 					$section_tmp->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
-					$section_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-					$section_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+					$section_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+					$section_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 					$section_tmp->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 					$section_tmp->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 					$section_tmp->external_link = GlobalFunctions::value_cleaner($formData['external_link']);
@@ -2057,8 +2062,8 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_act->author = GlobalFunctions::value_cleaner($formData['author']);
 					$section_act->feature = GlobalFunctions::value_cleaner($formData['feature']);
 					$section_act->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
-					$section_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-					$section_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+					$section_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+					$section_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 					$section_act->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 					$section_act->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 					$section_act->external_link = GlobalFunctions::value_cleaner($formData['external_link']);
@@ -2117,8 +2122,8 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_tmp->author = GlobalFunctions::value_cleaner($formData['author']);
 					$section_tmp->feature = GlobalFunctions::value_cleaner($formData['feature']);
 					$section_tmp->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
-					$section_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-					$section_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+					$section_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+					$section_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 					$section_tmp->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 					$section_tmp->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 					$section_tmp->external_link = GlobalFunctions::value_cleaner($formData['external_link']);
@@ -2179,8 +2184,8 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_tmp->author = GlobalFunctions::value_cleaner($formData['author']);
 					$section_tmp->feature = GlobalFunctions::value_cleaner($formData['feature']);
 					$section_tmp->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
-					$section_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-					$section_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
+					$section_tmp->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+					$section_tmp->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 					$section_tmp->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 					$section_tmp->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 					$section_tmp->external_link = GlobalFunctions::value_cleaner($formData['external_link']);

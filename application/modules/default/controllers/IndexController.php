@@ -445,8 +445,14 @@ class Default_IndexController extends Zend_Controller_Action
 		    		}
 		    		
 		    		//articles
+                                                             
 		    		$article_arr = array();
-		    		$articles_list = $section_obj->find('wc_section', array('section_parent_id'=>$section->id,'article'=>'yes'), array('order_number'=>'ASC'));
+                                
+                                if(count($website_obj) > 0 && $website_obj[0]->section_expiration=='yes'){
+                                     $articles_list = $section_obj->find_between('wc_section', array(array('section_parent_id','=',$section->id), array('article','=','yes'),array(date('Y-m-d H:i:s'),'BETWEEN','publish_date','expire_date')), array('publish_date ASC')); 
+                                }else{
+                                    $articles_list = $section_obj->find('wc_section', array('section_parent_id'=>$section->id,'article'=>'yes'), array('order_number'=>'ASC'));
+                                }
 		    		if(count($articles_list)>0)
 		    		{
 		    			foreach ($articles_list as &$art)
