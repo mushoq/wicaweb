@@ -103,11 +103,11 @@
 		<div class="row-fluid">
 			
 			
-			<?php //if($show_article): ?>
+			<?php if($show_article): ?>
 			<a href="/default/index/index?id=<?php echo $value['article_id']; ?>">
 				<b> <?php echo $this->escape($value['title']); ?> </b>
 			</a>
-			<?php //endif; ?>
+			<?php endif; ?>
 		</div>			
 	</div>
 	<?php endif; ?>
