@@ -239,6 +239,7 @@ $(document).ready(function(){
 			var content_by_sec = $(this).attr('content_by_sec');
 			var content_id = $(this).attr('content_id');
 			var temp = $(this).attr('temp');
+                         if(!confirm('¡El contenido seleccionado sera borrado!')) return false;
 			$.ajax({
 				async: false,
 				type: "POST",

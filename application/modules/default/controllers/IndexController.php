@@ -910,6 +910,9 @@ class Default_IndexController extends Zend_Controller_Action
 						if(count($field_email)>0){
 							$field_email_id = $field_email[0]->id;
 						}
+                                                
+                                                //Get Attached files
+                                                $newFilename = $appUser->upload_file;
 						
 						//Get email/s directions for current content_id
 						$content = new Core_Model_ContentField();
@@ -918,25 +921,42 @@ class Default_IndexController extends Zend_Controller_Action
 						//create a transport to register smpt server credentials
 						if($website_data[0]->smtp_hostname){
 							$tr = new Zend_Mail_Transport_Smtp($website_data[0]->smtp_hostname,
-									array('ssl' => 'tls',
-											'auth' => 'login',
-											'username' => $website_data[0]->smtp_username,
-											'password' => $website_data[0]->smtp_password));
-							 
-							 
-							Zend_Mail::setDefaultTransport($tr);
+								array('ssl' => 'ssl',
+                                                                                'port'=>$website_data[0]->smtp_port, 
+										'auth' => 'login',
+										'username' => $website_data[0]->smtp_username,
+										'password' => $website_data[0]->smtp_password, 
+                                                                                'register'=>true));
 							
 							
-							$mail = new Zend_Mail();
-							$mail->setFrom('wicaweb@wicaweb.com');
-							$mail->setBodyHtml($body);
-							$mail->addTo($content_email[0]->value, 'User');
-							$mail->setSubject('subject');
-							$mail->send($tr);
-							
-							//success message
-							$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success send')));
-							echo json_encode ('success_captcha');
+                                                        Zend_Mail::setDefaultTransport($tr);						 
+                                                        $mail = new Zend_Mail();
+                                                        $mail->setFrom($website_data[0]->info_email, $website_data[0]->name);
+                                                        $mail->setBodyHtml($body);
+                                                        $mail->addTo($content_email[0]->value, 'User');
+                                                        $mail->setSubject('Formulario de sitio:'. $website_data[0]->name);
+                                                        $fileInfo= explode(".", $newFilename); 
+                                                        $extension = '.'.end($fileInfo); 
+                                                        if($newFilename){
+                                                        $content = file_get_contents(realpath('.').'/uploads/tmp/'.$newFilename);
+                                                            $attachment = new Zend_Mime_Part($content);
+                                                            $attachment->type        = 'application/'.$extension;
+                                                            $attachment->disposition = Zend_Mime::DISPOSITION_INLINE;
+                                                            $attachment->encoding    = Zend_Mime::ENCODING_BASE64;
+                                                            $attachment->filename    = $newFilename;
+                                                            $mail->addAttachment($attachment); 
+                                                        Zend_Session::namespaceUnset('user');
+                                                        unlink(realpath('.').'/uploads/tmp/'.$newFilename);
+                                                }
+                                                $sent = true;
+                                                try{
+                                                    $mail->send($tr);
+                                                } catch(Exception $e){
+                                                    $sent = false;
+                                                }
+						
+						$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success send')));
+						echo json_encode ('success_captcha');
 						}else{
 							$this->_helper->flashMessenger->addMessage(array('error'=>$lang->translate('Errors sending')));
 							echo json_encode ('error_sending');						
@@ -985,7 +1005,8 @@ class Default_IndexController extends Zend_Controller_Action
 						$mail->addTo($content_email[0]->value, 'User');
 						$mail->setSubject('Formulario de sitio:'. $website_data[0]->name);
                                                 $fileInfo= explode(".", $newFilename); 
-                                                $extension = '.'.end($fileInfo);  
+                                                $extension = '.'.end($fileInfo); 
+                                                if($newFilename){
                                                 $content = file_get_contents(realpath('.').'/uploads/tmp/'.$newFilename);
                                                     $attachment = new Zend_Mime_Part($content);
                                                     $attachment->type        = 'application/'.$extension;
@@ -995,6 +1016,7 @@ class Default_IndexController extends Zend_Controller_Action
                                                     $mail->addAttachment($attachment); 
                                                 Zend_Session::namespaceUnset('user');
                                                 unlink(realpath('.').'/uploads/tmp/'.$newFilename);
+                                                }
                                                 $sent = true;
                                                 try{
                                                     $mail->send($tr);

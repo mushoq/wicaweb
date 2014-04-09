@@ -65,7 +65,8 @@ $(document).ready(function(){
 	
 	//delete article
 	$('[id^="delete_article_"]').each(function() {
-		$(this).bind('click', function() {			
+		$(this).bind('click', function() {		
+                     if(!confirm('¡El artículo seleccionado sera borrado!')) return false;
 			$.ajax({
 				type: 'POST',
 				async: false,

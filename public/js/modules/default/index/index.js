@@ -98,9 +98,6 @@ $(document).ready(function() {
             rules: {
             }
 		});
-//            $("#form_field_file_"+content_id).bind("click",function(){
-//                load_file('/default/index/upload-file', '/uploads/tmp/', 'form_field_file'+content_id, content_id); 
-//            }) 
             $("#form_field_file_"+content_id).bind("click",function(){
                 load_file('/default/index/upload-file', '/uploads/tmp/', 'form_field_file'+content_id, content_id); 
             }) 
@@ -120,7 +117,7 @@ $(document).ready(function() {
 							$("#captcha_error_"+content_id).show();
 						}else
 							if(data=='success_captcha' || data=='error_dictionary' || data=='error_sending'){
-								//window.location.reload(true);
+								window.location.reload(true);
 							}
 					},
 					error: function(){
@@ -132,7 +129,7 @@ $(document).ready(function() {
 							
 							success: function(data) {	
 								if(data){
-									//window.location.reload(true);
+									window.location.reload(true);
 								}
 							}
 						});
