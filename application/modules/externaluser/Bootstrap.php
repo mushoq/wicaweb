@@ -4,14 +4,14 @@
  *	Bootstrap allows files to be auto loaded
  *
  * @category   WicaWeb
- * @package    Core
+ * @package    Externaluser
  * @copyright  Copyright (c) WicaWeb - Mushoq
  * @license    GNP
  * @version    1.0
- * @author	   Santiago Arellano
+ * @author	   Paul Arevalo
  */
 
-class Banners_Bootstrap extends Zend_Application_Module_Bootstrap{
+class Externaluser_Bootstrap extends Zend_Application_Module_Bootstrap{
 
 
 }
