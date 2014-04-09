@@ -3,14 +3,14 @@
  *	Banners model
  *
  * @category   WicaWeb
- * @package    Banners_Model
+ * @package    Externaluser_Model
  * @copyright  Copyright (c) WicaWeb - Mushoq
  * @license    GNP
  * @version    1.0
- * @author	   Diego Perez
+ * @author	   Paul Arevalo
  */
 
-class Banners_Model_Banners extends Core_Model_Factory
+class Externaluser_Model_Externaluser extends Core_Model_Factory
 {
 		
 	public static $publication_type = array('calendar'=>'Calendar','hits'=>'Hits');

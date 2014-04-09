@@ -4,14 +4,14 @@
  * This file has parameters to create a form for the website configurations
  *
  * @category   WicaWeb
- * @package    Core_Form
+ * @package    Externaluser_Form
  * @copyright  Copyright (c) WicaWeb - Mushoq
  * @license    GNP
- * @author	   Diego Perez
+ * @author	   Paul Arevalo
  * @version    1.0
  *
  */
-class Banners_Form_Banners extends Zend_Form
+class Externaluser_Form_Externaluser extends Zend_Form
 {
 	protected $_param;
 	
@@ -29,10 +29,9 @@ class Banners_Form_Banners extends Zend_Form
 	public function init()
 	{
 
-		$this->setAttrib('id', 'frmBanners');
+		$this->setAttrib('id', 'frmExternaluser');
 		$this->setAttrib('class', 'form-horizontal well');
 		$this->setAttrib('enctype', 'multipart/form-data'); //attr to support file upload
-		$this->setAction('/banners/index/savebanner');
 		
 		//translate library
 		$lang = Zend_Registry::get('Zend_Translate');

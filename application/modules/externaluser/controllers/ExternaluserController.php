@@ -3,14 +3,14 @@
  *	Functinallity on banners 
  *
  * @category   WicaWeb
- * @package    Banners_Controller
+ * @package    Externaluser_Controller
  * @copyright  Copyright (c) WicaWeb - Mushoq
  * @license    GNP
  * @version    1.0
- * @author	   Diego Perez
+ * @author	   Paul Arevalo
  */
 
-class Banners_BannersController extends Zend_Controller_Action
+class Externaluser_ExternaluserController extends Zend_Controller_Action
 {
 	public function init(){
 
