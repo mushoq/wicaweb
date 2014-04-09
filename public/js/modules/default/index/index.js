@@ -81,6 +81,11 @@ $(document).ready(function() {
             $("#myCarousel_4").carousel('next');
             }            
        
+        $("#form_field_file_").bind('click', function() {
+            alert('hola');
+                    
+                });
+                
 	//search form contents
 	$("[id^='content_form_']").each(function(){
 		var content_id = $(this).attr('content_id');
@@ -93,8 +98,15 @@ $(document).ready(function() {
             rules: {
             }
 		});
+//            $("#form_field_file_"+content_id).bind("click",function(){
+//                load_file('/default/index/upload-file', '/uploads/tmp/', 'form_field_file'+content_id, content_id); 
+//            }) 
+            $("#form_field_file_"+content_id).bind("click",function(){
+                load_file('/default/index/upload-file', '/uploads/tmp/', 'form_field_file'+content_id, content_id); 
+            }) 
+               
 		
-		$("#btn_sub_form_"+content_id).bind("click",function(){
+		$("#btn_sub_form_"+content_id).bind("click",function(){                    
 			$("#captcha_error").hide();
 			if($("#content_form_"+content_id).valid()){
 				$.ajax({
@@ -102,13 +114,13 @@ $(document).ready(function() {
 					async: false,
 					url: '/default/index/sendformemail',
 					dataType: 'json',
-					data: 	$("#content_form_"+content_id).serialize(),
+					data: $("#content_form_"+content_id).serialize(),
 					success: function(data) {	
 						if(data=='error_captcha'){
 							$("#captcha_error_"+content_id).show();
 						}else
 							if(data=='success_captcha' || data=='error_dictionary' || data=='error_sending'){
-								window.location.reload(true);
+								//window.location.reload(true);
 							}
 					},
 					error: function(){
@@ -120,7 +132,7 @@ $(document).ready(function() {
 							
 							success: function(data) {	
 								if(data){
-									window.location.reload(true);
+									//window.location.reload(true);
 								}
 							}
 						});
@@ -392,5 +404,47 @@ function mainmenu() {
 		$(this).find('ul:first').css({
 			visibility : "hidden"
 		});
+	});
+}
+
+/**
+  * Function to upload files by ajax
+  * @action : Action controller
+  * @directory: Directory where files are to upload
+  * @nameFile: name $_FILE()
+  * @content_id: content Id 
+  */			
+function load_file(action, directory, nameFile, content_id){	
+	 
+         new AjaxUpload('#form_field_file_'+content_id ,{               
+		action: action ,
+		data:{
+			directory: directory,
+			maxSize: 2097152,
+                        nameFile: nameFile
+		},
+		name: nameFile,
+                onSubmit : function(file, ext){
+			this.disable();
+		},
+		onComplete: function(file, response){
+			this.enable();
+			if(!(response)){
+                                $('#form_txt_file_'+ content_id).val(file);			
+			}else{
+				if(response == 1){
+					alert('Tamaño de archivo excedido');
+                                        $('#form_txt_file_'+ content_id).val('');
+				}
+				if(response == 2){
+					alert('Extension de archivo no permitida');
+                                        $('#form_txt_file_'+ content_id).val('');
+				}
+                                if(response == 3){
+                                    alert('Directorio incorrecto');
+                                    $('#form_txt_file_'+ content_id).val('');
+                                }
+			}
+		}
 	});
 }

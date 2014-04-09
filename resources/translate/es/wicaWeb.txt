@@ -518,3 +518,4 @@ New Password>Contraseña Nueva|
 Invalid old password>Contraseña anterior inválida|
 Old Password>Contraseña anterior|
 Generate Backup>Generar Respaldo|
+Search..>Buscar..|
