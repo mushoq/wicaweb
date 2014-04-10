@@ -13,7 +13,11 @@ application/configs/
 /public/uploads/
 /public/uploads/cache
 
+
 .DS_Store
+
+
+
 application/configs/application.ini
 
 public/.DS_Store
