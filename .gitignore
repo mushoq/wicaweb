@@ -12,3 +12,5 @@ application/configs
 /public/installer.lock
 /public/uploads
 /public/uploads/cache
+
+.DS_Store
