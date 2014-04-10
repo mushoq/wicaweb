@@ -780,6 +780,9 @@ class Core_Section_SectionController extends Zend_Controller_Action
 	public function sectiondetailsAction()
 	{
 		$this->_helper->layout->disableLayout ();
+                $post = $this->getRequest()->getParams();
+                $fechaListArticle = (isset($post['fecha_list']))?date('Y-m-d 00:00:59', strtotime($post['fecha_list'])):date('Y-m-d 00:00:59');
+                $fechaArticles =(isset($post['fecha_list']))?$post['fecha_list']:date('m/d/Y');
 		
 		//translate library
 		$lang = Zend_Registry::get('Zend_Translate');
@@ -943,9 +946,11 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			}
 			else
 			{
-				$articles_list = $section->find('wc_section', array('section_parent_id'=>$parent_section[0]->id,'article'=>'yes'), array('order_number'=>'ASC'));
+				//$articles_list = $section->find('wc_section', array('section_parent_id'=>$parent_section[0]->id,'article'=>'yes'), array('order_number'=>'ASC')); 
+                                $articles_list = $section->find_between('wc_section', array(array('section_parent_id','=',$parent_section[0]->id), array('article','=','yes'),array($fechaListArticle,'BETWEEN','publish_date','expire_date')), array('publish_date ASC'));
 			}
 			
+                       // die();
 			if(count($articles_list)>0)
 			{
 				foreach ($articles_list as $k => &$ali)
@@ -1181,7 +1186,9 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		}		
  		$this->view->contents = $content_list_arr;
  		$this->view->available_temp = $using_temp;
- 		
+                $this->view->section_temp =$search_temp;
+                $this->view->fechaList = $fechaArticles;
+                $this->view->txtFecha=GlobalFunctions::spanishDateStr($fechaListArticle);
 	}
 	
 	/**

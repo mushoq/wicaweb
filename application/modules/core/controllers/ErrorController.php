@@ -27,8 +27,8 @@ class Core_ErrorController extends Zend_Controller_Action
         echo'<pre>';
          print_r($errors); 
          echo'</pre>';
-        echo $errors->exception->getMessage();
-//         die();
+        echo $errors->exception->getMessage();  
+//        die();
         /*END FOR DEBUG*/
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:

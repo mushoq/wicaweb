@@ -13,7 +13,30 @@
 
 
 class GlobalFunctions {
+        private static $spanish_day = array(
+		"Monday"=>"Lunes",
+		"Tuesday"=>"Martes",
+		"Wednesday"=>"Miércoles",
+		"Thursday"=>"Jueves",
+		"Friday"=>"Viernes",
+		"Saturday"=>"Sabado",
+		"Sunday"=>"Domingo",
+	);
 
+	private static $spanish_month = array(
+		"January"=>"Enero",
+		"February"=>"Febrero",
+		"March"=>"Marzo",
+		"April"=>"Abril",
+		"May"=>"Mayo",
+		"June"=>"Junio",
+		"July"=>"Julio",
+		"August"=>"Agosto",
+		"September"=>"Septiembre",
+		"October"=>"Octubre",
+		"November"=>"Noviembre",
+		"December"=>"Diciembre",
+	);
 	/**
 	 * Build an array of words to translate according to language
 	 * @param string $language
@@ -1993,5 +2016,18 @@ class GlobalFunctions {
 			$section = new Core_Model_Section();
 			$section->delete('wc_section',array('id'=>$res->id));	
 		}	
+	}
+        /**
+         * 
+         * @param type $date
+         * @return txt format date in spanish
+         */
+       public static function spanishDateStr($date)
+	{
+		$timeStamp = strtotime($date);
+		$day = self::$spanish_day[date('l', $timeStamp)];
+		$month = self::$spanish_month[date('F', $timeStamp)];
+
+		return $day . ' , ' . date('d' , $timeStamp)  . ' de ' . $month  . ' del ' . date('Y' , $timeStamp);
 	}
 }

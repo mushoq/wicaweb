@@ -298,4 +298,37 @@ $(document).ready(function(){
 			$('#content_align_'+$(this).attr('content_id')).val($(this).attr('val'));
 		});	
 	});
+        
+        if($('#fecha_list').length){
+//              setDefaultCalendar($('#fecha_list'));
+//              $('#fecha_list').change(function() {
+//                    alert('entra');
+//              });
+          $("#fecha_list").datepicker({
+                showOn: 'button',
+		buttonImage: '/images/calendar.gif',
+		buttonImageOnly: true,
+                onSelect: function() {
+                    //alert($('#section_id').val());
+                    //show article button
+                    $('#article_option').removeClass('hide');
+                    //show section button
+                    $('#section_option').removeClass('hide');
+
+                    //section details
+                    $('#cms_container').load("/core/section_section/sectiondetails", {
+                            id : $('#section_id').val(),
+                            is_section_temp : $('#section_temp').val(),
+                            fecha_list:$('#fecha_list').val()
+                    }, function() {
+                            $( 'html, body' ).animate( {scrollTop: 0}, 0 );
+                            setSectionTreeHeight();
+                            setTimeout("resize_content_list()",100);
+                            $.getScript('/js/modules/core/section/sectionlist.js');
+                            $.getScript('/js/modules/core/section/sectiondetails.js');
+                            $.getScript('/js/modules/core/article/articledetails.js');
+                    });
+                }
+           });
+        }
 });
