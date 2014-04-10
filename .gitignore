@@ -14,3 +14,9 @@ application/configs
 /public/uploads/cache
 
 .DS_Store
+
+application/config/application.ini
+
+application/config/languages/en.php
+
+application/config/languages/es.php
