@@ -12,3 +12,17 @@ application/configs
 /public/installer.lock
 /public/uploads
 /public/uploads/cache
+
+application/configs/application.ini
+
+public/.DS_Store
+
+public/css/.DS_Store
+
+public/images/.DS_Store
+
+public/js/.DS_Store
+
+application/.DS_Store
+
+.DS_Store
