@@ -13,13 +13,13 @@
 <?php $lang = Zend_Registry::get('Zend_Translate');?>
 
 <div>
-	<?php echo $this->flashMessages();?>
+	<?php echo $this->flashMessages(); ?>
 	
 <!-- 	Form -->
 	<form class="well form-horizontal <?php echo $this->form->getAttrib('class'); ?>" id="<?php echo $this->form->getAttrib('id'); ?>" method="<?php echo $this->form->getMethod(); ?>" enctype="multipart/form-data">		 
 <!-- 	Get elements from post -->
 		<?php
-		//print_r($this->form->getElements()) ;
+		//var_dump($this->form->getElements());
 		//loops through all content elemnts
 		foreach($this->form->getElements() as $name => $element){ ?>
 			<?php if(strpos($name, 'hdnNameFile')=== false){ ?>		
@@ -29,8 +29,7 @@
 				
 				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?> ">
 					
-						<div class="control-group">
-						
+						<div class="control-group">						
 <!-- 						Control when label should be shown -->
 						<?php if(($this->form->$name->helper != 'formSubmit' && $this->form->$name->helper != 'formButton') || ($name == 'file' || $name == 'alternative_image' || $name == 'flash_file')) { ?>
 							<label id="<?php echo $name."_label"?>" class="control-label <?php if( ($this->form->$name->class == 'hide' || $this->form->$name->class == 'hide btn') && ($name != 'alternative_image' && $name != 'flash_file')) echo ' hide'?>"><?php if($name == 'file' || $name == 'alternative_image' || $name == 'flash_file'){ echo $this->form->$name->label_name;  }else{ echo $this->form->$name->getLabel(); }?></label>
@@ -113,14 +112,14 @@
                                                                                                                     //echo $this->form->$name->helper;
 													if($this->form->$name->helper == 'formSubmit'){
 														//generate save button to print at the end
-														$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+														$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span8 center">'.$this->form->$name->renderViewHelper().'</div></div>';
 													}elseif($this->form->$name->helper == 'formButton'){
 														if($this->form->$name->getName() == 'save_image'){
-															//generate save button to print at the end
-															$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
-														}else{
-                                                                                                                    $saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
-															//echo '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span10 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+                                                                                                                    //generate save button to print at the end
+                                                                                                                    $saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span8 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+                                                                                                                }else{
+                                                                                                                    $saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span8 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+                                                                                                                    echo '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span10 center">'.$this->form->$name->renderViewHelper().'</div></div>';
 														}
 													}else
 														if($name == 'url'){
@@ -177,7 +176,9 @@
 			<?php } ?>
 		<?php } 
 		//prints the save button at the end
+                if($this->content_type=='Image'||$this->content_type=='Carousel'){
 		echo $saveButton;
+                }
 		?>
 		<input type="hidden" id="approved" name="approved" value="<?php echo $this->approved_frm; ?>" />
 		<input type="hidden" id="section_details" name="section_details" value="<?php echo $this->section_id.'/'.$this->article;?>" />

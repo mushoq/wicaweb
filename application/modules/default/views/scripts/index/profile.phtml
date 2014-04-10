@@ -1,87 +1,44 @@
 <?php 
-$lang = Zend_Registry::get ( 'Zend_Translate' );
-?>				
-    <form class="span12 form-horizontal margin-fancy" id="form_register_'.$area_id.'" name="form_register_'.$area_id.'" action="">
-            <div class="row-fluid center">
-                    <h3> <?php echo $lang->translate('User'); ?></h3>
-            </div><br/>
-            <div class="row-fluid">
-            <div class="span6">				      							      		
-                    <div class="control-group">
-                                    <label class="control-label">* <?php echo $lang->translate('Nombre'); ?></label>
-                                    <div class="controls">
-                                            <input type="text" id="public_user_name_'.$area_id.'" name="public_user_name_'.$area_id.'" />
-                                    </div>
-                            </div>
+/**
+ * ControlPanel View. Renders the view of the index action 
+ *
+ * @category   WicaWeb
+ * @package    Core_View_Index_ControlPanel
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @author	   Esteban
+ * @version    1.0
+ *
+ */
+//translate library
+$lang = Zend_Registry::get('Zend_Translate');
+?>
+
+<div class="row-fluid line">
+	<div class="span12 page-header-wica center">
+		<h1> <?php echo $lang->translate('Cliente Home');?> </h1>
+	</div>
+</div>
+<div class="line-top alert_messages_container">
+	<?php echo $this->flashMessages();?>
+</div>
+
+<div class="well">
+	<div class="row-fluid">
+            <div class="span12">
+                UD. Se encuentra en mora
             </div>
-            <div class="span6">				      							      		
-                    <div class="control-group">
-                                    <label class="control-label">* <?php echo $lang->translate('Lastname'); ?></label>
-                                    <div class="controls">
-                                            <input type="text" id="public_user_last_name_'.$area_id.'" name="public_user_last_name_'.$area_id.'" />
-                                    </div>
-                            </div>
-            </div>								      												
-            </div>
-            <div class="row-fluid">
-            <div class="span6">				      							      		
-                    <div class="control-group">
-                                    <label class="control-label">* <?php echo $lang->translate('Identificattion'); ?></label>
-                                    <div class="controls">
-                                            <input type="text" id="public_user_identification_'.$area_id.'" name="public_user_identification_'.$area_id.'" />
-                                    </div>
-                            </div>
-            </div>
-            <div class="span6">				      							      		
-                    <div class="control-group">
-                                    <label class="control-label">* <?php echo $lang->translate('Email'); ?></label>
-                                    <div class="controls">
-                                            <input type="text" id="public_user_email_'.$area_id.'" name="public_user_email_'.$area_id.'" />
-                                    </div>
-                            </div>
-            </div>								      												
-            </div>		
-            <div class="row-fluid">
-            <div class="span6">				      							      		
-                    <div class="control-group">
-                                    <label class="control-label"> <?php echo $lang->translate('Phone'); ?></label>
-                                    <div class="controls">
-                                            <input type="text" id="public_user_phone_'.$area_id.'" name="public_user_phone_'.$area_id.'" />
-                                    </div>
-                            </div>
-            </div>
-            <div class="span6">				      							      		
-                    <div class="control-group">
-                                    <label class="control-label">* <?php echo $lang->translate('Username'); ?></label>
-                                    <div class="controls">
-                                            <input type="text" id="public_user_username_'.$area_id.'" name="public_user_username_'.$area_id.'" />
-                                    </div>
-                            </div>
-            </div>								      												
-            </div>	
-            <div class="row-fluid">
-            <div class="span6">				      							      		
-                    <div class="control-group">
-                                    <label class="control-label">* <?php echo $lang->translate('Password'); ?></label>
-                                    <div class="controls">
-                                            <input type="password" id="public_user_password_'.$area_id.'" name="public_user_password_'.$area_id.'" />
-                                    </div>
-                            </div>
-            </div>	
-            <div class="span6">				      							      		
-                    <div class="control-group">
-                                    <label class="control-label">* <?php echo $lang->translate('Confirm Password'); ?></label>
-                                    <div class="controls">
-                                            <input type="password" id="public_user_cpassword_'.$area_id.'" name="public_user_cpassword_'.$area_id.'" />
-                                    </div>
-                            </div>
-            </div>								      								      												
-            </div>
-            <div class="row-fluid center">
-                    <input class="btn " type="button" id="btn_register_user_'.$area_id.'" name="btn_register_user_'.$area_id.'" value=" <?php echo $lang->translate('Enviar'); ?>" />
-                    <input type="hidden" id="website_id" name="website_id" value="'.$front_ids->website_id.'" />
-                    <input type="hidden" id="area" name="area" value="'.$area_id.'" />
-                    <input type="hidden" id="error_email_'.$area_id.'" name="error_email_'.$area_id.'" value="'. $lang->translate('The email address already has been registered').'" />
-                    <input type="hidden" id="error_username_'.$area_id.'" name="error_username_'.$area_id.'" value="'. $lang->translate('The username already has been registered').'" />
-            </div>																																				
-    </form>
+		<ul id="control_panel_options" class="nav nav-pills">
+			<?php foreach($this->menu_modules as $module):?>
+				<li class="control_panel_opt">
+                                    <a id="<?php echo $module?>" class="pointer center"><?php if($module):?>
+                                        <img alt="<?php echo $lang->translate($module);?>" src="/images/controlPanel/<?php echo $module;?>" class="control_panel_image">
+                                            <?php endif;?>
+                                        <br>
+                                                <?php echo $lang->translate($module);?>
+                                    </a>
+                                </li>       
+			<?php endforeach;?>
+		</ul>
+	</div>	
+</div>

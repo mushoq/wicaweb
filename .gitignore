@@ -8,11 +8,23 @@ extras/documentation
 /nbproject
 /docs/db/scripts/bdd_20120828.sql
 /docs/db/scripts/basic_data.sql
-application/configs/
+
 /public/installer.lock
 /public/uploads
 /public/uploads/cache
 
+
 .DS_Store
 
 application/configs/application.ini
+
+public/.DS_Store
+
+public/css/.DS_Store
+
+public/images/.DS_Store
+
+public/js/.DS_Store
+
+application/.DS_Store
+

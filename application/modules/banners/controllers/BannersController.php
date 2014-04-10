@@ -83,10 +83,6 @@ class Banners_BannersController extends Zend_Controller_Action
 			}
 			$sections_list = $sections_list_res;
 		}
-
-		//Check if user profile is admin profile
-		if($id->user_profile == '1')
-		{
 			//sections list array
 			if(count($sections_list)>0)
 			{
@@ -134,173 +130,6 @@ class Banners_BannersController extends Zend_Controller_Action
 			if(isset($sections_arr_list)){
 				$sections_arr = $sections_arr_list;
 			}	
-		}
-		else //No Admin Profile
-		{
-			$subsection_arr = array();
-			$section_aux = array();
-			
-			//Get of session var the sections allowed by actual user
-			$user_allowed_sections_arr = explode(',',$id->user_allowed_sections);
-
-			/** Begin filter sections with variable area only (Banner Module Control)**/
-			
-			//Find template according website
-			$website = new Core_Model_Website();
-			$website_data = $website->find('wc_website',array('id'=>$id->website_id));
-			$template_id = $website_data[0]->template_id;
-			  
-			//Find variable area content by template
-			$area = new Core_Model_Area();
-			$area_data = $area->personalized_find('wc_area',array(array('template_id','=',$template_id),array('type','LIKE','variable')));
-			$area_content_id = $area_data[0]->id;
-		
-			//Find sections with variable area content
-			$section_area = new Core_Model_SectionModuleArea();
-			$section_area_list = $section_area->find('wc_section_module_area',array('area_id'=>$area_content_id));
-		
-			//Get data of existent sections that contents variable content
-			if($section_area_list){
-				foreach ($section_area_list as $sal){
-					$section_area_item = $section->find('wc_section',array('id'=>$sal->section_id));
-					if($section_area_item){
-						foreach ($section_area_item as $sei){
-							$sections_list_aux[] = $sei;
-						}
-		
-					}
-				}
-			}
-		
-			 
-			//sections list array
-			if($sections_list_aux)
-			{
-				foreach ($sections_list_aux as $sec)
-				{
-					$sections_arr_variable[] = array('id'=>$sec->id,
-							'section_parent_id'=>$sec->section_parent_id,
-							'title'=>$sec->title,
-							'article'=>$sec->article
-					);
-				}
-			}
-		
-			/** End filter sections with fixed area only (End Banner Module Control)**/
-			
-			//Get available sections for user
-			
-			foreach ($user_allowed_sections_arr as $serial)
-			{
-				foreach ($sections_list as $asc)
-				{
-					if($asc->id == $serial)
-					{
-						$section_aux[] = $asc;
-					}
-				}
-			}
-			$available_sections = $section_aux;
-		
-			foreach ($available_sections as $sec)
-			{
-				$sections_arr[] = array('id'=>$sec->id,
-						'temp'=>$sec->temp,
-						'section_parent_id'=>$sec->section_parent_id,
-						'title'=>$sec->title,
-						'article'=>$sec->article,
-						'order_number'=>$sec->order_number
-				);
-		
-				//parent allowed sections
-				if($sec->section_parent_id)
-				{
-					$subsection_arr[] = self::buildSectionParentTree($branch = array(), $sec->section_parent_id);
-				}
-			}
-		
-			if(count($subsection_arr)>0)
-			{
-				//parent sections array
-				foreach ($subsection_arr as $key => $sub)
-				{
-					foreach ($sub as $val)
-					{
-						$subsection_list[$val['id']] = $val['id'];
-						$subsection_list_stt[$val['id']] = $val['temp'];
-					}
-				}
-		
-				$subsection_aux = array_unique($subsection_list);
-				if(count($subsection_aux)>0)
-				{
-					foreach ($subsection_aux as $k => &$sbc)
-					{
-						foreach ($sections_arr as $sct)
-						{
-							if($sct['id'] == $sbc && $sct['temp'] == intval($subsection_list_stt[$sbc]))
-							{
-								unset($subsection_aux[$k]);
-							}
-						}
-					}
-					//non repeated sections
-					foreach ($subsection_aux as $sec)
-					{
-						if($subsection_list_stt[$sec])
-						{
-							$subsection_obj = $section_temp->find('wc_section_temp', array('section_id'=>$sec));
-							$temp_subsec = 1;
-						}
-						else
-						{
-							$subsection_obj = $section->find('wc_section', array('id'=>$sec));
-							$temp_subsec = 0;
-						}
-		
-						foreach ($subsection_obj as $obj)
-						{
-							if(isset($obj->section_id))
-							{
-								$serial_sec = $obj->section_id;
-							}
-							else
-							{
-								$serial_sec = $obj->id;
-							}
-								
-							$sections_arr[] = array('id'=>$serial_sec,
-									'temp'=>$temp_subsec,
-									'section_parent_id'=>$obj->section_parent_id,
-									'title'=>$obj->title,
-									'article'=>$obj->article,
-									'order_number'=>$obj->order_number
-							);
-						}
-					}
-				}
-			}
-		
-			//Get only variable sections (Banner Module Control)
-		
-			if($sections_arr_variable){
-				foreach ($sections_arr as $sav){
-					foreach ($sections_arr_variable as $sa)
-					{
-						if($sav['id']==$sa['id']){
-							$sections_arr_list[] = $sav;
-						}
-					}
-				}
-			}
-		
-			$sections_arr = array();
-				
-			if(isset($sections_arr_list)){
-				$sections_arr = $sections_arr_list;
-			}
-		
-		}
 		
 		// Ordering sections by article and number
 		$sort_col_number = array();
@@ -476,9 +305,6 @@ class Banners_BannersController extends Zend_Controller_Action
 		
 		//available parent section list according profile
 		
-		//Check if user profile is admin
-		if($id->user_profile == '1')
-		{		
 			$section_list = $available_sections; 
 			if(count($section_list)>0)
 			{
@@ -503,54 +329,6 @@ class Banners_BannersController extends Zend_Controller_Action
 					}
 				}
 			}
-		}
-		else
-		{
-			$section_aux = array();			
-			foreach ($id->user_allowed_sections as $sbc)
-			{
-				foreach ($available_sections as $sct)
-				{
-					if($sct->id == $sbc->section_id)
-					{						
-						$section_aux[] = $sct;
-					}
-				}
-			}			
-			$section_list = $section_aux;
-			if(count($section_list)>0)
-			{
-				foreach ($section_list as &$sli)
-				{
-					if(GlobalFunctions::checkEditableSection($sli->id))
-					{
-						$sli->editable_section = 'yes';
-					}
-					else
-					{
-						$sli->editable_section = 'no';
-					}
-			
-					if(GlobalFunctions::checkErasableSection($sli->id))
-					{
-						$sli->erasable_section = 'yes';
-					}
-					else
-					{
-						$sli->erasable_section = 'no';
-					}
-				}
-			}
-			
-			/*
-			 * Ordering sections by order_number in tree of sections
-			 */
-			$sort_col = array();
-			foreach ($section_list as $row) {				
-				$sort_col_number[$row->id] = $row->order_number;
-			}
-			array_multisort($sort_col_number, SORT_ASC, $section_list);
-		}
 
 		//Section list to view
 		$this->view->section = $section_list;
