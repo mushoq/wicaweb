@@ -285,9 +285,9 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 																			<div class="span3 form_label">
 																				<label>'.$ff->name.'</label>
 																			</div>
-																			<div class="span3 form_field">
-																				<input type="file" id="form_field_file_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'" />
-																			</div>
+																			<div class="span4 form_field">																				
+                                                                                                                                                                <input id="form_txt_file_'.$data_content [0]->id.'" class="align-top" type="text" name="txt'.$ff->name.'" readonly="">
+                                                                                                                                                                <button id="form_field_file_'.$data_content [0]->id.'" class="btn " type="button" name="'.$ff->name.'">'.$lang->translate('Search..').'</button>																			</div>
 																		</div>';
 															break;								
 										}

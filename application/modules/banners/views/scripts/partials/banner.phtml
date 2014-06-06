@@ -44,9 +44,11 @@
 					switch ($value['banner_type'])
 					{
 						case 'flash' :
+							list($widthSWF, $heightSWF, $typeSWF, $attrSWF) = getimagesize('uploads/banners/' . $value['content']);
+                                                        //var_dump($widthSWF, $heightSWF, $typeSWF, $attrSWF);die();
 							$return = '<div id="alignment_cont_'.$value['id'].'">
-							<object type="application/x-shockwave-flash" data="/uploads/banners/' . $value['content'] . '" width="320" height="240">
-							<param name="movie" value="/uploads/banners/'.$value['content'].'" />
+							<object type="application/x-shockwave-flash" data="/uploads/banners/' . $value['content'] . '" width="'.$widthSWF.'" height="'.$heightSWF.'">
+                                                        <param name="movie" value="/uploads/banners/'.$value['content'].'" />
 							<param name="quality" value="high" />
 							<param name="wmode" value="opaque" />
 							</object>
