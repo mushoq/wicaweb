@@ -254,7 +254,12 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 					$cms_arr[$mod->action_id] = array('action'=> $mod->action_name, 'title'=>$mod->action_title);
 				}
 			}
-		}		
+		}
+                 //Get website_id
+		$website_id = $id->website_id;
+		$website_aux = new Core_Model_Website();
+		$website_data = $website_aux->find('wc_website',array('id'=>$website_id));
+		$this->view->website_data = $website_data;
 		$this->view->cms_links = $cms_arr;
 	}
 	

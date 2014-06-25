@@ -32,6 +32,18 @@
 					<a id="article_preview_<?php echo $this->info['id']; ?>" class="pointer" title="<?php echo $lang->translate('Preview'); ?>"> <i class="icon-eye-open"></i> </a>					
 					<a id="article_prw" class="hide" href="#article_front_container"></a>
 			<?php endif; ?>
+                        <?php if($this->website_data[0]->prints == 'yes'){ 
+				//Get prints of actual section
+				$section_prints_aux = new Core_Model_SectionPrints();
+				$section_prints = $section_prints_aux->find('wc_section_prints',array('section_id'=>$this->info['id']));
+				if(count($section_prints)>0){
+					echo $lang->translate('Prints').': '.$section_prints[0]->count;
+				}else
+				{
+					echo $lang->translate('Prints').': 0';
+				}
+				
+			}?>                                        
 		</span>
 	</div>	
 	<input type="hidden" id="article_id" name="article_id" value="<?php echo $this->info['id']; ?>">
