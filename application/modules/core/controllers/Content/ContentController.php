@@ -657,9 +657,11 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 			}else{
 				$array_foreach = $get_fields;
 			}
-                        
+                  if(!isset($imagesArray)){
+                      $imagesArray = NULL;
+                  }      
                  //for multiple images FIELDS 2,3,4,5,6,7,8,9, 36, 37
-                if(isset($imagesArray) && count($imagesArray)>1){
+                if(count($imagesArray)>1){
                     $content_field = new Core_Model_ContentField ();                              
                     $picture_foot = $formData['picture_foot']; //2
                     $description = $formData['description']; //3
@@ -671,6 +673,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
                     $resizeimg = $formData['resizeimg']; //9  
                     $watermark = $formData['watermarkimg']; //36 
                     $watermarkposition = $formData['watermark_position']; //37 
+                    $zoom = $formData['zoom'];//38
                         if($_FILES["Filedata"]["error"])	
                         foreach ($_FILES["Filedata"]["error"] as $key => $error) {
                                 if ($error == UPLOAD_ERR_OK) {
@@ -728,6 +731,11 @@ class Core_Content_ContentController extends Zend_Controller_Action {
                                                         $content_field_obj7->content_id=$multipleId[$key] ['id'];
                                                         $content_field_obj7->value= $resizeimg;
                                                         $saved_content_field7 = $content_field->save ( 'wc_content_field', $content_field_obj7 );
+                                                        $content_field_obj8 = $content_field->getNewRow ( 'wc_content_field' );
+                                                        $content_field_obj8->field_id=38;
+                                                        $content_field_obj8->content_id=$multipleId[$key] ['id'];
+                                                        $content_field_obj8->value= $zoom;
+                                                        $saved_content_field8 = $content_field->save ( 'wc_content_field', $content_field_obj8 );
                                                         $content_field_obj9 = $content_field->getNewRow ( 'wc_content_field' );
                                                         $content_field_obj9->field_id=36;
                                                         $content_field_obj9->content_id=$multipleId[$key] ['id'];
@@ -1099,13 +1107,14 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 				}					
 			}
 		}
-	}	
+	 }	
+        
 	
 	/**
 	 * Updates an existent content
 	 */
 	public function editAction() 
-	{
+	{       
 		//disable layout
 		$this->_helper->layout->disableLayout ();
 		// translate library
@@ -1117,6 +1126,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 		$content_id = $this->_request->getPost ('id');
 		$section_id = $this->_request->getPost ('section_id');
 		$session_id->section_id = $section_id;
+               
 		
 		if (! $content_id) {
 			$this->_helper->flashMessenger->addMessage ( array (
@@ -1246,7 +1256,9 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 			$this->view->section_id = null;			
 			$this->view->max_height = 1000;
 			$this->view->max_width = 1000;			
-		}		
+		}	
+                
+                 //die('entra');
 	}
 	
 	/**

@@ -104,9 +104,12 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									$watermark_data =  GlobalFunctions::getWatermark($id->website_id);							
 									//$return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>1000,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" ><img';
 									$hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0));
-                                                                        
-                                                                        $return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value  . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. $hrefImg .'" ><img';					
-									
+                                                                        if($data_content_field[10]->value =='yes'){
+                                                                            $return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value  . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. $hrefImg .'" ><img';					
+                                                                        }else{
+                                                                             $return .= $data_content_field [3]->value? '<img' : '<img';					
+
+                                                                        }
 										
 									if( $data_content_field[7]->value == 'no'){
                                                                             $path = APPLICATION_PATH.'/../public/uploads/content/';
@@ -135,9 +138,9 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 										$return.= ' class="image-frame"';
 									}
 									$return .='/>';
-									
-									$return .= $data_content_field [3]->value? '</a>' : '</a>';
-									
+									if($data_content_field[10]->value =='yes'){
+                                                                            $return .= $data_content_field [3]->value? '</a>' : '</a>';
+                                                                        }
 									if($data_content_field [0]->value != '')
 										$return .= '<p>'.$data_content_field [0]->value.'</p>';
 									

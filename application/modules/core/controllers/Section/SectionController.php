@@ -1703,6 +1703,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		//section area
 		$section_areas = new Core_Model_SectionModuleArea();
 		$section_areas_temp = new Core_Model_SectionModuleAreaTemp();
+                $idArea = null;
 		
 		if($search_temp)
 		{
@@ -1715,13 +1716,17 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		
 		//areas
 		$areas = new Core_Model_Area();
+               
 		
 		if(count($section_area)>0)
 		{			
 			$number = $areas->find('wc_area',array('id'=>$section_area[0]->area_id));
-			$section_arr['section_area'] = $number[0]->area_number;
+                        $section_arr['section_area'] = $number[0]->area_number;
 			$section_arr['section_area_id'] = $section_area[0]->id;
+                        $idArea = $number[0]->id;
+                        
 		}
+                $this->view->idArea = $idArea;
 	
 		if($section_arr['section_parent_id'])
 		{
@@ -1937,8 +1942,8 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			$section_act->author = GlobalFunctions::value_cleaner($formData['author']);
 			$section_act->feature = GlobalFunctions::value_cleaner($formData['feature']);
 			$section_act->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
-			$section_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
-			$section_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
+			$section_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
+			$section_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
 			$section_act->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 			$section_act->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
 			$section_act->external_link = GlobalFunctions::value_cleaner($formData['external_link']);

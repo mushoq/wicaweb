@@ -30,9 +30,7 @@ class Core_Form_Content_Content extends Zend_Form {
 		$this->setAction ( '' );
 		
 		$field = new Core_Model_Field ();
-		$fields = $field->find ( 'wc_field', array (
-				'content_type_id' => $content_type_id 
-		) );
+		$fields = $field->find ( 'wc_field', array ('content_type_id' => $content_type_id), array('order_item'=>'asc') );
 		
 		// Title
 		$title = new Zend_Form_Element_Text ( 'title' );

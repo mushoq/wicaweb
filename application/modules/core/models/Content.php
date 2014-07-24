@@ -43,6 +43,8 @@ class Core_Model_Content extends Core_Model_Factory
        public static $watermarkimg_values = array (
 									'yes' =>  'Yes' ,
 									'no' =>  'No');
+       public static $zoom_values = array ('yes' =>'Yes',
+                                           'no' =>'No'); 
 	
 	
 	/**

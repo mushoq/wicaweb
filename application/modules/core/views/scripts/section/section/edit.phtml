@@ -187,8 +187,8 @@
                                                 <div class="controls">
                                                         <select id="area" name="area">
                                                                 <option value=""><?php echo $lang->translate('Selected'); ?></option>
-                                                                <?php foreach ($this->template_areas as $ky => $tpl ): ?>
-                                                                <option value="<?php echo $tpl->id; ?>" type="<?php echo $tpl->type; ?>" <?php if($tpl->area_number==$this->form->section_area->getValue()){ ?> selected="selected" <?php } ?> ><?php echo $tpl->name; ?></option>
+                                                                <?php  foreach ($this->template_areas as $ky => $tpl ): ?>
+                                                                <option value="<?php echo $tpl->id; ?>" type="<?php echo $tpl->type; ?>" <?php if($tpl->id==$this->idArea){ ?> selected="selected" <?php } ?> ><?php echo $tpl->name; ?></option>
                                                                 <?php endforeach; ?>
                                                          </select>                        
                                                 </div>

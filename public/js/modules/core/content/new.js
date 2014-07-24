@@ -168,6 +168,11 @@ $(document).ready(function() {
                                         $("input[id^='watermarkimg']").bind("click",function(){
                                                 $("#watermarkimg").val($(this).attr('element_value'));
                                         });
+                                        $("#zoom-"+$("#zoom").val()).attr("class",'btn btn-primary active');
+                                        //set value on radio aux validation
+                                        $("input[id^='zoom']").bind("click",function(){
+                                                $("#zoom").val($(this).attr('element_value'));
+                                        });
                                         
 					//validation
 					$("#frmContent").validate({
@@ -184,7 +189,7 @@ $(document).ready(function() {
 								}
 							},
 							description:{
-								required:true
+								required:false
 							},
 							agileUploaderFileInputText:{
 								required:true,
