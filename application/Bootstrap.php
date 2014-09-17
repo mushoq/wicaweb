@@ -61,14 +61,54 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	 * Get file with words to translate
 	 */
 	protected function _initTranslation() {
+//		
+//		
+//		Zend_Loader::loadClass('Zend_Translate');
+//		
+//		$translate = new Zend_Translate(
+//				'array',
+//				APPLICATION_PATH.'/configs/languages/',
+//				'es',
+//				array('scan' => Zend_Translate::LOCALE_FILENAME)
+//		);
+//		
+//
+//		$id = New Zend_Session_Namespace('id');
+//		$website_language = $id->website_language;
+//		$locale = new Zend_Locale();
+//		
+//		if(isset($website_language)){
+//			$locale->setLocale($website_language);
+//		}else{
+//			$locale->setLocale(Zend_Locale::BROWSER);
+//		}
+//		$locale->setlocale(LC_ALL, 'en');
+//		
+//		// setting the right locale
+//		if ($translate->isAvailable($locale->getLanguage())) {
+//			$translate->setLocale($locale);
+//		} else {
+//			$translate->setLocale('es');
+//		}		
+//		
+//		Zend_Registry::set('Zend_Translate', $translate);
+//		
+//	
+	
 		
 		
 		Zend_Loader::loadClass('Zend_Translate');
 		
-		$translate = new Zend_Translate(
+/*		$translate = new Zend_Translate(
 				'array',
 				APPLICATION_PATH.'/configs/languages/',
 				'es',
+				array('scan' => Zend_Translate::LOCALE_FILENAME)
+		);*/
+		$translate = new Zend_Translate(
+				'array',
+				APPLICATION_PATH.'/configs/languages/',
+				'en',
 				array('scan' => Zend_Translate::LOCALE_FILENAME)
 		);
 		
@@ -77,18 +117,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$website_language = $id->website_language;
 		$locale = new Zend_Locale();
 		
-		if(isset($website_language)){
-			$locale->setLocale($website_language);
-		}else{
-			$locale->setLocale(Zend_Locale::BROWSER);
-		}
+// 		if(isset($website_language)){
+// 			$locale->setLocale($website_language);
+// 		}else{
+// 			$locale->setLocale(Zend_Locale::BROWSER);
+// 		}
 		$locale->setlocale(LC_ALL, 'en');
+		//$locale = new Zend_Locale();
 		
 		// setting the right locale
 		if ($translate->isAvailable($locale->getLanguage())) {
 			$translate->setLocale($locale);
 		} else {
-			$translate->setLocale('es');
+			//$translate->setLocale('es');
+			$translate->setLocale('en');
 		}		
 		
 		Zend_Registry::set('Zend_Translate', $translate);
@@ -145,6 +187,48 @@ public function _initRoute()
 						// add this route to the front controller
 	
 						$frontController->getRouter()->addRoute('user',$route);
+                                                
+                $route2 = new Zend_Controller_Router_Route(
+	
+				'section/:id/:title',array(
+                                    
+                                                'siteid' => '1',
+	
+						'controller' => 'index',
+	
+						'module' => 'default' ,
+	
+						'action' => 'index',
+	
+						'id' => 1,
+						
+						'title' => ''));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('tinyRoute',$route2);
+                                                
+              $route3 = new Zend_Controller_Router_Route(
+	
+				'article/:id/:title',array(
+                                    
+                                                'siteid' => '1',
+	
+						'controller' => 'index',
+	
+						'module' => 'default' ,
+	
+						'action' => 'index',
+	
+						'id' => 1,
+						
+						'title' => ''));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('mediumRoute',$route3);
                                                 
 }
 }

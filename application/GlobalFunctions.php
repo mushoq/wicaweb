@@ -596,6 +596,37 @@ class GlobalFunctions {
 	
 		return $html_content_preview;
 	}
+        
+        //Toma imagen del articulo para frontEnd
+        public static function getContentPreviewForArticle($content,$width, $height = '') {
+                       
+		//translate library
+		$lang = Zend_Registry::get('Zend_Translate');
+		
+		//get content type
+		$content_type = strtolower($content['type']);
+		
+		$html_content_preview = '';
+		switch ($content_type)
+		{
+			case 'image' :
+				//get data of the image content 
+				$content_type = new Core_Model_ContentType ();
+				$data_content_type = $content_type->find ( 'wc_content_type', array ('id' => $content['content_type_id']) );
+				
+				$content_field = new Core_Model_ContentField();
+				$content_field_temp = new Core_Model_ContentFieldTemp();
+					$data_content_field = $content_field->find ( 'wc_content_field', array ('content_id' => $content['id']) );
+				
+				//create the html to show the preview list
+				
+				
+				$html_content_preview .= imageRender::cache_image($data_content_field[4]->value, array('width' =>$width, 'height'=>$height));
+				break;
+		}
+	
+		return $html_content_preview;
+	}
 	
 	/**
 	 * Builds sections tree as html list

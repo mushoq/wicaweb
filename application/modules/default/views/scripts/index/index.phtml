@@ -73,8 +73,7 @@ $band_one_private = array();
 		}
 	}	
 	if($this->menu)
-		$section_contents_tpl['menu'] = '<ul id="nav">
-											<li><a href="/default/"><i class="icon-home icon-white"></i></a></li>'.
+		$section_contents_tpl['menu'] = '<ul id="nav">'.
 											$this->menu.'
 											<li><a href="/index/sitemap">'.$lang->translate('Sitemap').'</a></li> 					
 										</ul>';
@@ -97,12 +96,12 @@ $band_one_private = array();
 	if($this->header['name'])
             if(isset($_SESSION['external_user'])){
 		$section_contents_tpl['header_name'] .= '<div class="row-fluid right">
-                    <a class="pointer" id="profile" >'.$lang->translate('Welcome,'.$_SESSION['external_user_name'].'').'  </a><i class="icon-user"></i>
-                    <a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a><i class="icon-off"></i> </div>';
+                    <a class="pointer" id="profile" >'.$lang->translate('Welcome,'.$_SESSION['external_user_name'].'').'  </a><i class="glyphicon glyphicon-user"></i>
+                    <a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a> <i class="glyphicon glyphicon-off"></i> </div>';
             } else {
                 $section_contents_tpl['header_name'] .= '<div class="row-fluid right">
-                    <a class="pointer" id="profile" >'.$lang->translate('Login').'  </a><i class="icon-user"></i>
-                    <a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a><i class="icon-off"></i> </div>'; 
+                    <a class="pointer" id="profile" >'.$lang->translate('Login').'  </a><i class="glyphicon glyphicon-user"></i>
+                    <a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a> <i class="glyphicon glyphicon-off"></i> </div>'; 
             }
 	if($this->showold == 'yes')
 		$section_contents_tpl['header_name'] .= '<div class="row-fluid right">'.$lang->translate("View past publication").': &ensp;<input class="hide" type="text" id="view_old_plublications" name="view_old_plublications" /></div>';
