@@ -101,10 +101,18 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									//getWebsiste id
 									$id = new Zend_Session_Namespace('ids');
                                                                         //get watermark info
-									$watermark_data =  GlobalFunctions::getWatermark($id->website_id);							
+									$watermark_data =  GlobalFunctions::getWatermark($id->website_id);
+                                                                        
+                                                                        $path = APPLICATION_PATH.'/../public/uploads/content/';
+                                                                        //get the image size
+                                                                        $image_data = getimagesize($path.$data_content_field[4]->value);
+                                                                        $widthImg = $image_data[0].'px';
+                                                                        $heightImg = $image_data[1];
+                                                                        echo 'width= '.$widthImg;
+                                                                        echo '<br>contentWidth= '.$content_width;
 									//$return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>1000,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" ><img';
 									$hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0));
-                                                                        if($data_content_field[10]->value =='yes'){
+                                                                        if($data_content_field [3]->value){
                                                                             $return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value  . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. $hrefImg .'" ><img';					
                                                                         }else{
                                                                              $return .= $data_content_field [3]->value? '<img' : '<img';					
@@ -112,12 +120,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                         }
 										
 									if( $data_content_field[7]->value == 'no'){
-                                                                            $path = APPLICATION_PATH.'/../public/uploads/content/';
-                                                                            //get the image size
-                                                                            $image_data = getimagesize($path.$data_content_field[4]->value);
-                                                                            $widthImg = $image_data[0].'px';
-                                                                            $heightImg = $image_data[1];
-                                                                            $return .= ' src="/uploads/content/'.$data_content_field[4]->value.'" style="width:100%; max-width:'.$widthImg.';';
+                                                                            $return .= ' src="/uploads/content/'.$data_content_field[4]->value.'" ';
 									}else{
 									
 									
@@ -128,17 +131,19 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                             $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0)) .'" ';
                                                                         }                               
                                                                         
-                                                                        $return .= ' style="'.GlobalFunctions::checkImageSize($data_content_field [4]->value,$content_width);
+                                                                        
 									}
 									
 									
 									
-									$return .= '"';
+									
+                                                                        $return.= ' class="img-responsive';
                                                                         if($data_content_field [5]->value == 'frame'){
-										$return.= ' class="image-frame"';
+										$return.= ' image-frame';
 									}
+                                                                        $return.= '"';
 									$return .='/>';
-									if($data_content_field[10]->value =='yes'){
+									if($data_content_field [3]->value){
                                                                             $return .= $data_content_field [3]->value? '</a>' : '</a>';
                                                                         }
 									if($data_content_field [0]->value != '')
@@ -197,55 +202,56 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 										switch($ff->type)
 										{
 											case 'textfield':
-															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
-																				<label>'.$ff->name.'</label>
-																			</div>
-																			<div class="span3 form_field">
-																				<input type="text" id="form_field_textfield_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'"/>
-																			</div>
-																		</div>';
+															$return .=	'<div class="form-group">
+                                                                                                                                            <label for="form_field_textfield_'.$ff->id.'">'.$ff->name.'</label>
+                                                                                                                                            <input type="text" id="form_field_textfield_'.$ff->id.'" class="form-control" name="'.$ff->name.'" valid="'.$ff->required.'"/>
+                                                                                                                                         </div>';
 															break;
+                                                                                                                    
+                                                                                        case 'emailfield':
+															$return .=	'<div class="form-group">
+                                                                                                                                            <label for="form_field_textfield_'.$ff->id.'">'.$ff->name.'</label>
+                                                                                                                                            <input type="text" id="form_field_textfield_'.$ff->id.'" class="form-control email" name="'.$ff->name.'" valid="'.$ff->required.'"/>
+                                                                                                                                         </div>';
+															break;
+                                                                                                                    
 											case 'textarea':	
-															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
-																				<label>'.$ff->name.'</label>
-																			</div>
-																			<div class="span3 form_field">
-																				<textarea id="form_field_textarea_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'" ></textarea>
-																			</div>
-																		</div>';					
+															$return .=	'<div class="form-group">
+                                                                                                                                            <label for="form_field_textarea_'.$ff->id.'">'.$ff->name.'</label>
+                                                                                                                                            <textarea id="form_field_textarea_'.$ff->id.'" class="form-control" name="'.$ff->name.'" valid="'.$ff->required.'" ></textarea>
+                                                                                                                                        </div>';					
 															break;
 															
 											case 'radiobutton':
-															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
+															$return .=	'<div class="form-group">
+																			
 																				<label>'.$ff->name.'</label>
-																			</div>';
+																			';
 															
 															$array_options = explode ( ',', $ff->options );
 															
 															if(count($array_options)>1)
 																array_pop ( $array_options );
 															
+                                                                                                                            $return.= '<div>';
 															if($array_options)
 															{
 																foreach ( $array_options as $ao ) 
 																{
-																	$return .= '	<input id="'.$ao.'" type="radio" value="'.$ao.'" name="'.strtolower ( $data_content_type [0]->name ).$content_id.'">'.$ao;
+																	$return .= '<label class="radio-inline"><input id="'.$ao.'" class="radio-inline" type="radio" value="'.$ao.'" name="'.strtolower ( $data_content_type [0]->name ).$content_id.'">'.$ao.'</label>';
 																}
-															}					
-															$return.= '</div>
-																		</div>';
+															}
+                                                                                                                            $return.= '</div>';
+															$return.= '</div>';
 															break;
 												
 											case 'dropdown':
-															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
-																				<label>'.$ff->name.'</label>
-																			</div>
-																			<div class="span3 form_field">
-																				<select id="form_field_dropdown_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'">';
+															$return .=	'<div class="form-group">
+																			
+																				<label for="form_field_dropdown_'.$ff->id.'">'.$ff->name.'</label>
+																			
+																			
+																				<select class="form-control" id="form_field_dropdown_'.$ff->id.'" name="'.$ff->name.'" valid="'.$ff->required.'">';
 															
 																$array_options = explode ( ',', $ff->options );
 																if(count($array_options)>1)
@@ -257,40 +263,35 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 																}
 															
 															$return.= '</select>
-																			</div>
+																		
 																	</div>';											
 															break;	
+												
+											
 				
 											case 'checkbox':
-															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
-																				<label>'.$ff->name.'</label>
-																			</div>
-																			<div class="span3 form_field">
-																				<input type="checkbox" id="form_field_checkbox_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'" />
-																			</div>
-																		</div>';						
+															$return .=	'<div class="checkbox">
+                                                                                                                                            <label>
+                                                                                                                                                <input type="checkbox" id="form_field_checkbox_'.$ff->id.'" name="'.$ff->name.'" valid="'.$ff->required.'" />
+                                                                                                                                                '.$ff->name.'
+                                                                                                                                            </label>
+                                                                                                                                        </div>';						
 															break;	
 				
 											case 'comment':	
-															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
-																				&ensp;
-																			</div>
-																			<div class="span5 form_field">
+															$return .=	'<div class="form-group">
 																				<label class="comment">'.$ff->description.'</label>
-																			</div>
 																		</div>';
 															break;	
 														
 											case 'file':	
-															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
-																				<label>'.$ff->name.'</label>
-																			</div>
-																			<div class="span4 form_field">																				
-                                                                                                                                                                <input id="form_txt_file_'.$data_content [0]->id.'" class="align-top" type="text" name="txt'.$ff->name.'" readonly="">
-                                                                                                                                                                <button id="form_field_file_'.$data_content [0]->id.'" class="btn " type="button" name="'.$ff->name.'">'.$lang->translate('Search..').'</button>																			</div>
+															$return .=	'<div class="form-group">
+																			
+																				<label for="form_field_file_'.$ff->id.'">'.$ff->name.'</label>
+																			
+																			
+																				<input type="file" id="form_field_file_'.$ff->id.'" name="'.$ff->name.'" valid="'.$ff->required.'" />
+																			
 																		</div>';
 															break;								
 										}
@@ -319,22 +320,22 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 										//validate if session code is set
 										
 										$_SESSION['captcha_session_'.$data_content [0]->id] =  $captchaIterator['word'];
-										$return .= '<div class="line row-fluid">
-														<div class="span3 form_label">
-															<label>'.$lang->translate('Insert the security code').'</label>
-														</div>
-														<div class="span3 form_field">
-															'.$captcha->render().'
-															<input type ="text" id ="form_field_captcha_'.$data_content [0]->id.'" name = "form_field_captcha_'.$data_content [0]->id.'" valid="yes" class="line-top"/>
+										$return .= '<div class="form-group text-center">
+														
+															<label>'.$lang->translate('Insert the security code').'</label><br>
+														
+														
+															'.$captcha->render().'<br>
+															<input type="text" id="form_field_captcha_'.$data_content [0]->id.'" name = "form_field_captcha_'.$data_content [0]->id.'" valid="yes" class="form-control captcha" />
 																<label id="captcha_error_'.$data_content [0]->id.'" class="error_validation hide" for="form_field_captcha_'.$data_content [0]->id.'">'.$lang->translate('Invalid code').'</label>
-														</div>
+														
 													</div>';
 									}
 	
 									$front_ids = New Zend_Session_Namespace('ids');
 	
-									$return .= '<div class="row-fluid line center">								
-													<input type="button" id="btn_sub_form_'.$data_content [0]->id.'" name="btn_sub_form_'.$data_content [0]->id.'" class="btn btn-primary" value="'.$lang->translate('Save').'"/>
+									$return .= '<div class="form-group center">								
+													<input type="button" id="btn_sub_form_'.$data_content [0]->id.'" name="btn_sub_form_'.$data_content [0]->id.'" class="btn btn-primary" value="'.$lang->translate('Send').'"/>
 													<input type="hidden" id="website_id" name="website_id" value="'.$front_ids->website_id.'" />
 													<input type="hidden" id="form_id" name="form_id" value="'.$data_content [0]->id.'" />		
 												</div>';

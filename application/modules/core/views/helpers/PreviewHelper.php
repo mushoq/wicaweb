@@ -228,6 +228,18 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 												</div>
 											</div>';
 								break;
+								
+							case 'emailfield':
+								
+								$return .= '<div class="line row-fluid">
+												<div class="span3 form_label">
+													<label>'.$ff->name.'</label>
+												</div>
+												<div class="span3 form_field">
+													<input type="text" id="'.$ff->name.'" required="'.$ff->required.'" />
+												</div>
+											</div>';
+								break;
 							case 'textarea':
 								
 								$return .= '<div class="line row-fluid">

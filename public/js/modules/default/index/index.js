@@ -51,8 +51,6 @@ $(document).ready(function() {
 		$(this).hide();
 	});
 	
-	mainmenu();
-	
 	$("[id^='myCarousel_']").each(function(){
 		$(this).carousel({
 			interval : 8000
@@ -386,24 +384,41 @@ $(document).ready(function() {
 	});
 	setDefaultCalendarOldPbl($("#view_old_plublications"));	
 	
+	$(".fancybox").fancybox();
+	$(".wicabox").fancybox();
+	
+	$(".various").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 600,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+	
 });
 
-function mainmenu() {
-	$(" #nav ul ").css({
-		display : "none"
-	}); // Opera Fix
-	$(" #nav li").hover(function() {
-		$(this).find('ul:first').css({
-			visibility : "visible",
-			display : "none"
-		}).show(400);
-	}, function() {
-		$(this).find('ul:first').css({
-			visibility : "hidden"
-		});
-	});
-}
+$(function() {
+  $('#nav').smartmenus();
+});
 
+$(window).load(function(){
+	$('#showMenu').click(function() {
+	 $('ul.sm-simple').show();
+	 $('#hideMenu').show();
+	 $('#showMenu').hide();
+	});
+	
+	$('#hideMenu').click(function() {
+	 $('ul.sm-simple').hide();
+	 $('#hideMenu').hide();
+	 $('#showMenu').show();
+	});	
+});
+	
 /**
   * Function to upload files by ajax
   * @action : Action controller

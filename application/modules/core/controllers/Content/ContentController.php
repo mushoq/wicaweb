@@ -662,6 +662,13 @@ class Core_Content_ContentController extends Zend_Controller_Action {
                   }      
                  //for multiple images FIELDS 2,3,4,5,6,7,8,9, 36, 37
                 if(count($imagesArray)>1){
+                    
+                    if(!isset($formData['watermarkimg']))
+                        $formData['watermarkimg'] = 'no';
+                    
+                    if(!isset($formData['resizeimg']))
+                        $formData['resizeimg'] = 'no';
+                    
                     $content_field = new Core_Model_ContentField ();                              
                     $picture_foot = $formData['picture_foot']; //2
                     $description = $formData['description']; //3

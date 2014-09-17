@@ -249,6 +249,7 @@ class Core_Form_Content_Content extends Zend_Form {
 						$select->setMultiOptions ( array (
 								'' => $lang->translate ('- Select -'),
 								'textfield' => $lang->translate ('Text field'),
+                                                                'emailfield' => $lang->translate ('Email field'),
 								'textarea' => $lang->translate ('Text area'),
 								'radiobutton' => $lang->translate ('Radio button'),
 								'dropdown' => $lang->translate('Dropdown list'),

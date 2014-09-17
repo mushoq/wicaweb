@@ -108,6 +108,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    	$header_data['meta_descr'] = $website_data['description'];
 		    	$header_data['meta_keywords'] = $website_data['keywords'];
 		    	$header_data['meta_author'] = $website_data['copyright'];
+                        $header_data['website_url'] = $website_data['website_url'];
 		    	$this->view->header = $header_data;
 		    	 
 		    	/********
@@ -379,8 +380,25 @@ class Default_IndexController extends Zend_Controller_Action
 	    		//related section_id content data    		
 		    	foreach ($section_data_arr as $k=>$section)
 		    	{	    		
-		    		if($section->title_browser)
-		    			$this->view->title_browser = $section->title_browser;
+		    		$this->view->title_browser = str_replace('"','-',str_replace('\\','',$section->title));
+                                $this->view->synopsis_browser = str_replace(array("<p>", "</p>"),'',$section->synopsis);
+                                $this->view->author_browser = $section->author;
+                                $this->view->id_browser = $section->id;
+                                $this->view->article_browser = $section->article;
+                                $this->view->website_id = $front_ids->website_id;
+                                $this->view->image_browser = '';
+                                if($section->title_browser)
+                                            $this->view->title_browser = $section->title_browser;
+                                
+                                
+                                $content = new Core_Model_Content();
+                                /* METATAG OPEN GRAPH IMAGE */ 
+                                $image_browser = $content->getContentsBySection($section->id, $front_ids->website_id, null, 2);
+                                if(count($image_browser)>0) {
+                                    $this->view->image_browser = GlobalFunctions::getContentPreviewForArticle($image_browser[0],500);
+                                } else {
+                                    $this->view->image_browser = null;
+                                }
 	
 		    		//id is related to section or article when searching for section_area
 		    		//same name $section_id guarantees sections build correctly
@@ -817,7 +835,7 @@ class Default_IndexController extends Zend_Controller_Action
     	{
     		$content_arr[] = array('section_id'=>NULL,'content_id'=>NULL,'title'=>$lang->translate('Sitemap'), 'content'=>$html_list, 'columns'=>'1');
     		$contents_list[0]['order_number'] = '';
-    		$contents_list[0]['filename'] = 'sectemplate1.phtml';
+    		$contents_list[0]['filename'] = 'sectemplate.phtml';
     		$contents_list[0]['area'] = 'wica_area_content';
     		$contents_list[0]['area_width'] = 'span1';
     		$contents_list[0]['column_number'] = 1;

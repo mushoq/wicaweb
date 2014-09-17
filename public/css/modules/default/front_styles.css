@@ -194,3 +194,20 @@ table.table tr:hover{
 	height: 250px;
 	text-align: justify;
 }
+
+#showMenu, #hideMenu{
+	text-align:center;
+	font-size:18px;
+	color:#999999;
+	cursor:pointer;
+	display:none;
+}
+#showMenu img, #hideMenu img{
+	width:20px;
+	margin:5px;	
+}
+.captcha{
+	width:100px;
+	margin:0 auto;
+	margin-top:5px;	
+}

@@ -304,7 +304,7 @@ $(document).ready(function(){
 					}
 				},
 				description:{
-					required:true
+					required:false
 				},
 				aux_value_selected:{
 					required:true
@@ -677,7 +677,7 @@ $(document).ready(function(){
 					required:true
 				},
 				description:{
-					required:true
+					required:false
 				},
 				captcha:{
 					required:true
@@ -845,7 +845,7 @@ $(document).ready(function(){
 									required:true
 								},
 								frm_description:{
-									required:true
+									required:false
 								}
 				            }
 
@@ -984,7 +984,7 @@ $(document).ready(function(){
 									required:true
 								},
 								frm_description:{
-									required:true
+									required:false
 								}
 
 				            }
@@ -1563,7 +1563,7 @@ $(document).ready(function(){
 					file_limit: 10,
 					max_width: parseInt($("#hdn_max_width_img").val()),
 					max_height : parseInt($("#hdn_max_height_img").val()),
-					resize: 'jpg,jpeg,gif,png',
+					resize: 'jpg,jpeg',
 		    		form_action: '/core/content_content/save'
 	    		}	
 	    	}); 
@@ -1645,7 +1645,7 @@ function edit_element(element, type){
 					required:true
 				},
 				frm_description:{
-					required:true
+					required:false
 				}
 
             }

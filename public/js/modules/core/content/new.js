@@ -158,21 +158,29 @@ $(document).ready(function() {
 						$("#target").val($(this).attr('element_value'));
 					});		
 					
-					$("#resizeimg").val('');
+					$("#resizeimg").val('no');
+					
+					$("#resizeimg-"+$("#resizeimg").val()).attr("class",'btn btn-primary active');
 					//set value on radio aux validation
 					$("input[id^='resizeimg']").bind("click",function(){
 						$("#resizeimg").val($(this).attr('element_value'));
 					});
-                                         $("#watermarkimg-"+$("#watermarkimg").val()).attr("class",'btn btn-primary active');
-                                        //set value on radio aux validation
-                                        $("input[id^='watermarkimg']").bind("click",function(){
-                                                $("#watermarkimg").val($(this).attr('element_value'));
-                                        });
-                                        $("#zoom-"+$("#zoom").val()).attr("class",'btn btn-primary active');
-                                        //set value on radio aux validation
-                                        $("input[id^='zoom']").bind("click",function(){
-                                                $("#zoom").val($(this).attr('element_value'));
-                                        });
+					
+          $('#watermarkimg').val('no');
+					
+					 $("#watermarkimg-"+$("#watermarkimg").val()).attr("class",'btn btn-primary active');
+					//set value on radio aux validation
+					$("input[id^='watermarkimg']").bind("click",function(){
+									$("#watermarkimg").val($(this).attr('element_value'));
+					});
+					
+					$( "#format option[value='no_frame']" ).attr( "selected", "selected" );
+					
+					$("#zoom-"+$("#zoom").val()).attr("class",'btn btn-primary active');
+					//set value on radio aux validation
+					$("input[id^='zoom']").bind("click",function(){
+									$("#zoom").val($(this).attr('element_value'));
+					});
                                         
 					//validation
 					$("#frmContent").validate({
@@ -231,7 +239,7 @@ $(document).ready(function() {
 							file_limit: 10,
 							max_width: parseInt($("#hdn_max_width_img").val()),
 							max_height : parseInt($("#hdn_max_height_img").val()),
-							resize: 'jpg,jpeg,gif,png',
+							resize: 'jpg,jpeg',
 				    		form_action: '/core/content_content/save'
 			    		}	
 			    	}); 
@@ -529,7 +537,9 @@ $(document).ready(function() {
 				break;
 				
 			case '4': //Content Form
-				$("#captcha").val('');
+				$("#captcha").val('no');
+				
+				$("#captcha-"+$("#captcha").val()).attr("class",'btn btn-primary active');
 				//set value on radio aux validation
 				$("input[id^='captcha']").bind("click",function(){
 					$("#captcha").val($(this).attr('element_value'));
@@ -553,7 +563,7 @@ $(document).ready(function() {
 							required:true
 						},
 						description:{
-							required:true
+							required:false
 						},
 						captcha:{
 							required:true
@@ -642,7 +652,7 @@ $(document).ready(function() {
 											required:true
 										},
 										frm_description:{
-											required:true
+											required:false
 										}
 						            }
 
@@ -787,7 +797,7 @@ $(document).ready(function() {
 											required:true
 										},
 										frm_description:{
-											required:true
+											required:false
 										}
 						            }
 								});										
