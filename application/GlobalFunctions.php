@@ -81,7 +81,19 @@ class GlobalFunctions {
 		$filename = strtolower($filename);
 		return utf8_encode($filename);
 	}
-	
+	/**
+	 * Get file weight
+	 * @param string $file
+	 * @return string
+	 */
+	public static function fileWeight($file)
+        {
+            $path = APPLICATION_PATH.'/../public/uploads/content/';
+            $size = filesize($path.$file);
+            
+            $filesizename = array(" Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB");
+            return round($size/pow(1024, ($i = floor(log($size, 1024)))), 2) . $filesizename[$i];
+        }
 	/**
 	 * Uploads the file and renames it according to convention
 	 * @param string $filename
@@ -961,7 +973,7 @@ class GlobalFunctions {
 		}
 		
 		//fixed span value
-		$fixed_span12 = 1900;
+		$fixed_span12 = 1200;
 		
 		//var with the fixed percentages of the corresponding span values
 		$span_percentages = array();

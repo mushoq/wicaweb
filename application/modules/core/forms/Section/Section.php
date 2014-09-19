@@ -54,14 +54,14 @@ class Core_Form_Section_Section extends Zend_Form{
                 $template->setLabel('* '.$lang->translate('Template').':');                
                 //Get values from wc_section_template
                 $section_template_model = new Core_Model_SectionTemplate();        
-                $options_both = $section_template_model->find('wc_section_template', array('type'=>'both'));
+                $options_both = $section_template_model->find('wc_section_template', array('type'=>'both'), array('name'=>'ASC'));
                 if(count($options_both)>0)
                 {                
                         foreach ($options_both as $t){
                                 $options_template[$t->id] = $t->name;
                         }
                 }
-                $options_section = $section_template_model->find('wc_section_template', array('type'=>'section'));
+                $options_section = $section_template_model->find('wc_section_template', array('type'=>'section'), array('name'=>'ASC'));
                 if(count($options_section)>0)
                 {
                         foreach ($options_section as $t){

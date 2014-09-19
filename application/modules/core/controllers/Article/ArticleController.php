@@ -92,7 +92,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 			}
 			//get number of columns on template
 			$section_template = new Core_Model_SectionTemplate();
-			$section_template_data = $section_template->find("wc_section_template", array('id' => $parent_section[0]->section_template_id));
+			$section_template_data = $section_template->find("wc_section_template", array('id' => $parent_section[0]->section_template_id), array('name'=>'ASC'));
 			$this->view->columns = $section_template_data[0]->column_number;
 			
 			//parent section as array to display data on view
@@ -1417,7 +1417,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 		
 				//section template
 				$section_template = new Core_Model_SectionTemplate();
-				$section_tpl = $section_template->find('wc_section_template',array('id'=>$section->section_template_id));
+				$section_tpl = $section_template->find('wc_section_template',array('id'=>$section->section_template_id), array('name'=>'ASC'));
 				$section_filename_tpl = $section_tpl[0]->file_name;
 				$column_number = $section_tpl[0]->column_number;
 					

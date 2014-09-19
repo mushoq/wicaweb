@@ -108,15 +108,16 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                         $image_data = getimagesize($path.$data_content_field[4]->value);
                                                                         $widthImg = $image_data[0].'px';
                                                                         $heightImg = $image_data[1];
-                                                                        echo 'width= '.$widthImg;
-                                                                        echo '<br>contentWidth= '.$content_width;
-									//$return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>1000,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" ><img';
-									$hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0));
-                                                                        if($data_content_field [3]->value){
+									
+                                                                        if($widthImg > $content_width){
+                                                                            $hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$widthImg,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):'/uploads/content/'.$data_content_field[4]->value;
+                                                                            $return .= '<a class="wicabox" rel="imagesGroup" href="'.$hrefImg.'"><img';					
+                                                                            
+                                                                        }elseif($data_content_field [3]->value){
+                                                                            $hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0));
                                                                             $return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value  . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. $hrefImg .'" ><img';					
                                                                         }else{
-                                                                             $return .= $data_content_field [3]->value? '<img' : '<img';					
-
+                                                                             $return .= '<img';					
                                                                         }
 										
 									if( $data_content_field[7]->value == 'no'){
@@ -124,7 +125,6 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									}else{
 									
 									
-									//$return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" ';
 									 if($data_content_field[8]->value =='yes'){
                                                                             $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)) .'" ';
                                         }                               else{
@@ -143,8 +143,8 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									}
                                                                         $return.= '"';
 									$return .='/>';
-									if($data_content_field [3]->value){
-                                                                            $return .= $data_content_field [3]->value? '</a>' : '</a>';
+									if($data_content_field [3]->value || $widthImg > $content_width){
+                                                                            $return .= '</a>';
                                                                         }
 									if($data_content_field [0]->value != '')
 										$return .= '<p>'.$data_content_field [0]->value.'</p>';
@@ -162,15 +162,14 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 										
 										if(!$my_array_of_vars){
 											$my_array_of_vars = explode('/',$data_content_field [0]->value);
-											$return = '<div  align="'.$content_by_section_data[0]->align.'"><embed src="http://www.youtube.com/v/'.$my_array_of_vars[3].'&rel=1" pluginspage="http://adobe.com/go/getflashplayer" type="application/x-shockwave-flash" quality="high" width="450" height="376" bgcolor="#ffffff" loop="false"></embed></div>';
+											$return = '<div  align="'.$content_by_section_data[0]->align.'"><div class="video-container"><embed src="http://www.youtube.com/v/'.$my_array_of_vars[3].'&rel=1" pluginspage="http://adobe.com/go/getflashplayer" type="application/x-shockwave-flash" quality="high" width="450" height="376" bgcolor="#ffffff" loop="false"></embed></div></div>';
 										}else{
-											$return = '<div  align="'.$content_by_section_data[0]->align.'"><embed src="http://www.youtube.com/v/'.$my_array_of_vars['v'].'&rel=1" pluginspage="http://adobe.com/go/getflashplayer" type="application/x-shockwave-flash" quality="high" width="450" height="376" bgcolor="#ffffff" loop="false"></embed></div>';
+											$return = '<div  align="'.$content_by_section_data[0]->align.'"><div class="video-container"><embed src="http://www.youtube.com/v/'.$my_array_of_vars['v'].'&rel=1" pluginspage="http://adobe.com/go/getflashplayer" type="application/x-shockwave-flash" quality="high" width="450" height="376" bgcolor="#ffffff" loop="false"></embed></div></div>';
 										}
 										
 										return $return;
-									}
-									else
-										return '<div align="'.$content_by_section_data[0]->align.'">' . $data_content_field [1]->value . '</div>';
+									}else
+										return '<div align="'.$content_by_section_data[0]->align.'" class="map-container">' . $data_content_field [1]->value . '</div>';
 									break;
 					
 					case 'link' :					
@@ -185,7 +184,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 											return '<div align="'.$content_by_section_data[0]->align.'"><a href="http://' . str_replace ('http://', '', $data_content_field [3]->value) . '" >'.$data_content[0]->title.'</a></div>';
 											break;
 										case 'file' :
-											return '<div align="'.$content_by_section_data[0]->align.'" id="este"><a href="/uploads/content/' . $data_content_field [4]->value . '" ><img src="/images/' . $data_content_field [5]->value . '.png" />'.$data_content[0]->title.'</a></div>';
+											return '<div align="'.$content_by_section_data[0]->align.'" id="este"><a href="/uploads/content/' . $data_content_field [4]->value . '" target="_blank" ><img src="/images/' . $data_content_field [5]->value . '.png" /> '.$data_content_field [6]->value.' ('.GlobalFunctions::fileWeight($data_content_field [4]->value) .')</a></div>';
 											break;
 									}
 									break;
