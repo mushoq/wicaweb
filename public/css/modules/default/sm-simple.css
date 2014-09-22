@@ -30,11 +30,19 @@
 		font-family:'Lucida Sans Unicode','Lucida Sans','Lucida Grande',Arial,sans-serif;
 		text-decoration:none;
 	}
-	.sm-simple a:hover, .sm-simple a:focus, .sm-simple a:active,
-	.sm-simple a.highlighted {
+	.sm-simple .seccSelected a{
 		background:#eee;
 		color:#555;
 	}
+	.sm-simple .seccSelected li a{
+		background:none;
+	}
+	.sm-simple a:hover, .sm-simple a:focus, .sm-simple a:active,
+	.sm-simple a.highlighted{
+		background:#eee !important;
+		color:#555 !important;
+	}
+	
 	/* current items - add the class manually to some item or check the "markCurrentItem" script option */
 	.sm-simple a.current, .sm-simple a.current:hover, .sm-simple a.current:focus, .sm-simple a.current:active {
 		background:#555;

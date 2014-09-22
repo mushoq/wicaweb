@@ -200,7 +200,26 @@ class GlobalFunctions {
 		
 		return $db_date;	
 	}
-	
+	/* Return Parent_id until root
+         * @param $section_id
+         * @return $parent_id
+         */
+        public static function parentUntilCero($section_id)
+	{
+                $parent_id = NULL;
+		if($section_id)
+		{
+                    $section_id_temp = $section_id;
+			do{
+                            $section = new Core_Model_Section();
+                            $section_obj = $section->find ( 'wc_section', array ('id' => $section_id_temp) );
+                            
+                            $parent_id = $section_id_temp;
+                            $section_id_temp = $section_obj[0]->section_parent_id;
+                        }while($section_obj[0]->section_parent_id > 0);
+		}
+		return $parent_id;
+	}
 	/**
 	 * Return a date formatted to corresponding configuration
 	 * @param string $value
@@ -383,7 +402,7 @@ class GlobalFunctions {
 			foreach ($tree as $item) {
 				//$html.= !isset($item['children'])? '<li class="dropdown" id="menu'.$item['id'].'">' : '<li>';
 				$html.= '<li'; 
-				if($item['id'] == $selectedId){
+				if($item['id'] == $selectedId || $item['id'] == self::parentUntilCero($selectedId)){
 					$html.= ' class="seccSelected" ';				
 				}
 				$html.= '>';
@@ -392,7 +411,7 @@ class GlobalFunctions {
 					
                                     //new route with the new parameter : siteid 
 					if(!$storage)
-						$html.= '<a href="/site/'.$front_ids->website_id.'/content/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
+						$html.= '<a href="/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
 					else 
 						$html.= '<a href="/indexold_indexold/index?id='.$item['id'].'">';
 					//$html.= !isset($item['children'])? '<a class="dropdown-toggle" data-toggle="dropdown" href="#menu'.$item['id'].'">' : '<a>';

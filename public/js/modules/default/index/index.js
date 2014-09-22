@@ -242,6 +242,15 @@ $(document).ready(function() {
 	$("[id^='register_']").each(function(){
 		var area_reg = $(this).attr('area');
 		$("[id^='register_']").fancybox({
+			fitToView	: false,
+			width		: '70%',
+			height		: '70%',
+			maxWidth	: 600,
+			maxHeight	: 400,
+			autoSize	: false,
+			closeClick	: false,
+			openEffect	: 'none',
+			closeEffect	: 'none',
 			'onClosed':  function(){
 				$("#form_register_"+area_reg+" input[id^='public_user_']").each(function(){
 					$("input.error_validation").removeClass('error_validation');
@@ -342,7 +351,17 @@ $(document).ready(function() {
 
 	$("[id^='forgot_']").each(function(){
 		var area_for = $(this).attr('area');
-		$(this).fancybox();
+		$(this).fancybox({
+				fitToView	: false,
+				width		: '70%',
+				height		: '70%',
+				maxWidth	: 400,
+				maxHeight	: 200,
+				autoSize	: false,
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none',
+			});
 		
 		//Validation
 		$("#form_forgot_"+area_for).validate({

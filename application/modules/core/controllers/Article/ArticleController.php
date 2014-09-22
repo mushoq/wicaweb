@@ -837,7 +837,15 @@ class Core_Article_ArticleController extends Zend_Controller_Action
                         $article_act->order_feature =(isset($formData['order_feature_value']))?GlobalFunctions::value_cleaner($formData['order_feature_value']):NULL;
 			$article_act->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
                         $article_act->order_highlight = (isset($formData['order_highlight_value']))?GlobalFunctions::value_cleaner($formData['order_highlight_value']):NULL;
+                        
+                        if(!isset($formData['hora_inicio']))
+                            $formData['hora_inicio'] = '';
+                        
 			$article_act->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']).' '.$formData['hora_inicio'];
+                        
+                        if(!isset($formData['hora_fin']))
+                            $formData['hora_fin'] = '';
+                        
 			$article_act->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']).' '.$formData['hora_fin'];
 			$article_act->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
 			$article_act->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);

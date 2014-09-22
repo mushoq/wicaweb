@@ -60,9 +60,10 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									break;	
 												
 					case 'carousel':
-									$return = '<div align="'.$content_by_section_data[0]->align.'">
-										    <div id="myCarousel_'.$content_id.'" class="carousel slide">										    
-											    <div class="carousel-inner">';					
+									$return = '<div align="'.$content_by_section_data[0]->align.'" class="carruselInterna">
+										    <div class="cycle-slideshow" data-cycle-fx="fade" data-cycle-pause-on-hover="false" data-cycle-timeout="4000" data-cycle-speed="500">
+                                                                                        <div class="cycle-prev"></div>
+                                                                                        <div class="cycle-next"></div>';					
 						
 									$array_images = explode ( ',', $data_content_field [0]->value );
 									if(count($array_images)>1)
@@ -78,17 +79,12 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 										$watermark_data =  GlobalFunctions::getWatermark($id->website_id);
 										
 										foreach ( $array_images as $ai ) {
-											$return .= '<div class="item"><img src="'. imageRender::cache_image($ai, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" style="'.GlobalFunctions::checkImageSize($ai,$content_width).'"/></div>';
+											$return .= '<img src="'. imageRender::cache_image($ai, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" style="'.GlobalFunctions::checkImageSize($ai,$content_width).'" class="img-responsive"/>';
 										
 										}
 									}
 						
-									$return .= '	</div>
-												    <!-- Carousel nav -->
-												    <a id="carousel_left_'.$content_id.'" class="carousel-control left hide" href="#myCarousel_'.$content_id.'" data-slide="prev">&lsaquo;</a>
-												    <a id="carousel_right_'.$content_id.'" class="carousel-control right hide" href="#myCarousel_'.$content_id.'" data-slide="next">&rsaquo;</a>
-											   		 </div>
-												</div>';
+									$return .= '</div></div>';
 									
 									return $return;
 									break;
@@ -348,111 +344,67 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 			$front_ids = New Zend_Session_Namespace('ids');
 			$return = '<div class="row-fluid">
 							
-							<div id="section_login_container" class="row_fluid">
+							<div id="section_login_container" class="col-md-4 col-md-offset-4">
 								<form id="form_login_'.$area_id.'" name="form_login_'.$area_id.'" action="">
-									<div class="row-fluid">
-										<div class="row-fluid">
-											<label class="required">* '.$lang->translate("User").'</label>
-										</div>
-										<div class="row-fluid">
-											<input type="text" id="public_user_'.$area_id.'" name="public_user_'.$area_id.'" />
-										</div>
-									</div>
-									<div class="row-fluid">
-										<div class="row-fluid">
-											<label class="required">* '.$lang->translate("Password").'</label>
-										</div>
-										<div class="row-fluid">
-											<input type="password" id="public_password_'.$area_id.'" name="public_password_'.$area_id.'" />
-										</div>
-									</div>
+									
+                                                                        <div class="form-group">
+                                                                                <label class="required" for="public_user_'.$area_id.'">* '.$lang->translate("User").'</label>
+                                                                                <input type="text" class="form-control" id="public_user_'.$area_id.'" name="public_user_'.$area_id.'" />
+                                                                        </div>
+									
+									<div class="form-group">
+										<label class="required" for="public_password_'.$area_id.'">* '.$lang->translate("Password").'</label>
+                                                                                <input type="password" class="form-control" id="public_password_'.$area_id.'" name="public_password_'.$area_id.'" />
+                                                                        </div>
 									<label  id="error_login_'.$area_id.'" name="error_login_'.$area_id.'" class="error_validation hide">'.$lang->translate("The username or password are wrong").'</label>
 									<label  id="error_login_inactive_'.$area_id.'" name="error_login_inactive_'.$area_id.'" class="error_validation hide">'.$lang->translate("This user is inactive").'</label>
-									<input type="button" id="btnLogin_'.$area_id.'" area="'.$area_id.'" name="btnLogin_'.$area_id.'" value="'.$lang->translate("Login").'"/><br/>
+									<input type="button" class="btn btn-primary" id="btnLogin_'.$area_id.'" area="'.$area_id.'" name="btnLogin_'.$area_id.'" value="'.$lang->translate("Login").'"/><br/>
 									<a class="pointer" href="#form_register_'.$area_id.'" area="'.$area_id.'" id="register_'.$area_id.'">'.$lang->translate("Register").'</a><br/>
 									<a class="pointer" href="#form_forgot_'.$area_id.'" area="'.$area_id.'" id="forgot_'.$area_id.'">'.$lang->translate("Forgot your password").'?</a>
 								</form>	
 							</div>
 							
 							<div class="hide">
-								<form class="span8 form-horizontal margin-fancy" id="form_register_'.$area_id.'" name="form_register_'.$area_id.'" action="">
-									<div class="row-fluid center">
-										<h3>'.$lang->translate("Register Form").'</h3>
-									</div><br/>
-									<div class="row-fluid">
-							      		<div class="span6">				      							      		
-							      			<div class="control-group">
-												<label class="control-label">* '.$lang->translate("Name").'</label>
-												<div class="controls">
-													<input type="text" id="public_user_name_'.$area_id.'" name="public_user_name_'.$area_id.'" />
-												</div>
-											</div>
-							      		</div>
-							      		<div class="span6">				      							      		
-							      			<div class="control-group">
-												<label class="control-label">* '.$lang->translate("Lastname").'</label>
-												<div class="controls">
-													<input type="text" id="public_user_last_name_'.$area_id.'" name="public_user_last_name_'.$area_id.'" />
-												</div>
-											</div>
-							      		</div>								      												
-									</div>
-									<div class="row-fluid">
-							      		<div class="span6">				      							      		
-							      			<div class="control-group">
-												<label class="control-label">* '.$lang->translate("Identification").'</label>
-												<div class="controls">
-													<input type="text" id="public_user_identification_'.$area_id.'" name="public_user_identification_'.$area_id.'" />
-												</div>
-											</div>
-							      		</div>
-							      		<div class="span6">				      							      		
-							      			<div class="control-group">
-												<label class="control-label">* '.$lang->translate("Email").'</label>
-												<div class="controls">
-													<input type="text" id="public_user_email_'.$area_id.'" name="public_user_email_'.$area_id.'" />
-												</div>
-											</div>
-							      		</div>								      												
-									</div>		
-									<div class="row-fluid">
-							      		<div class="span6">				      							      		
-							      			<div class="control-group">
-												<label class="control-label">'.$lang->translate("Phone").'</label>
-												<div class="controls">
-													<input type="text" id="public_user_phone_'.$area_id.'" name="public_user_phone_'.$area_id.'" />
-												</div>
-											</div>
-							      		</div>
-							      		<div class="span6">				      							      		
-							      			<div class="control-group">
-												<label class="control-label">* '.$lang->translate("Username").'</label>
-												<div class="controls">
-													<input type="text" id="public_user_username_'.$area_id.'" name="public_user_username_'.$area_id.'" />
-												</div>
-											</div>
-							      		</div>								      												
-									</div>	
-									<div class="row-fluid">
-							      		<div class="span6">				      							      		
-							      			<div class="control-group">
-												<label class="control-label">* '.$lang->translate("Password").'</label>
-												<div class="controls">
-													<input type="password" id="public_user_password_'.$area_id.'" name="public_user_password_'.$area_id.'" />
-												</div>
-											</div>
-							      		</div>	
-							      		<div class="span6">				      							      		
-							      			<div class="control-group">
-												<label class="control-label">* '.$lang->translate("Confirm Password").'</label>
-												<div class="controls">
-													<input type="password" id="public_user_cpassword_'.$area_id.'" name="public_user_cpassword_'.$area_id.'" />
-												</div>
-											</div>
-							      		</div>								      								      												
-									</div>
-									<div class="row-fluid center">
-										<input class="btn " type="button" id="btn_register_user_'.$area_id.'" name="btn_register_user_'.$area_id.'" value="'.$lang->translate("Send").'" />
+								<form class="form-login margin-fancy " id="form_register_'.$area_id.'" name="form_register_'.$area_id.'" action="">
+
+                                                                        <h3 class="text-center">'.$lang->translate("Register Form").'</h3>
+
+												      							      		
+							      			<div class="form-group col-md-6">
+                                                                                    <label for="public_user_name_'.$area_id.'">* '.$lang->translate("Name").'</label>
+                                                                                    <input type="text" class="form-control" id="public_user_name_'.$area_id.'" name="public_user_name_'.$area_id.'" />
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="public_user_last_name_'.$area_id.'">* '.$lang->translate("Lastname").'</label>
+                                                                                    <input type="text" class="form-control" id="public_user_last_name_'.$area_id.'" name="public_user_last_name_'.$area_id.'" />
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="public_user_identification_'.$area_id.'">* '.$lang->translate("Identification").'</label>
+                                                                                    <input type="text" class="form-control" id="public_user_identification_'.$area_id.'" name="public_user_identification_'.$area_id.'" />
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="public_user_email_'.$area_id.'">* '.$lang->translate("Email").'</label>
+                                                                                    <input type="text" class="form-control email" id="public_user_email_'.$area_id.'" name="public_user_email_'.$area_id.'" />
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="public_user_phone_'.$area_id.'">'.$lang->translate("Phone").'</label>
+                                                                                    <input type="text" class="form-control" id="public_user_phone_'.$area_id.'" name="public_user_phone_'.$area_id.'" />
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="public_user_username_'.$area_id.'">* '.$lang->translate("Username").'</label>
+                                                                                    <input type="text" class="form-control" id="public_user_username_'.$area_id.'" name="public_user_username_'.$area_id.'" />
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="public_user_password_'.$area_id.'">* '.$lang->translate("Password").'</label>
+                                                                                    <input type="password" class="form-control" id="public_user_password_'.$area_id.'" name="public_user_password_'.$area_id.'" />
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="public_user_cpassword_'.$area_id.'">* '.$lang->translate("Confirm Password").'</label>
+                                                                                    <input type="password" class="form-control" id="public_user_cpassword_'.$area_id.'" name="public_user_cpassword_'.$area_id.'" />
+                                                                                </div>
+                                                                                
+									<div class="text-center col-md-12">
+										<input class="btn btn-primary" type="button" id="btn_register_user_'.$area_id.'" name="btn_register_user_'.$area_id.'" value="'.$lang->translate("Send").'" />
 										<input type="hidden" id="website_id" name="website_id" value="'.$front_ids->website_id.'" />
 										<input type="hidden" id="area" name="area" value="'.$area_id.'" />
 										<input type="hidden" id="error_email_'.$area_id.'" name="error_email_'.$area_id.'" value="'. $lang->translate('The email address already has been registered').'" />
@@ -462,26 +414,19 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 							</div>
 							
 							<div class="hide">
-								<form class="span8 form-horizontal margin-fancy" id="form_forgot_'.$area_id.'" name="form_forgot_'.$area_id.'" action="">
-									<div class="row-fluid center">
+								<form class="span8 form-login margin-fancy" id="form_forgot_'.$area_id.'" name="form_forgot_'.$area_id.'" action="">
+									<div class="text-center">
 										<h3>'.$lang->translate("Password Reset").'</h3>
 									</div><br/>
-									<div class="row-fluid">
-										<div class="span3">
-							      				&ensp;
-							      		</div>
-							      		<div class="span6">
-							      			<div class="control-group">
-												<label class="control-label">'.$lang->translate("Email").'</label>
-												<div class="controls">
-													<input type="text" id="public_for_user_email_'.$area_id.'" name="public_for_user_email_'.$area_id.'" />
-												</div>
-											</div>
-							      		</div>
-									</div>	
-									<div class="row-fluid center">
-										<input class="btn " type="button" id="btn_send_password_user_'.$area_id.'" name="btn_send_password_user_'.$area_id.'" value="'.$lang->translate("Send").'" />
-										
+									
+							      		
+                                                                        <div class="form-group">
+                                                                                <label for="public_for_user_email_'.$area_id.'">'.$lang->translate("Email").'</label>
+                                                                                <input type="text" class="form-control" id="public_for_user_email_'.$area_id.'" name="public_for_user_email_'.$area_id.'" />
+                                                                        </div>
+							      			
+									<div class="form-group text-center">
+										<input class="btn btn-primary" type="button" id="btn_send_password_user_'.$area_id.'" name="btn_send_password_user_'.$area_id.'" value="'.$lang->translate("Send").'" />
 									</div>										
 								</form>
 							</div>								
