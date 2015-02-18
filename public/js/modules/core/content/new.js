@@ -51,11 +51,17 @@ $(document).ready(function() {
 							{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
 							'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
 							{ name: 'links', items : [ 'Link','Unlink' ] },
-							{ name: 'insert', items : [ 'HorizontalRule','SpecialChar','PageBreak' ] },
+							{ name: 'insert', items : [ 'HorizontalRule','SpecialChar','PageBreak','Image','Table' ] },
 							{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
 							{ name: 'colors', items : [ 'TextColor','BGColor' ] },
 							{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
-						]
+						],
+						filebrowserBrowseUrl: '/js/ckeditor/ckfinder/ckfinder.html',
+						filebrowserImageBrowseUrl: '/js/ckeditor/ckfinder/ckfinder.html?Type=Images',
+						filebrowserFlashBrowseUrl: '/js/ckeditor/ckfinder/ckfinder.html?Type=Flash',
+						filebrowserUploadUrl: '/js/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+						filebrowserImageUploadUrl: '/js/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+						filebrowserFlashUploadUrl: '/js/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 					},function(){
 						// resize tree height according content
 						setSectionTreeHeight();	

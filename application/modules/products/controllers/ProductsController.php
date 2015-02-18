@@ -483,6 +483,7 @@ class Products_ProductsController extends Zend_Controller_Action
 			$product_obj = $product->getNewRow('product');
 			 
 			//save data
+                        
 
 			//Check if id exist 
 			if(array_key_exists('id',$formData)){ //Is update product
