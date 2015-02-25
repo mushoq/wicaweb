@@ -12,6 +12,6 @@
 
 class Core_Model_FormField extends Core_Model_Factory
 {
-	public static $form_type = array('textfield'=>'Campo de Texto', 'emailfield'=>'Campo de Texto Email', 'textarea'=>'Área de Texto', 'radiobutton'=>'Botón de Radio', 'dropdown'=>'Lista Desplegable', 'checkbox'=>'Casilla de Verificación', 'comment'=>'Comentario', 'file'=>'Archivo');
+	public static $form_type = array('textfield'=>'Campo de Texto', 'emailfield'=>'Campo de Texto Email', 'datepicker'=>'Selector de fecha', 'textarea'=>'Área de Texto', 'radiobutton'=>'Botón de Radio', 'dropdown'=>'Lista Desplegable', 'checkbox'=>'Casilla de Verificación', 'comment'=>'Comentario', 'file'=>'Archivo');
 
 }

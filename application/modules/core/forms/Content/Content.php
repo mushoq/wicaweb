@@ -250,6 +250,7 @@ class Core_Form_Content_Content extends Zend_Form {
 								'' => $lang->translate ('- Select -'),
 								'textfield' => $lang->translate ('Text field'),
                                                                 'emailfield' => $lang->translate ('Email field'),
+                                                                'datepicker' => $lang->translate ('Date Picker'),
 								'textarea' => $lang->translate ('Text area'),
 								'radiobutton' => $lang->translate ('Radio button'),
 								'dropdown' => $lang->translate('Dropdown list'),

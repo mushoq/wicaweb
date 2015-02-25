@@ -240,6 +240,13 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 												</div>
 											</div>';
 								break;
+                                                            
+                                                        case 'datepicker':
+                                                                $return .=	'<div class="form-group">
+                                                                                    <label for="form_field_textfield_'.$ff->id.'">'.$ff->name.'</label>
+                                                                                    <input type="text" id="form_field_textfield_'.$ff->id.'" class="form-control date-calendar hasDatepicker" readonly="readonly" name="'.$ff->name.'" valid="'.$ff->required.'"/><img class="ui-datepicker-trigger" src="/images/calendar.gif" alt="..." title="...">
+                                                                                 </div>';
+                                                                break;
 							case 'textarea':
 								
 								$return .= '<div class="line row-fluid">
