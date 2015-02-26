@@ -97,8 +97,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 .cke_skin_v2 .cke_browser_ie .cke_toolgroup
 {
-	#float: none;
-	#display: inline;
+	
+	
 }
 
 .cke_skin_v2 .cke_rtl .cke_toolgroup
@@ -108,7 +108,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 .cke_skin_v2 .cke_browser_ie .cke_rtl .cke_toolgroup
 {
-	#float: none;
+	
 }
 
 .cke_skin_v2 .cke_separator
@@ -122,8 +122,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 .cke_skin_v2 .cke_browser_ie .cke_separator
 {
-	#float: none;
-	#display: inline;
+	
+	
 }
 
 .cke_skin_v2 .cke_rtl .cke_separator
@@ -133,7 +133,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 .cke_skin_v2 .cke_browser_ie .cke_rtl .cke_separator
 {
-	#float: none;
+	
 }
 
 .cke_skin_v2 .cke_break
@@ -159,8 +159,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 .cke_skin_v2 .cke_browser_ie .cke_toolbar_start
 {
-	#float: none;
-	#display: inline;
+	
+	
 }
 
 .cke_skin_v2 .cke_rtl .cke_toolbar_start
@@ -170,7 +170,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 .cke_skin_v2 .cke_browser_ie .cke_rtl .cke_toolbar_start
 {
-	#float: none;
+	
 }
 
 .cke_skin_v2 .cke_toolbar_end
@@ -181,8 +181,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 .cke_skin_v2 .cke_browser_ie .cke_toolbar_end
 {
-	#float: none;
-	#display: inline
+	
+	
 }
 
 .cke_skin_v2 .cke_rtl .cke_toolbar_end
@@ -192,7 +192,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 .cke_skin_v2 .cke_browser_ie .cke_rtl .cke_toolbar_end
 {
-	#float: none;
+	
 }
 
 /*#7181*/
@@ -325,7 +325,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 .cke_skin_v2 .cke_browser_ie .cke_button.cke_noalphafix .cke_icon,
 .cke_skin_v2 .cke_browser_ie .cke_rtl .cke_button.cke_noalphafix .cke_icon
 {
-	filter: ;
+	
 }
 
 .cke_skin_v2 .cke_button .cke_label
