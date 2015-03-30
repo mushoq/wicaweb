@@ -61,6 +61,35 @@
 	<!--CKEDITOR-->			
 	
 	<script src="/js/jquery.exptextarea.js" type="text/javascript"></script>
+        <!-- Sesion caducada -->
+        <script>
+            //Seteamos el contador
+            var idleTime = 0;
+            //Seteamos el tiempo dado por el sistema en minutos
+            var maxLifeTime = <?php echo ini_get("session.gc_maxlifetime");?> / 60;
+            $(document).ready(function() {
+                //Cada minuto se revisa si se cumplio el tiempo dicho
+                var idleInterval = setInterval(timerIncrement, 60000); //1 minuto
+
+                //Vemos la actividad del usuario y retornamos el contador a 0
+                $(this).mousemove(function (e){
+                    idleTime = 0;
+                });
+                $(this).keypress(function (e){
+                    idleTime = 0; 
+                });
+            });
+ 
+            //Comparamos el contador con el tiempo propuesto
+            function timerIncrement() {
+                idleTime++;
+                if(idleTime == maxLifeTime ){
+                    //Terminamos la sesion
+                    alert("Su sesion expiro");
+                    location.href="/../core";
+                }
+            }
+        </script>
 </head>
   	<body>
   		<div class="container-fluid">
