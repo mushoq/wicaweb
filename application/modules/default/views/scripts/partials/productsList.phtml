@@ -1,0 +1,92 @@
+<?php $count_contents = 0; ?>
+<?php if(!$this->private || ($this->private && isset($_SESSION['external_user']))): ?>	
+<div class="section_title_container">
+        <h1><?php echo $this->section_title;?></h1>
+</div>
+
+<?php if($this->section_subtitle): ?>
+<div class="section_title_container">
+        <h3><?php echo $this->section_subtitle;?></h3>
+</div>
+<?php endif; ?>
+
+<?php $ite = 0; ?>
+<div id="content_container">
+<?php foreach($this->contents as $key => $value): ?>
+	<?php $section_cols = $this->col_number; ?>
+	<?php $used_cols = $value['columns']; ?>	
+	<?php $row_factor = 12 / $section_cols; ?>
+	<?php if($used_cols): ?>
+	<?php $col_factor = $row_factor * $used_cols; ?>
+	<?php else: ?>
+	<?php $col_factor = 12; ?>
+	<?php endif; ?>
+	<?php $ite+= $used_cols; ?>
+	<div class="span<?php echo $col_factor; ?> col-md-<?php echo $col_factor; ?> no-margin overflow_hidden <?php if($ite > $section_cols): echo 'jump'; $ite = $used_cols; endif; ?>" id="mov_content_<?php echo $value['content_id']; ?>">
+		<?php if($value['title']): ?>
+                
+                <h3><?php echo utf8_encode($value['title']); ?></h3>					
+                
+                <?php endif; ?>
+
+                <?php if($value['content_id'] && $value['section_id']): ?>	
+                <?php 	if($this->isstorage == 'yes'):?>									
+                <?php 		echo $this->previewHelperStorage($value['section_id'], $value['content_id']); ?>
+                <?php 	else:?>
+                <?php 		echo $this->previewHelper($value['section_id'], $value['content_id']); ?>
+                <?php 	endif;?>
+                <?php endif; ?>
+                <?php if(isset($value['content'])): ?>
+                <?php 	echo $value['content']; ?>
+                <?php endif; ?>
+
+                <?php $count_contents++;?>
+	</div>		
+<?php endforeach; ?>
+	<input type="hidden" id="section_cols" name="section_cols" value="<?php echo $this->col_number; ?>">
+</div>
+
+<?php if($this->products): 
+    
+     
+
+foreach($this->products as $key => $value): ?>
+<div class="row-fluid">		
+
+	<div class="span12 no-margin overflow_hidden jump">
+		<div class="row-fluid">
+			<div class="fixed_internal_content">		
+				
+				<?php 
+				$product = '<div><div class="span2 pointer">';
+				$product .= '<img id="catalog_prod_'.$value["id"].'" product_id="'.$value["id"].'" class="preview_list_img thumbnail"';
+				$product.= ' style="border: thin solid; color: black !important;"';
+				$product .= ' src="/uploads/products/' . $value['image'] .'" width="100px"/>';
+				$product .= '</div>
+							<div class="span5">
+								<div id="catalog_prod_name_'.$value["id"].'" class="pointer row-fluid" product_id="'.$value["id"].'"><b>'.$value['name'].'</b></div>
+				                <div class="row-fluid" style="text-align:justify;"><p>'.substr($value['description'], 0, 200)."...".'</p></div>
+							</div>			
+							</div>';
+
+				$product .= '<div class="hide"><div class="span8" id="catalog_container"></div></div>';
+				
+			
+				?>		
+				<?php echo $product; ?>
+			</div>
+		</div>
+	</div>
+
+</div>
+<?php endforeach; ?>
+<?php endif; ?>
+<?php elseif (!$this->login):?>
+<div class="row-fluid">
+	<?php 	if($this->isstorage == 'yes'):?>									
+	<?php 		echo $this->previewHelper(null,null,$this->area); ?>
+	<?php 	else:?>
+	<?php 		echo $this->previewHelper(null,null,$this->area); ?>
+	<?php 	endif;?>
+</div>
+<?php endif; ?>

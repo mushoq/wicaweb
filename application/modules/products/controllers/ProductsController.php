@@ -945,7 +945,7 @@ class Products_ProductsController extends Zend_Controller_Action
     	//Disable layout for this form
     	$this->_helper->layout->disableLayout ();   	
     	 
-    	$data = $this->_request->getPost();
+    	$data = $this->_request->getParams();
     	//Get product_id
     	$product_id = $data['product_id'];
 //     	$location = $data['location'];

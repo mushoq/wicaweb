@@ -211,9 +211,10 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 															break;
                                                                                                                     
                                                                                         case 'datepicker':
-															$return .=	'<div class="form-group">
+															$return .=	'<div class="form-group has-feedback">
                                                                                                                                             <label for="form_field_textfield_'.$ff->id.'">'.$ff->name.'</label>
                                                                                                                                             <input type="text" id="form_field_textfield_'.$ff->id.'" class="form-control date-calendar wicaDatepicker" readonly="readonly" name="'.$ff->name.'" valid="'.$ff->required.'"/>
+                                                                                                                                            <span class="glyphicon glyphicon-calendar form-control-feedback ui-datepicker-trigger" aria-hidden="true"></span>
                                                                                                                                          </div>';
 															break;
                                                                                                                     

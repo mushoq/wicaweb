@@ -26,7 +26,7 @@ class Core_Model_Module extends Core_Model_Factory
 	
 		$sql = 'SELECT m.id, m.name, m.action, m.image, m.partial,m.description 
 		FROM wc_module m
-		WHERE m.id NOT IN (1,2,3,4,5,6,7,8)';
+		WHERE m.id NOT IN (1,2,3,4,5,6,7,8,10)';
 			
 		$data = $adapter->query($sql);
 	

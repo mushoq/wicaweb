@@ -2,10 +2,8 @@
 //translate library
 $lang = Zend_Registry::get ( 'Zend_Translate' ); ?>
 
-<div class="row-fluid center">
-	<h2><?php echo $lang->translate("Catalog"); ?></h2>
-</div>
 
+<?php print_r(json_encode($this->catalog));?>
 
 <div class="span4">
 	<img id="big_catalog_img" class="row-fluid preview_list_img thumbnail" src="<?php echo '/uploads/products/'.$this->product->image; ?> ">
@@ -43,17 +41,4 @@ $lang = Zend_Registry::get ( 'Zend_Translate' ); ?>
 	</div>
 </div>
 
-</div><!-- End demo -->
-
-<script>
-			
-$(document).ready(function(){
-    $('#mycarousel').jcarousel({
-        vertical: true,
-        scroll: 4
-    });
-
-    $("#tabs").tabs({});
-});
-			
-</script>
+</div>

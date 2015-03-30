@@ -381,7 +381,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    	foreach ($section_data_arr as $k=>$section)
 		    	{	    		
 		    		$this->view->title_browser = str_replace('"','-',str_replace('\\','',$section->title));
-                                $this->view->synopsis_browser = str_replace(array("<p>", "</p>"),'',$section->synopsis);
+                                $this->view->synopsis_browser = strip_tags($section->synopsis);
                                 $this->view->author_browser = $section->author;
                                 $this->view->id_browser = $section->id;
                                 $this->view->article_browser = $section->article;
@@ -461,7 +461,26 @@ class Default_IndexController extends Zend_Controller_Action
 		    				$content_arr[] = array('section_id'=>$section->id,'content_id'=>$v->id,'title'=>$v->title,'section'=>$v->section_name,'internal_name'=>$v->internal_name, 'columns'=>$v->column_number);
 		    			}	    			
 		    		}
-		    		
+                                //Products List
+                                $product_arr = array();
+                                $product = new Products_Model_Products();
+                                $products = $product->rendercontents($section->id);
+                                
+                                //Product Catalog
+                                $product_id = $this->_getParam('product_id');
+                                if($product_id)
+                                    $section_filename_tpl = "product.phtml";
+                                
+                                $catalog = new Products_Model_ProductCatalog();
+                                $product_catalog = $catalog->find('product_catalog', array('product_id'=>$product_id));
+
+                                $product_obj = new Products_Model_Products();
+                                $product = $product_obj->find('product', array('id'=>$product_id));
+                                
+                                if(count($product)>0)
+		    		{
+                                    $product_arr[] = array('product'=>$product,'product_catalog'=>$product_catalog);
+                                }
 		    		//articles
                                 $content_field = new Core_Model_ContentField();
                                 
@@ -506,6 +525,8 @@ class Default_IndexController extends Zend_Controller_Action
 		    		
 		    		$contents_list[$section->id]['content'] = $content_arr;
 		    		$contents_list[$section->id]['article'] = $article_arr;
+                                $contents_list[$section->id]['products'] = $products;
+                                $contents_list[$section->id]['product_catalog'] = $product_arr;
 		    		
 		    		/******
 		    		 * External module contents within section selected
@@ -638,7 +659,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    			
 		    			$contents_list[$section->id]['content'] = $content_arr;
 		    			$contents_list[$section->id]['article'] = $article_arr;
-		    			
+		    			$contents_list[$section->id]['products'] = $products;
 		    			/******
 		    			 * External module contents within section selected
 		    			*/

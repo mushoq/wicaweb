@@ -230,6 +230,30 @@ public function _initRoute()
 	
 						$frontController->getRouter()->addRoute('mediumRoute',$route3);
                                                 
+                                                
+               $products = new Zend_Controller_Router_Route(
+	
+				'product/:id/:product_id/:title',array(
+                                    
+                                                'siteid' => '1',
+	
+						'controller' => 'index',
+	
+						'module' => 'default' ,
+	
+						'action' => 'index',
+	
+						'id' => 1,
+                                    
+                                                'product_id' => 1,
+						
+						'title' => ''));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('products',$products);
+                                                
 }
 }
 class ModuleLayoutLoader extends Zend_Controller_Action_Helper_Abstract// looks up layout by module in application.ini

@@ -267,7 +267,7 @@ $(document).ready(function() {
 		    $('#submit_button').bind('click',function(){
 		    	if($("#frmProducts").valid())
 		    	{
-					alert('si vale');
+					
 		    		//ajax save
 					$.ajax({
 						type: 'POST',

@@ -421,11 +421,11 @@ $(document).ready(function() {
 	$( ".wicaDatepicker" ).datepicker({
         changeYear: true,
         yearRange: '1900:+0',
-        dateFormat: 'dd/mm/yy',   
-        showOn: "both",
-        buttonImage: "/images/calendar.gif", 
-        buttonImageOnly: true
-    }).focus();
+        dateFormat: 'dd/mm/yy'//,   
+        //showOn: "both",
+        //buttonImage: "/images/calendar.gif", 
+        //buttonImageOnly: true
+    });
 	
 });
 
