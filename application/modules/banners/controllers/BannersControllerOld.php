@@ -228,7 +228,7 @@ class Banners_BannersController extends Zend_Controller_Action
 			{
 				//Get all banners
 				$banner_obj = new Banners_Model_Banners();
-				$banners_list_obj = $banner_obj->find('banner', array('status'=>'active'));
+				$banners_list_obj = $banner_obj->find('banner');
 				
 				//Convert objClass to normal array
 				if($banners_list_obj){
@@ -276,7 +276,7 @@ class Banners_BannersController extends Zend_Controller_Action
 				//Get banners list data by module_area
 					$banner_obj = new Banners_Model_Banners();
 					foreach ($module_descriptions_banners_list as $mdbl){
-						$banner_item = $banner_obj->find('banner',array('id'=>$mdbl->row_id, 'status'=>'active'));
+						$banner_item = $banner_obj->find('banner',array('id'=>$mdbl->row_id));
 						if($banner_item){
 							foreach ($banner_item as $bi){
 								$banners_list[] = get_object_vars($bi);
@@ -293,7 +293,7 @@ class Banners_BannersController extends Zend_Controller_Action
 					$sort_col_number[$key] = $row['order_number'];
 				}
 				array_multisort($sort_col_number, SORT_ASC, $banners_list);
-                                
+				
 				if(isset($banners_list)){
 					$this->view->banners_list = $banners_list;
 				}
@@ -1159,15 +1159,9 @@ class Banners_BannersController extends Zend_Controller_Action
     	//Delete module area by module description id and section id
 		$section_module_area_aux = new Core_Model_SectionModuleArea();
     	$delete_banner= $section_module_area_aux->delete('wc_section_module_area',array('module_description_id'=>$module_description_id,'section_id'=>$section_id));
-        $bannerModel = new Banners_Model_Banners();
-        $inactive_banner = $bannerModel->find('banner', array('id'=>$banner_id));
-        if( $inactive_banner){
-             $inactive_banner[0]->status = 'inactive';
-             $save_banner_inactive = $bannerModel->save('banner', $inactive_banner[0]);
-        }
-            //var_dump($save_banner_inactive);die();
+
     	//succes or error messages displayed on screen
-    	if($save_banner_inactive)
+    	if($delete_banner)
     	{
     		$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success deleted')));
     		$arr_success = array('serial'=>$section_id);

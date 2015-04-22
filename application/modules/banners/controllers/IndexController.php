@@ -87,6 +87,8 @@ class Banners_IndexController extends Zend_Controller_Action
 			}
 			$sections_list = $sections_list_res;
 		}
+
+		//Check if user profile is admin profile
 		
 			//sections list array
 			if(count($sections_list)>0)
@@ -138,6 +140,9 @@ class Banners_IndexController extends Zend_Controller_Action
 			}
 		
 		
+		
+		
+
 		// Ordering sections by article and number
 		
 		$sort_col_number = array();
