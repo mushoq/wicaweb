@@ -114,7 +114,7 @@ class Banners_Model_Banners extends Core_Model_Factory
 	
 			foreach ($module_descriptions_banners_list as $mdbl)
 			{
-				$banner_item = $banner_obj->find('banner', array('id' => $mdbl->row_id));
+				$banner_item = $banner_obj->find('banner', array('id' => $mdbl->row_id, 'status'=>'active'));
 				$banner_counts_itm = $banner_counts_obj->find('banner_counts', array('banner_id' => $mdbl->row_id));
 				if(count($banner_item)>0 && count($banner_counts_itm)>0)
 				{
