@@ -24,7 +24,7 @@
 <?php if($this->info):?>
 <div class="row-fluid">
 	<div class="page-header">
-		<h1 class='line'><?php echo $this->info['title']; ?></h1>
+		<h1 class='line'><?php echo $this->info['title']; ?><span style="font-size: 12px;">(section/<?php echo $this->info['id']; echo '/'.strtolower(GlobalFunctions::formatFilename($this->info['title']));?>)</span></h1>
 		<span>
 			<?php foreach($this->cms_links as $action_id => $opt): ?>
 				<?php if($opt['action']=='edit'): ?>

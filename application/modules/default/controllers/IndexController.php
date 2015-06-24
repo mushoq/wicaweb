@@ -1498,4 +1498,90 @@ class Default_IndexController extends Zend_Controller_Action
         }
     }
     
+    /**
+     * Loads rss
+     */
+    public function rssAction()
+    {
+        $lang = Zend_Registry::get('Zend_Translate');
+     
+        $front_ids = New Zend_Session_Namespace('ids');
+        
+        $this->_helper->layout->disableLayout ();
+        // disable autorendering for this action
+        $this->_helper->viewRenderer->setNoRender();
+
+
+           $website = new Core_Model_Website();
+           $website_obj = $website->personalized_find('wc_website', 
+                   array(array('default_page','=','yes'))); 
+
+           $website_data = get_object_vars($website_obj[0]); //make an array of the object data
+
+           $header_data['logo'] = $website_data['logo'];
+           $header_data['name'] = $website_data['name'];
+           $header_data['website_url'] = $website_data['website_url'];
+           $header_data['analytics'] = $website_data['analytics'];
+           $header_data['meta_descr'] = $website_data['description'];
+           $header_data['meta_keywords'] = $website_data['keywords'];
+           $header_data['meta_author'] = $website_data['copyright'];
+           $this->view->header = $header_data;        
+
+           $content = new Core_Model_Content();
+           $section_obj = new Core_Model_Section();
+
+
+           $section = new Core_Model_Section();
+        //find existent rss on db according website
+           $article_rss_arr = $this->getDataToPortal($section_obj->find_between('wc_section', 
+                   array(array('article','=','yes'), 
+                       array('publish_article','=','yes'),
+                       array('rss_available','=','yes'), 
+                       array('website_id','=',1), 
+                       array(date('Y-m-d H:i:s'),'BETWEEN','publish_date','expire_date')), 
+                   array('order_number ASC'),800), $content, $section, 1, $section_obj, false, true, 500);        
+
+           $article_rss_arr = $section_obj->find_between('wc_section', 
+                       array(array('article','=','yes'), 
+                       array('publish_article','=','yes'),
+                       array('rss_available','=','yes'), 
+                       array('website_id','=',1), 
+                       array(date('Y-m-d H:i:s'),'BETWEEN','publish_date','expire_date')), 
+                   array('order_number ASC'),800);        
+
+           //print_r($article_rss_arr);
+
+           echo '<?xml version="1.0" encoding="UTF-8" ?>
+   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+   <channel>
+     <title>'.$header_data['name'].'</title>
+     <description>'.$header_data['meta_descr'].'</description>
+       <pubDate>'. date("D, j M Y h:i:sa").'</pubDate>
+       <generator>Wicaweb RSS Generator ('.$header_data['website_url'].')</generator>
+       <link>'.$header_data['website_url'].'</link>
+       ';
+
+       foreach ($article_rss_arr as $art) {
+           //$art->title = GlobalFunctions::truncate(str_replace('\\','',$art->title), 100, false);
+           //$art->synopsis = GlobalFunctions::truncate($art->synopsis, 240, false);
+       echo '
+         <item>
+           <title>'.str_replace('\\','',$art->title).'</title>
+           <description>'. strip_tags( str_replace('\\','',html_entity_decode($art->synopsis) ) ).'</description>
+           <pubDate>Thu, 23 Apr 2015 20:50:00 +0000</pubDate>
+           <link>http://'.$header_data['website_url'].'/articulo/'.$art->id.'/'.str_replace(' ','-',trim($art->title)).'</link>
+           <guid>http://'.$header_data['website_url'].'/articulo/'.$art->id.'/'.str_replace(' ','-',trim($art->title)).'</guid>
+           <enclosure type="image/jpeg" length="111990" url="';
+           //search for an image         
+           //$pictures_list = $art->getContentsBySection($art->id, $front_ids, null, 2);
+           //print_r($pictures_list);
+       echo '"/>
+        </item>';
+              }
+
+    echo '</channel>
+    </rss>';
+        
+    }
+    
 }

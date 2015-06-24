@@ -134,6 +134,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		}		
 		
 		Zend_Registry::set('Zend_Translate', $translate);
+                
+                date_default_timezone_set('America/Guayaquil');
 		
 	}
 	

@@ -75,7 +75,7 @@ class GlobalFunctions {
 	 */
 	public static function formatFilename($filename) {
 		$tofind = "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ· ";
-		$replace = "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn-_";
+		$replace = "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn--";
 		$filename = utf8_decode($filename);
 		$filename = strtr($filename, utf8_decode($tofind), $replace);
 		$filename = strtolower($filename);
@@ -411,7 +411,7 @@ class GlobalFunctions {
 					
                                     //new route with the new parameter : siteid 
 					if(!$storage)
-						$html.= '<a href="/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
+						$html.= '<a href="/section/'.$item['id'].'/'.strtolower(self::formatFilename($item['title'])).'">';
 					else 
 						$html.= '<a href="/indexold_indexold/index?id='.$item['id'].'">';
 					//$html.= !isset($item['children'])? '<a class="dropdown-toggle" data-toggle="dropdown" href="#menu'.$item['id'].'">' : '<a>';
