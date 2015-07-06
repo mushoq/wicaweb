@@ -1563,38 +1563,36 @@ function delete_file(index)
  * @param youtube
  */
 function getYouTubeInfo(youtube) {
-	
-	//get youtube id 
-	var results;	
-	//large url
+ //get youtube id 
+ var results; 
+ //large url
     results = youtube.match("[\\?&]v=([^&#]*)");
-	if( results === null )	//short url
-		results = youtube.match("youtu.be/([^&#]*)");
-	
-	if(results !== null){
-		//check if data exist through ajax
-		$.ajax({
-		    url:"http://gdata.youtube.com/feeds/api/videos/"+results[1]+"?v=2",
-		    error: function()
-		    {
-		    	parseresults(null); 
-		    },
-		    success: function()
-		    {
-		    	//get data through ajax
-			    $.ajax({
-		            url: "http://gdata.youtube.com/feeds/api/videos/"+results[1]+"?v=2&alt=json&callback=?",
-		            dataType: "json",
-		            success: function (data) {
-		            	parseresults(data); 
-						// resize tree height according content
-						setSectionTreeHeight();	
-		            }
-			    });	
-		    }
-		});		
-		
-	}
+ if( results === null ) //short url
+  results = youtube.match("youtu.be/([^&#]*)");
+ if(results !== null){
+  //check if data exist through ajax
+  $.ajax({
+                    url:"https://www.googleapis.com/youtube/v3/videos?id="+results[1]+"&key=AIzaSyCA4j53nO0C6DTmDXwskV1CFtl28itdsy8&part=snippet,contentDetails,statistics,status",
+      error: function()
+      {
+       parseresults(null); 
+      },
+      success: function()
+      {
+       //get data through ajax
+       $.ajax({
+              url:"https://www.googleapis.com/youtube/v3/videos?id="+results[1]+"&key=AIzaSyCA4j53nO0C6DTmDXwskV1CFtl28itdsy8&part=snippet,contentDetails,statistics,status",
+              dataType: "json",
+              success: function (data) {
+               parseresults(data); 
+      // resize tree height according content
+      setSectionTreeHeight(); 
+              }
+       }); 
+      }
+  });  
+  
+ }
 
 }
 
@@ -1603,21 +1601,22 @@ function getYouTubeInfo(youtube) {
  * @param data
  */
 function parseresults(data) {
-	//set data
-	if(data){
-        var title = data.entry.title.$t;
-        var description = data.entry.media$group.media$description.$t;
-        var img = data.entry.media$group.media$thumbnail[1].url;
+    //console.log(JSON.parse(JSON.stringify(data)));
+ //set data
+ if(data){
+        var title = data['items'][0]['snippet']['title'];
+        var description = data['items'][0]['snippet']['description'];
+        var img = data['items'][0]['snippet']['thumbnails']['high']['url'];
         $("#img_youtube").attr('src',img);
         $('#title_youtube').html('<b>'+title+'</b>');
         $('#url_youtube').html($("#url").val());
         $('#description_youtube').html('<p>'+description.substring(0,160)+'...</p>' );
-	}else{
+ }else{
         $("#img_youtube").attr('src','');
         $('#title_youtube').html('');
         $('#url_youtube').html('');
-        $('#description_youtube').html('');		
-	}
+        $('#description_youtube').html('');  
+ }
 }
 /**
  * Add action to the watermark position selector panel
