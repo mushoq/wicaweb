@@ -241,7 +241,7 @@ class Core_Form_Content_Content extends Zend_Form {
 								'ppt' => 'Power Point',
 								'other' => $lang->translate ( 'Other' )
 						) );
-						$select->setAttrib('class', 'hide');
+						//$select->setAttrib('class', 'hide');
 	
 					}	
 
