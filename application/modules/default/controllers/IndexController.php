@@ -125,7 +125,11 @@ class Default_IndexController extends Zend_Controller_Action
 		    	$sections_list = $section->personalized_find('wc_section',array(array('website_id','=',$front_ids->website_id), array('display_menu','=','yes'), array('approved','=','yes'), array('publication_status','=','published')),'order_number');
 		
 		    	//section_id passed in URL
-		    	$section_id = $this->_getParam('id');
+		    	if($this->_getParam('id')){
+                            $section_id = $this->_getParam('id');
+                        }else{
+                            $section_id = 1;
+                        }
 		    	$sections_arr = array();    	
 		    	//sections list array
 		    	if($sections_list)
@@ -299,8 +303,12 @@ class Default_IndexController extends Zend_Controller_Action
     	$this->view->areas = $area_tpl;
           	
     	//section_id passed in URL
-    	$section_id = $this->_getParam('id');
-    	
+    	if($this->_getParam('id')){
+            $section_id = $this->_getParam('id');
+        }else{
+            $section_id = 1;
+        }
+    	$this->view->section_id = $section_id;
     	//will contain section object data as array
     	$section_arr = array();
     	//section model
