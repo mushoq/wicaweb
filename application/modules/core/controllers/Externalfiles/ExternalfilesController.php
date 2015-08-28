@@ -349,6 +349,38 @@ class Core_Externalfiles_ExternalfilesController extends Zend_Controller_Action
     	
     	$this->view->file_content = $file_content;
     	$this->view->file_name = $filename;
+        $this->view->id = $id;
     }
+    public function editfileAction(){
+        $this->_helper->layout->disableLayout ();
+    	// disable autorendering for this action
+    	$this->_helper->viewRenderer->setNoRender();
     
+    	//translate library
+    	$lang = Zend_Registry::get('Zend_Translate');
+    	//new external file
+    	$external_file =  new Core_Model_Externalfiles();
+    	$id = $this->_getParam('id');
+    	$data = $external_file->find('wc_external_files', array('id'=>$id)); //get the selected file data
+    	$arr_data = get_object_vars($data[0]); //make an array of the object data
+    	
+    	$filename = $arr_data['path'];
+    	$extension = pathinfo($filename, PATHINFO_EXTENSION);
+    	$path = '';
+    	//get the extension and corresponding path
+    	switch($extension){
+    		case 'js':
+    			$path = APPLICATION_PATH. '/../public/js/external/';
+    			break;
+    	
+    		case 'css':
+    			$path = APPLICATION_PATH. '/../public/css/external/';
+    			break;
+    	}
+        
+        $file = fopen($path.$filename, "w+");
+        echo fwrite($file, $_POST['code']);
+        fclose($file);
+        $this->_redirect("/core/externalfiles_externalfiles");
+    }
 }
