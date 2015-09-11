@@ -1,0 +1,84 @@
+<?php 
+/**
+ * New View. Renders the view of the New action 
+ *
+ * @category   WicaWeb
+ * @package    Core_View_Externalfile_New
+ * @copyright  Copyright (c) WicaWeb - Mushoq
+ * @license    GNP
+ * @author	   Esteban
+ * @version    1.0
+ *
+ */
+//translate library
+$lang = Zend_Registry::get('Zend_Translate');
+?>
+<script type="text/javascript" src="/js/modules/core/externalfiles/edit_file.js"></script>
+
+<div class="row-fluid">
+	<div class="span12">
+        <?php echo $this->flashMessages();?>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+    	<div class="row-fluid">
+	    	<div class="span3">&nbsp;</div>
+	    	<div class="span6 well">
+	    		<h2 class="center"><?php echo $lang->translate('Test Code')?></h2>
+                        <form style="margin-bottom: 0;">
+                            <textarea id="code" name="code">
+// @simpletest
+                            </textarea>
+                            <div class="center" style="margin-top: 15px;">
+                                <input id="test" class="btn btn-primary" type="button" value="Test" name="test">
+                                <input id="cancel" class="btn btn-primary" type="button" value="Cancel" name="cancel">
+                            </div>
+                        </form>
+                        
+                        <div id="result">
+                        </div>
+                        <br><br>
+                        <div>
+                            <b>Tips:</b>
+                            <ul>
+                                <li>This code tester only works with php.</li>
+                                <li>If not using SimpleTest always end with "return $variable".</li>
+                                <li>For usage of SimpleTest start with "// @simpletest".</li>
+                                <li>Remember web testing with SimpleTest does NOT support javascript.</li>
+                            </ul>
+                        </div>
+	       </div>
+	       <div class="span3">&nbsp;</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            styleActiveLine: true,
+            matchBrackets: true,
+            indentUnit: 4,
+            indentWithTabs: true,
+            lineWrapping: true,
+            mode: "text/x-php"
+        });
+        
+        $('#test').bind('click', function(){
+            $("#result").load("/core/website_website/testcode", {code: editor.getValue()});
+            /*$.ajax({
+                type: 'POST',
+                async: false,
+                url: '/core/website_website/testcode',
+                dataType: 'json',
+                data:  {
+                 code: editor.getValue()
+                },
+
+                success: function(){
+                    $("#result").load("/core/website_website/testcode");
+                }
+            }) ;*/
+         });
+</script>

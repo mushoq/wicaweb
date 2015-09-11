@@ -1541,17 +1541,15 @@ class Default_IndexController extends Zend_Controller_Action
 
            $section = new Core_Model_Section();
         //find existent rss on db according website
-           $article_rss_arr = $this->getDataToPortal($section_obj->find_between('wc_section', 
-                   array(array('article','=','yes'), 
-                       array('publish_article','=','yes'),
+           /*$article_rss_arr = $this->getDataToPortal($section_obj->find_between('wc_section', 
+                   array(array('article','=','yes'),
                        array('rss_available','=','yes'), 
                        array('website_id','=',1), 
                        array(date('Y-m-d H:i:s'),'BETWEEN','publish_date','expire_date')), 
                    array('order_number ASC'),800), $content, $section, 1, $section_obj, false, true, 500);        
-
+            */
            $article_rss_arr = $section_obj->find_between('wc_section', 
                        array(array('article','=','yes'), 
-                       array('publish_article','=','yes'),
                        array('rss_available','=','yes'), 
                        array('website_id','=',1), 
                        array(date('Y-m-d H:i:s'),'BETWEEN','publish_date','expire_date')), 

@@ -11,6 +11,11 @@
  * @version    1.0
  * 
  */
+
+//simpletest
+/*require_once('/simpletest/autorun.php');
+require_once('/simpletest/web_tester.php');*/
+
 class Core_Website_WebsiteController extends Zend_Controller_Action
 {
 	/**
@@ -1008,5 +1013,27 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
          //remove files 
          unlink($filedb);
          unlink($destination);
+        }
+        
+        public function testAction()
+        {
+        }
+        
+        public function testcodeAction()
+        {
+            $this->_helper->layout->disableLayout ();
+            $this->_helper->viewRenderer->setNoRender ( TRUE );
+            if(strpos($this->_getParam('code'), '@simpletest') !== false){
+                $code = 'require_once("/simpletest/autorun.php");';
+                $code .= 'require_once("/simpletest/web_tester.php");';
+                $code .= 'class Tests extends WebTestCase {';
+                $code .= 'function testCode() {';
+                $code .= $this->_getParam('code');
+                $code .= '$this->assertResponse(200);';
+                $code .= '}}';
+                eval($code);
+            } else {
+                print_r(eval($this->_getParam('code')));
+            }
         }
 }
