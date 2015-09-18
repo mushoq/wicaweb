@@ -158,6 +158,78 @@ $comments_type = GlobalFunctions::arrayTranslate(Core_Model_Website::$comments_t
 									</div>
 								</div>
 							</div>
+                                                    
+                                                        <div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="auspiciante"><?php echo $this->form->auspiciante->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php echo $this->form->auspiciante->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+											<p class="help-block grey">(jpg,png,gif,jpeg)</p>
+										</div>
+									</div>
+									<div class="row-fluid">
+										<div class="span5">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php echo $this->form->img_auspiciante->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+                                                    
+                                                        <div class="row-fluid">
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="color_1"><?php echo $this->form->color_1->getDecorator('label')->getOption('requiredPrefix').$this->form->color_1->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->color_1->setAttrib('container','collapseOptions'); echo $this->form->color_1->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="color_2"><?php echo $this->form->color_2->getDecorator('label')->getOption('requiredPrefix').$this->form->color_2->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->color_2->setAttrib('container','collapseOptions'); echo $this->form->color_2->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+                                                        </div>
+                                                        <div class="row-fluid">
+                                                                <div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="color_3"><?php echo $this->form->color_3->getDecorator('label')->getOption('requiredPrefix').$this->form->color_3->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->color_3->setAttrib('container','collapseOptions'); echo $this->form->color_3->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+                                                                <div class="span6">
+									<div class="row-fluid">
+										<div class="span4 form_label">
+											<label class="required" for="competition_date"><?php echo $this->form->competition_date->getDecorator('label')->getOption('requiredPrefix').$this->form->competition_date->getLabel(); ?></label>
+										</div>
+										<div class="span1">&nbsp;</div>
+										<div class="span4 form_field">
+											<?php $this->form->competition_date->setAttrib('container','collapseOptions'); echo $this->form->competition_date->renderViewHelper(); ?>
+                                                                                        <?php echo '&nbsp;<span>Hora:</span>';
+                                                                                              echo $this->form->competition_time->renderViewHelper(); ?>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div class="row-fluid center">
 								<input type="button" class="btn btn-warning" value="<?php echo $lang->translate('Continue');?>" id="continue_1" current="collapseOptions" next="collapseTemplates">
 							</div>
