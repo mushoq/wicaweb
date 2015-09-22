@@ -1469,42 +1469,99 @@ class Default_IndexController extends Zend_Controller_Action
     	 	
     }
     
-        public function uploadFileAction()
-    {
-       $this->_helper->viewRenderer->setNoRender();
-       $this->_helper->layout->disableLayout ();
-       $appUser = new Zend_Session_Namespace('user');
-       $formData  = $this->getRequest()->getParams();
-        if(isset($formData['directory'])){
-            $directory = $formData['directory'];
-            $extensions = array('bat', 'exe', 'sh', 'php', 'js', 'sql', 'asp', 'aspx', 'jsp');
-            $maxSize = $formData['maxSize'];
-            $files = $formData['nameFile'];
-            if ($_FILES[$files]["size"] <= $maxSize) {//DETERMINING IF THE SIZE OF THE FILE UPLOADED IS VALID
-               $upload = new Zend_File_Transfer_Adapter_Http();
-                $file = $upload->getFileName(NULL, FALSE);                
-                $fileInfo= explode(".", $file); 
-                $extension = '.'.end($fileInfo);
-                if(end($fileInfo)!=null && !in_array(strtolower(end($fileInfo)), $extensions)){//DETERMINING IF THE EXTENSION OF THE FILE UPLOADED IS VALID
-                           if (is_dir(realpath('.').$directory)) {                                
-                               $newFilename = str_replace($extension,'',$file).'_'.date('YmdHis').$extension;                               
-                               $upload->addFilter('Rename', array('target' => realpath('.'). $directory.$newFilename,'overwrite' => true));
-                               if(!$upload->receive()){
-                                   $message = $upload->getMessages();
-                               }
-                                $appUser->upload_file = $newFilename;
-                           } else {//ITS NOT A DIRECTORY
-                                   echo json_encode(3);
-                           }
-                   } else {//INCORRECT EXTENSION
-                           echo json_encode(2);
-                   }
-               
-    	} else {//INCORRECT SIZE
-    		echo json_encode(1);
-    	}
-        }
-    }
+    public function uploadfileAction()
+	{
+		$this->_helper->layout->disableLayout ();
+		// disable autorendering for this action only:
+		$this->_helper->viewRenderer->setNoRender();
+	
+		$formData  = $this->_request->getPost();
+	
+		$directory = $formData['directory'];
+		$maxSize = $formData['maxSize'];
+		$type = $formData['type'];
+
+		$directory = APPLICATION_PATH. '/../'. $directory;
+		if ($_FILES["content_file"]["size"] <= $maxSize && $_FILES["content_file"]["size"]!=0) 
+		{
+			//DETERMINING IF THE SIZE OF THE FILE UPLOADED IS VALID
+			$path_parts = pathinfo($_FILES["content_file"]["name"]);
+			
+			if($type == 'image')
+			{
+				$extensions = array(0 => 'jpg', 1 => 'jpeg', 2 => 'png', 3 => 'gif', 4 => 'JPG', 5 => 'JPEG', 6 => 'PNG', 7 => 'GIF');
+			}elseif($type == 'flash')
+			{
+				$extensions = array(0 => 'swf', 1 => 'SWF');
+			}
+			
+			if($type == 'file')
+			{
+				if (is_dir($directory)) 
+				{
+					do {
+						$tempName = 'file_' . time() . '.' . $path_parts['extension'];
+					} while (file_exists($directory . $tempName));
+					move_uploaded_file($_FILES["content_file"]["tmp_name"], $directory . $tempName);
+					echo $tempName;
+				}
+				else
+				{
+					//ITS NOT A DIRECTORY
+					echo 3;
+				}				
+			}
+			else
+			{
+				if (in_array($path_parts['extension'], $extensions)) 
+				{
+					//DETERMINING IF THE EXTENSION OF THE FILE UPLOADED IS VALID
+					if (is_dir($directory)) 
+					{
+						do {
+							$tempName = 'file_' . time() . '.' . $path_parts['extension'];
+						} while (file_exists($directory . $tempName));
+						move_uploaded_file($_FILES["content_file"]["tmp_name"], $directory . $tempName);
+						echo $tempName;
+					} 
+					else
+					{
+						//ITS NOT A DIRECTORY
+						echo 3;
+					}
+				}
+				else 
+				{
+					//INCORRECT EXTENSION
+					echo 2;
+				}
+			}
+		}
+		else
+		{
+			//INCORRECT SIZE
+			echo 1;
+		}
+	}
+        
+    public function deletefileAction()
+	{
+		$this->_helper->layout->disableLayout ();
+		// disable autorendering for this action only:
+		$this->_helper->viewRenderer->setNoRender();
+	
+		$formData  = $this->_request->getPost();
+	
+		$file = $formData['file'];
+	
+		if ($file) 
+		{
+			if (file_exists(APPLICATION_PATH. '/../'. 'public/uploads/tmp/' . $file))
+			{
+				unlink(APPLICATION_PATH. '/../'. 'public/uploads/tmp/'. $file);
+			}
+		}
+	}
     
     /**
      * Loads rss

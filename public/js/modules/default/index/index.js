@@ -96,9 +96,11 @@ $(document).ready(function() {
             rules: {
             }
 		});
-            $("#form_field_file_"+content_id).bind("click",function(){
-                load_file('/default/index/upload-file', '/uploads/tmp/', 'form_field_file'+content_id, content_id); 
-            }) 
+        
+		$('[id^="form_field_file_"]').each(function(){
+			content_id = this.id.replace("form_field_file_","");
+			load_file('form_field_file'+content_id, 'file'); 
+		}) 
                
 		
 		$("#btn_sub_form_"+content_id).bind("click",function(){                    
@@ -454,37 +456,57 @@ $(window).load(function(){
   * @nameFile: name $_FILE()
   * @content_id: content Id 
   */			
-function load_file(action, directory, nameFile, content_id){	
-	 
-         new AjaxUpload('#form_field_file_'+content_id ,{               
-		action: action ,
+function load_file(element_sufix, element_type)
+{
+	
+	new AjaxUpload('#'+element_sufix,{//UPLOADS FILE TO THE $_FILES VAR
+		action: "/index/index/uploadfile",
 		data:{
-			directory: directory,
-			maxSize: 2097152,
-                        nameFile: nameFile
+			directory: 'public/uploads/tmp/',
+			maxSize: 22097152,
+			type: element_type
 		},
-		name: nameFile,
-                onSubmit : function(file, ext){
+		name: 'content_file',
+		onSubmit : function(file, ext){
 			this.disable();
 		},
-		onComplete: function(file, response){
+		onComplete: function(file, response){//ONCE THE USER SELECTS THE FILE
 			this.enable();
-			if(!(response)){
-                                $('#form_txt_file_'+ content_id).val(file);			
-			}else{
+			if(isNaN(response)){//IF THE RESPONSE OF uploadFile.rpc ITS NOT A NUMBER (NOT AN ERROR)
+				//DELETING PREVIOUS PICTURE IF IT EXISTS
+				if($("#hdnNameFile_"+element_sufix).val()){
+					$.ajax({
+						url: "/index/index/deletefile",
+						type: "post",
+						data: ({
+							file: function(){
+								return $("#hdnNameFile").val();
+							}
+						}),
+						success: function(data) {
+						}
+					});
+				}					
+				if(element_type == 'image'){
+					$('#imageprw_'+element_sufix).attr('src', "/uploads/tmp/"+response);
+					$('#imageprw_'+element_sufix).show();
+				}
+				// resize tree height according content
+				setSectionTreeHeight();	
+				
+				$('#input_file_'+element_sufix).val(file);
+				$('#hdnNameFile_'+element_sufix).val(response);
+				
+			}else{//ERRORS ON THE FILE UPLOADED
+				
 				if(response == 1){
-					alert('Tamaño de archivo excedido');
-                                        $('#form_txt_file_'+ content_id).val('');
+					alert("El tamaño del archivo es demasiado grande");
 				}
 				if(response == 2){
-					alert('Extension de archivo no permitida');
-                                        $('#form_txt_file_'+ content_id).val('');
+					alert("Extensión no válida");
 				}
-                                if(response == 3){
-                                    alert('Directorio incorrecto');
-                                    $('#form_txt_file_'+ content_id).val('');
-                                }
 			}
 		}
 	});
+		
 }
