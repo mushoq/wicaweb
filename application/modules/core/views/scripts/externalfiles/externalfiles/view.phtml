@@ -16,6 +16,7 @@ $confirm = GlobalFunctions::arrayTranslate(Core_Model_Externalfiles::$confirm);
 $website = new Core_Model_Website();
 $website_list = $website->find('wc_website');
 ?>
+<script type="text/javascript" src="/js/modules/core/externalfiles/edit_file.js"></script>
 <div class="row-fluid line">
 	<div class="span12 page-header-wica center line">
 		<h1><?php echo $lang->translate('View External File');?></h1>
@@ -34,13 +35,29 @@ $website_list = $website->find('wc_website');
 	    	<div class="span3">&nbsp;</div>
 	    	<div class="span6 well">
 	    		<h2 class="center"><?php echo $lang->translate('File Content').': '. $this->file_name;?></h2>
-		       <?php 
-			       foreach($this->file_content as $f):
-			       		echo $f.'<br/>';
-			       endforeach;
-		       ?>
+                        <form method="POST" action="/core/externalfiles_externalfiles/editfile?id=<?php echo $this->id ?>" style="margin-bottom: 0;">
+                            <textarea id="code" name="code">
+                                <?php
+                                        foreach($this->file_content as $f):
+echo $f;
+                                        endforeach;
+                                ?>
+                            </textarea>
+                            <div class="center" style="margin-top: 15px;">
+                                <input id="save" class="btn btn-primary" type="submit" value="Save" name="save">
+                                <input id="cancel" class="btn btn-primary" type="button" value="Cancel" name="cancel">
+                            </div>
+                        </form>
 	       </div>
 	       <div class="span3">&nbsp;</div>
 	      </div>
     </div>
-</div> 
+</div>
+<script type="text/javascript">
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            styleActiveLine: true,
+            matchBrackets: true,
+            lineWrapping: true
+        });
+</script>

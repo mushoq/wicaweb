@@ -59,7 +59,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 						
 						<?php foreach($this->template_links as $action_id => $opt): ?>
 							<?php if($opt['action']=='edit'): ?>
-								<a href="/core/template_template/edit?id=<?php echo $template->id;?>" title="<?php echo $lang->translate('Update'); ?>"><i class="icon-pencil"></i></a>
+								<a href="/core/template_template/edit/id/<?php echo $template->id;?>" title="<?php echo $lang->translate('Update'); ?>"><i class="icon-pencil"></i></a>
 								/
 							<?php endif; ?>
 							<?php if( ! in_array($template->id, $this->active_templates) ){ ?>
@@ -70,7 +70,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 							<?php }?>				
 						<?php endforeach; ?>
 						
-						<a href="/core/template_template/view?id=<?php echo $template->id;?>" title="<?php echo $lang->translate('View code'); ?>"><i class="icon-indent-left"></i></a>			
+						<a href="/core/template_template/view/id/<?php echo $template->id;?>" title="<?php echo $lang->translate('View code'); ?>"><i class="icon-indent-left"></i></a>			
 					</td>
 				</tr>	
 				<?php endforeach;?>

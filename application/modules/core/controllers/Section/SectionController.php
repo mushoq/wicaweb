@@ -588,6 +588,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		$id = New Zend_Session_Namespace('id');
 		$id->__unset('section_id');
 		$id->__unset('section_temp');
+                //die('simon');
 	}
 	
 	/**

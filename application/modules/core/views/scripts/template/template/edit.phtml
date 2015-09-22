@@ -47,6 +47,7 @@ $lang = Zend_Registry::get('Zend_Translate');
                         <div class="span5 form_field">
                             <input class="align-top" readonly type="text" id="input_template_file" name="input_template_file"/>
 							<?php echo $this->form->template_file->renderViewHelper(); ?>&ensp;<a href="<?php echo '/core/template_template/download?file='.$this->form->hdn_template_file->getValue().'&url='.str_replace('/', '@@@', APPLICATION_PATH . '/../application/modules/default/views/scripts/partials/'.$this->form->hdn_template_file->getValue()); ?>" title="<?php echo $lang->translate('Download'); ?>"><i class="icon-download-alt"></i></a>
+							<a href="/core/template_template/view/id/<?php echo $this->template_id;?>" title="<?php echo $lang->translate('View code'); ?>"><i class="icon-indent-left"></i></a>	
 							<?php echo $this->form->hdn_template_file->renderViewHelper(); ?>
 							<span id='error_no_area' class="hide">
 								<label class="error_validation" ><?php echo $lang->translate('Not found any valid area');?></label>
@@ -96,7 +97,9 @@ $lang = Zend_Registry::get('Zend_Translate');
 								if($aux_css_files)
 								foreach($aux_css_files as $key_css => $aii){ ?>
 									<li id='css_file_<?php echo str_replace('.', '', $aii)?>' >
-										<?php echo substr($aii, 0,30);?>... &ensp;<a href="<?php echo '/core/template_template/download?file='.$aii.'&url='.str_replace('/', '@@@', APPLICATION_PATH . '/../public/css/templates/'.$this->template_name.'/'.$aii); ?>" title="<?php echo $lang->translate('Download'); ?>"><i class="icon-download-alt" ></i></a><br/>
+										<?php echo substr($aii, 0,30);?>... &ensp;
+                                                                                <a href="<?php echo '/core/template_template/view?file='.$aii.'&url='.str_replace('/', '@@@', APPLICATION_PATH . '/../public/css/templates/'.$this->template_name.'/'.$aii); ?>" title="<?php echo $lang->translate('View code'); ?>"><i class="icon-indent-left"></i></a>	
+                                                                                <a href="<?php echo '/core/template_template/download?file='.$aii.'&url='.str_replace('/', '@@@', APPLICATION_PATH . '/../public/css/templates/'.$this->template_name.'/'.$aii); ?>" title="<?php echo $lang->translate('Download'); ?>"><i class="icon-download-alt" ></i></a><br/>
 										&ensp;media:&ensp;<input type='text' id='media_css_<?php echo str_replace('.', '', $aii)?>' name='media_css_<?php echo str_replace('.', '', $aii)?>' value="<?php if($aux_media_css){ if($aux_media_css[$key_css]!='null'){echo $aux_media_css[$key_css];} } ?>"/>
 										&ensp;<a id='delete_css_<?php echo str_replace('.', '', $aii)?>' title='Borrar' index='<?php echo $aii;?>' li='css_file_<?php echo str_replace('.', '', $aii)?>' old="yes" template="<?php echo $this->template_name; ?>" >
 											<i class='icon-trash'></i>
@@ -151,6 +154,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 								array_pop($aux_js_files);
 								foreach($aux_js_files as $aii){ ?>
 									<li id='js_file_<?php echo str_replace('.', '', $aii)?>' >
+                                                                            <a href="<?php echo '/core/template_template/download?file='.$aii.'&url='.str_replace('/', '@@@', APPLICATION_PATH . '/../public/js/templates/'.$this->template_name.'/'.$aii); ?>" title="<?php echo $lang->translate('View code'); ?>"><i class="icon-indent-left"></i></a>	
 										<?php echo substr($aii, 0,30);?>...&ensp;<a href="<?php echo '/core/template_template/download?file='.$aii.'&url='.str_replace('/', '@@@', APPLICATION_PATH . '/../public/js/templates/'.$this->template_name.'/'.$aii); ?>" title="<?php echo $lang->translate('Download'); ?>"><i class="icon-download-alt" ></i></a>
 										&ensp;<a id='delete_js_<?php echo str_replace('.', '', $aii)?>' title='Borrar' index='<?php echo $aii;?>' li='js_file_<?php echo str_replace('.', '', $aii)?>' old="yes" template="<?php echo $this->template_name; ?>"  >
 											<i class='icon-trash'></i>

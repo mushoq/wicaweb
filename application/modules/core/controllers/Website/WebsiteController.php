@@ -89,6 +89,13 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     			else{
     				$logo = NULL;
     			}
+                        
+                        if($uploadedData['auspiciante']){
+    				$auspiciante = GlobalFunctions::uploadFiles($uploadedData['auspiciante'], APPLICATION_PATH. '/../public/uploads/website/');
+    			}
+    			else{
+    				$auspiciante = NULL;
+    			}
     			 
     			if($uploadedData['icon']){
     				$icon = GlobalFunctions::uploadFiles($uploadedData['icon'], APPLICATION_PATH. '/../public/uploads/website/');
@@ -116,8 +123,13 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     			$website_obj->description = GlobalFunctions::value_cleaner($formData['description']);
     			$website_obj->keywords = GlobalFunctions::value_cleaner($formData['keywords']);
     			$website_obj->website_url = GlobalFunctions::value_cleaner($formData['website_url']);
+                        $website_obj->color_1 = GlobalFunctions::value_cleaner($formData['color_1']);
+                        $website_obj->color_2 = GlobalFunctions::value_cleaner($formData['color_2']);
+                        $website_obj->color_3 = GlobalFunctions::value_cleaner($formData['color_3']);
+                        $website_obj->competition_date = GlobalFunctions::setFormattedDate($formData['competition_date']).' '.$formData['competition_time'];
     			$website_obj->default_page = $default_page;
     			$website_obj->logo = $logo;
+                        $website_obj->auspiciante = $auspiciante;
     			$website_obj->icon = $icon;
     			$website_obj->info_email = $formData['info_email'];
     			$website_obj->time_zone = $formData['time_zone'];
@@ -240,6 +252,7 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
 				
 				//Removing all temporal files
 				GlobalFunctions::removeOldFiles($uploadedData['logo'], APPLICATION_PATH. '/../public/uploads/tmp/');
+                                GlobalFunctions::removeOldFiles($uploadedData['auspiciante'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['icon'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['watermark'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['offline_image'], APPLICATION_PATH. '/../public/uploads/tmp/');
@@ -337,6 +350,13 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
 			$form->img_logo->setImage('/uploads/website/'.$arr_data['logo']);
 			$form->img_logo->setLabel($lang->translate('Current Image Logo').':');
     	}
+        
+        if($arr_data['auspiciante']){
+			$form->img_auspiciante->setImage('/uploads/website/'.$arr_data['auspiciante']);
+			$form->img_auspiciante->setLabel($lang->translate('Current Image Auspiciante').':');
+    	}
+        
+        
 		
     	if($arr_data['icon']){
 			$form->img_icon->setImage('/uploads/website/'.$arr_data['icon']);
@@ -382,6 +402,11 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
 					$arr_data['website_status'] = $wb->type;
 			}
 		}
+                        $arr_data['competition_time'] = substr($arr_data['competition_date'], -8);
+                        $arr_data['competition_date'] = GlobalFunctions::getFormattedDate($arr_data['competition_date']);
+			
+                
+                
 		//populate the form
 		$form->populate($arr_data);
     	$this->view->form = $form;
@@ -421,6 +446,24 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     				}
     				else{
     					$logo = NULL;
+    				}
+    			}
+                        
+                        if($uploadedData['auspiciante']){
+    				$auspiciante = GlobalFunctions::uploadFiles($uploadedData['auspiciante'], APPLICATION_PATH. '/../public/uploads/website/');
+    				if($arr_data['auspiciante']){
+    					//delete old file if the image is replaced
+    					if(!GlobalFunctions::removeOldFiles($arr_data['auspiciante'], APPLICATION_PATH. '/../public/uploads/website/')){
+    						throw new Zend_Exception("CUSTOM_EXCEPTION:FILE NOT DELETED.");
+    					}
+    				}
+    			}
+    			else{ //if there is no uploaded image it sets the current image or null in case that any image was uploaded before
+    				if($arr_data['auspiciante']){
+    					$auspiciante = $arr_data['auspiciante'];
+    				}
+    				else{
+    					$auspiciante = NULL;
     				}
     			}
     			
@@ -472,6 +515,10 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     			$website_obj->description = GlobalFunctions::value_cleaner($formData['description']);
     			$website_obj->keywords = GlobalFunctions::value_cleaner($formData['keywords']);
     			$website_obj->website_url = GlobalFunctions::value_cleaner($formData['website_url']);
+                        $website_obj->color_1 = GlobalFunctions::value_cleaner($formData['color_1']);
+                        $website_obj->color_2 = GlobalFunctions::value_cleaner($formData['color_2']);
+                        $website_obj->color_3 = GlobalFunctions::value_cleaner($formData['color_3']);
+                        $website_obj->competition_date = GlobalFunctions::setFormattedDate($formData['competition_date']).' '.$formData['competition_time'];
     			$website_obj->default_page = GlobalFunctions::value_cleaner($arr_data['default_page']);
     			
     			if($logo)
@@ -479,6 +526,11 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     			else
     				$website_obj->logo = NULL;
     			
+                        if($auspiciante)
+    				$website_obj->auspiciante = $auspiciante;
+    			else
+    				$website_obj->auspiciante = NULL;
+                        
     			if($icon)
     				$website_obj->icon = $icon;
     			else
@@ -637,6 +689,7 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
 				
 				//Removing all temporal files
 				GlobalFunctions::removeOldFiles($uploadedData['logo'], APPLICATION_PATH. '/../public/uploads/tmp/');
+                                GlobalFunctions::removeOldFiles($uploadedData['auspiciante'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['icon'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['watermark'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['offline_image'], APPLICATION_PATH. '/../public/uploads/tmp/');
@@ -715,7 +768,13 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     	$website_obj->description = GlobalFunctions::value_cleaner($stored_website_data[0]->description);
     	$website_obj->keywords = GlobalFunctions::value_cleaner($stored_website_data[0]->keywords);
     	$website_obj->website_url = GlobalFunctions::value_cleaner($stored_website_data[0]->website_url);
+        $website_obj->color_1 = GlobalFunctions::value_cleaner($stored_website_data[0]->color_1);
+        $website_obj->color_2 = GlobalFunctions::value_cleaner($stored_website_data[0]->color_2);
+        $website_obj->color_3 = GlobalFunctions::value_cleaner($stored_website_data[0]->color_3);
+        $website_obj->competition_date = GlobalFunctions::getFormattedDate($stored_website_data[0]->competition_date);
+        $website_obj->competition_time = substr($stored_website_data[0]->competition_time, -8);
     	$website_obj->logo = GlobalFunctions::value_cleaner($stored_website_data[0]->logo);
+        $website_obj->auspiciante = GlobalFunctions::value_cleaner($stored_website_data[0]->auspiciante);
     	$website_obj->icon = GlobalFunctions::value_cleaner($stored_website_data[0]->icon);
     	$website_obj->info_email = GlobalFunctions::value_cleaner($stored_website_data[0]->info_email);
     	$website_obj->time_zone = $stored_website_data[0]->time_zone;
@@ -774,7 +833,13 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
 					$website_deactivate_obj->description = GlobalFunctions::value_cleaner($deactivate->description);
 					$website_deactivate_obj->keywords = GlobalFunctions::value_cleaner($deactivate->keywords);
 					$website_deactivate_obj->website_url = GlobalFunctions::value_cleaner($deactivate->website_url);
+                                        $website_deactivate_obj->color_1 = GlobalFunctions::value_cleaner($deactivate->color_1);
+                                        $website_deactivate_obj->color_2 = GlobalFunctions::value_cleaner($deactivate->color_2);
+                                        $website_deactivate_obj->color_3 = GlobalFunctions::value_cleaner($deactivate->color_3);
+                                        $website_deactivate_obj->competition_date = GlobalFunctions::getFormattedDate($deactivate->competition_date);
+                                        $website_deactivate_obj->competition_time = substr($deactivate->competition_time, -8);
 					$website_deactivate_obj->logo = GlobalFunctions::value_cleaner($deactivate->logo);
+                                        $website_deactivate_obj->auspiciante = GlobalFunctions::value_cleaner($deactivate->auspiciante);
 					$website_deactivate_obj->icon = GlobalFunctions::value_cleaner($deactivate->icon);
 					$website_deactivate_obj->info_email = GlobalFunctions::value_cleaner($deactivate->info_email);
 					$website_deactivate_obj->time_zone = $deactivate->time_zone;
