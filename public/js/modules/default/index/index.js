@@ -97,10 +97,15 @@ $(document).ready(function() {
             }
 		});
         
-		$('[id^="form_field_file_"]').each(function(){
-			content_id = this.id.replace("form_field_file_","");
-			load_file('form_field_file'+content_id, 'file'); 
-		}) 
+		$('[id^="form_field_file_"]').each(function(){                
+				$("#hdnNameFile_"+this.id.replace("form_field_file_","")).rules("add", {                                
+						 accept: "jpg,png,gif,jpeg,JPG,PNG,GIF,JPEG,doc,docx,xls,xlsx,pdf,zip,rar"
+				});
+
+				element_sufix = this.id.replace("form_field_file_","");
+				load_picture(element_sufix);
+
+		});
                
 		
 		$("#btn_sub_form_"+content_id).bind("click",function(){                    
@@ -449,64 +454,49 @@ $(window).load(function(){
 	});	
 });
 	
-/**
-  * Function to upload files by ajax
-  * @action : Action controller
-  * @directory: Directory where files are to upload
-  * @nameFile: name $_FILE()
-  * @content_id: content Id 
-  */			
-function load_file(element_sufix, element_type)
+//uploads a section picture                        
+function load_picture(element_sufix)
 {
-	
-	new AjaxUpload('#'+element_sufix,{//UPLOADS FILE TO THE $_FILES VAR
-		action: "/index/index/uploadfile",
-		data:{
-			directory: 'public/uploads/tmp/',
-			maxSize: 22097152,
-			type: element_type
-		},
-		name: 'content_file',
-		onSubmit : function(file, ext){
-			this.disable();
-		},
-		onComplete: function(file, response){//ONCE THE USER SELECTS THE FILE
-			this.enable();
-			if(isNaN(response)){//IF THE RESPONSE OF uploadFile.rpc ITS NOT A NUMBER (NOT AN ERROR)
-				//DELETING PREVIOUS PICTURE IF IT EXISTS
-				if($("#hdnNameFile_"+element_sufix).val()){
-					$.ajax({
-						url: "/index/index/deletefile",
-						type: "post",
-						data: ({
-							file: function(){
-								return $("#hdnNameFile").val();
-							}
-						}),
-						success: function(data) {
-						}
-					});
-				}					
-				if(element_type == 'image'){
-					$('#imageprw_'+element_sufix).attr('src', "/uploads/tmp/"+response);
-					$('#imageprw_'+element_sufix).show();
-				}
-				// resize tree height according content
-				setSectionTreeHeight();	
-				
-				$('#input_file_'+element_sufix).val(file);
-				$('#hdnNameFile_'+element_sufix).val(response);
-				
-			}else{//ERRORS ON THE FILE UPLOADED
-				
-				if(response == 1){
-					alert("El tamaño del archivo es demasiado grande");
-				}
-				if(response == 2){
-					alert("Extensión no válida");
-				}
-			}
-		}
-	});
-		
+        new AjaxUpload('#form_field_file_'+element_sufix,{//UPLOADS FILE TO THE $_FILES VAR
+                action: "/default/index/uploadfile",
+                data:{
+                        directory: 'public/uploads/tmp/',
+                        maxSize: 2097152
+                },
+                name: 'section_photos',
+                onSubmit : function(file, ext){
+                        this.disable();
+                },
+                onComplete: function(file, response){//ONCE THE USER SELECTS THE FILE
+                        this.enable();
+                        if(isNaN(response)){//IF THE RESPONSE OF uploadFile.rpc ITS NOT A NUMBER (NOT AN ERROR)
+                                //DELETING PREVIOUS PICTURE IF IT EXISTS
+                                if($("#hdnNameFile_"+element_sufix).val()){
+                                        $.ajax({
+                                                url: "/default/index/deletetemppicture",
+                                                type: "post",
+                                                data: ({
+                                                        file_tmp: function(){
+                                                                return $("#hdnNameFile_"+element_sufix).val();
+                                                        }
+                                                }),
+                                                success: function(data) {
+                                                }
+                                        });
+                                }                                                                
+                                                                                                              
+                                $('#fileLabel_'+element_sufix).val(file);
+                                $('#hdnNameFile_'+element_sufix).val(response);
+                                
+                                
+                        }else{//ERRORS ON THE FILE UPLOADED
+                                if(response == 1){
+                                        alert('El archivo no debe pesar mas de 2MB');
+                                }
+                                if(response == 2){
+                                        alert('Los archivos soportados son: doc, docx, xls, xlsx, pdf, zip, rar, jpg, png, gif, jpeg');
+                                }
+                        }
+                }
+        });
 }

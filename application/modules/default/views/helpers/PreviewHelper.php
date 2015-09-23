@@ -289,12 +289,12 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 														
 											case 'file':	
 															$return .=	'<div class="form-group">
-																			
+                                                                                                                                                                
 																				<label for="form_field_file_'.$ff->id.'">'.$ff->name.'</label>
                                                                                                                                                                 <input id="fileLabel_'.$ff->id.'" type="text" value="" disabled="disabled">
                                                                                                                                                                 <button id="form_field_file_'.$ff->id.'" class="btn " type="button" name="form_field_file_'.$ff->id.'">Buscar</button>
 																				
-                                                                                                                                                                <input type="hidden" id="hdnNameFile_'.$ff->id.'" />
+                                                                                                                                                                <input type="hidden" id="hdnNameFile_'.$ff->id.'" name="hdnNameFile_'.$ff->id.'" />
 																			
 																		</div>';
 															break;								

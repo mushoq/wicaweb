@@ -895,7 +895,7 @@ class Default_IndexController extends Zend_Controller_Action
     	
 		$formData = $this->_request->getPost ();
 		$body='';
-				
+			
 		//Dictionary Validation
 		$dictionary_coincidence = false;
 		$website = new Core_Model_Website();
@@ -942,9 +942,11 @@ class Default_IndexController extends Zend_Controller_Action
 		//End Dictionary Validation
 		if($dictionary_coincidence==false){
 			foreach($formData as $key=>$data){
+                            
 				if($key!='captcha' && $key !='website_id')
 					$body.='<label>'.str_replace ( '_', ' ', $key ).': '.$data.'</label><br/>';
 			}
+                        
 			if ($this->getRequest ()->isPost ()) {
 				if(array_key_exists('form_field_captcha_'.$formData['form_id'],$formData)){
 					
@@ -1469,78 +1471,59 @@ class Default_IndexController extends Zend_Controller_Action
     	 	
     }
     
-    public function uploadfileAction()
+    public function uploadfileAction() 
+	{			
+		$this->_helper->layout->disableLayout ();
+		// disable autorendering for this action only:
+		$this->_helper->viewRenderer->setNoRender();
+		$appUser = new Zend_Session_Namespace('user');				
+		$formData  = $this->_request->getPost();
+		
+		$directory = $formData['directory'];			
+		$maxSize = $formData['maxSize'];	
+
+		$directory = APPLICATION_PATH. '/../'. $directory;
+		if ($_FILES["section_photos"]["size"] <= $maxSize) {//DETERMINING IF THE SIZE OF THE FILE UPLOADED IS VALID
+			$path_parts = pathinfo($_FILES["section_photos"]["name"]);
+			$extensions = array(0 => 'jpg', 1 => 'jpeg', 2 => 'png', 3 => 'gif', 4 => 'JPG', 5 => 'JPEG', 6 => 'PNG', 7 => 'GIF', 8 => 'doc', 9 => 'docx', 10 => 'pdf', 11 => 'xls', 12 => 'xlsx', 13=>'zip', 14 => 'rar');
+
+            if (in_array($path_parts['extension'], $extensions)) {//DETERMINING IF THE EXTENSION OF THE FILE UPLOADED IS VALID
+				if (is_dir($directory)) {
+					do {
+						$tempName = 'file_' . time() . '.' . $path_parts['extension'];
+					} while (file_exists($directory . $tempName));
+					move_uploaded_file($_FILES["section_photos"]["tmp_name"], $directory . $tempName);
+                                        $appUser->upload_file = $tempName;
+					echo $tempName;
+				} else {//ITS NOT A DIRECTORY
+					echo 3;
+				}
+			} else {//INCORRECT EXTENSION
+				echo 2;
+			}
+		} else {//INCORRECT SIZE
+			echo 1;
+		}
+	}
+        
+        /**
+	 * Deletes the section temp picture
+	 */
+	public function deletetemppictureAction()
 	{
 		$this->_helper->layout->disableLayout ();
 		// disable autorendering for this action only:
 		$this->_helper->viewRenderer->setNoRender();
 	
-		$formData  = $this->_request->getPost();
-	
-		$directory = $formData['directory'];
-		$maxSize = $formData['maxSize'];
-		$type = $formData['type'];
-
-		$directory = APPLICATION_PATH. '/../'. $directory;
-		if ($_FILES["content_file"]["size"] <= $maxSize && $_FILES["content_file"]["size"]!=0) 
-		{
-			//DETERMINING IF THE SIZE OF THE FILE UPLOADED IS VALID
-			$path_parts = pathinfo($_FILES["content_file"]["name"]);
-			
-			if($type == 'image')
+		$formData  = $this->_request->getPost();	
+		$temp_file = $formData['file_tmp'];
+				
+		if ($temp_file) 
+		{			
+			if (file_exists(APPLICATION_PATH. '/../'. 'public/uploads/tmp/' . $temp_file)) 
 			{
-				$extensions = array(0 => 'jpg', 1 => 'jpeg', 2 => 'png', 3 => 'gif', 4 => 'JPG', 5 => 'JPEG', 6 => 'PNG', 7 => 'GIF');
-			}elseif($type == 'flash')
-			{
-				$extensions = array(0 => 'swf', 1 => 'SWF');
+				unlink(APPLICATION_PATH. '/../'. 'public/uploads/tmp/'. $temp_file);
 			}
-			
-			if($type == 'file')
-			{
-				if (is_dir($directory)) 
-				{
-					do {
-						$tempName = 'file_' . time() . '.' . $path_parts['extension'];
-					} while (file_exists($directory . $tempName));
-					move_uploaded_file($_FILES["content_file"]["tmp_name"], $directory . $tempName);
-					echo $tempName;
-				}
-				else
-				{
-					//ITS NOT A DIRECTORY
-					echo 3;
-				}				
-			}
-			else
-			{
-				if (in_array($path_parts['extension'], $extensions)) 
-				{
-					//DETERMINING IF THE EXTENSION OF THE FILE UPLOADED IS VALID
-					if (is_dir($directory)) 
-					{
-						do {
-							$tempName = 'file_' . time() . '.' . $path_parts['extension'];
-						} while (file_exists($directory . $tempName));
-						move_uploaded_file($_FILES["content_file"]["tmp_name"], $directory . $tempName);
-						echo $tempName;
-					} 
-					else
-					{
-						//ITS NOT A DIRECTORY
-						echo 3;
-					}
-				}
-				else 
-				{
-					//INCORRECT EXTENSION
-					echo 2;
-				}
-			}
-		}
-		else
-		{
-			//INCORRECT SIZE
-			echo 1;
 		}
 	}
         
