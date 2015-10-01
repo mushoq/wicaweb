@@ -286,13 +286,13 @@ $(document).ready(function(){
 	
 	case '3': //Content link
 		
-		////set value on radio aux validation
+		//set value on radio aux validation
 		$("#type-"+$("#type").val()).attr("class",'btn btn-primary active');
 		$("input[id^='type']").bind("click",function(){
 			$("#type").val($(this).attr('element_value'));
 		});				
-//		
-//		//validation
+		
+		//validation
 		$("#frmContent").validate({
 			wrapper: "span",
 			onfocusout: false,
@@ -322,13 +322,13 @@ $(document).ready(function(){
             	}
             }
 		});
-//		
-//		//copying title into internal name
+		
+		//copying title into internal name
 		$('#title').keyup(function(){
 			$('#internal_name').val($(this).val());
 		});
-//		
-//		// if click on internal link option
+		
+		// if click on internal link option
 		$("#type-internal_link").bind("click",function(){
 			//hide other options elements
 			hide_elements_link();
@@ -347,8 +347,8 @@ $(document).ready(function(){
 			// resize tree height according content
 			setSectionTreeHeight();	
 		});
-//		
-//		// if click on external link option
+		
+		// if click on external link option
 		$("#type-external_link").bind("click",function(){
 			//hide other options elements
 			hide_elements_link();
@@ -367,7 +367,7 @@ $(document).ready(function(){
 			// resize tree height according content
 			setSectionTreeHeight();	
 		});
-//		// if click on email option
+		// if click on email option
 		$("#type-e_mail").bind("click",function(){
 			//hide other options elements
 			hide_elements_link();
@@ -387,7 +387,7 @@ $(document).ready(function(){
 			// resize tree height according content
 			setSectionTreeHeight();	
 		});
-//		
+		
 		$("#type-file").bind("click",function(){
 			//hide other options elements
 			hide_elements_link();
@@ -416,7 +416,7 @@ $(document).ready(function(){
 				required:true
 				
 			});
-//			
+			
 			$("#input_file_file").show();
 			// add ajax upload image
 			load_file('file','file');
@@ -425,9 +425,9 @@ $(document).ready(function(){
 			autoHeightContent();
 			// resize tree height according content
 			setSectionTreeHeight();	
-		});
-//		
-//		// if internal link option is active
+		});		
+		
+		// if internal link option is active
 		if($("#type-internal_link").hasClass('active'))
 		{
 			//hide other options elements
@@ -447,7 +447,7 @@ $(document).ready(function(){
 			// resize tree height according content
 			setSectionTreeHeight();	
 		}
-//		// if external link option is active
+		// if external link option is active
 		if($("#type-external_link").hasClass('active')){
 			//hide other options elements
 			hide_elements_link();
@@ -464,7 +464,7 @@ $(document).ready(function(){
 			// resize tree height according content
 			setSectionTreeHeight();	
 		};
-//		
+		
 		if($("#type-e_mail").hasClass('active')){
 			//hide other options elements
 			hide_elements_link();
@@ -481,7 +481,7 @@ $(document).ready(function(){
 			// resize tree height according content
 			setSectionTreeHeight();	
 		};
-//		
+		
 		//if($("#type-file").hasClass('active')){
 //			
 //			//hide other options elements
@@ -513,8 +513,8 @@ $(document).ready(function(){
 //			// resize tree height according content
 //			setSectionTreeHeight();	
 //		};			
-//
-//		//save content
+
+		//save content
 		$('#save').bind('click', function() {
 			if($("#frmContent").valid()){
 				
