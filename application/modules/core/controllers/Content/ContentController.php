@@ -1611,7 +1611,7 @@ class Core_Content_ContentController extends Zend_Controller_Action {
 			$this->view->section = $section_obj[0];			
 		}
 	}
-	
+        
 	/**
 	 * Returns the sections list for the autocompleter.
 	 *

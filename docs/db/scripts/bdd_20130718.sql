@@ -487,8 +487,8 @@ CREATE  TABLE IF NOT EXISTS `wc_section_module_area` (
   CONSTRAINT `fk_section_module_area_section1`
     FOREIGN KEY (`section_id` )
     REFERENCES `wc_section` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

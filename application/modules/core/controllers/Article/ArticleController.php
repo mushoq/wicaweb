@@ -1210,8 +1210,23 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 		
 		//section_id passed in URL
 		$id = $this->_getParam('id');
-				
+                
 		$section = new Core_Model_Section();
+                $section_area = $section->find('wc_section_module_area',array('section_id'=>$id));
+                
+		if(count($section_area)>0){
+			$delete_section_area = $section->delete('wc_section_module_area',array('id'=>$section_area[0]->id));
+                }
+                
+                $section_prints_obj = new Core_Model_SectionPrints();
+		$section_prints = $section_prints_obj->find('wc_section_prints', array('section_id'=>$id));
+		if(count($section_prints)>0)
+		{
+			$delete_section_prints = $section_prints_obj->delete('wc_section_prints', array('id'=>$section_prints[0]->id));
+		}
+                
+               
+		
 		$section_temp = new Core_Model_SectionTemp();
 		$section_obj_temp = $section_temp->find('wc_section_temp', array('section_id'=>$id));
 		
@@ -1245,15 +1260,18 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 			$delete_section_temp = $section->delete('wc_section_temp', array('section_id'=>$id));
 		}
 		
+                $borrar = new Core_Model_Section();
 		//section
-		$delete_section = $section->delete('wc_section', array('id'=>$id));
+                $article = $section->find('wc_section', array('id'=>$id));
+                $parent_section = $section->find('wc_section', array('id'=>$article[0]->section_parent_id));
+		$delete_section = $borrar->delete('wc_section', array('id'=>$id));
 		
 		//succes or error messages displayed on screen
 		if($delete_section)
 		{					
 			$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success deleted')));		
-			$arr_success = array('serial'=>'deleted');
-			echo json_encode($arr_success);
+                        echo json_encode(array('serial'=>'deleted','section_id' => $parent_section[0]->id, 'section_parent'=>$parent_section[0]->section_parent_id));
+			
 		}
 		else
 		{

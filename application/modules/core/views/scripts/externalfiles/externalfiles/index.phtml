@@ -61,7 +61,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 					<div class="span2 last pointer">
 						<?php foreach($this->external_files_links as $action_id => $opt): ?>
 							<?php if($opt['action']=='delete'): ?>
-							<a href="/core/externalfiles_externalfiles/remove?id=<?php echo $extfile_js->id;?>" title="<?php echo $lang->translate('Delete'); ?>"><i class="icon-trash"></i></a>
+							<a href="/core/externalfiles_externalfiles/remove?id=<?php echo $extfile_js->id;?>" title="<?php echo $lang->translate('Delete'); ?>" onclick="return confirm('Desea eliminar el archivo?')"><i class="icon-trash"></i></a>
 							<?php endif; ?>
 						<?php endforeach; ?>
 						/
@@ -94,7 +94,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 					<div class="span2 last pointer">
 						<?php foreach($this->external_files_links as $action_id => $opt): ?>
 							<?php if($opt['action']=='delete'): ?>
-								<a href="/core/externalfiles_externalfiles/remove?id=<?php echo $extfile_css->id;?>" title="<?php echo $lang->translate('Delete'); ?>"><i class="icon-trash"></i></a>
+								<a href="/core/externalfiles_externalfiles/remove?id=<?php echo $extfile_css->id;?>" title="<?php echo $lang->translate('Delete'); ?>" onclick="return confirm('Desea eliminar el archivo?')"><i class="icon-trash"></i></a>
 							<?php endif; ?>
 						<?php endforeach; ?>
 						/

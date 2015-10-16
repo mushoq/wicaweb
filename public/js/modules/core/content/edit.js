@@ -47,7 +47,7 @@ $(document).ready(function(){
 		$('#content').ckeditor({ 
 			toolbar :		
 				[					
-					{ name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','-','Templates' ] },
+					{ name: 'document', items : [ 'Source','-','NewPage','DocProps','Preview','-','Templates' ] },
 					{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
 					{ name: 'editing', items : [ 'Find','Replace','-','SelectAll'] },
 					{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },

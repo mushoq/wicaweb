@@ -78,15 +78,22 @@ $(document).ready(function(){
 				success: function(data) {													
 					if(data['serial'])
 					{
-						$('#section_tree_container').load("/core/section_section/sectionstreedata");
-
-						$('#cms_container').load("/core/section_section/sectionlist", {
+							$('#section_tree_container').load("/core/section_section/sectionstreedata", function(){
+								id = parseInt(data['section_id']);
+								section_parent = parseInt(data['section_parent']);
+								mark_section_selected('<a id="tree_'+id+'" section_parent="'+section_parent+'" article="yes"> </a>');
+								$( 'html, body' ).animate( {scrollTop: 0}, 0 );
+							});	
 							
-						}, function() {				
-							setSectionTreeHeight();
-							$.getScript('/js/modules/core/section/sectionlist.js');
-							$.getScript('/js/modules/core/section/sectiondetails.js');
-						});	
+							$('#cms_container').load("/core/section_section/sectiondetails", {
+								id: parseInt(data['section_id'])
+							},function(){							
+								setSectionTreeHeight();
+							    setTimeout("resize_content_list()",100);
+								$.getScript('/js/modules/core/section/sectionlist.js');
+								$.getScript('/js/modules/core/section/sectiondetails.js');
+								$.getScript('/js/modules/core/article/articledetails.js');
+							});							
 					}
 				}								
 			});
