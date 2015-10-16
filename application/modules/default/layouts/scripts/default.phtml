@@ -9,7 +9,7 @@
               <?php if($this->id_browser == 1){?>
               <meta property="og:url" content="<?php echo $this->header['website_url'];?>" />
               <?php }else{?>
-              <meta property="og:url" content="<?php echo $this->header['website_url'];?>/<?php if($this->article_browser == 'yes'){ echo 'article';}else{ echo 'section';}?>/<?php echo $this->id_browser; ?>/<?php echo strtolower(GlobalFunctions::formatFilename($this->title_browser))?>" />
+              <meta property="og:url" content="<?php echo $this->header['website_url'];?><?php echo $this->site_url; ?>" />
               <?php }?>
               <?php if($this->image_browser != ''){?>
                 <meta property="og:image" content="<?php echo $this->header['website_url'];?><?php echo $this->image_browser;?>" />    

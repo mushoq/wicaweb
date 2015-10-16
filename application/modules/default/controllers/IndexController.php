@@ -394,6 +394,7 @@ class Default_IndexController extends Zend_Controller_Action
                                 $this->view->id_browser = $section->id;
                                 $this->view->article_browser = $section->article;
                                 $this->view->website_id = $front_ids->website_id;
+                                $this->view->site_url = $_SERVER['REQUEST_URI'];
                                 $this->view->image_browser = '';
                                 if($section->title_browser)
                                             $this->view->title_browser = $section->title_browser;
