@@ -79,10 +79,7 @@ $(document).ready(function() {
             $("#myCarousel_4").carousel('next');
             }            
        
-        $("#form_field_file_").bind('click', function() {
-            alert('hola');
-                    
-                });
+        
                 
 	//search form contents
 	$("[id^='content_form_']").each(function(){
