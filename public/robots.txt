@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /
+
+Disallow: /fonts
+
+Disallow: /smartoptimizer
+Disallow: /installer.lock
+Disallow: /web.config

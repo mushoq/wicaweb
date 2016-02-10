@@ -38,39 +38,33 @@ $(document).ready(function(){
 		});
 	
 		//ckeditor
-		$('textarea').expandingTextArea();
-		
-		if (CKEDITOR.instances['content']) {
-			CKEDITOR.remove(CKEDITOR.instances['content']);
-		}
-		
-		$('#content').ckeditor({ 
-			toolbar :		
-				[					
-					{ name: 'document', items : [ 'Source','-','NewPage','DocProps','Preview','-','Templates' ] },
-					{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
-					{ name: 'editing', items : [ 'Find','Replace','-','SelectAll'] },
-					{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
-					{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
-					'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
-					{ name: 'links', items : [ 'Link','Unlink','Anchor' ] },
-					{ name: 'insert', items : [ 'HorizontalRule','SpecialChar','PageBreak','Image','Table' ] },
-					{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
-					{ name: 'colors', items : [ 'TextColor','BGColor' ] },
-					{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
-				],
-				filebrowserBrowseUrl: '/js/ckeditor/ckfinder/ckfinder.html',
-				filebrowserImageBrowseUrl: '/js/ckeditor/ckfinder/ckfinder.html?Type=Images',
-				filebrowserFlashBrowseUrl: '/js/ckeditor/ckfinder/ckfinder.html?Type=Flash',
-				filebrowserUploadUrl: '/js/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-				filebrowserImageUploadUrl: '/js/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-				filebrowserFlashUploadUrl: '/js/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
-			},function(){
-				//auto height content columns
-				autoHeightContent();
-				// resize tree height according content
-				setSectionTreeHeight();	
-			});	
+                $('textarea').expandingTextArea();
+
+                if (CKEDITOR.instances['content']) {
+                        CKEDITOR.remove(CKEDITOR.instances['content']);
+                }
+                $('#content').ckeditor({ 
+                        toolbar :		
+                                [					
+                                        { name: 'document', items : [ 'Source','-','NewPage','DocProps','Preview','-','Templates','Maximize' ] },
+                                        { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+                                        { name: 'editing', items : [ 'Find','Replace','-','SelectAll'] },
+                                        { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+                                        { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
+                                        '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+                                        { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+                                        { name: 'insert', items : [ 'HorizontalRule','SpecialChar','PageBreak','Image','Table' ] },
+                                        { name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
+                                        { name: 'colors', items : [ 'TextColor','BGColor' ] },
+                                        { name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
+                                ],
+                                filebrowserBrowseUrl: '/js/ckeditor4/ckfinder/ckfinder.html',
+                                filebrowserImageBrowseUrl: '/js/ckeditor4/ckfinder/ckfinder.html?Type=Images',
+                                filebrowserFlashBrowseUrl: '/js/ckeditor4/ckfinder/ckfinder.html?Type=Flash',
+                                filebrowserUploadUrl: '/js/ckeditor4/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                                filebrowserImageUploadUrl: '/js/ckeditor4/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                                filebrowserFlashUploadUrl: '/js/ckeditor4/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+                        });	
 
 		//call ckeditor_styles.js file to fill the dropdown styles on ckeditor
 //		$.getScript('/js/external/ckeditor_styles.js',function(data){

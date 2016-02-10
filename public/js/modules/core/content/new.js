@@ -40,11 +40,10 @@ $(document).ready(function() {
 				if (CKEDITOR.instances['content']) {
 					CKEDITOR.remove(CKEDITOR.instances['content']);
 				}
-				
 				$('#content').ckeditor({ 
 					toolbar :		
 						[					
-							{ name: 'document', items : [ 'Source','-','NewPage','DocProps','Preview','-','Templates' ] },
+							{ name: 'document', items : [ 'Source','-','NewPage','DocProps','Preview','-','Templates','Maximize' ] },
 							{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
 							{ name: 'editing', items : [ 'Find','Replace','-','SelectAll'] },
 							{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
@@ -56,23 +55,13 @@ $(document).ready(function() {
 							{ name: 'colors', items : [ 'TextColor','BGColor' ] },
 							{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
 						],
-						filebrowserBrowseUrl: '/js/ckeditor/ckfinder/ckfinder.html',
-						filebrowserImageBrowseUrl: '/js/ckeditor/ckfinder/ckfinder.html?Type=Images',
-						filebrowserFlashBrowseUrl: '/js/ckeditor/ckfinder/ckfinder.html?Type=Flash',
-						filebrowserUploadUrl: '/js/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-						filebrowserImageUploadUrl: '/js/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-						filebrowserFlashUploadUrl: '/js/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
-					},function(){
-						// resize tree height according content
-						setSectionTreeHeight();	
+						filebrowserBrowseUrl: '/js/ckeditor4/ckfinder/ckfinder.html',
+						filebrowserImageBrowseUrl: '/js/ckeditor4/ckfinder/ckfinder.html?Type=Images',
+						filebrowserFlashBrowseUrl: '/js/ckeditor4/ckfinder/ckfinder.html?Type=Flash',
+						filebrowserUploadUrl: '/js/ckeditor4/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+						filebrowserImageUploadUrl: '/js/ckeditor4/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+						filebrowserFlashUploadUrl: '/js/ckeditor4/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 					});
-				
-				//call ckeditor_styles.js file to fill the dropdown styles on ckeditor				
-//				$.getScript('/js/external/ckeditor_styles.js',function(data){
-//					if(data){
-//						CKEDITOR.config.stylesSet = 'external:/js/external/ckeditor_styles.js';
-//					}
-//				});
 				
 				//save content through ajax
 				$('#save').bind('click', function() {
