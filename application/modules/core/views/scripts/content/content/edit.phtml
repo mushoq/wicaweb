@@ -23,16 +23,16 @@
 <!-- 	Form -->	
 	<form class="well form-horizontal <?php echo $this->form->getAttrib('class'); ?>" id="<?php echo $this->form->getAttrib('id'); ?>" method="<?php echo $this->form->getMethod(); ?>" enctype="multipart/form-data">		
 	<!-- 	Get elements from post -->
-		<?php  foreach($this->form->getElements() as $name => $element){ 
-                        //echo $name;
-                      // echo '<br>';
+		<?php foreach($this->form->getElements() as $name => $element){ 
+//                        echo $name;
+//                        echo '<br>';
                     ?>
 			<?php if(strpos($name, 'hdnNameFile')=== false){ ?>		
 				<div class="row-fluid">
 				<!-- 				Div only for separate elements -->
-				<div id="<?php echo $name."_span-separator";?>" class="span1 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg' && $name!='zoom')){ echo 'hide'; }?>">&ensp;</div>
+				<div id="<?php echo $name."_span-separator";?>" class="span1 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?>">&ensp;</div>
 				
-				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg' && $name!='zoom')){ echo 'hide'; }?> ">
+				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg')){ echo 'hide'; }?> ">
 			<?php if($name == 'select_images'){ ?>                                  
                                     <div class="control-group">
                                        <label id="carrusel_images_order" class="control-label control-label-edit<?php if( ($this->form->$name->class == 'hide' || $this->form->$name->class == 'hide btn') && ($name != 'alternative_image' && $name != 'flash_file')) echo ' hide'?>"><?php if($name == 'file' || $name == 'alternative_image' || $name == 'flash_file'){ echo 'Orden Actual:'; }else{ echo 'Orden Actual:'; }?></label>
@@ -86,7 +86,7 @@
 										else	
 // 											Build blue special buttons to replace radio button elements
                                                                                     
-											if($name == 'background' || $name == 'type' || $name == 'captcha' || $name == 'target'  || $name == 'resizeimg' || $name=='watermarkimg' || $name=='zoom'){ 
+											if($name == 'background' || $name == 'type' || $name == 'captcha' || $name == 'target'  || $name == 'resizeimg' || $name=='watermarkimg'){ 
 													$static_var = $name.'_values'; ?>
 													<div class="btn-group" data-toggle="buttons-radio">
 														<?php foreach ( Core_Model_Content::$$static_var as $k => $entry): ?>
@@ -142,12 +142,19 @@
 		
 												<?php }
 												else		
-// 													center buttons
-													if($this->form->$name->helper == 'formButton' || $this->form->$name->helper == 'formSubmit'){
-														
-                                                                                                                //echo ''.$this->form->$name->renderViewHelper(); 
+// 													center buttons	
+                                                                                                                    //echo $this->form->$name->helper;
+													if($this->form->$name->helper == 'formSubmit'){
 														//generate save button to print at the end
-														$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';														
+														$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+													}elseif($this->form->$name->helper == 'formButton'){
+														if($this->form->$name->getName() == 'save_image'){
+															//generate save button to print at the end
+															$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+														}else{
+                                                                                                                    $saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span6 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+															echo '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span10 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+														}
 													}else
 														if($name == 'url'){
 															echo $this->form->$name->removeDecorator('HtmlTag')->removeDecorator('Label');
@@ -195,7 +202,9 @@
 			<?php } ?>
 		<?php } 
 		//prints the save button at the end
+		if($this->content_type=='Image'||$this->content_type=='Carousel'){
 		echo $saveButton;
+                }
 		?>
                 <div id="deleted_array" style="visibility:hidden"></div>
 		<input type="hidden" id="approved" name="approved" value="<?php echo $this->approved_frm; ?>" />		
