@@ -405,12 +405,14 @@ function addNextButton(i, stepName){
         if($("input[type=text][id=publish_date]").length > 0 && $("input[type=text][id=expire_date]").length > 0)
         {
                 setDefaultCalendar($('#publish_date'),$('#expire_date'));
-                $("#hora_inicio").rules("add", {
+                /*
+                  * // PRENDER CUANDO SE AUMENTE CAMPOS DE HORA
+                  $("#hora_inicio").rules("add", {
 				 time24: true
 			});
                  $("#hora_fin").rules("add", {
 				 time24: true
-			});
+			});*/
         }
 
         $('[id^="img_"]').each(function(){                
