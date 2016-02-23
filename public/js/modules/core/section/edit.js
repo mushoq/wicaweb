@@ -420,12 +420,14 @@ function addNextButton(i, stepName){
 	{
 		setDefaultCalendar($('#publish_date'),$('#expire_date'));
                 
-                 $("#hora_inicio").rules("add", {
+                 /*
+                  * // PRENDER CUANDO SE AUMENTE CAMPOS DE HORA
+                  $("#hora_inicio").rules("add", {
 				 time24: true
 			});
                  $("#hora_fin").rules("add", {
 				 time24: true
-			});
+			});*/
 
 	}			
 
