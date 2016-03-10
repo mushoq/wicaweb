@@ -1,5 +1,17 @@
 <?php $count_contents = 0; ?>
 <?php if(!$this->private || ($this->private && isset($_SESSION['external_user']))): ?>	
+<div class="ruta">
+        <?php 
+        foreach($this->crums as $key => $ruta){
+            if($key != 0 && $ruta['area'] == 'wica_area_content'){
+                echo $key != 1 ? '&nbsp;&nbsp;/&nbsp;&nbsp;':'';
+                ?> 
+                 <a href="<?php echo $this->website_id != 1 ? '/site/'.$this->website_id:'';?>/<?php echo $ruta['article'] == 'yes' ? 'article':'section'; ?>/<?php echo $ruta['id']; ?>/<?php echo strtolower(GlobalFunctions::formatFilename($ruta['title']))?>"><?php echo $ruta['title'];?></a>
+                <?php
+            }
+        }
+        ?>
+</div>
 <div class="section_title_container">
         <h1><?php echo $this->section_title;?></h1>
 </div>

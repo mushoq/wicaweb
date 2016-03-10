@@ -517,7 +517,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    				$article_arr[] = array('section_id'=>$section->id, 'article_id'=>$art->id, 'title'=>$art->title, 'synopsis'=>$art->synopsis, 'image'=>$art->image, 'feature'=>$art->feature, 'publish_date'=>$art->publish_date, 'expire_date'=>$art->expire_date);
 		    			}
 		    		}
-		    		
+		    		$crums = GlobalFunctions::getCrums($section->id);
 		    		//contents list
 		    		$contents_list[$section->id]['order_number'] = $section->order_number;
 		    		$contents_list[$section->id]['filename'] = $section_filename_tpl;
@@ -536,6 +536,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    		$contents_list[$section->id]['article'] = $article_arr;
                                 $contents_list[$section->id]['products'] = $products;
                                 $contents_list[$section->id]['product_catalog'] = $product_arr;
+                                $contents_list[$section->id]['crums'] = $crums;
 		    		
 		    		/******
 		    		 * External module contents within section selected
@@ -565,8 +566,21 @@ class Default_IndexController extends Zend_Controller_Action
 	    	//sections different from selected
 	    	$section_arr = array();
 	    	
-	    	if($section_id)
-	    		$section_arr = $section_obj->personalized_find('wc_section',array(array('website_id','=',$front_ids->website_id), array('id','!=',$section_id), array('article','=','no'), array('approved','=','yes'), array('publication_status','=','published')),'order_number');
+	    	if($section_id){
+                    
+                $table = new Zend_Db_Table('wc_section');
+		$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
+		$select->setIntegrityCheck(false)
+		->join('wc_section_module_area', 'wc_section_module_area.section_id = wc_section.id', array('id'=>'wc_section.id'));	
+                $select->where("wc_section.website_id = ?", $front_ids->website_id);
+                $select->where("wc_section.id != ?", $section_id);
+                $select->where("wc_section.article = ?", 'no');
+                $select->where("wc_section.approved = ?", 'yes');
+                $select->where("wc_section.publication_status = ?", 'published');
+		$select->where("wc_section_module_area.area_id != ?", $area_content_variable[0]->id);
+		$section_arr = $table->fetchAll($select);
+                }   
+	    		//$section_arr = $section_obj->personalized_find('wc_section',array(array('website_id','=',$front_ids->website_id), array('id','!=',$section_id), array('article','=','no'), array('approved','=','yes'), array('publication_status','=','published')),'order_number');
 	    	
 	    	if(count($section_arr)>0)
 	    	{
@@ -669,6 +683,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    			$contents_list[$section->id]['content'] = $content_arr;
 		    			$contents_list[$section->id]['article'] = $article_arr;
 		    			$contents_list[$section->id]['products'] = $products;
+                                        $contents_list[$section->id]['crums'] = $crums;
 		    			/******
 		    			 * External module contents within section selected
 		    			*/
@@ -698,12 +713,12 @@ class Default_IndexController extends Zend_Controller_Action
 			/******
 			 * Ordering section contents array according section order
 			 */
-	    	$sort_col = array();
-	    	foreach ($contents_list as $key=> $row)
-	    	{
-	    		$sort_col[$key] = $row['order_number'];
-	    	}    	
-	    	array_multisort($sort_col, SORT_ASC, $contents_list);    		
+//	    	$sort_col = array();
+//	    	foreach ($contents_list as $key=> $row)
+//	    	{
+//	    		$sort_col[$key] = $row['order_number'];
+//	    	}    	
+//	    	array_multisort($sort_col, SORT_ASC, $contents_list);    		
     	}    		
     	
     	$this->view->section_contents = $contents_list;

@@ -19,6 +19,30 @@ class GlobalFunctions {
 	 * @param string $language
 	 * @return array 
 	 */
+        private static $spanish_day = array(
+		"Monday"=>"Lunes",
+		"Tuesday"=>"Martes",
+		"Wednesday"=>"Miércoles",
+		"Thursday"=>"Jueves",
+		"Friday"=>"Viernes",
+		"Saturday"=>"Sábado",
+		"Sunday"=>"Domingo",
+	);
+
+	private static $spanish_month = array(
+		"January"=>"enero",
+		"February"=>"febrero",
+		"March"=>"marzo",
+		"April"=>"abril",
+		"May"=>"mayo",
+		"June"=>"junio",
+		"July"=>"julio",
+		"August"=>"agosto",
+		"September"=>"septiembre",
+		"October"=>"octubre",
+		"November"=>"noviembre",
+		"December"=>"diciembre",
+	);
 	public static function translate($language) {
 
 		// create an array to hold directory list
@@ -154,8 +178,12 @@ class GlobalFunctions {
 	 * @return string
 	 */	
 	public static function value_cleaner($txt){
-		$txt = mysql_escape_string(strip_tags(utf8_decode($txt)));
-//        $txt = mysql_real_escape_string(strip_tags(utf8_decode($txt)));
+                //$link = mysql_connect("localhost", "amcecuad_mushoq", "@Mc3cu4d0r");
+		//$txt = mysql_escape_string(strip_tags(utf8_decode($txt)));
+                //$txt = mysql_real_escape_string(strip_tags(utf8_decode($txt)));
+                $search = array("\\",  "\x00", "\n",  "\r",  "'",  '"', "\x1a");
+                $replace = array("\\\\","\\0","\\n", "\\r", "\'", '\"', "\\Z");
+                $txt = strip_tags(utf8_decode(str_replace($search, $replace, $txt)));
 		return $txt;
 	}
 	
@@ -2056,4 +2084,72 @@ class GlobalFunctions {
 			$section->delete('wc_section',array('id'=>$res->id));	
 		}	
 	}
+        
+    public static function getCrums($idSeccion){
+            $obj = new Core_Model_Section();
+             $section_module_area = new Core_Model_SectionModuleArea();
+             $area_aux = new Core_Model_Area();
+
+            $crum = array();
+            $seccion = $obj->find('wc_section',array('id'=>$idSeccion));
+            //return $seccion[0];
+            $crum[] = $seccion[0];
+            while(!is_null($seccion[0]->section_parent_id)){
+                $seccion = $obj->find('wc_section',array('id'=>$seccion[0]->section_parent_id));
+                //if($area_data[0]->name == 'wica_area_content')       
+                    $crum[] = $seccion[0];
+            }
+            $crum = array_reverse($crum);
+
+            $crum_arr = array();    	
+            //sections list array
+            if($crum)
+            {
+                    foreach ($crum as $sec)
+                    {
+                        $area = 'wica_area_content';
+                        if($sec->article == 'no'){
+                            $area = $section_module_area->find('wc_section_module_area',array('section_id'=>$sec->id));
+                            $area_data = $area_aux->find('wc_area',array('id'=>$area[0]->area_id));
+                            $area = $area_data[0]->name;
+                        }
+                        
+                        $crum_arr[] = array('id'=>$sec->id,
+                            'section_parent_id'=>$sec->section_parent_id,
+                            'title'=>$sec->title,
+                            'article'=>$sec->article,
+                            'area' => $area
+                        );
+                    }
+            }
+            return $crum_arr;
+        }
+        
+        public static function spanishDateStr($date)
+	{
+		$timeStamp = strtotime($date);
+		$day = self::$spanish_day[date('l', $timeStamp)];
+		$month = self::$spanish_month[date('F', $timeStamp)];
+
+		return $day . ', ' . date('d' , $timeStamp)  . ' de ' . $month  . ' de ' . date('Y' , $timeStamp);
+	}
+        /**
+         * 
+         * @param date $date
+         * @return txt format day in spanish
+         */
+        public static function spanishDay($date) {
+            $timeStamp = strtotime($date);
+            $day = self::$spanish_day[date('l', $timeStamp)];
+	    return $day.' '. date('d' , $timeStamp);
+            
+        }
+        
+        public static function spanishMonth($date) {
+             $timeStamp = strtotime($date);
+             $month = self::$spanish_month[date('F', $timeStamp)];
+             return $month;
+            
+            
+        }
 }
