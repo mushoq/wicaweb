@@ -21,13 +21,19 @@ $(document).ready(function() {
 			
 			$('#description').ckeditor({ 
 				toolbar :		
-				[
-					{name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ]},
-					{name: 'editing', items : [ 'SelectAll','-','SpellChecker', 'Scayt' ]},
-					{name: 'basicstyles', items : [ 'Bold','Italic','Underline','-','RemoveFormat' ]},
-					{name: 'paragraph', items : [ 'Outdent','Indent','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ]},
-					{name: 'tools', items : [ 'About' ]}
-				]
+						[					
+							{ name: 'document', items : [ 'Source','-','NewPage','DocProps','Preview','-','Templates','Maximize' ] },
+							{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+							{ name: 'editing', items : [ 'Find','Replace','-','SelectAll'] },
+							{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+							{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
+							'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+							{ name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+							{ name: 'insert', items : [ 'HorizontalRule','SpecialChar','PageBreak','Image','Table' ] },
+							{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
+							{ name: 'colors', items : [ 'TextColor','BGColor' ] },
+							{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
+						]
 			});
 						
 			//Validate	
@@ -75,6 +81,12 @@ $(document).ready(function() {
 					$("#feature").val(this.id.replace('feature-',''));			
 				});
 			});
+                        //highlight
+			$('input[id^="highlight-"]').each(function(){		
+				$(this).click(function(){
+					$("#highlight").val(this.id.replace('highlight-',''));			
+				});
+			});
 			
 			//Add validation rule
 			$("#product_hdnNameFile").rules("add", {				 
@@ -82,6 +94,7 @@ $(document).ready(function() {
 			});
 			//Get image id
 			load_picture('product');
+			load_file('product');
 					
 			//add products
 		    $("#anchor_add_product").fancybox();
@@ -312,12 +325,18 @@ $(document).ready(function() {
 					
 					$('#description').ckeditor({ 
 						toolbar :		
-						[
-							{name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ]},
-							{name: 'editing', items : [ 'SelectAll','-','SpellChecker', 'Scayt' ]},
-							{name: 'basicstyles', items : [ 'Bold','Italic','Underline','-','RemoveFormat' ]},
-							{name: 'paragraph', items : [ 'Outdent','Indent','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ]},
-							{name: 'tools', items : [ 'About' ]}
+						[					
+							{ name: 'document', items : [ 'Source','-','NewPage','DocProps','Preview','-','Templates','Maximize' ] },
+							{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+							{ name: 'editing', items : [ 'Find','Replace','-','SelectAll'] },
+							{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+							{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
+							'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+							{ name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+							{ name: 'insert', items : [ 'HorizontalRule','SpecialChar','PageBreak','Image','Table' ] },
+							{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
+							{ name: 'colors', items : [ 'TextColor','BGColor' ] },
+							{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
 						]
 					});
 								
@@ -357,18 +376,28 @@ $(document).ready(function() {
 							$("#available").val(this.id.replace('available-',''));			
 						});
 					});
+                                        $("#available-" + $("#available").val()).addClass('active');
 					//status
 					$('input[id^="status-"]').each(function(){		
 						$(this).click(function(){
 							$("#status").val(this.id.replace('status-',''));			
 						});
 					});
+                                        $("#status-" + $("#status").val()).addClass('active');
 					//feature
 					$('input[id^="feature-"]').each(function(){		
 						$(this).click(function(){
 							$("#feature").val(this.id.replace('feature-',''));			
 						});
 					});
+                                        $("#feature-" + $("#feature").val()).addClass('active');
+                                        //highlight
+					$('input[id^="highlight-"]').each(function(){		
+						$(this).click(function(){
+							$("#highlight").val(this.id.replace('highlight-',''));			
+						});
+					});
+                                        $("#highlight-" + $("#highlight").val()).addClass('active');
 					
 					//Add validation rule
 					$("#product_hdnNameFile").rules("add", {				 
@@ -376,6 +405,7 @@ $(document).ready(function() {
 					});
 					//Get image id
 					load_picture('product');
+					load_file('product');
 							
 					//add products
 				    $("#anchor_add_product").fancybox();
@@ -795,6 +825,52 @@ function load_picture(element_prefix)
 				}
 				if(response == 2){
 					alert(supported_extension);
+				}
+			}
+		}
+	});
+}
+
+//uploads a section picture                        
+function load_file(element_prefix)
+{	
+	new AjaxUpload('#'+element_prefix+'_ficha',{//UPLOADS FILE TO THE $_FILES VAR
+		action: "/products/products/uploadficha",
+		data:{
+			directory: 'public/uploads/tmp/',
+			maxSize: 20971520
+		},
+		name: 'product_ficha',
+		onSubmit : function(file, ext){
+			this.disable();
+		},
+		onComplete: function(file, response){//ONCE THE USER SELECTS THE FILE
+			this.enable();
+			if(isNaN(response)){//IF THE RESPONSE OF uploadFile.rpc ITS NOT A NUMBER (NOT AN ERROR)
+				//DELETING PREVIOUS PICTURE IF IT EXISTS
+				if($("#"+element_prefix+"_hdnNameFile").val()){
+					$.ajax({
+						url: "/products/products/deletetemppicture",
+						type: "post",
+						data: ({
+							file_tmp: function(){
+								return $("#"+element_prefix+"_hdnNameFicha").val();
+							}
+						}),
+						success: function(data) {
+						}
+					});
+				}																	
+				$('#'+element_prefix+'_fichaLabel').val(file);
+				$('#'+element_prefix+'_hdnNameFicha').val(response);
+				//$("#'+element_prefix+'_del_img").show();
+				
+			}else{//ERRORS ON THE FILE UPLOADED
+				if(response == 1){
+					alert(max_size);
+				}
+				if(response == 2){
+					alert('Extensión no permitida');
 				}
 			}
 		}

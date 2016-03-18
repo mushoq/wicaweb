@@ -1794,17 +1794,17 @@ class Core_Article_ArticleController extends Zend_Controller_Action
             $section = new Core_Model_Section();
             if(isset($post['feature'])){
                 //$articles_list = $section->find('wc_section', array('article'=>'yes', 'feature'=>'yes'), array('order_feature'=>'ASC'));
-                $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('feature','=','yes'),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_feature ASC'));
+                $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('feature','=','yes'), array('website_id','=',$id->website_id),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_feature ASC'));
                 $typeArticle ='feature';
             }
             if(isset($post['highlight'])){
                 //$articles_list = $section->find('wc_section', array('article'=>'yes', 'highlight'=>'yes'), array('order_highlight'=>'ASC'));
-                $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('highlight','=','yes'),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_highlight ASC'));
+                $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('highlight','=','yes'), array('website_id','=',$id->website_id),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_highlight ASC'));
                 $typeArticle ='highlight';
             }
             if(isset($post['homepage'])){
                 //$articles_list = $section->find('wc_section', array('article'=>'yes', 'homepage_down'=>'yes'), array('order_hompeage_down'=>'ASC'));
-                $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('homepage_down','=','yes'),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_hompeage_down ASC'));
+                $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('homepage_down','=','yes'), array('website_id','=',$id->website_id),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_hompeage_down ASC'));
                 $typeArticle ='homepage';
             }
             $this->view->articles = $articles_list;

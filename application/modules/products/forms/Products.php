@@ -28,6 +28,7 @@ class Products_Form_Products extends Zend_Form
 		//translate enums
 		$available_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$available);
 		$feature_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$feature);
+                $highlight_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$highlight);
 		$status_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$status);
 		
 		//translate
@@ -81,7 +82,23 @@ class Products_Form_Products extends Zend_Form
 		$image = new Zend_Form_Element_Button('product_img');
 		$image->setLabel($lang->translate('Search'));
 		$image->setAttrib('class', 'btn');
-		$this->addElement($image);	
+		$this->addElement($image);
+                
+                
+                $ficha_file = new Zend_Form_Element_Hidden('product_file_ficha');
+		$ficha_file->removeDecorator('Label');
+		$ficha_file->removeDecorator('HtmlTag');
+		$this->addElement($ficha_file);
+		
+		/*$img_id = new Zend_Form_Element_Hidden('product_id_img');
+		$img_id->removeDecorator('Label');
+		$img_id->removeDecorator('HtmlTag');
+		$this->addElement($img_id);*/
+		
+		$ficha = new Zend_Form_Element_Button('product_ficha');
+		$ficha->setLabel($lang->translate('Search'));
+		$ficha->setAttrib('class', 'btn');
+		$this->addElement($ficha);
 
 				
 		//available - yes / no -
@@ -104,15 +121,23 @@ class Products_Form_Products extends Zend_Form
 		$feature->setValue($default_feature_arr[1]);
 		$feature->removeDecorator('Label');
 		$feature->removeDecorator('HtmlTag');
+                
+                //highlight - yes / no -
+		$highlight = new Zend_Form_Element_Hidden('highlight');
+		$default_highlight_arr = array_keys($highlight_opt);
+		$highlight->setValue($default_highlight_arr[1]);
+		$highlight->removeDecorator('Label');
+		$highlight->removeDecorator('HtmlTag');
 		
 		$this->addElements(array(
-				$id,
-				$section_id,
-				$name_pro,
-				$description,
-				$available,
-				$status,
-				$feature
+                    $id,
+                    $section_id,
+                    $name_pro,
+                    $description,
+                    $available,
+                    $status,
+                    $feature,
+                    $highlight
 		));
 		
 		//submit button

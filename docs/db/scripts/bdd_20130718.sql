@@ -820,6 +820,7 @@ CREATE  TABLE IF NOT EXISTS `product` (
   `available` ENUM('yes', 'no') NOT NULL ,
   `status` ENUM('active', 'inactive') NOT NULL ,
   `feature` ENUM('yes', 'no') NOT NULL ,
+  `highlight` ENUM('yes', 'no') NOT NULL ,
   `order_number` INT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;

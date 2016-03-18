@@ -14,6 +14,7 @@ class Products_Model_Products extends Core_Model_Factory
 {
 	public static $available = array('yes'=>'Yes','no'=>'No');
 	public static $feature = array('yes'=>'Yes','no'=>'No');
+        public static $highlight = array('yes'=>'Yes','no'=>'No');
 	public static $status = array('active'=>'Active','inactive'=>'Inactive');
 	
 	/**
@@ -93,7 +94,7 @@ class Products_Model_Products extends Core_Model_Factory
 				$product_item = $product_obj->find('product', array('id' => $mdbl->row_id, 'available' => 'yes'));
 				$product_catalog_itm = $product_catalog_obj->find('product_catalog', array('product_id' => $mdbl->row_id));
 				
-				if(count($product_item)>0 && count($product_catalog_itm)>0)
+				if(count($product_item)>0 /*&& count($product_catalog_itm)>0*/)
 				{
 					$product_field_arr = array(get_object_vars($product_item[0]));
 					foreach ($product_field_arr as $k => $pfa)

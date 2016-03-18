@@ -19,6 +19,7 @@
 
 <?php $available_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$available); ?>
 <?php $feature_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$feature); ?>
+<?php $highlight_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$highlight); ?>
 <?php $status_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$status); ?>
      	   
 <div class="row-fluid line">
@@ -35,7 +36,7 @@
 
 <form class="well <?php echo $this->form->getAttrib('class'); ?>" id="<?php echo $this->form->getAttrib('id'); ?>" method="<?php echo $this->form->getMethod(); ?>" enctype="multipart/form-data">
 <div class="row-fluid">
-	<div class="span6">
+	<div class="span12">
 		<div class="row-fluid">							
 			<?php echo $this->form->id->renderViewHelper(); ?>
 			<?php echo $this->form->section_id->renderViewHelper(); ?>
@@ -47,7 +48,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="span5">				      							      		
+</div>
+<div class="row-fluid">
+	<div class="span8">				      							      		
       	<div class="control-group">
 			<label class="control-label"><?php echo $this->form->description->getLabel(); ?></label>
 			<div class="controls">
@@ -74,8 +77,20 @@
 			</div>
 		</div>		
 		<?php echo $this->form->product_file_img->renderViewHelper(); ?>
-		<?php //echo $this->form->product_id_img->renderViewHelper(); ?>
 	</div>
+        <div class="span6">												
+		<div class="control-group">
+			<label class="control-label">Ficha:</label>
+			<div class="controls">
+				<input type="text" disabled="disabled" id="product_fichaLabel">
+				<?php echo $this->form->product_ficha->renderViewHelper(); ?>
+				<input type="hidden" name="product_hdnNameFicha" id="product_hdnNameFicha" value=""/>
+			</div>
+		</div>			
+		<?php echo $this->form->product_file_ficha->renderViewHelper(); ?>
+	</div>
+</div>
+    <div class="row-fluid">
 	<div class="span6">	
 		<div class="control-group">
 			<label class="control-label"><?php echo '* '.$lang->translate('Available').':'; ?></label>
@@ -91,9 +106,39 @@
 			</div>
 		</div>
 	</div>	
+        <div class="span6">
+		<div class="control-group">
+			<label class="control-label"><?php echo '* '.$lang->translate('Feature').':'; ?></label>
+			<div class="controls">
+				<div class="btn-group" data-toggle="buttons-radio">
+					<?php $default_feature_arr = array_keys($feature_opt);
+						$default_feature_opt = $default_feature_arr[1]; ?>							
+					<?php foreach($feature_opt as $k => $opt): ?>
+					<input type="button" class="btn btn-primary <?php if($default_feature_opt == $k): echo 'active'; endif; ?>" id="feature-<?php echo $k; ?>" value="<?php echo $opt; ?>">
+					<?php endforeach; ?>
+				</div>
+				<?php echo $this->form->feature->renderViewHelper(); ?>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="row-fluid">
+        <div class="span6">
+		<div class="control-group">
+			<label class="control-label"><?php echo '* '.$lang->translate('Highlight').':'; ?></label>
+			<div class="controls">
+				<div class="btn-group" data-toggle="buttons-radio">
+					<?php $default_highlight_arr = array_keys($highlight_opt);
+						$default_highlight_opt = $default_highlight_arr[1]; ?>							
+					<?php foreach($highlight_opt as $k => $opt): ?>
+					<input type="button" class="btn btn-primary <?php if($default_highlight_opt == $k): echo 'active'; endif; ?>" id="highlight-<?php echo $k; ?>" value="<?php echo $opt; ?>">
+					<?php endforeach; ?>
+				</div>
+				<?php echo $this->form->highlight->renderViewHelper(); ?>
+			</div>
+		</div>
+	</div>
 	<div class="span6">	
 		<div class="control-group">
 			<label class="control-label"><?php echo '* '.$lang->translate('Status').':'; ?></label>
@@ -109,21 +154,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="span6">
-		<div class="control-group">
-			<label class="control-label"><?php echo '* '.$lang->translate('Feature').':'; ?></label>
-			<div class="controls">
-				<div class="btn-group" data-toggle="buttons-radio">
-					<?php $default_feature_arr = array_keys($feature_opt);
-						$default_feature_opt = $default_feature_arr[1]; ?>							
-					<?php foreach($feature_opt as $k => $opt): ?>
-					<input type="button" class="btn btn-primary <?php if($default_feature_opt == $k): echo 'active'; endif; ?>" id="feature-<?php echo $k; ?>" value="<?php echo $opt; ?>">
-					<?php endforeach; ?>
-				</div>
-				<?php echo $this->form->feature->renderViewHelper(); ?>
-			</div>
-		</div>
-	</div>
+	
 </div>
 
 <div class="row-fluid line">

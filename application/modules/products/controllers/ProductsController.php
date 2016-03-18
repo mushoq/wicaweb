@@ -436,12 +436,15 @@ class Products_ProductsController extends Zend_Controller_Action
     	$product_form = new Products_Form_Products();
     	
     	$arr_data = get_object_vars($product_data[0]); //make object data array    	
-    	$arr_data['product_file_img'] = $arr_data['image'];    	
+    	$arr_data['product_file_img'] = $arr_data['image'];
+               
     	$image_preview = New Zend_Form_Element_Image('product_imageprw');
     	$image_preview->setImage('/uploads/products/'.$arr_data['image']);    	
     	$image_preview->setAttrib('style', 'width:150px;');
     	$image_preview->setAttrib('onclick', 'return false;');
     	$product_form->addElement($image_preview);
+        
+        $arr_data['product_file_ficha'] = $arr_data['ficha']; 
        	
     	$arr_data['section_id'] = $section_id;
     	//Populate form with data
@@ -495,6 +498,7 @@ class Products_ProductsController extends Zend_Controller_Action
 			$product_obj->available = GlobalFunctions::value_cleaner($formData['available']);
 			$product_obj->status = GlobalFunctions::value_cleaner($formData['status']);
 			$product_obj->feature = GlobalFunctions::value_cleaner($formData['feature']);
+                        $product_obj->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
 						
 			//path to upload image
 			if(!is_dir(APPLICATION_PATH. '/../public/uploads/products/'))
@@ -543,6 +547,33 @@ class Products_ProductsController extends Zend_Controller_Action
 			{
 				//Same image
 				$product_obj->image = $formData['product_file_img'];
+			}
+                        
+                        //if FICHA file uploaded to create new or update
+			if($formData['product_hdnNameFicha'])
+			{
+				if(isset($formData['product_file_ficha']))
+				{
+					//delete old image file
+					if($formData['product_file_ficha']!="")
+					{
+					
+						list($folder,$subfolder,$file) = explode('/',$formData['product_file_ficha']);
+						GlobalFunctions::removeOldFiles($file, APPLICATION_PATH. '/../public/uploads/products/'.$folder.'/'.$subfolder.'/');					
+					}
+				}
+
+				//Save image in object
+				$img = GlobalFunctions::uploadFiles($formData['product_hdnNameFicha'], APPLICATION_PATH. '/../public/uploads/products/'.date('Y').'/'.date('m').'/');
+				$product_obj->ficha = date('Y').'/'.date('m').'/'.$img;				
+											
+				//remove images temp files
+				GlobalFunctions::removeOldFiles($formData['product_hdnNameFICHA'], APPLICATION_PATH. '/../public/uploads/tmp/');
+			}
+			else
+			{
+				//Same image
+				$product_obj->ficha = $formData['product_file_ficha'];
 			}
 // 			Zend_Debug::dump($_POST);die;
 			// Save data
@@ -780,9 +811,11 @@ class Products_ProductsController extends Zend_Controller_Action
     							$product_obj->name = GlobalFunctions::value_cleaner($product_data[0]->name);
     							$product_obj->description = GlobalFunctions::value_cleaner($product_data[0]->description);
     							$product_obj->image = GlobalFunctions::value_cleaner($product_data[0]->image);
+                                                        $product_obj->ficha = GlobalFunctions::value_cleaner($product_data[0]->ficha);
     							$product_obj->available = GlobalFunctions::value_cleaner($product_data[0]->available);
     							$product_obj->status = GlobalFunctions::value_cleaner($product_data[0]->status);
-    							$product_obj->feature = GlobalFunctions::value_cleaner($product_data[0]->feature);    							
+    							$product_obj->feature = GlobalFunctions::value_cleaner($product_data[0]->feature);   
+                                                        $product_obj->highlight = GlobalFunctions::value_cleaner($product_data[0]->highlight);                                                         
     							$product_obj->order_number = GlobalFunctions::value_cleaner($count);
     							$serial_id = $product->save('product',$product_obj);
     							$count++;
@@ -907,6 +940,41 @@ class Products_ProductsController extends Zend_Controller_Action
     					$tempName = 'pic_' . time() . '.' . $path_parts['extension'];
     				} while (file_exists($directory . $tempName));
     				move_uploaded_file($_FILES["product_photos"]["tmp_name"], $directory . $tempName);
+    				echo $tempName;
+    			} else {//ITS NOT A DIRECTORY
+    				echo 3;
+    			}
+    		} else {//INCORRECT EXTENSION
+    			echo 2;
+    		}
+    	} else {//INCORRECT SIZE
+    		echo 1;
+    	}
+    }
+    
+    public function uploadfichaAction()
+    {
+    	$this->_helper->layout->disableLayout ();
+    	// disable autorendering for this action only:
+    	$this->_helper->viewRenderer->setNoRender();
+    
+    	$formData  = $this->_request->getPost();
+    
+    	$directory = $formData['directory'];
+    	$maxSize = $formData['maxSize'];
+    
+    	$directory = APPLICATION_PATH. '/../'. $directory;
+    	if ($_FILES["product_ficha"]["size"] <= $maxSize) {//DETERMINING IF THE SIZE OF THE FILE UPLOADED IS VALID
+    		$path_parts = pathinfo($_FILES["product_ficha"]["name"]);
+    		$extensions = array(0 => 'pdf', 1 => 'PDF', 2 => 'doc', 3 => 'DOC', 4 => 'docx', 5 => 'DOCX', 6 => 'xls',
+                                    7 => 'XLS', 8 => 'xlsx', 9 => 'XLSX', 10 => 'jpg', 11 => 'JPG', 12 => 'jpeg', 13 => 'JPEG', 14 => 'png', 13 => 'PNG');
+    
+    		if (in_array($path_parts['extension'], $extensions)) {//DETERMINING IF THE EXTENSION OF THE FILE UPLOADED IS VALID
+    			if (is_dir($directory)) {
+    				do {
+    					$tempName = 'ficha_' . time() . '.' . $path_parts['extension'];
+    				} while (file_exists($directory . $tempName));
+    				move_uploaded_file($_FILES["product_ficha"]["tmp_name"], $directory . $tempName);
     				echo $tempName;
     			} else {//ITS NOT A DIRECTORY
     				echo 3;
