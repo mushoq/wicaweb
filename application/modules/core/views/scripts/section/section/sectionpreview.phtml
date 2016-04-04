@@ -143,7 +143,7 @@
  			}	 		
 	 	}
  		
-	 	$sectemplate = fopen(APPLICATION_PATH."/modules/core/views/scripts/partials/section_template.phtml", "w");
+	 	$sectemplate = fopen(APPLICATION_PATH."/modules/core/views/scripts/partials/section_template.phtml", "r");
 	 	if($sectemplate)
 	 	{ 	
 	 		fwrite($sectemplate, $render); 	

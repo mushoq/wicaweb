@@ -794,7 +794,8 @@ div.areaprw_bgcolor{
 	background-color: #ffffff;
 }
 .overflow_hidden{
-	overflow: hidden;
+	overflow-x: hidden;
+        overflow-y: visible;
 }
 #no_flash_player label{
 	color: #AA0000;

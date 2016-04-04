@@ -1284,7 +1284,7 @@ $(document).ready(function() {
 							file_limit: 10,
 							max_width: parseInt($("#hdn_max_width_img").val()),
 							max_height : parseInt($("#hdn_max_height_img").val()),
-							resize: 'jpg,jpeg,gif,png',
+							resize: 'jpg,jpeg',
 				    		form_action: '/core/content_content/save'
 			    		}	
 			    	}); 

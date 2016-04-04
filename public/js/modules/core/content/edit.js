@@ -247,7 +247,7 @@ $(document).ready(function(){
 		    		preview_jpg_quality: 100,
 		    		preview_max_height: 200,
 		    		preview_max_width: 200,
-		    		resize: 'jpg,jpeg,gif,png'
+		    		resize: 'jpg,jpeg'
 	    		}	
 			}); 
 			
