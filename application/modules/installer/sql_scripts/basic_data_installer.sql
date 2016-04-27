@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generaci�n: 19-12-2012 
--- Versi�n del servidor: 5.1.61
--- Versi�n de PHP: 5.3.9-ZS5.6.0
+-- Tiempo de generación: 19-12-2012 
+-- Versión del servidor: 5.1.61
+-- Versión de PHP: 5.3.9-ZS5.6.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -39,8 +39,8 @@ INSERT INTO `wc_section_template` (`id`, `name`, `file_name`, `column_number`, `
 --
 
 INSERT INTO `wc_website_language` (`id`, `name`, `abbreviation`, `description`) VALUES
-(1, 'Espa�ol', 'es', NULL),
-(2, 'Ingl�s', 'en', NULL);
+(1, 'Español', 'es', NULL),
+(2, 'Inglés', 'en', NULL);
 
 --
 -- Volcar la base de datos para la tabla `wc_website_template`

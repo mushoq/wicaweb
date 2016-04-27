@@ -817,12 +817,15 @@ DROP TABLE IF EXISTS `product` ;
 
 CREATE  TABLE IF NOT EXISTS `product` (
   `id` INT NOT NULL AUTO_INCREMENT ,
+  `website_id` INT NOT NULL ,
   `name` VARCHAR(250) NOT NULL ,
   `description` TEXT NULL ,
   `image` VARCHAR(250) NOT NULL ,
+  `ficha` VARCHAR(250) NULL ,
   `available` ENUM('yes', 'no') NOT NULL ,
   `status` ENUM('active', 'inactive') NOT NULL ,
   `feature` ENUM('yes', 'no') NOT NULL ,
+  `highlight` ENUM('yes', 'no') NOT NULL ,
   `order_number` INT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
