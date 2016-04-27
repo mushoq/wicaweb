@@ -46,6 +46,10 @@ class Products_Form_Products extends Zend_Form
 		$section_id->removeDecorator('Label');
 		$section_id->removeDecorator('HtmlTag');
 		
+                $website_id = new Zend_Form_Element_Hidden('website_id');
+		$website_id->removeDecorator('Label');
+		$website_id->removeDecorator('HtmlTag');
+                
 		//name
 		$name_pro = new Zend_Form_Element_Text('name');
 		$name_pro->setLabel('* '.$lang->translate('Name').':');
@@ -132,6 +136,7 @@ class Products_Form_Products extends Zend_Form
 		$this->addElements(array(
                     $id,
                     $section_id,
+                    $website_id,
                     $name_pro,
                     $description,
                     $available,

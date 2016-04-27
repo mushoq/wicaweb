@@ -1821,7 +1821,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 				}
 			}
 		}
-		
+                
 		//searchs for stored session section_id
 		$id = New Zend_Session_Namespace('id');
 		

@@ -14,7 +14,7 @@ class Products_Model_Products extends Core_Model_Factory
 {
 	public static $available = array('yes'=>'Yes','no'=>'No');
 	public static $feature = array('yes'=>'Yes','no'=>'No');
-        public static $highlight = array('yes'=>'Yes','no'=>'No');
+        public static $highlight = array('yes'=>'Yes','no'=>'No'); 
 	public static $status = array('active'=>'Active','inactive'=>'Inactive');
 	
 	/**

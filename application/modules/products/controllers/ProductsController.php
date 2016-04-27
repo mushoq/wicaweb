@@ -265,7 +265,7 @@ class Products_ProductsController extends Zend_Controller_Action
 		
 		//Section id in view
 		$this->view->section_id = $section_id;
-		
+		$this->view->website_id = $id->website_id;
 		//Get module_id by module_name
 		$module_obj = new Core_Model_Module();
 		$module = $module_obj->find('wc_module',array('name'=>'Products'));
@@ -286,7 +286,7 @@ class Products_ProductsController extends Zend_Controller_Action
 			{
 				//Get all products
 				$product_obj = new Products_Model_Products();
-				$products_list_obj = $product_obj->find('product');
+				$products_list_obj = $product_obj->find('product', array('website_id'=>$id->website_id));
 				
 				//Convert objClass to normal array
 				if($products_list_obj){
@@ -369,7 +369,9 @@ class Products_ProductsController extends Zend_Controller_Action
 	 * Creates a new product
 	 */
     public function newAction()
-    {    	
+    {
+        $id = New Zend_Session_Namespace('id');
+        $this->view->website_id = $id->website_id;        
     	//Get section_id
     	$section_id = $this->_getParam('id');
   	    	    	
@@ -383,7 +385,14 @@ class Products_ProductsController extends Zend_Controller_Action
     	$section_id_element->removeDecorator ( 'Label' );
     	$section_id_element->removeDecorator ( 'HtmlTag' );
     	$product_form->addElement ( $section_id_element );
-
+        
+        //website_id
+        $website_id_element = new Zend_Form_Element_Hidden ( 'website_id' );
+    	$website_id_element->setValue ($id->website_id );
+    	$website_id_element->removeDecorator ( 'Label' );
+    	$website_id_element->removeDecorator ( 'HtmlTag' );
+    	$product_form->addElement ( $website_id_element );
+        
     	$product_form->setMethod('post');
     	$this->view->section_id = $section_id;
     	$this->view->form = $product_form;
@@ -406,7 +415,8 @@ class Products_ProductsController extends Zend_Controller_Action
     {    	 
     	//Get section_id
     	$section_id = $this->_getParam('section_id');
-
+        $id = New Zend_Session_Namespace('id');
+        $this->view->website_id = $id->website_id;
     	//Disable layout for this form
     	$this->_helper->layout->disableLayout ();
     	 
@@ -447,6 +457,7 @@ class Products_ProductsController extends Zend_Controller_Action
         $arr_data['product_file_ficha'] = $arr_data['ficha']; 
        	
     	$arr_data['section_id'] = $section_id;
+        $arr_data['website_id'] = $id->website_id;
     	//Populate form with data
     	$product_form->populate($arr_data);
     	
@@ -494,6 +505,7 @@ class Products_ProductsController extends Zend_Controller_Action
 			}			
 			
 			$product_obj->name = GlobalFunctions::value_cleaner($formData['name']);
+                        $product_obj->website_id = GlobalFunctions::value_cleaner($formData['website_id']);
 			$product_obj->description = $formData['description'];
 			$product_obj->available = GlobalFunctions::value_cleaner($formData['available']);
 			$product_obj->status = GlobalFunctions::value_cleaner($formData['status']);
@@ -808,6 +820,7 @@ class Products_ProductsController extends Zend_Controller_Action
     							//Create product object for update with new order
     							$product_obj = $product->getNewRow('product');
     							$product_obj->id = $product_data[0]->id;
+                                                        $product_obj->website_id = GlobalFunctions::value_cleaner($product_data[0]->website_id);
     							$product_obj->name = GlobalFunctions::value_cleaner($product_data[0]->name);
     							$product_obj->description = GlobalFunctions::value_cleaner($product_data[0]->description);
     							$product_obj->image = GlobalFunctions::value_cleaner($product_data[0]->image);
