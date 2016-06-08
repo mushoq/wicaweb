@@ -960,7 +960,7 @@ class Default_IndexController extends Zend_Controller_Action
 			foreach($formData as $key=>$data){
                             
 				if($key!='captcha' && $key !='website_id')
-					$body.='<label>'.str_replace ( '_', ' ', $key ).': '.$data.'</label><br/>';
+					$body.='<p><b>'.str_replace ( '_', ' ', $key ).':</b> '.$data.'</p>';
 			}
                         
 			if ($this->getRequest ()->isPost ()) {
@@ -1001,9 +1001,54 @@ class Default_IndexController extends Zend_Controller_Action
                                                         Zend_Mail::setDefaultTransport($tr);						 
                                                         $mail = new Zend_Mail();
                                                         $mail->setFrom($website_data[0]->info_email, $website_data[0]->name);
-                                                        $mail->setBodyHtml($body);
-                                                        $mail->addTo($content_email[0]->value, 'User');
-                                                        $mail->setSubject('Formulario de sitio:'. $website_data[0]->name);
+                                                        $descripcion = '<html xmlns="http://www.w3.org/1999/xhtml">
+                                                        <head>
+                                                            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                                                            <title>Formulario Din&aacute;mica</title>
+                                                            <style type="text/css">
+                                                            body {
+                                                                background-color:#FFFFFF;
+                                                                font-family:Arial, Helvetica, sans-serif;
+                                                            }
+                                                            .texto {
+                                                                font-size:12px;
+                                                                font-weight:normal;
+                                                                color:#5B5B5B;
+                                                            }
+                                                            </style>
+                                                        </head>
+                                                        <body>
+                                                        <table width="673"  border="0" align="center" cellpadding="0" cellspacing="2">
+                                                    <tr>
+                                                            <td height="101" colspan="2"><img src="'.$website_data[0]->website_url.'/uploads/website/'.$website_data[0]->logo.'"></td>
+                                                    </tr>
+                                                <tr bgcolor="#EEEEEE">
+                                                            <td colspan="2" class="texto"><p align="center">Hola, este es un mensaje de formulario en el sitio Web '.utf8_decode($website_data[0]->name).':</font> <br>
+                                                                            </p></td>
+                                                    </tr>
+                                                <tr bgcolor="#FFFFFF" >
+
+                                                <td style="border-bottom:1px solid #EEEEEE;" width="55%" class="texto" colspan="2">'.utf8_decode($body).'</td>
+                                                </tr>
+                                                <tr> 
+                                                <td align="center" colspan="2"><font color="red" size="1">&nbsp;</font> <br>
+                                                 <font color="red" size="1">&nbsp;
+                                                 </font>
+                                                 </td>
+                                                 </tr>
+                                                <tr>
+                                                <td colspan="2" bgcolor="#323232">
+                                                &nbsp;
+                                                </td>
+                                                </tr>
+                                                </table>
+                                                <p align="center"><a style="text-decoration: none;" href="'.$website_data[0]->website_url.'"><font size="3" color="#000000">'.$website_data[0]->website_url.'</font></a></p>
+
+                                                </body>
+                                                </html>';
+                                                        $mail->setBodyHtml($descripcion);
+                                                        $mail->addTo($content_email[0]->value);
+                                                        $mail->setSubject('Formulario de sitio: '. utf8_decode($website_data[0]->name));
                                                         $fileInfo= explode(".", $newFilename); 
                                                         $extension = '.'.end($fileInfo); 
                                                         if($newFilename){
@@ -1070,9 +1115,54 @@ class Default_IndexController extends Zend_Controller_Action
 						Zend_Mail::setDefaultTransport($tr);						 
 						$mail = new Zend_Mail();
 						$mail->setFrom($website_data[0]->info_email, $website_data[0]->name);
-						$mail->setBodyHtml($body);
+						$descripcion = '<html xmlns="http://www.w3.org/1999/xhtml">
+                                                        <head>
+                                                            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                                                            <title>Formulario Din&aacute;mica</title>
+                                                            <style type="text/css">
+                                                            body {
+                                                                background-color:#FFFFFF;
+                                                                font-family:Arial, Helvetica, sans-serif;
+                                                            }
+                                                            .texto {
+                                                                font-size:12px;
+                                                                font-weight:normal;
+                                                                color:#5B5B5B;
+                                                            }
+                                                            </style>
+                                                        </head>
+                                                        <body>
+                                                        <table width="673"  border="0" align="center" cellpadding="0" cellspacing="2">
+                                                    <tr>
+                                                            <td height="101" colspan="2"><img src="'.$website_data[0]->website_url.'/uploads/website/'.$website_data[0]->logo.'"></td>
+                                                    </tr>
+                                                <tr bgcolor="#EEEEEE">
+                                                            <td colspan="2" class="texto"><p align="center">Hola, este es un mensaje de formulario en el sitio Web '.utf8_decode($website_data[0]->name).':</font> <br>
+                                                                            </p></td>
+                                                    </tr>
+                                                <tr bgcolor="#FFFFFF" >
+
+                                                <td style="border-bottom:1px solid #EEEEEE;" width="55%" class="texto" colspan="2">'.utf8_decode($body).'</td>
+                                                </tr>
+                                                <tr> 
+                                                <td align="center" colspan="2"><font color="red" size="1">&nbsp;</font> <br>
+                                                 <font color="red" size="1">&nbsp;
+                                                 </font>
+                                                 </td>
+                                                 </tr>
+                                                <tr>
+                                                <td colspan="2" bgcolor="#323232">
+                                                &nbsp;
+                                                </td>
+                                                </tr>
+                                                </table>
+                                                <p align="center"><a style="text-decoration: none;" href="'.$website_data[0]->website_url.'"><font size="3" color="#000000">'.$website_data[0]->website_url.'</font></a></p>
+
+                                                </body>
+                                                </html>';
+                                                        $mail->setBodyHtml($descripcion);
 						$mail->addTo($content_email[0]->value, 'User');
-						$mail->setSubject('Formulario de sitio:'. $website_data[0]->name);
+						$mail->setSubject('Formulario de sitio: '. $website_data[0]->name);
                                                 $fileInfo= explode(".", $newFilename); 
                                                 $extension = '.'.end($fileInfo); 
                                                 if($newFilename){

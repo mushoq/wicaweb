@@ -288,16 +288,13 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 															break;	
 														
 											case 'file':	
-															$return .=	'<div class="form-group">
-                                                                                                                                                                
-																				<label for="form_field_file_'.$ff->id.'">'.$ff->name.'</label>
-                                                                                                                                                                <input id="fileLabel_'.$ff->id.'" type="text" value="" disabled="disabled">
-                                                                                                                                                                <button id="form_field_file_'.$ff->id.'" class="btn btn-warning" type="button" name="form_field_file_'.$ff->id.'">Examinar</button>
-																				
-                                                                                                                                                                <input type="hidden" id="hdnNameFile_'.$ff->id.'" name="hdnNameFile_'.$ff->id.'" />
-																			
-																		</div>';
-															break;								
+															$return .= '<div class="form-group center">								
+                                                                                                                                            <input type="button" id="btn_sub_form_'.$data_content [0]->id.'" name="btn_sub_form_'.$data_content [0]->id.'" class="btn btn-primary" value="'.$lang->translate('Enviar').'"/>
+                                                                                                                                            <input type="hidden" id="website_id" name="website_id" value="'.$front_ids->website_id.'" />
+                                                                                                                                            <input type="hidden" id="form_name" name="form_name" value="'.$data_content [0]->internal_name.'" />    
+                                                                                                                                            <input type="hidden" id="form_id" name="form_id" value="'.$data_content [0]->id.'" />		
+                                                                                                                                    </div>';
+															break;
 										}
 									}
 									
