@@ -231,7 +231,8 @@ $(document).ready(function() {
 			    		formId: 'frmContent',
 			    		flashVars: {
 							firebug: true,
-							file_limit: 10,
+							file_limit: 20,
+                                                        max_post_size: 20971520, 
 							max_width: parseInt($("#hdn_max_width_img").val()),
 							max_height : parseInt($("#hdn_max_height_img").val()),
 							resize: 'jpg,jpeg',
@@ -1281,7 +1282,8 @@ $(document).ready(function() {
 			    		formId: 'frmContent',
 			    		flashVars: {
 							firebug: true,
-							file_limit: 10,
+							file_limit: 20,
+                                                        max_post_size: 20971520, 
 							max_width: parseInt($("#hdn_max_width_img").val()),
 							max_height : parseInt($("#hdn_max_height_img").val()),
 							resize: 'jpg,jpeg',
@@ -1470,7 +1472,7 @@ function load_file(element_sufix, element_type)
 		action: "/core/content_content/uploadfile",
 		data:{
 			directory: 'public/uploads/tmp/',
-			maxSize: 2097152,
+			maxSize: 20971520,
 			type: element_type
 		},
 		name: 'content_file',
