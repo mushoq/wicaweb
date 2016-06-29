@@ -106,28 +106,30 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                         $heightImg = $image_data[1];
 									
                                                                         if($data_content_field [3]->value){
+                                                                            
                                                                             $hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0));
                                                                             $return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value  . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. $hrefImg .'" ><img';					
                                                                         }elseif($widthImg > $content_width){
+                                                                            
                                                                             $hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$widthImg,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):'/uploads/content/'.$data_content_field[4]->value;
                                                                             $return .= '<a class="wicabox" rel="imagesGroup" href="'.$hrefImg.'"><img';					
                                                                             
                                                                         }else{
                                                                              $return .= '<img';					
                                                                         }
-										
+									
 									if( $data_content_field[7]->value == 'no'){
+                                                                            if($data_content_field[8]->value =='yes'){
+                                                                                $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$widthImg,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)) .'" ';
+                                                                            }else{
                                                                             $return .= ' src="/uploads/content/'.$data_content_field[4]->value.'" ';
+                                                                            }
 									}else{
-									
-									
-									 if($data_content_field[8]->value =='yes'){
-                                                                            $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)) .'" ';
-                                        }                               else{
-                                                                            $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0)) .'" ';
-                                                                        }                               
-                                                                        
-                                                                        
+                                                                            if($data_content_field[8]->value =='yes'){
+                                                                                $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)) .'" ';
+                                            }                               else{
+                                                                                $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0)) .'" ';
+                                                                            }                               
 									}
 									
 									
@@ -143,7 +145,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                             $return .= '</a>';
                                                                         }
 									if($data_content_field [0]->value != '')
-										$return .= '<p>'.$data_content_field [0]->value.'</p>';
+										$return .= '<p>'.str_replace("\\", "", $data_content_field [0]->value).'</p>';
 									
 									$return .= '</div>';
 									return  $return;
@@ -288,12 +290,15 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 															break;	
 														
 											case 'file':	
-															$return .= '<div class="form-group center">								
-                                                                                                                                            <input type="button" id="btn_sub_form_'.$data_content [0]->id.'" name="btn_sub_form_'.$data_content [0]->id.'" class="btn btn-primary" value="'.$lang->translate('Enviar').'"/>
-                                                                                                                                            <input type="hidden" id="website_id" name="website_id" value="'.$front_ids->website_id.'" />
-                                                                                                                                            <input type="hidden" id="form_name" name="form_name" value="'.$data_content [0]->internal_name.'" />    
-                                                                                                                                            <input type="hidden" id="form_id" name="form_id" value="'.$data_content [0]->id.'" />		
-                                                                                                                                    </div>';
+															$return .= '<div class="form-group">
+                                                                                                                                                                
+																				<label for="form_field_file_'.$ff->id.'">'.$ff->name.'</label>
+                                                                                                                                                                <input id="fileLabel_'.$ff->id.'" type="text" value="" disabled="disabled">
+                                                                                                                                                                <button id="form_field_file_'.$ff->id.'" class="btn btn-warning" type="button" name="form_field_file_'.$ff->id.'">Examinar</button>
+																				
+                                                                                                                                                                <input type="hidden" id="hdnNameFile_'.$ff->id.'" name="hdnNameFile_'.$ff->id.'" />
+																			
+																		</div>';
 															break;
 										}
 									}

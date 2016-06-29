@@ -505,9 +505,10 @@ class Default_IndexController extends Zend_Controller_Action
 		    				//search for an image	    				
 		    				$pictures_list = $content->getContentsBySection($art->id, $front_ids->website_id, null, 2);
                                                 
-                                                $data_content_field = $content_field->find ( 'wc_content_field', array ('content_id' => $pictures_list[0]->id) );
+                                                
 		    				if(count($pictures_list)>0)
 		    				{
+                                                        $data_content_field = $content_field->find ( 'wc_content_field', array ('content_id' => $pictures_list[0]->id) );
 		    					$art->image = $data_content_field[4]->value;
 		    				}
 		    				else
