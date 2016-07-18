@@ -305,37 +305,10 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									
 									if($data_content_field[2]->value=='yes')
 									{
-										//create captcha object on form content
-										$captcha = new Zend_Captcha_Image();
-										$captcha->setName('foo');
-										$captcha->setImgDir(APPLICATION_PATH . '/../public/images/captcha/');
-										$captcha->setImgUrl($this->view->baseUrl('/images/captcha/'));
-										$captcha->setFont(APPLICATION_PATH . '/../public/fonts/VeraIt.ttf');
-										$captcha->setWordlen(5);
-										$captcha->setFontSize(28);
-										$captcha->setLineNoiseLevel(15);
-										$captcha->setWidth(200);
-										$captcha->setHeight(64);
-										$id_captcha = $captcha->generate();
-										//$this->view->captcha = $captcha;
-									
-										$captchaSession = new Zend_Session_Namespace('Zend_Form_Captcha_'.$id_captcha);
-										//get captcha iterator
-										$captchaIterator = $captchaSession->getIterator();
-									
-										//validate if session code is set
-										
-										$_SESSION['captcha_session_'.$data_content [0]->id] =  $captchaIterator['word'];
-										$return .= '<div class="form-group text-center">
-														
-															<label>'.$lang->translate('Insert the security code').'</label><br>
-														
-														
-															'.$captcha->render().'<br>
-															<input type="text" id="form_field_captcha_'.$data_content [0]->id.'" name = "form_field_captcha_'.$data_content [0]->id.'" valid="yes" class="form-control captcha" />
-																<label id="captcha_error_'.$data_content [0]->id.'" class="error_validation hide" for="form_field_captcha_'.$data_content [0]->id.'">'.$lang->translate('Invalid code').'</label>
-														
-													</div>';
+										$return .= '<div id="recaptcha" class="form-group text-center">
+                                                                                                <label id="captcha_error_'.$data_content [0]->id.'" class="error_validation hidden" for="form_field_captcha_'.$data_content [0]->id.'">'.$lang->translate('Please check the reCAPTCHA verification ').'</label>
+                                                                                                <div class="g-recaptcha text-center center-block" style="width: 304px; height: 78px;margin: 0 auto" data-sitekey="6LfGUiUTAAAAAPZNmgcZjc27DHEQwr9Pzu47I-qu"></div>
+                                                                                            </div>';
 									}
 	
 									$front_ids = New Zend_Session_Namespace('ids');

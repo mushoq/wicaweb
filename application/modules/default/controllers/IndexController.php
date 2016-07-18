@@ -960,14 +960,26 @@ class Default_IndexController extends Zend_Controller_Action
 		if($dictionary_coincidence==false){
 			foreach($formData as $key=>$data){
                             
-				if($key!='captcha' && $key !='website_id')
+				if($key!='captcha' && $key !='website_id' && $key != 'g-recaptcha-response')
 					$body.='<p><b>'.str_replace ( '_', ' ', $key ).':</b> '.$data.'</p>';
 			}
                         
 			if ($this->getRequest ()->isPost ()) {
-				if(array_key_exists('form_field_captcha_'.$formData['form_id'],$formData)){
+				if(isset($formData['g-recaptcha-response'])){
+                                        $captcha=$formData['g-recaptcha-response'];
+                                        if(!$captcha){
+                                            echo json_encode ('error_captcha');
+                                            exit;
+                                        }
+					$secretKey = "6LfGUiUTAAAAACJWMwLaqIJnWsY8MzMumwxmVsJb";
+                                        $ip = $_SERVER['REMOTE_ADDR'];
+                                        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+                                        $responseKeys = json_decode($response,true);
+                                        if(intval($responseKeys["success"]) !== 1) {
+                                            echo json_encode ('error_captcha');
+                                            exit;
+                                        }
 					
-					if($_SESSION['captcha_session_'.$formData['form_id']]==$formData['form_field_captcha_'.$formData['form_id']]){
 						 
 						//get smpt credential from website information
 						$website = new Core_Model_Website();
@@ -1077,9 +1089,7 @@ class Default_IndexController extends Zend_Controller_Action
 							echo json_encode ('error_sending');						
 						}
 
-					}else{
-						echo json_encode ('error_captcha');
-					}
+					
 					 
 					 
 				}else{
