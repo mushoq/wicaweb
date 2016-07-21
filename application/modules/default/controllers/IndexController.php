@@ -1013,7 +1013,7 @@ class Default_IndexController extends Zend_Controller_Action
 							
                                                         Zend_Mail::setDefaultTransport($tr);						 
                                                         $mail = new Zend_Mail();
-                                                        $mail->setFrom($website_data[0]->info_email, $website_data[0]->name);
+                                                        $mail->setFrom($website_data[0]->info_email, utf8_decode($website_data[0]->name));
                                                         $descripcion = '<html xmlns="http://www.w3.org/1999/xhtml">
                                                         <head>
                                                             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -1073,7 +1073,7 @@ class Default_IndexController extends Zend_Controller_Action
                                                             $attachment->filename    = $newFilename;
                                                             $mail->addAttachment($attachment); 
                                                         Zend_Session::namespaceUnset('user');
-                                                        unlink(realpath('.').'/uploads/tmp/'.$newFilename);
+                                                        
                                                 }
                                                 $sent = true;
                                                 try{
@@ -1082,6 +1082,9 @@ class Default_IndexController extends Zend_Controller_Action
                                                     $sent = false;
                                                 }
 						
+                                                if($newFilename){
+                                                    unlink(realpath('.').'/uploads/tmp/'.$newFilename);
+                                                }
 						$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success send')));
 						echo json_encode ('success_captcha');
 						}else{
@@ -1125,7 +1128,7 @@ class Default_IndexController extends Zend_Controller_Action
 							
 						Zend_Mail::setDefaultTransport($tr);						 
 						$mail = new Zend_Mail();
-						$mail->setFrom($website_data[0]->info_email, $website_data[0]->name);
+						$mail->setFrom($website_data[0]->info_email, utf8_decode($website_data[0]->name));
 						$descripcion = '<html xmlns="http://www.w3.org/1999/xhtml">
                                                         <head>
                                                             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -1185,7 +1188,6 @@ class Default_IndexController extends Zend_Controller_Action
                                                     $attachment->filename    = $newFilename;
                                                     $mail->addAttachment($attachment); 
                                                 Zend_Session::namespaceUnset('user');
-                                                unlink(realpath('.').'/uploads/tmp/'.$newFilename);
                                                 }
                                                 $sent = true;
                                                 try{
@@ -1193,7 +1195,9 @@ class Default_IndexController extends Zend_Controller_Action
                                                 } catch(Exception $e){
                                                     $sent = false;
                                                 }
-						
+						if($newFilename){
+                                                    unlink(realpath('.').'/uploads/tmp/'.$newFilename);
+                                                }
 						$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success send')));
 						echo json_encode ('success_captcha');
 						

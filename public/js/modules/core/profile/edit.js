@@ -163,17 +163,21 @@ function createNextButton(i) {
 					
 					while(it < delete_pos.length)
 					{						
-						delete_opt = sel_options[it].split(',');
-						if(delete_opt[0]==web_id){								
-							sel_options.splice(it,1);
-							count_del++;
-							it=0;
-						}else{
-							it++;
-						}
-						
-						if(count_del==delete_pos.length)
-							it = delete_pos.length;
+                                            if(sel_options[it] != null ){
+                                                delete_opt = sel_options[it].split(',');
+                                                if(delete_opt[0]==web_id){        
+                                                    sel_options.splice(it,1);
+                                                    count_del++;
+                                                    it=0;
+                                                }else{
+                                                    it++;
+                                                }
+
+                                                if(count_del==delete_pos.length)
+                                                    it = delete_pos.length;
+                                            }else{
+                                                it++;
+                                            }
 					}
 					$('#section_sel').val(sel_options.join('|'));					
 				}
