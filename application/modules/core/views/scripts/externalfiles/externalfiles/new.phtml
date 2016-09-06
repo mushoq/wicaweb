@@ -16,38 +16,38 @@ $confirm = GlobalFunctions::arrayTranslate(Core_Model_Externalfiles::$confirm);
 $website = new Core_Model_Website();
 $website_list = $website->find('wc_website');
 ?>
-<div class="row-fluid line">
-	<div class="col-md-12 page-header-wica center line">
+<div class="container-fluid center">
+	<div class="page-header-wica center">
 		<h1><?php echo $lang->translate('Upload New External File');?></h1>
 	</div>
 </div>
 
-<div class="line-top alert_messages_container">
+<div class="container-fluid line-top alert_messages_container">
         <?php echo $this->flashMessages();?>
 </div>
 
-<div class="row-fluid">
+<div class="container-fluid">
     <div class="col-md-12">
-      <form id="<?php echo $this->form->getId() ?>" action="" method="<?php echo $this->form->getMethod() ?>" class="well" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >  
-          <div class="row-fluid">
+      <form id="<?php echo $this->form->getId() ?>" action="" method="<?php echo $this->form->getMethod() ?>" class="well form-horizontal" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >  
+          <div class="row">
                 <div class="col-md-6">
-                    <div class="row-fluid">
-                        <div class="col-md-4 form_label">
-                            <label class="required" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
-                        </div>
-                        <div class="col-md-1">&nbsp;</div>
-                        <div class="col-md-4 form_field">
+                    <div class="form-group">
+                        
+                        <label class="col-sm-4 form_label required" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
+                        
+                        
+                        <div class="col-sm-4 col-sm-offset-1 form_field">
                             <?php echo $this->form->name->renderViewHelper(); ?>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row-fluid">
-                        <div class="col-md-4 form_label">
-                            <label class="required" for="file"><?php echo  $this->form->file->getDecorator('label')->getOption('requiredPrefix').$this->form->file->getLabel(); ?></label>
-                        </div>
-                        <div class="col-md-1">&nbsp;</div>
-                        <div class="col-md-4 form_field">
+                    <div class="form-group">
+                        
+                        <label class="col-sm-4 form_label required" for="file"><?php echo  $this->form->file->getDecorator('label')->getOption('requiredPrefix').$this->form->file->getLabel(); ?></label>
+                        
+                        
+                        <div class="col-sm-4 col-sm-offset-1 form_field">
                             <?php echo $this->form->file->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                             <p class="help-block grey">(css,js)</p>
                         </div>
@@ -57,12 +57,12 @@ $website_list = $website->find('wc_website');
           <?php if(count($website_list)>1):?>
           <div class="row-fluid">
                 <div class="col-md-6">
-                    <div class="row-fluid">
-                        <div class="col-md-4 form_label">
-                            <label class="required" for="add_to_all"><?php echo  '* '.$lang->translate('Add to all Websites?').':'; ?></label>
-                        </div>
-                        <div class="col-md-1">&nbsp;</div>
-                        <div class="col-md-4 form_field">
+                    <div class="form-group">
+                        
+                        <label class="col-sm-4 form_label required" for="add_to_all"><?php echo  '* '.$lang->translate('Add to all Websites?').':'; ?></label>
+                        
+                        
+                        <div class="col-sm-4 col-sm-offset-1 form_field">
                             <div class="btn-group" data-toggle="buttons-radio">
                                 <?php foreach($confirm as $k => $opt): ?>
                                 <input type="button" class="btn btn-primary" id="add_to_all_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           

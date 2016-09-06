@@ -15,7 +15,7 @@ $(document).ready(function(){
 		$(this).wrap("<div class='row'></div>");
 		$(this).wrap("<div id='step" + i + "' class='col-md-12'></div>");
 		//div where next and previous buttons are placed
-		$(this).append("<div id='step" + i + "commands'></div>");	
+		$(this).append("<div id='step" + i + "commands' class='row'></div><p>&nbsp;</p>");	
 		
 		step_name = $(this).find("span h2").html();			
 		$("#steps").append("<li id='stepDesc" + i + "'>" + (i + 1) +'. '+ step_name + "</li>");
@@ -149,7 +149,7 @@ function createNextButton(i) {
 			});
 			
 			//website dropdown			
-			html='<select id="web_list">';
+			html='<select id="web_list" class="form-control">';
 				html+='<option id="">-Seleccione-</option>';
 			for( var j =1; j <websites_id.length; j++) {			
 				html+='<option value="'+websites_id[j]+'">'+websites_name[j]+'</option>';
@@ -191,7 +191,7 @@ function createNextButton(i) {
 			if(sections_fl){
 				
 				$('#messages').addClass('hide');
-				$('#web_container').show();
+				$('#web_container').removeClass('hide');
 				$('#websites').html(html);
 				$('#section_container').html('');				
 				$('#section_sel').val('');														
@@ -307,7 +307,7 @@ function createNextButton(i) {
 					});
 				}else{	
 					//if there is not CMS module selected
-					$('#messages').show();
+					$('#messages').removeClass('hide');
 					$('#web_container').addClass('hide');
 					$('#websites').html('');
 					$('#section_container').html('');
@@ -329,7 +329,7 @@ function createNextButton(i) {
 
 function addNextButton(i, stepName){
 	$("#" + stepName).addClass('hide');
-	$("#step" + (i + 1)).show();
+	$("#step" + (i + 1)).removeClass('hide');
 
 }
 
@@ -340,7 +340,7 @@ function createPrevButton(i) {
 	$("#" + stepName + "Prev").bind("click", function() {					
 		$("#error_container").addClass('hide');
 		$("#" + stepName).addClass('hide');
-		$("#step" + (i - 1)).show();		
+		$("#step" + (i - 1)).removeClass('hide');		
 		selectStep(i - 1);
 	});
 }

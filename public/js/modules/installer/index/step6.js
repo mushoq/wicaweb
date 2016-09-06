@@ -1,6 +1,16 @@
 $(document).ready(function() {    
     //STEP6
-	
+	//listener continue buttons
+	$('[id^=continue_]').each(function(){
+		$(this).bind('click',function(){
+			$('#'+$(this).attr('current')).removeClass('in');
+			$('#'+$(this).attr('current')).addClass('collapse');
+			$('#'+$(this).attr('current')).css('height','0px');
+			$('#'+$(this).attr('next')).addClass('in');
+			$('#'+$(this).attr('next')).removeClass('collapse');
+			$('#'+$(this).attr('next')).css('height','auto');
+		});
+	});
 	//default vals 
 	$('#offline_text').val(website_offline_text);
     $('#coming_soon_text').val(website_soon_text);

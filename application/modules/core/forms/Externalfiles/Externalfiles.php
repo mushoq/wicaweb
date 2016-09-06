@@ -33,7 +33,7 @@ class Core_Form_Externalfiles_Externalfiles extends Zend_Form
 		$name->setRequired(true);
 		$name->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$name->setFilters(array( new Zend_Filter_StringTrim()));
-		$name->setAttrib('style','width:100%');
+		$name->setAttrib('class','form-control');
 				
 		//File
 		$file = New Zend_Form_Element_File('file');
@@ -60,7 +60,7 @@ class Core_Form_Externalfiles_Externalfiles extends Zend_Form
 		//Cancel Button
 		$cancel = New Zend_Form_Element_Button('cancel');
 		$cancel->setLabel($lang->translate('Cancel'));
-		$cancel->setAttrib('class', 'btn');
+		$cancel->setAttrib('class', 'btn btn-default');
 		$cancel->setIgnore(true);
 				
 		//add elements to the form

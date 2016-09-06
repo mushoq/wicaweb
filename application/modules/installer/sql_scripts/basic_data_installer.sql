@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+engli-- phpMyAdmin SQL Dump
 -- version 3.3.2deb1ubuntu1
 -- http://www.phpmyadmin.net
 --
@@ -39,8 +39,8 @@ INSERT INTO `wc_section_template` (`id`, `name`, `file_name`, `column_number`, `
 --
 
 INSERT INTO `wc_website_language` (`id`, `name`, `abbreviation`, `description`) VALUES
-(1, 'Español', 'es', NULL),
-(2, 'Inglés', 'en', NULL);
+(1, 'Espanol', 'es', NULL),
+(2, 'English', 'en', NULL);
 
 --
 -- Volcar la base de datos para la tabla `wc_website_template`

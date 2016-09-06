@@ -45,11 +45,11 @@ class Installer_Form_Website extends Zend_Form
 		$aux= $language_model->find('wc_website_language');
 		//create the array for populate the select
 		$options_language = array();
-		foreach ($aux as $l){
+		foreach ($aux as $l){ 
 			$options_language[$l->id] = $l->name;
 		}
 		$language->setMultiOptions($options_language);
-		$language->setAttrib('style', 'width:100%');
+		$language->setAttrib('class', 'form-control');
 		
 		//template
 		$template = New Zend_Form_Element_Hidden('template_id');
@@ -60,7 +60,7 @@ class Installer_Form_Website extends Zend_Form
 		$name->setRequired(true);
 		$name->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$name->setFilters(array( new Zend_Filter_StringTrim()));
-		$name->setAttrib('style', 'width:100%');		
+		$name->setAttrib('class', 'form-control');		
 
 		//description
 		$description = New Zend_Form_Element_Textarea('description');
@@ -68,7 +68,7 @@ class Installer_Form_Website extends Zend_Form
 		$description->setRequired(true);
 		$description->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$description->setAttribs(array('cols' => 40, 'rows' => 5));
-		$description->setAttrib('style', 'width:100%');
+		$description->setAttrib('class', 'form-control');	
 		
 		//keywords
 		$keywords = New Zend_Form_Element_Textarea('keywords');
@@ -76,7 +76,7 @@ class Installer_Form_Website extends Zend_Form
 		$keywords->setRequired(true);
 		$keywords->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$keywords->setAttribs(array('cols' => 40, 'rows' => 5));
-		$keywords->setAttrib('style', 'width:100%');
+		$keywords->setAttrib('class', 'form-control');
 		
 		//website Url
 		$website_url = New Zend_Form_Element_Text('website_url');
@@ -84,7 +84,7 @@ class Installer_Form_Website extends Zend_Form
 		$website_url->setRequired(true);
 		$website_url->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$website_url->setFilters(array( new Zend_Filter_StringTrim()));
-		$website_url->setAttrib('style', 'width:100%');
+		$website_url->setAttrib('class', 'form-control');
 		
 		//default page
 		$default_page = New Zend_Form_Element_Hidden('default_page');
@@ -100,7 +100,7 @@ class Installer_Form_Website extends Zend_Form
 		$logo->setDestination(APPLICATION_PATH. '/../public/uploads/tmp');
 		$logo->addValidator('Count', false, 1);
 		$logo->addValidator('Extension', false, 'jpg,png,gif,jpeg');
-		$logo->setAttrib('style', 'width:100%');
+		//$logo->setAttrib('class', 'form-control');
 		
 		//Icono
 		$icon = New Zend_Form_Element_File('icon');
@@ -108,7 +108,7 @@ class Installer_Form_Website extends Zend_Form
 		$icon->setDestination(APPLICATION_PATH. '/../public/uploads/tmp');
 		$icon->addValidator('Count', false, 1);
 		$icon->addValidator('Extension', false, 'jpg,png,gif,jpeg,ico');
-		$icon->setAttrib('style', 'width:100%');
+		//$icon->setAttrib('class', 'form-control');
 		
 		//Info Email
 		$info_email = New Zend_Form_Element_Text('info_email');
@@ -117,7 +117,7 @@ class Installer_Form_Website extends Zend_Form
 		$info_email->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$info_email->addValidator(new Zend_Validate_EmailAddress());
 		$info_email->setFilters(array( new Zend_Filter_StringTrim()));
-		$info_email->setAttrib('style', 'width:100%');
+		$info_email->setAttrib('class', 'form-control');
 		
 		
 		//Copyright
@@ -126,7 +126,7 @@ class Installer_Form_Website extends Zend_Form
 		$copyright->setRequired(true);
 		$copyright->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$copyright->setFilters(array( new Zend_Filter_StringTrim()));
-		$copyright->setAttrib('style', 'width:100%');
+		$copyright->setAttrib('class', 'form-control');
 		
 		
 		//Submit Button
@@ -171,7 +171,7 @@ class Installer_Form_Website extends Zend_Form
 		$website_status = New Zend_Form_Element_Select('website_status');
 		$website_status->setLabel($lang->translate('Status').':');
 		$website_status->setRequired(true);
-		$website_status->setAttrib('style', 'width:100%');
+		$website_status->setAttrib('class', 'form-control');
 		$website_status->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$website_status_type = $website_type;
 		$website_status->setMultiOptions($website_status_type);
@@ -183,7 +183,7 @@ class Installer_Form_Website extends Zend_Form
 		$offline_text->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$offline_text->setAttribs(array('cols' => 40, 'rows' => 5));
 		$offline_text->setFilters(array( new Zend_Filter_StringTrim()));
-		$offline_text->setAttrib('style', 'width:100%');
+		$offline_text->setAttrib('class', 'form-control');
 		
 		//Offline_img
 		$img_offline = New Zend_Form_Element_Image('img_offline');
@@ -205,7 +205,7 @@ class Installer_Form_Website extends Zend_Form
 		$coming_soon_text->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$coming_soon_text->setAttribs(array('cols' => 40, 'rows' => 5));
 		$coming_soon_text->setFilters(array( new Zend_Filter_StringTrim()));
-		$coming_soon_text->setAttrib('style', 'width:100%');
+		$coming_soon_text->setAttrib('class', 'form-control');
 		
 		//coming soon img
 		$img_coming_soon = New Zend_Form_Element_Image('img_coming_soon');

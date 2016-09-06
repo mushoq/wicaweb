@@ -16,7 +16,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 <?php foreach($this->external_files_links as $action_id => $opt): ?>
 <?php if($opt['action']=='new'): ?>
-<div class="row-fluid option_bar_container">
+<div class="container-fluid option_bar_container">
 	<ul class="nav nav-pills pull-right">
         <li>
             <a href="/core/externalfiles_externalfiles/new"><?php echo $lang->translate('Add New File'); ?></a>
@@ -26,17 +26,17 @@ $lang = Zend_Registry::get('Zend_Translate');
 <?php endif; ?>
 <?php endforeach; ?>
 
-<div class="line-top alert_messages_container">
+<div class="container-fluid line-top alert_messages_container">
 	<?php echo $this->flashMessages();?>
 </div>
 
-<div class="row-fluid">
-	<div class=" page-header-wica col-md-12 center line">
+<div class="container-fluid center">
+	<div class="page-header-wica center">
 		<h1> <?php echo $lang->translate('Upload External Files');?> </h1>
 	</div>
 </div>
 
-<div class="row-fluid">
+<div class="container-fluid">
 <?php if($this->files && count($this->files)>0):?>
 	<form action="#" method="post" name="frmExternalFiles" id="frmExternalFiles">
 		<?php if($this->external_files_js && count($this->external_files_js)>0):?>
@@ -65,7 +65,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 							<?php endif; ?>
 						<?php endforeach; ?>
 						/
-						<a href="/core/externalfiles_externalfiles/view?id=<?php echo $extfile_js->id;?>" title="<?php echo $lang->translate('View'); ?>"><i class="icon-indent-left"></i></a>
+						<a href="/core/externalfiles_externalfiles/view?id=<?php echo $extfile_js->id;?>" title="<?php echo $lang->translate('View'); ?>"><i class="glyphicon glyphicon-indent-left"></i></a>
 					</div>			
 				</div>					
 				<?php endforeach; ?>
@@ -98,7 +98,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 							<?php endif; ?>
 						<?php endforeach; ?>
 						/
-						<a href="/core/externalfiles_externalfiles/view?id=<?php echo $extfile_css->id;?>" title="<?php echo $lang->translate('View'); ?>"><i class="icon-indent-left"></i></a>
+						<a href="/core/externalfiles_externalfiles/view?id=<?php echo $extfile_css->id;?>" title="<?php echo $lang->translate('View'); ?>"><i class="glyphicon glyphicon-indent-left"></i></a>
 					</div>			
 				</div>					
 				<?php endforeach; ?>

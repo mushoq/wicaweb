@@ -942,3 +942,9 @@ input[type="checkbox"], input[type="radio"] {
 #navigation_info{
     width: 450px;
 }
+.form-group label p{
+    cursor: pointer;
+}
+#section_container label{
+    font-weight: normal;
+}

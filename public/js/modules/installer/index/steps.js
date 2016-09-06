@@ -6,6 +6,10 @@ $(document).ready(function() {
 		$(this).hide();
 	});
 	
+	$(".btn-group > .btn").click(function(){
+		$(this).addClass("current").siblings().removeClass("active");
+	});
+	
     /*STEP 2*/
     
     //back button
