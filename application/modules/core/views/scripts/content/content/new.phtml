@@ -12,7 +12,7 @@
 
 <?php $lang = Zend_Registry::get('Zend_Translate');?>
 
-<div>
+
 	<?php echo $this->flashMessages(); ?>
 	
 <!-- 	Form -->
@@ -23,23 +23,26 @@
 		//loops through all content elemnts
 		foreach($this->form->getElements() as $name => $element){ ?>
 			<?php if(strpos($name, 'hdnNameFile')=== false){ ?>		
-				<div class="row-fluid">
+				<div class="row">
 <!-- 				Div only for separate elements -->
-				<div id="<?php echo $name."_span-separator";?>" class="span4 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg' && $name!='zoom')){ echo 'hide'; }?>">&ensp;</div>
-				
-				<div id="<?php echo $name."_row-fluid";?>" class="row-fluid <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg' && $name!='zoom')){ echo 'hide'; }?> ">
+				<div id="<?php echo $name."_row-fluid";?>" class="col-md-8 col-md-offset-2 <?php if(($this->form->$name->helper == 'formHidden' || $this->form->$name->class == 'hide') && ($name!='flash_file' && $name!='alternative_image' && $name!='aux_make_div_image' && $name!='select_images' && $name != 'background' && $name != 'type' && $name != 'captcha' && $name != 'target'  && $name != 'resizeimg' && $name!='watermarkimg' && $name!='zoom')){ echo 'hide'; }?> ">
 					
-						<div class="control-group">						
+						<div class="form-group">						
 <!-- 						Control when label should be shown -->
-						<?php if(($this->form->$name->helper != 'formSubmit' && $this->form->$name->helper != 'formButton') || ($name == 'file' || $name == 'alternative_image' || $name == 'flash_file')) { ?>
-							<label id="<?php echo $name."_label"?>" class="control-label <?php if( ($this->form->$name->class == 'hide' || $this->form->$name->class == 'hide btn') && ($name != 'alternative_image' && $name != 'flash_file')) echo ' hide'?>"><?php if($name == 'file' || $name == 'alternative_image' || $name == 'flash_file'){ echo $this->form->$name->label_name;  }else{ echo $this->form->$name->getLabel(); }?></label>
+						<?php if(($this->form->$name->helper != 'formSubmit' && $this->form->$name->helper != 'formButton') || ($name == 'file' || $name == 'alternative_image' || $name == 'flash_file')) {?>
+							<label id="<?php echo $name."_label"?>" class="col-sm-3 control-label <?php if( ($this->form->$name->class == 'hide' || $this->form->$name->class == 'hide btn btn-default' || $this->form->$name->class == 'hide form-control' || $this->form->$name->class == 'hide btn-default') && ($name != 'alternative_image' && $name != 'flash_file')) echo ' hide'?>"><?php if($name == 'file' || $name == 'alternative_image' || $name == 'flash_file'){ echo $this->form->$name->label_name;  }else{ echo $this->form->$name->getLabel(); }?></label>
 						<?php } ?>	
-							<?php if($name == 'alternative_image'){ ?>
-							<div class="span7">
-							<?php }else{ ?>
-							<div class="<?php if($name == 'content'){ echo 'span6'; } else {?>span4<?php }?>">
-							<?php }?>
+							<?php 
+                                                        if($this->form->$name->helper != 'formButton' || $this->form->$name->label_name == '* Archivo:'){
+                                                            if($name == 'alternative_image'){ ?>
+                                                            <div class="col-md-7">
+                                                            <?php }else{ ?>
+                                                            <div class="col-md-6">
+                                                            <?php }
+                                                        }else{?>
+                                                              <div class="col-md-12 center">  
 								<?php 
+                                                        }  
 // 								Div for carrusel multi image uploader
 									if($name == 'select_images'){
 										?>
@@ -71,15 +74,15 @@
                                                                                        <br>
                                                                                         <div>
                                                                                             
-                                                                                            <input type="button" pos="TL" value="" class="btn watermark_pos_selector" id="wmk_pos_TL">
-                                                                                            <input type="button" pos="T" value="" class="btn watermark_pos_selector" id="wmk_pos_T">
-                                                                                            <input type="button" pos="TR" value="" class="btn watermark_pos_selector" id="wmk_pos_TR"> <br>
-                                                                                            <input type="button" pos="L" value="" class="btn watermark_pos_selector" id="wmk_pos_L">
-                                                                                            <input type="button" pos="C" value="" class="btn watermark_pos_selector" id="wmk_pos_C">
-                                                                                            <input type="button" pos="R" value="" class="btn watermark_pos_selector" id="wmk_pos_R"> <br>
-                                                                                            <input type="button" pos="BL" value="" class="btn watermark_pos_selector" id="wmk_pos_BL">
-                                                                                            <input type="button" pos="B" value="" class="btn watermark_pos_selector" id="wmk_pos_B">
-                                                                                            <input type="button" pos="BR" value="" class="btn watermark_pos_selector" id="wmk_pos_BR">
+                                                                                            <input type="button" pos="TL" value="" class="btn btn-default watermark_pos_selector" id="wmk_pos_TL">
+                                                                                            <input type="button" pos="T" value="" class="btn btn-default watermark_pos_selector" id="wmk_pos_T">
+                                                                                            <input type="button" pos="TR" value="" class="btn btn-default watermark_pos_selector" id="wmk_pos_TR"> <br>
+                                                                                            <input type="button" pos="L" value="" class="btn btn-default watermark_pos_selector" id="wmk_pos_L">
+                                                                                            <input type="button" pos="C" value="" class="btn btn-default watermark_pos_selector" id="wmk_pos_C">
+                                                                                            <input type="button" pos="R" value="" class="btn btn-default watermark_pos_selector" id="wmk_pos_R"> <br>
+                                                                                            <input type="button" pos="BL" value="" class="btn btn-default watermark_pos_selector" id="wmk_pos_BL">
+                                                                                            <input type="button" pos="B" value="" class="btn btn-default watermark_pos_selector" id="wmk_pos_B">
+                                                                                            <input type="button" pos="BR" value="" class="btn btn-default watermark_pos_selector" id="wmk_pos_BR">
                                                                                         </div>
                                                                                        
                                                                                   <?php
@@ -92,7 +95,7 @@
 												if($name == 'file' || $name == 'alternative_image' || $name=='flash_file'){?>
 													<div>
 														<input class="align-top hide" readonly type="text" id="<?php echo 'input_file_'.$name;?>" name="<?php echo 'input_file_'.$name;?>"/>
-														<?php $this->form->$name->class="hide btn align-top"; echo $this->form->$name->renderViewHelper(); ?>
+														<?php $this->form->$name->class="hide btn btn-default"; echo $this->form->$name->renderViewHelper(); ?>
 														<?php $hdn_name='hdnNameFile_'.$name; echo $this->form->$hdn_name->renderViewHelper(); ?>
 														<?php if($name == 'flash_file'){ ?>
 															<p class="help-block grey">(swf)</p>
@@ -112,14 +115,14 @@
                                                                                                                     //echo $this->form->$name->helper;
 													if($this->form->$name->helper == 'formSubmit'){
 														//generate save button to print at the end
-														$saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span8 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+														$saveButton =  '<div class="row"><div class="col-md-12 center">'.$this->form->$name->renderViewHelper().'</div></div>';
 													}elseif($this->form->$name->helper == 'formButton'){
 														if($this->form->$name->getName() == 'save_image'){
                                                                                                                     //generate save button to print at the end
-                                                                                                                    $saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span8 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+                                                                                                                    $saveButton =  '<div class="row"><div class="col-md-12 center">'.$this->form->$name->renderViewHelper().'</div></div>';
                                                                                                                 }else{
-                                                                                                                    $saveButton =  '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span8 center">'.$this->form->$name->renderViewHelper().'</div></div>';
-                                                                                                                    echo '<div class="row-fluid"><div class="span2">&ensp;</div><div class="span10 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+                                                                                                                    $saveButton =  '<div class="row"><div class="col-md-12 center">'.$this->form->$name->renderViewHelper().'</div></div>';
+                                                                                                                    echo '<div class="row"><div class="col-md-12 center">'.$this->form->$name->renderViewHelper().'</div></div>';
 														}
 													}else
 														if($name == 'url'){
@@ -148,10 +151,10 @@
 <!-- 				info youtube video -->
 							<?php if($name == 'url'){
 									?>
-									<br/><div id="youtube_separator" class="span3 ">&ensp;</div>
-										<div class="span7">
-											<img class="span2" id="img_youtube" name="img_youtube" src="" width="200px"/>
-											<div class="span4">
+									<br/><div id="youtube_separator" class="col-md-3 ">&ensp;</div>
+										<div class="col-md-7">
+											<img class="col-md-2" id="img_youtube" name="img_youtube" src="" width="200px"/>
+											<div class="col-md-4">
 												<div id="title_youtube" ></div>
 												<div id="url_youtube" ></div>
 								                <div id="description_youtube" style="text-align:justify;"></div>
@@ -162,17 +165,18 @@
 				</div>	
 				<?php if($name == 'add'){ ?>
 					<div class="row-fluid">
-						<div class="span2"> &nbsp; </div>
-						<div class="span8">
+						<div class="col-md-2"> &nbsp; </div>
+						<div class="col-md-8">
 							<div class="row-fluid"> 
 								<div class="center line" id='form_elements'></div>
 								<div id='div_hidden_elements'></div>
 							</div>
 						</div>						
-						<div class="span2"> &nbsp; </div>
+						<div class="col-md-2"> &nbsp; </div>
 					</div>
 				<?php
 				} ?> 
+                            </div>
 			<?php } ?>
 		<?php } 
 		//prints the save button at the end
@@ -185,12 +189,13 @@
 		<input type="hidden" id="section_temp" name="section_temp" value="<?php echo $this->section_temp; ?>" />
 		<input type="hidden" id="hdn_max_height_img" name="hdn_max_height_img" value="<?php echo $this->max_height; ?>" />
 		<input type="hidden" id="hdn_max_width_img" name="hdn_max_width_img" value="<?php echo $this->max_width; ?>" />
-	</form>
+                                
+        </form>
 	
 	<a id="anchor_add" class="hide" href="#formContent"></a>
 	<div style="display: none">
 <!-- form of elments on contetn form -->
-		<div class="span5" id="formContent">
+		<div class="col-md-5" id="formContent">
 			
 		</div>
 
@@ -199,10 +204,10 @@
 	<input id="header_table" type="hidden" value='<?php echo '<label id="labl_no_elements"><h4>'.$lang->translate('No items entered').'</h4></label>
 															<div id="elements_table" class="hide">
 																<div class="row-fluid table-bordered-header">	
-																	<div class="span4"><b>'.$lang->translate('Name').'</b></div>
-																	<div class="span3"><b>'.$lang->translate('Type').'</b></div>
-																	<div class="span1"><b>'.$lang->translate('Order').'</b></div>
-																	<div class="span4 last"><b>'.$lang->translate('Tools').'</b></div>																	
+																	<div class="col-md-4"><b>'.$lang->translate('Name').'</b></div>
+																	<div class="col-md-3"><b>'.$lang->translate('Type').'</b></div>
+																	<div class="col-md-1"><b>'.$lang->translate('Order').'</b></div>
+																	<div class="col-md-4 last"><b>'.$lang->translate('Tools').'</b></div>																	
 																</div>
 															</div>
 															<div id="sortable" class="row-fluid hide"></div>'?>' /> 
@@ -210,7 +215,7 @@
 	<input type="hidden" id="repeat_content" value="<?php echo $lang->translate('The internal name of content already exist');?>" />															
 															
 														
-</div>
+
 
 <!-- flash player message -->
 <div id="no_flash_player" class="row-fluid hide center">

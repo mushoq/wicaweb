@@ -27,7 +27,7 @@ $(document).ready(function() {
 		);	
 		$("#sortable").disableSelection();
 		
-		setTimeout("resize_content_list()",100);
+		setTimeout("resize_content_list()",200);
 			
 		//loads section details to update it
 		$('[id^="tree_"]').each(function() {
@@ -52,7 +52,7 @@ $(document).ready(function() {
 						}, function() {
 							$( 'html, body' ).animate( {scrollTop: 0}, 0 );
 							setSectionTreeHeight();
-							setTimeout("resize_content_list()",100);
+							setTimeout("resize_content_list()",200);
 							$.getScript('/js/modules/banners/banners/banners.js');
 						});
 					}else{
@@ -67,7 +67,7 @@ $(document).ready(function() {
 						},function(){
 							$( 'html, body' ).animate( {scrollTop: 0}, 0 );
 							setSectionTreeHeight();
-						    setTimeout("resize_content_list()",100);
+						    setTimeout("resize_content_list()",200);
 						    $.getScript('/js/modules/banners/banners/banners.js');
 						});
 					}

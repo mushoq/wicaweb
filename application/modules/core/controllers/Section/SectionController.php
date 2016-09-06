@@ -1182,6 +1182,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		}		
  		$this->view->contents = $content_list_arr;
  		$this->view->available_temp = $using_temp;
+                $this->view->website_id = $id->website_id;
  		
 	}
 	
@@ -1644,7 +1645,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			$section_arr['link'] = 'no';
 		
 		$subsection = new Zend_Form_Element_Button('subsection_of');
-		$subsection->setAttrib('class', 'btn');
+		$subsection->setAttrib('class', 'btn btn-default');
 		
 		if($section_parent_id)
 		{

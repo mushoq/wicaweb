@@ -11,7 +11,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 <?php $publication_type = GlobalFunctions::arrayTranslate(Banners_Model_Banners::$publication_type); ?>
      	   
 <div class="row-fluid line">
-	<div class="span12">
+	<div class="col-md-12">
 		<div class="page-header-wica center">
 			<h1><?php if($this->parent_section):?> <?php echo $lang->translate('New banner'); ?> <?php echo $this->parent_section['title']; ?> <?php else: ?> <?php echo $lang->translate('New Banner'); ?>   <?php endif;?></h1>		
 		</div>
@@ -19,12 +19,12 @@ $lang = Zend_Registry::get('Zend_Translate');
 </div>
 
 <div class="row-fluid line">
-	<div class="span12"></div>	
+	<div class="col-md-12"></div>	
 </div>
 
 <div class="row-fluid">
-	<div class="span4 center">&nbsp;</div>
-	<div class="span4 center">
+	<div class="col-md-4 center">&nbsp;</div>
+	<div class="col-md-4 center">
 		<div class="btn-group">
 			<input type="button" class="btn btn-primary" id="image_btn" value="<?php echo $lang->translate('Image');?>">
 			<input type="button" class="btn btn-primary" id="flash_btn" value="<?php echo $lang->translate('Flash');?>">
@@ -34,7 +34,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 </div>	
 
 <div class="row-fluid line">
-	<div class="span12">
+	<div class="col-md-12">
 		&nbsp;
 	</div>	
 </div>
@@ -42,24 +42,24 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 <form  id="<?php echo $this->form->getId() ?>" action="<?php echo $this->form->getAction() ?>" method="<?php echo $this->form->getMethod() ?>" class="<?php echo $this->form->getAttrib('class'); ?>" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">
 		
 				<label class="required control-label" for="area"><?php echo  $this->form->area->getDecorator('label')->getOption('requiredPrefix').$this->form->area->getLabel(); ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<?php $this->form->area->setAttrib('container','collapseOptions'); echo $this->form->area->renderViewHelper(); ?>
 				</div>
 			</div>
 		</div>
 </div>
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">
 		
 				<label class="required control-label" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<?php $this->form->name->setAttrib('container','collapseOptions'); echo $this->form->name->renderViewHelper(); ?>
 					<input type="hidden" id="repeated_banner_name" value="<?php echo $lang->translate('The banner name already exist');?>" />
 				</div>
@@ -69,11 +69,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">		
 				<label class="required control-label" for="description"><?php echo  $this->form->description->getLabel(); ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<?php $this->form->description->setAttrib('container','collapseOptions'); echo $this->form->description->renderViewHelper(); ?>
 				</div>
 			</div>
@@ -85,12 +85,12 @@ $lang = Zend_Registry::get('Zend_Translate');
 <div id="image_container">
 <?php for ($i=1; $i<=1 ;$i++){ ?>
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4"> &nbsp; </div>
+	<div id="name_span-separator" class="col-md-4"> &nbsp; </div>
 		<div id="name_row-fluid" class="row-fluid ">								
 			<div class="control-group">
 				<?php $img = 'img_'.$i; ?>
 				<label class="control-label"><?php echo '* '.$lang->translate('Image Banner').':' ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<input type="text" disabled="disabled" id="fileLabel_<?php echo $i; ?>">
 					<?php echo $this->form->$img->renderViewHelper(); ?>
 					<p class="help-block grey">(jpg,png,gif,jpeg)</p>
@@ -102,12 +102,12 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4"> &nbsp; </div>
+	<div id="name_span-separator" class="col-md-4"> &nbsp; </div>
 		<div id="name_row-fluid" class="row-fluid ">								
 			<div class="control-group">
 				<?php $img_prw = 'imageprw_'.$i; ?>
 					<label class="control-label"><?php echo $this->form->$img_prw->getLabel(); ?></label>
-					<div class="span4">
+					<div class="col-md-4">
 						<?php echo $this->form->$img_prw->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
 					</div>
 			</div>
@@ -123,12 +123,12 @@ $lang = Zend_Registry::get('Zend_Translate');
 <div id="flash_container">
 <?php for ($i=1; $i<=1 ;$i++){ ?>
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4"> &nbsp; </div>
+	<div id="name_span-separator" class="col-md-4"> &nbsp; </div>
 		<div id="name_row-fluid" class="row-fluid ">								
 			<div class="control-group">
 				<?php $flash = 'flash_'.$i; ?>
 				<label class="control-label"><?php echo '* '.$lang->translate('Flash Banner').':' ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<input type="text" disabled="disabled" id="fileLabelFlash_<?php echo $i; ?>">
 					<?php echo $this->form->$flash->renderViewHelper(); ?>
 					<p class="help-block grey">(swf)</p>
@@ -144,11 +144,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 
 <div class="row-fluid" id="html_container">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">		
 				<label class="control-label" for="html"><?php echo $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->html->getLabel(); ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<?php $this->form->html->setAttrib('container','collapseOptions'); echo $this->form->html->renderViewHelper(); ?>
 					<p class="help-block grey">(<?php echo $lang->translate('HTML code')?>)</p>
 				</div>
@@ -156,11 +156,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 		</div>
 </div>
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">		
 				<label class="control-label" for="link"><?php echo $this->form->link->getLabel(); ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<?php $this->form->link->setAttrib('container','collapseOptions'); echo $this->form->link->renderViewHelper(); ?>
 					<p class="help-block grey">www.google.com</p>
 				</div>
@@ -168,11 +168,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 		</div>
 </div>
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">		
 				<label class="required control-label" for="type"><?php echo  '* '.$lang->translate('Publication Type').':'; ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<div class="btn-group" data-toggle="buttons-radio">
 					     <?php foreach($publication_type as $k => $opt): ?>
 					    <input type="button" class="btn btn-primary" id="publication_type_btn_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -185,11 +185,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 </div>
 <div id="dates_container">
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">		
 				<label class="control-label" for="publish_date"><?php echo $this->form->publish_date->getDecorator('label')->getOption('requiredPrefix').$this->form->publish_date->getLabel(); ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<?php echo $this->form->publish_date->renderViewHelper(); ?>
 				</div>
 			</div>
@@ -197,11 +197,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 </div>
 
 <div class="row-fluid">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">		
 				<label class="control-label" for="expire_date"><?php echo $this->form->expire_date->getDecorator('label')->getOption('requiredPrefix').$this->form->expire_date->getLabel(); ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<?php echo $this->form->expire_date->renderViewHelper(); ?>		
 				</div>
 			</div>
@@ -211,11 +211,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 
 <div class="row-fluid" id="hits_container">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">		
 				<label class="control-label" for="hits"><?php echo $this->form->hits->getDecorator('label')->getOption('requiredPrefix').$this->form->hits->getLabel(); ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<?php echo $this->form->hits->renderViewHelper(); ?>
 				</div>
 			</div>
@@ -224,11 +224,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 <?php if($this->section_list_option!=null){?>
 <div class="row-fluid" id="hits_container">
-	<div id="name_span-separator" class="span4 ">&ensp;</div>
+	<div id="name_span-separator" class="col-md-4 ">&ensp;</div>
 		<div id="name_row-fluid" class="row-fluid ">
 			<div class="control-group">		
 				<label class="control-label" for="sections"><?php echo $this->form->sections->getLabel(); ?></label>
-				<div class="span4">
+				<div class="col-md-4">
 					<?php echo $this->form->sections->renderViewHelper(); ?>	
 				</div>
 			</div>
@@ -242,11 +242,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 
 <div class="row-fluid">
-	<div id="save_image_span-separator" class="span4 ">&ensp;</div>
+	<div id="save_image_span-separator" class="col-md-4 ">&ensp;</div>
 	<div id="save_image_row-fluid" class="row-fluid ">
 		<div class="control-group">
-			<div class="span4">
-			<div class="span2">&ensp;</div>
+			<div class="col-md-4">
+			<div class="col-md-2">&ensp;</div>
 				<button id="save_btn" class="btn btn-success" type="button" name="save_btn">Guardar</button>
 			</div>
 		</div>

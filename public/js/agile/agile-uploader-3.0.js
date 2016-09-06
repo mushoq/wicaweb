@@ -129,7 +129,7 @@
 							setSectionTreeHeight();
 							//scroll top
 							$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-							setTimeout("resize_content_list()",100);
+							setTimeout("resize_content_list()",200);
 							$.getScript('/js/modules/core/section/sectionlist.js');
 							$.getScript('/js/modules/core/section/sectiondetails.js');
 							$.getScript('/js/modules/core/article/articledetails.js');
@@ -143,7 +143,7 @@
 							setSectionTreeHeight();
 							//scroll top
 							$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-						    setTimeout("resize_content_list()",100);
+						    setTimeout("resize_content_list()",200);
 							$.getScript('/js/modules/core/section/sectionlist.js');
 							$.getScript('/js/modules/core/section/sectiondetails.js');
 							$.getScript('/js/modules/core/article/articledetails.js');

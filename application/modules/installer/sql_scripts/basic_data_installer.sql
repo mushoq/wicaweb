@@ -58,16 +58,16 @@ INSERT INTO `wc_website_template` (`id`, `name`, `file_name`, `image`, `css_file
 --
 
 INSERT INTO `wc_area` (`id`, `template_id`, `name`, `type`, `area_number`, `width`) VALUES
-(1, 1, 'wica_area_content', 'variable', 1, 'span9'),
-(2, 1, 'wica_area_2', 'fixed', 2, 'span3'),
-(3, 1, 'wica_area_3', 'fixed', 3, 'span3'),
-(4, 2, 'wica_area_content', 'variable', 1, 'span9'),
-(5, 2, 'wica_area_2', 'fixed', 2, 'span3'),
-(6, 2, 'wica_area_3', 'fixed', 3, 'span3'),
-(7, 3, 'wica_area_content', 'variable', 1, 'span8'),
-(8, 3, 'wica_area_2', 'fixed', 2, 'span2'),
-(9, 3, 'wica_area_3', 'fixed', 3, 'span2'),
-(10, 4, 'wica_area_content', 'variable', 1, 'span12');
+(1, 1, 'wica_area_content', 'variable', 1, 'col-md-9'),
+(2, 1, 'wica_area_2', 'fixed', 2, 'col-md-3'),
+(3, 1, 'wica_area_3', 'fixed', 3, 'col-md-3'),
+(4, 2, 'wica_area_content', 'variable', 1, 'col-md-9'),
+(5, 2, 'wica_area_2', 'fixed', 2, 'col-md-3'),
+(6, 2, 'wica_area_3', 'fixed', 3, 'col-md-3'),
+(7, 3, 'wica_area_content', 'variable', 1, 'col-md-8'),
+(8, 3, 'wica_area_2', 'fixed', 2, 'col-md-2'),
+(9, 3, 'wica_area_3', 'fixed', 3, 'col-md-2'),
+(10, 4, 'wica_area_content', 'variable', 1, 'col-md-12');
 
 --
 -- Volcar la base de datos para la tabla `wc_module`

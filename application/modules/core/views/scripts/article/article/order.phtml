@@ -44,24 +44,24 @@ if($this->articles > 0):?>
 		<input type="button" id="save_article_order" name="save_article_order" class="btn btn-success" value="<?php echo $lang->translate('Save order'); ?>">
 	</div>	
 	<div class="row-fluid table-bordered-header">
-                <div class="span1">&nbsp;</div>
-		<div class="span8"><b><?php echo $lang->translate('Article'); ?></b></div>
-		<div class="span1 last"><b><?php echo $lang->translate('Order'); ?></b></div>
+                <div class="col-md-1">&nbsp;</div>
+		<div class="col-md-8"><b><?php echo $lang->translate('Article'); ?></b></div>
+		<div class="col-md-1 last"><b><?php echo $lang->translate('Order'); ?></b></div>
 
 	</div>
 	
 	<div id="article_sortable">		
 		<?php foreach ($this->articles as $k => $entry): ?>
 		<div class="row-fluid table-bordered-content <?php if(($k+1)%2): echo "odd"; endif;?>" id="<?php echo $entry->temp.'_'.$entry->id; ?>">				
-                    <div class="span1"><?php echo $k+1; ?></div>	
-                    <div class="span8">
+                    <div class="col-md-1"><?php echo $k+1; ?></div>	
+                    <div class="col-md-8">
 				<div class="row-fluid no-border">	
 					<?php if($entry->image):?>				
-					<div class="span3 no-border">
+					<div class="col-md-3 no-border">
 						<?php echo GlobalFunctions::getContentPreviewForList($entry->image);?> 
 					</div>
 					<?php endif; ?>
-					<div class="pointer <?php if($entry->image):?> span8 <?php else: ?> span11 <?php endif; ?> no-border" id="tree_<?php echo $entry->id; ?>" section_parent="<?php echo $this->info['id']; ?>" article="<?php echo $entry->article; ?>" editable_section="<?php echo $entry->editable_section; ?>" temp="<?php echo $entry->temp; ?>">
+					<div class="pointer <?php if($entry->image):?> col-md-8 <?php else: ?> col-md-11 <?php endif; ?> no-border" id="tree_<?php echo $entry->id; ?>" section_parent="<?php echo $this->info['id']; ?>" article="<?php echo $entry->article; ?>" editable_section="<?php echo $entry->editable_section; ?>" temp="<?php echo $entry->temp; ?>">
 						<div class="row-fluid no-border article_title">
 							<b> <?php echo $this->escape($entry->title); ?> </b>								
 						</div>
@@ -71,7 +71,7 @@ if($this->articles > 0):?>
 					</div>
 				</div>				
 			</div>
-			<div class="span1 last handler move"><i class="icon-move"></i></div>
+			<div class="col-md-1 last handler move"><i class="glyphicon glyphicon-move"></i></div>
 			
 		</div>					
 		<?php endforeach; ?>

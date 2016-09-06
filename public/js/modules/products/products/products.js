@@ -154,7 +154,7 @@ $(document).ready(function() {
 												'<td id="tmp_product_description_'+count+'" name="tmp_product_description_'+count+'">'+$('#product_description').val()+'</td>'+
 												'<td id="tmp_product_price_'+count+'" name="tmp_product_price_'+count+'">'+$('#product_price').val()+'</td>'+
 												'<td id="tmp_product_price_sale_'+count+'" name="tmp_product_price_sale_'+count+'">'+$('#product_price_sale').val()+'</td>'+
-												'<td id="actions_tmp_product_'+count+'" name="actions_tmp_product_'+count+'"><i id="edit_element_'+count+'" element="'+count+'" class="pointer icon-pencil" title="Edit"></i>|<i id="remove_element_'+count+'" element="'+count+'" class="pointer icon-trash" title="Delete"></i></td>'+
+												'<td id="actions_tmp_product_'+count+'" name="actions_tmp_product_'+count+'"><i id="edit_element_'+count+'" element="'+count+'" class="pointer glyphicon glyphicon-pencil" title="Edit"></i>|<i id="remove_element_'+count+'" element="'+count+'" class="pointer glyphicon glyphicon-trash" title="Delete"></i></td>'+
 											'</tr>');  
 
 								$("#hdn_products").append('<div id="hdn_product_'+count+'">'+
@@ -567,7 +567,7 @@ $(document).ready(function() {
 														'<td id="tmp_product_description_'+count+'" name="tmp_product_description_'+count+'">'+$('#product_description').val()+'</td>'+
 														'<td id="tmp_product_price_'+count+'" name="tmp_product_price_'+count+'">'+$('#product_price').val()+'</td>'+
 														'<td id="tmp_product_price_sale_'+count+'" name="tmp_product_price_sale_'+count+'">'+$('#product_price_sale').val()+'</td>'+
-														'<td id="actions_tmp_product_'+count+'" name="actions_tmp_product_'+count+'"><i id="edit_element_'+count+'" element="'+count+'" class="pointer icon-pencil" title="Edit"></i>|<i id="remove_element_'+count+'" element="'+count+'" class="pointer icon-trash" title="Delete"></i></td>'+
+														'<td id="actions_tmp_product_'+count+'" name="actions_tmp_product_'+count+'"><i id="edit_element_'+count+'" element="'+count+'" class="pointer glyphicon glyphicon-pencil" title="Edit"></i>|<i id="remove_element_'+count+'" element="'+count+'" class="pointer glyphicon glyphicon-trash" title="Delete"></i></td>'+
 													'</tr>');  
 
 										$("#hdn_products").append('<div id="hdn_product_'+count+'">'+

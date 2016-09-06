@@ -12,7 +12,7 @@ $(document).ready(function(){
 	);
 	$("#content_sortable").disableSelection();
 	
-	setTimeout("resize_content_list()",100);
+	setTimeout("resize_content_list()",200);
 	
 	//saves ordered contents
 	$('#save_content_order').bind('click', function() {
@@ -212,7 +212,8 @@ $(document).ready(function(){
 			},function(){
 				$.getScript('/js/modules/core/section/sectionpreview.js', function(){					
 					$("#preview").click();
-				});				
+				});
+				$('.cycle-slideshow').cycle();				
 			});
 		});	
 	});
@@ -228,6 +229,7 @@ $(document).ready(function(){
 			},function(){
 				setSectionTreeHeight();	
 				$.getScript('/js/modules/core/content/edit.js');
+				$('.cycle-slideshow').cycle();
 			});		
 		});
 			
@@ -257,7 +259,7 @@ $(document).ready(function(){
 								id : parseInt(msj['section_id']) 
 							}, function() {
 								setSectionTreeHeight();
-								setTimeout("resize_content_list()",100);
+								setTimeout("resize_content_list()",200);
 								$.getScript('/js/modules/core/section/sectionlist.js');
 								$.getScript('/js/modules/core/section/sectiondetails.js');
 								$.getScript('/js/modules/core/article/articledetails.js');
@@ -268,7 +270,7 @@ $(document).ready(function(){
 								id: parseInt(msj['section_id'])
 							},function(){							
 								setSectionTreeHeight();
-							    setTimeout("resize_content_list()",100);
+							    setTimeout("resize_content_list()",200);
 								$.getScript('/js/modules/core/section/sectionlist.js');
 								$.getScript('/js/modules/core/section/sectiondetails.js');
 								$.getScript('/js/modules/core/article/articledetails.js');

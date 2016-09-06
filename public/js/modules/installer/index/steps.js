@@ -31,7 +31,7 @@ $(document).ready(function() {
             	   }else{
             		   //show error messages
             		   $('#preinstaller_test_msg').removeClass('hide');
-            		   $('#preinstaller_test_msg').addClass('alert-error');
+            		   $('#preinstaller_test_msg').addClass('alert-danger');
             		   $('#preinstaller_test_msg').removeClass('alert-success');
             		   if(!data['php']){
             			   $('#preinstaller_test_msg').html(php_version_fail);
@@ -116,7 +116,7 @@ $(document).ready(function() {
 	         	               }
 	         	               else if(data['success']==false){
 	         	                	$('#create_db_fail_msg').removeClass('hide');
-	         	                	$('#create_db_fail_msg').addClass('alert-error');
+	         	                	$('#create_db_fail_msg').addClass('alert-danger');
 	         	               	 	$('#create_db_fail_msg').html(write_app_fail);
 	         	               	 	
 	         	                }
@@ -128,7 +128,7 @@ $(document).ready(function() {
 	            	       $('#step4_container').addClass('hide');
 	            	       $('#create_db_fail_msg').removeClass('hide');
 	                   		$('#create_db_fail_msg').removeClass('alert-success');
-	                   		$('#create_db_fail_msg').addClass('alert-error');
+	                   		$('#create_db_fail_msg').addClass('alert-danger');
 	                  	 	$('#create_db_fail_msg').html(create_db_error);
 	                   }
 	
@@ -150,13 +150,13 @@ $(document).ready(function() {
                     if(data['success']==true){
                     	$('#test_connection_msg').removeClass('hide');
                     	$('#test_connection_msg').addClass('alert-success');
-                    	$('#test_connection_msg').removeClass('alert-error');
+                    	$('#test_connection_msg').removeClass('alert-danger');
                     	$('#test_connection_msg').html(db_test_success);
                     }
                     else if(data['success']==false){
                     	$('#test_connection_msg').removeClass('hide');
                     	$('#test_connection_msg').removeClass('alert-success');
-                    	$('#test_connection_msg').addClass('alert-error');
+                    	$('#test_connection_msg').addClass('alert-danger');
                    	 	$('#test_connection_msg').html(db_test_fail);
                     }
                 }
@@ -249,7 +249,7 @@ $(document).ready(function() {
              	        $('#step5_container').addClass('hide');
                     	$('#create_admin_error_msg').removeClass('hide');
                     	$('#create_admin_error_msg').removeClass('alert-success');
-                    	$('#create_admin_error_msg').addClass('alert-error');
+                    	$('#create_admin_error_msg').addClass('alert-danger');
                    	 	$('#create_admin_error_msg').html(create_admin_fail);
                    	 	
                     }
@@ -317,7 +317,7 @@ $(document).ready(function() {
 			               }
 			               else if(data['success']==false){
 			                	$('#write_app').removeClass('hide');
-			                	$('#write_app').addClass('alert-error');
+			                	$('#write_app').addClass('alert-danger');
 			               	 	$('#write_app').html(advanced_website_fail);
 			               	 	
 			                }

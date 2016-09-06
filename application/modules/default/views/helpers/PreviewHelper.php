@@ -79,7 +79,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 										$watermark_data =  GlobalFunctions::getWatermark($id->website_id);
 										
 										foreach ( $array_images as $ai ) {
-											$return .= '<img src="'. imageRender::cache_image($ai, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$watermark_data['pos'])) .'" style="'.GlobalFunctions::checkImageSize($ai,$content_width).'" class="img-responsive"/>';
+											$return .= '<img src="'. imageRender::cache_image($ai, array('width' =>$content_width)) .'" style="'.GlobalFunctions::checkImageSize($ai,$content_width).'" class="img-responsive"/>';
 										
 										}
 									}
@@ -398,7 +398,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 							</div>
 							
 							<div class="hide">
-								<form class="span8 form-login margin-fancy" id="form_forgot_'.$area_id.'" name="form_forgot_'.$area_id.'" action="">
+								<form class="col-md-8 form-login margin-fancy" id="form_forgot_'.$area_id.'" name="form_forgot_'.$area_id.'" action="">
 									<div class="text-center">
 										<h3>'.$lang->translate("Password Reset").'</h3>
 									</div><br/>

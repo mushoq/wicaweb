@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generaci�n: 19-12-2012 
--- Versi�n del servidor: 5.1.61
--- Versi�n de PHP: 5.3.9-ZS5.6.0
+-- Tiempo de generación: 19-12-2012 
+-- Versión del servidor: 5.1.61
+-- Versión de PHP: 5.3.9-ZS5.6.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -38,8 +38,8 @@ INSERT INTO `wc_section_template` (`id`, `name`, `file_name`, `column_number`, `
 --
 
 INSERT INTO `wc_website_language` (`id`, `name`, `abbreviation`, `description`) VALUES
-(1, 'Español', 'es', NULL),
-(2, 'Inglés', 'en', NULL);
+(1, 'Espa&ntilde;ol', 'es', NULL),
+(2, 'English', 'en', NULL);
 
 --
 -- Volcar la base de datos para la tabla `wc_website_template`
@@ -57,16 +57,16 @@ INSERT INTO `wc_website_template` (`id`, `name`, `file_name`, `image`, `css_file
 --
 
 INSERT INTO `wc_area` (`id`, `template_id`, `name`, `type`, `area_number`, `width`) VALUES
-(1, 1, 'wica_area_content', 'variable', 1, 'span9'),
-(2, 1, 'wica_area_2', 'fixed', 2, 'span3'),
-(3, 1, 'wica_area_3', 'fixed', 3, 'span3'),
-(4, 2, 'wica_area_content', 'variable', 1, 'span9'),
-(5, 2, 'wica_area_2', 'fixed', 2, 'span3'),
-(6, 2, 'wica_area_3', 'fixed', 3, 'span3'),
-(7, 3, 'wica_area_content', 'variable', 1, 'span8'),
-(8, 3, 'wica_area_2', 'fixed', 2, 'span2'),
-(9, 3, 'wica_area_3', 'fixed', 3, 'span2'),
-(10, 4, 'wica_area_content', 'variable', 1, 'span12');
+(1, 1, 'wica_area_content', 'variable', 1, 'col-md-9'),
+(2, 1, 'wica_area_2', 'fixed', 2, 'col-md-3'),
+(3, 1, 'wica_area_3', 'fixed', 3, 'col-md-3'),
+(4, 2, 'wica_area_content', 'variable', 1, 'col-md-9'),
+(5, 2, 'wica_area_2', 'fixed', 2, 'col-md-3'),
+(6, 2, 'wica_area_3', 'fixed', 3, 'col-md-3'),
+(7, 3, 'wica_area_content', 'variable', 1, 'col-md-8'),
+(8, 3, 'wica_area_2', 'fixed', 2, 'col-md-2'),
+(9, 3, 'wica_area_3', 'fixed', 3, 'col-md-2'),
+(10, 4, 'wica_area_content', 'variable', 1, 'col-md-12');
 
 --
 -- Volcar la base de datos para la tabla `wc_module`
@@ -185,7 +185,7 @@ INSERT INTO `wc_field` (`id`, `content_type_id`, `name`, `type`, `required`, `or
   (6,2,'Image','image','yes',5),
   (7,2,'Format','select','yes',6),
   (8,2,'Save image','button','no',7),
-  (9,2,'Resizeimg','radio','yes',8),
+  (9,2,'Resizeimg','radio','no',8),
   (10,1,'Save','button','no',1),
   (11,3,'Type','radio','yes',1),
   (12,3,'Internal section','select','yes',1),

@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	$(".btn-group > .btn").click(function(){
+		$(this).addClass("current").siblings().removeClass("active");
+	});	
 	//switch types of content
 	switch( $("#content_type_id").val() ){
 	case '1': //Content Text
@@ -104,7 +107,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-										setTimeout("resize_content_list()",100);
+										setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');
@@ -120,7 +123,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-									    setTimeout("resize_content_list()",100);
+									    setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');
@@ -589,7 +592,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-										setTimeout("resize_content_list()",100);
+										setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');
@@ -605,7 +608,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-									    setTimeout("resize_content_list()",100);
+									    setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');
@@ -720,10 +723,10 @@ $(document).ready(function(){
 						
 						//append as a table style
 						$("#sortable").append('<div class="row-fluid table-bordered-content even" id="element_'+i+'" element="'+count+'">' +
-							'<div class="span4" id="td_name_'+i+'">'+data[i]['name']+'</div>' +
-							'<div class="span2" id="td_type_'+i+'">'+data[i]['type']+'</div>' +
-							'<div class="span2 handler move"><i class="icon-move"></i></div>' +
-							'<div class="span3 last pointer">'+
+							'<div class="col-md-4" id="td_name_'+i+'">'+data[i]['name']+'</div>' +
+							'<div class="col-md-2" id="td_type_'+i+'">'+data[i]['type']+'</div>' +
+							'<div class="col-md-2 handler move"><i class="glyphicon glyphicon-move"></i></div>' +
+							'<div class="col-md-3 last pointer">'+
 							'	<a id="aux_edit_element_'+i+'" href="#formContent"></a><a id="edit_element_'+i+'" number="'+length+'" element="'+i+'"><i class="edit_element icon-pencil pointer"></i></a> / ' +
 							'	<i id="remove_element_'+i+'" element="'+i+'" class="remove_element icon-trash pointer"></i>'+
 							'</div>' +
@@ -884,10 +887,10 @@ $(document).ready(function(){
 									{
 									//append as a table style
 									$("#sortable").append('<div class="row-fluid table-bordered-content even" id="element_'+count+'" element="'+count+'">' +
-											'<div class="span4" id="td_name_'+count+'">'+form_name+'</div>' +
-											'<div class="span2" id="td_type_'+count+'">'+$("#element_type").val()+'</div>' +
-											'<div class="span2 handler move"><i class="icon-move"></i></div>' +
-											'<div class="span3 last pointer">' +
+											'<div class="col-md-4" id="td_name_'+count+'">'+form_name+'</div>' +
+											'<div class="col-md-2" id="td_type_'+count+'">'+$("#element_type").val()+'</div>' +
+											'<div class="col-md-2 handler move"><i class="glyphicon glyphicon-move"></i></div>' +
+											'<div class="col-md-3 last pointer">' +
 											'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element icon-pencil pointer" ></i></a> / ' +
 											'	<img id="remove_element_'+count+'" element="'+count+'" class="remove_element icon-trash pointer" ></i>' +
 											'</div>' +
@@ -1018,10 +1021,10 @@ $(document).ready(function(){
 									{			
 									//append as a table style
 									$("#sortable").append('<div class="row-fluid table-bordered-content even" id="element_'+count+'" element="'+count+'">' +
-											'<div class="span4" id="td_name_'+count+'">'+form_name+'</div>'+
-											'<div class="span2" id="td_type_'+count+'">'+$("#element_type").val()+'</div>'+
-											'<div class="span2 handler move"><i class="icon-move"></i></div>' +
-											'<div class="span3 last">' +
+											'<div class="col-md-4" id="td_name_'+count+'">'+form_name+'</div>'+
+											'<div class="col-md-2" id="td_type_'+count+'">'+$("#element_type").val()+'</div>'+
+											'<div class="col-md-2 handler move"><i class="glyphicon glyphicon-move"></i></div>' +
+											'<div class="col-md-3 last">' +
 											'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element icon-pencil pointer" ></i></a> / ' +
 											'	<img id="remove_element_'+count+'" element="'+count+'" class="remove_element icon-trash pointer" ></i>' +
 											'</div>' +
@@ -1128,7 +1131,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-										setTimeout("resize_content_list()",100);
+										setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');
@@ -1144,7 +1147,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-									    setTimeout("resize_content_list()",100);
+									    setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');
@@ -1288,7 +1291,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-										setTimeout("resize_content_list()",100);
+										setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');
@@ -1304,7 +1307,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-									    setTimeout("resize_content_list()",100);
+									    setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');
@@ -1431,7 +1434,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-										setTimeout("resize_content_list()",100);
+										setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');
@@ -1447,7 +1450,7 @@ $(document).ready(function(){
 										setSectionTreeHeight();
 										//scroll top
 										$( 'html, body' ).animate( {scrollTop: 0}, 0 );	
-									    setTimeout("resize_content_list()",100);
+									    setTimeout("resize_content_list()",200);
 										$.getScript('/js/modules/core/section/sectionlist.js');
 										$.getScript('/js/modules/core/section/sectiondetails.js');
 										$.getScript('/js/modules/core/article/articledetails.js');

@@ -45,12 +45,12 @@ $lang = Zend_Registry::get('Zend_Translate');
 <div class="row-fluid">
 	<div class="alert alert-info general_legend_text">
 		<div class="legend_inner_left">
-			<i class="icon-info-sign"></i>
+			<i class="glyphicon glyphicon-info-sign"></i>
 		</div>
 		<div class="right">
-			<i class="icon-pencil"></i> <?php echo $lang->translate('Update'); ?> &nbsp;&nbsp;
-			<i class="icon-trash"></i> <?php echo $lang->translate('Delete'); ?> &nbsp;&nbsp;
-			<i class="icon-move"></i> <?php echo $lang->translate('Order'); ?> 
+			<i class="glyphicon glyphicon-pencil"></i> <?php echo $lang->translate('Update'); ?> &nbsp;&nbsp;
+			<i class="glyphicon glyphicon-trash"></i> <?php echo $lang->translate('Delete'); ?> &nbsp;&nbsp;
+			<i class="glyphicon glyphicon-move"></i> <?php echo $lang->translate('Order'); ?> 
 		</div>
 	</div>
 </div>
@@ -70,23 +70,23 @@ $lang = Zend_Registry::get('Zend_Translate');
 	<input type="hidden" id="section_id" name="section_id" value="<?php echo $this->section_id;?>">
 	
 	<div class="row-fluid table-bordered-header">	
-		<div class="span6"><b><?php echo $lang->translate('Banner name'); ?></b></div>
-		<div class="span1"><b><?php echo $lang->translate('Order'); ?></b></div>
-		<div class="span4 last"><b><?php echo $lang->translate('Tools'); ?></b></div>
+		<div class="col-md-6"><b><?php echo $lang->translate('Banner name'); ?></b></div>
+		<div class="col-md-1"><b><?php echo $lang->translate('Order'); ?></b></div>
+		<div class="col-md-4 last"><b><?php echo $lang->translate('Tools'); ?></b></div>
 	</div>
 	
 	<div id="sortable">
 		<?php foreach ($this->banners_list as $k => $entry): ?> 
 		<div class="row-fluid table-bordered-content <?php if(($k+1)%2): echo "odd"; endif;?>" id="<?php echo $entry['id']; ?>">	
-			<div class="span6 pointer"><a class="pointer" id="edit_banner_<?php echo $entry['id'];?>" banner_id="<?php echo $entry['id'];?>"> <?php echo $entry['name']; ?> </a></div>
-			<div class="span1 handler move"><i class="icon-move"></i></div>			
-			<div class="span4 last pointer">
+			<div class="col-md-6 pointer"><a class="pointer" id="edit_banner_<?php echo $entry['id'];?>" banner_id="<?php echo $entry['id'];?>"> <?php echo $entry['name']; ?> </a></div>
+			<div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div>			
+			<div class="col-md-4 last pointer">
 			<?php foreach($this->cms_links as $action_id => $opt): ?>
 			<?php if($opt['action']=='edit'): ?>
-			<a class="pointer" id="edit_banner_<?php echo $entry['id']?>" banner_id="<?php echo $entry['id'];?>" title="<?php echo $lang->translate('Update'); ?>"><i class="icon-pencil"></i></a> /
+			<a class="pointer" id="edit_banner_<?php echo $entry['id']?>" banner_id="<?php echo $entry['id'];?>" title="<?php echo $lang->translate('Update'); ?>"><i class="glyphicon glyphicon-pencil"></i></a> /
 			<?php endif; ?>
 			<?php if($opt['action']=='delete'): ?>
-			<a class="pointer" id="delete_banner_<?php echo $entry['id']?>" banner_id="<?php echo $entry['id'];?>" title="<?php echo $lang->translate('Delete'); ?>"><i class="icon-trash"></i></a>
+			<a class="pointer" id="delete_banner_<?php echo $entry['id']?>" banner_id="<?php echo $entry['id'];?>" title="<?php echo $lang->translate('Delete'); ?>"><i class="glyphicon glyphicon-trash"></i></a>
 			<?php endif; ?>
 			<?php endforeach; ?>	
 			</div>			

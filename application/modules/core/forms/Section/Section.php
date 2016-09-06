@@ -47,11 +47,12 @@ class Core_Form_Section_Section extends Zend_Form{
                 
                 //subsection of
                 $subsection = new Zend_Form_Element_Button('subsection_of');
-                $subsection->setAttrib('class', 'btn');
+                $subsection->setAttrib('class', 'btn btn-default');
                         
                 //template
                 $template = new Zend_Form_Element_Select('section_template_id');
-                $template->setLabel('* '.$lang->translate('Template').':');                
+                $template->setLabel('* '.$lang->translate('Template').':'); 
+                $template->setAttrib('class', 'form-control');
                 //Get values from wc_section_template
                 $section_template_model = new Core_Model_SectionTemplate();        
                 $options_both = $section_template_model->find('wc_section_template', array('type'=>'both'), array('name'=>'ASC'));
@@ -73,28 +74,34 @@ class Core_Form_Section_Section extends Zend_Form{
                 //internal name
                 $internal_name = new Zend_Form_Element_Text('internal_name');
                 $internal_name->setLabel('* '.$lang->translate('Internal name').':');
+                $internal_name->setAttrib('class', 'form-control');
 
                 //title
                 $title = new Zend_Form_Element_Text('title');
                 $title->setLabel('* '.$lang->translate('Title').':');
+                $title->setAttrib('class', 'form-control');
 
                 //subtitle
                 $subtitle = new Zend_Form_Element_Text('subtitle');
-                $subtitle->setLabel($lang->translate('Subtitle').':');                
+                $subtitle->setLabel($lang->translate('Subtitle').':'); 
+                $subtitle->setAttrib('class', 'form-control');
                 
                 //title_browser
                 $title_browser = new Zend_Form_Element_Text('title_browser');
                 $title_browser->setLabel($lang->translate('Browser title').':');
+                $title_browser->setAttrib('class', 'form-control');
                 
                 //synopsis
                 $synopsis = new Zend_Form_Element_Textarea('synopsis');
                 $synopsis->setLabel($lang->translate('Synopsis').':');
                 $synopsis->setAttribs(array('cols' => 40, 'rows' => 5));
                 
+                
                 //keywords
                 $keywords = new Zend_Form_Element_Textarea('keywords');
                 $keywords->setLabel($lang->translate('Keywords').':');
                 $keywords->setAttribs(array('cols' => 40, 'rows' => 5));
+                $keywords->setAttrib('class', 'form-control');
 
                 //link - yes / no -
                 $link = new Zend_Form_Element_Hidden('link');
@@ -102,10 +109,12 @@ class Core_Form_Section_Section extends Zend_Form{
                 $link->setValue($default_link_arr[1]);
                 $link->removeDecorator('Label');
                 $link->removeDecorator('HtmlTag');
+                $link->setAttrib('class', 'form-control');
                                 
                 //external link text
                 $external_link = new Zend_Form_Element_Text('external_link');
                 $external_link->setLabel('* '.$lang->translate('Url external link').':');
+                $external_link->setAttrib('class', 'form-control');
 
                 //target - self / none -                
                 $target = new Zend_Form_Element_Hidden('target');
@@ -353,12 +362,13 @@ class Core_Form_Section_Section extends Zend_Form{
                         {                                                        
                                 $image = new Zend_Form_Element_Button('img_'.$i);                                
                                 $image->setLabel($lang->translate('Search'));
-                                $image->setAttrib('class', 'btn');
+                                $image->setAttrib('class', 'btn btn-default');
                                 $this->addElement($image);                                                        
                                 
                                 //image name
                                 $name = new Zend_Form_Element_Text('name_img_'.$i);
                                 $name->setLabel($lang->translate('Name').':');
+                                $name->setAttrib('class', 'form-control');
                                 $name->addFilters(array('StringTrim'));
                                 $this->addElement($name);                
 
@@ -390,7 +400,7 @@ class Core_Form_Section_Section extends Zend_Form{
                 //cencel button
                 $cancel_button = new Zend_Form_Element_Button('cancel_button');
                 $cancel_button->setLabel($lang->translate('Cancel'));
-                $cancel_button->setAttrib('class', 'btn');
+                $cancel_button->setAttrib('class', 'btn btn-default');
                 $this->addElement($cancel_button);
         }
 }

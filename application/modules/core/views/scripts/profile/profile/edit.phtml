@@ -18,11 +18,11 @@
 </script>
 
 <div class="row-fluid">
-	<div class="span2">&nbsp;</div>
+	<div class="col-md-2">&nbsp;</div>
 	
-	<div class="span8">
+	<div class="col-md-8">
 		<div class="row-fluid">
-			<div class="span12 center">
+			<div class="col-md-12 center">
 				<div class="page-header-wica">
 					<h1><?php echo $lang->translate('Edit profile'); ?></h1>
 				</div>
@@ -30,23 +30,23 @@
 		</div>
 		
 		<div class="row-fluid">
-			<div class="span2">&nbsp;</div>
-			<div class="span8">
+			<div class="col-md-2">&nbsp;</div>
+			<div class="col-md-8">
 				<?php echo $this->flashMessages();?>
 			</div>
-			<div class="span2">&nbsp;</div>
+			<div class="col-md-2">&nbsp;</div>
 		</div>
 		
 		<div class="row-fluid">
 			<div class="alert_messages_container hide" id="error_container">						
-				<div class="alert alert-error size_alerts"><div id="alerts"></div></div>
+				<div class="alert alert-danger size_alerts"><div id="alerts"></div></div>
 			</div>
 		</div>
 	
 		<form action="#" method="post" class="form-horizontal" name="frmCreateProfile" id="frmCreateProfile">
 		<div class="row-fluid">	
-			<div class="span4">&nbsp;</div>	
-			<div class="span4">
+			<div class="col-md-4">&nbsp;</div>	
+			<div class="col-md-4">
 				<div class="control-group">
 					<label class="control-label"><?php echo '* '.$lang->translate('Profile name').':';?></label>
 					<div class="controls">
@@ -54,12 +54,12 @@
 					</div>
 				</div>	
 			</div>
-			<div class="span4">&nbsp;</div>
+			<div class="col-md-4">&nbsp;</div>
 		</div>
 		
 		<div class="row-fluid">	
-			<div class="span4">&nbsp;</div>	
-			<div class="span4">
+			<div class="col-md-4">&nbsp;</div>	
+			<div class="col-md-4">
 				<div class="control-group">
 					<label class="control-label"><?php echo $lang->translate('Status');?></label>
 					<div class="controls">
@@ -71,29 +71,29 @@
 					</div>
 				</div>	
 			</div>
-			<div class="span4">&nbsp;</div>
+			<div class="col-md-4">&nbsp;</div>
 		</div>
 		
 		<div class="row-fluid">	
-			<div class="span12" id="navigation_info">
+			<div class="col-md-12" id="navigation_info">
 				<ul id='steps'></ul>
 			</div>
 		</div>
 		
 		<div class="step_containers">	
 				<div class="row-fluid">
-					<div class="span4">&nbsp;</div>	
-					<div class="span4">
+					<div class="col-md-4">&nbsp;</div>	
+					<div class="col-md-4">
 						<span>
 							<h2><?php echo $lang->translate('Websites'); ?></h2>				
 						</span>
 					</div>
-					<div class="span4">&nbsp;</div>
+					<div class="col-md-4">&nbsp;</div>
 				</div>
 				
 				<div class="row-fluid">
-					<div class="span4">&nbsp;</div>
-					<div class="span4">
+					<div class="col-md-4">&nbsp;</div>
+					<div class="col-md-4">
 					<?php if($this->websites && count($this->websites)>0):?>				
 							<?php foreach ($this->websites as $web):?>
 								<?php $selected = false; ?>
@@ -116,25 +116,25 @@
 					<?php endif;?>
 						<input type="hidden" name="sel_website" id="sel_website" title="<?php echo $lang->translate('Required website selection'); ?>"/>
 					</div>
-					<div class="span4">&nbsp;</div>
+					<div class="col-md-4">&nbsp;</div>
 				</div>					
 			</div>
 			
 			<div class="step_containers">		
 				<div class="row-fluid">	
-					<div class="span4">&nbsp;</div>
-					<div class="span4">
+					<div class="col-md-4">&nbsp;</div>
+					<div class="col-md-4">
 						<span>
 							<h2><?php echo $lang->translate('Modules'); ?></h2>				
 						</span>
 					</div>
-					<div class="span4">&nbsp;</div>
+					<div class="col-md-4">&nbsp;</div>
 				</div>	
 				
 				<?php if (count($this->modules)>0): ?>
 				<div class="row-fluid">
-					<div class="span4">&nbsp;</div>	
-					<div class="span4">			
+					<div class="col-md-4">&nbsp;</div>	
+					<div class="col-md-4">			
 			  			<?php foreach ($this->modules as $entry):?>	  	
 		  	 			<div class="control-group">
 							<label class="control-label" for="optionsCheckbox"><b><?php echo $lang->translate($entry->name);?></b></label>
@@ -164,7 +164,7 @@
 			  				<?php endforeach ?>		  		  	
 			  			<?php endforeach ?>
 					</div>
-					<div class="span4">&nbsp;</div>
+					<div class="col-md-4">&nbsp;</div>
 				</div>		 
 				<?php endif ?>		
 				<input type="hidden" name="module_sel" id="module_sel" title="<?php echo $lang->translate('Required module selection'); ?>"/>				
@@ -172,34 +172,34 @@
 			
 			<div class="step_containers">
 				<div class="row-fluid">	
-					<div class="span4">&nbsp;</div>
-					<div class="span4">
+					<div class="col-md-4">&nbsp;</div>
+					<div class="col-md-4">
 						<span>
 							<h2><?php echo $lang->translate('Sections'); ?></h2>				
 						</span>
 					</div>
-					<div class="span4">&nbsp;</div>
+					<div class="col-md-4">&nbsp;</div>
 				</div>	
 				<div class="row-fluid">
-					<div class="span4">&nbsp;</div>
-					<div class="span4" id="messages"><?php echo $lang->translate('Section config not required'); ?></div>
-					<div class="span4">&nbsp;</div>		
+					<div class="col-md-4">&nbsp;</div>
+					<div class="col-md-4" id="messages"><?php echo $lang->translate('Section config not required'); ?></div>
+					<div class="col-md-4">&nbsp;</div>		
 				</div>
 				<div class="row-fluid hide" id="web_container">
-					<div class="span4">&nbsp;</div>
-					<div class="span4">
+					<div class="col-md-4">&nbsp;</div>
+					<div class="col-md-4">
 						<div class="control-group">
 							<label class="control-label"><?php echo '* '.$lang->translate('Website Name').':';?></label>			
 							<div class="controls" id="websites">				
 							</div>
 						</div>
 					</div>
-					<div class="span4">&nbsp;</div>		
+					<div class="col-md-4">&nbsp;</div>		
 				</div>
 				<div class="row-fluid">
-					<div class="span4">&nbsp;</div>
-					<div class="span4" id="section_container"></div>
-					<div class="span4">&nbsp;</div>
+					<div class="col-md-4">&nbsp;</div>
+					<div class="col-md-4" id="section_container"></div>
+					<div class="col-md-4">&nbsp;</div>
 				</div>
 				<input type="hidden" name="section_sel" id="section_sel" title="<?php echo $lang->translate('Required section selection'); ?>" value="<?php echo $this->sections_profile; ?>"/>
 			</div>				
@@ -207,5 +207,5 @@
 		</form>
 	</div>
 	
-	<div class="span2">&nbsp;</div>
+	<div class="col-md-2">&nbsp;</div>
 </div>

@@ -220,6 +220,10 @@ $(document).ready(function(){
 		});		
 	});
 	
+	$(".btn-group > .btn").click(function(){
+		$(this).addClass("current").siblings().removeClass("active");
+	});
+	
 	$('[id^=private_section_]').each(function(){
 		$(this).bind('click',function(){
 			$('#private_section').val($(this).attr('option'));

@@ -347,12 +347,12 @@ class GlobalFunctions {
 				$html.= '">';
 				//get icon
 				if(isset($item['children']))
-					$html.= '<a section_id="'.$item['id'].'" class="open_sections" onclick="toggle_section_tree(this); return false;"><i id="open_'.$item['id'].'" class="open icon-plus"> </i></a>&nbsp;<i id="open_folder_'.$item['id'].'" class="icon-folder-close"> </i>&nbsp;';
+					$html.= '<a section_id="'.$item['id'].'" class="open_sections" onclick="toggle_section_tree(this); return false;"><i id="open_'.$item['id'].'" class="open glyphicon glyphicon-plus"> </i></a>&nbsp;<i id="open_folder_'.$item['id'].'" class="glyphicon glyphicon-folder-close"> </i>&nbsp;';
 				else{
 					if($item['article']=='yes')
-						$html.= '<div class="no-icon">&nbsp;</div>&nbsp;<i id="open_folder_'.$item['id'].'" class="icon-file"> </i>&nbsp;';
+						$html.= '<div class="no-icon">&nbsp;</div>&nbsp;<i id="open_folder_'.$item['id'].'" class="glyphicon glyphicon-file"> </i>&nbsp;';
 					else
-						$html.= '<div class="no-icon">&nbsp;</div>&nbsp;<i id="open_folder_'.$item['id'].'" class="icon-folder-close"> </i>&nbsp;';
+						$html.= '<div class="no-icon">&nbsp;</div>&nbsp;<i id="open_folder_'.$item['id'].'" class="glyphicon glyphicon-folder-close"> </i>&nbsp;';
 				}
 				
 				//parent section
@@ -514,25 +514,25 @@ class GlobalFunctions {
 		switch ($content_type)
 		{
 			case 'text' :
-				$icon = 'icon-text-height';
+				$icon = 'glyphicon glyphicon-text-size';
 				break;
 			case 'image' :
-				$icon = 'icon-picture';
+				$icon = 'glyphicon glyphicon-picture';
 				break;
 			case 'link' :
-				$icon = 'icon-share';
+				$icon = 'glyphicon glyphicon-link';
 				break;
 			case 'form' :
-				$icon = 'icon-list-alt';
+				$icon = 'glyphicon glyphicon-list-alt';
 				break;
 			case 'flash' :
-				$icon = 'icon-play-circle';
+				$icon = 'glyphicon glyphicon-play-circle';
 				break;
 			case 'flash video' :
-				$icon = 'icon-facetime-video';
+				$icon = 'glyphicon glyphicon-facetime-video';
 				break;
 			case 'carousel' :
-				$icon = 'icon-film';
+				$icon = 'glyphicon glyphicon-film';
 				break;
 			default :
 				$icon = '';
@@ -628,7 +628,7 @@ class GlobalFunctions {
 					$data_content_field = $content_field->find ( 'wc_content_field', array ('content_id' => $content['id']) );
 
 				//generate the code to show in the preview list
-				$html_content_preview = '<i class="icon-film"></i> <b>'.$lang->translate('Carousel').'</b>';
+				$html_content_preview = '<i class="glyphicon glyphicon-film"></i> <b>'.$lang->translate('Carousel').'</b>';
 				
 				$html_content_preview .= '<div id="carousel_preview_list'.$content['id'].'" class="no-border carousel" >';
 				
@@ -703,9 +703,9 @@ class GlobalFunctions {
 				$html.= '<div class="parent_section">';
 				//get icon
 				if(isset($item['children']))
-					$html.= '<a section_id="'.$item['id'].'" class="open_sections" onclick="toggle_section_selector(this); return false;"><i id="open_selector_'.$item['id'].'" class="open icon-plus"> </i></a>&nbsp;<i id="open_folder_selector_'.$item['id'].'" class="icon-folder-close"> </i>&nbsp;';
+					$html.= '<a section_id="'.$item['id'].'" class="open_sections" onclick="toggle_section_selector(this); return false;"><i id="open_selector_'.$item['id'].'" class="open glyphicon glyphicon-plus"> </i></a>&nbsp;<i id="open_folder_selector_'.$item['id'].'" class="glyphicon glyphicon-folder-close"> </i>&nbsp;';
 				else{
-					$html.= '<div class="no-icon">&nbsp;</div>&nbsp;<i id="open_folder_selector_'.$item['id'].'" class="icon-folder-close"> </i>&nbsp;';
+					$html.= '<div class="no-icon">&nbsp;</div>&nbsp;<i id="open_folder_selector_'.$item['id'].'" class="glyphicon glyphicon-folder-close"> </i>&nbsp;';
 				}
 	
 				//parent section
@@ -1022,26 +1022,26 @@ class GlobalFunctions {
 		}
 		
 		//fixed span value
-		$fixed_span12 = 1200;
+		$fixed_col_md_12 = 1200;
 		
 		//var with the fixed percentages of the corresponding span values
 		$span_percentages = array();
-		$span_percentages['span12'] = 99.99999998999999;
-		$span_percentages['span11'] = 91.489361693;
-		$span_percentages['span10'] = 82.97872339599999;
-		$span_percentages['span9'] = 74.468085099;
-		$span_percentages['span8'] = 65.95744680199999;
-		$span_percentages['span7'] = 57.446808505;
-		$span_percentages['span6'] = 48.93617020799999;
-		$span_percentages['span5'] = 40.425531911;
-		$span_percentages['span4'] = 31.914893614;
-		$span_percentages['span3'] = 23.404255317;
-		$span_percentages['span2'] = 14.89361702;
-		$span_percentages['span1'] = 6.382978723;
+		$span_percentages['col-md-12'] = 99.99999998999999;
+		$span_percentages['col-md-11'] = 91.489361693;
+		$span_percentages['col-md-10'] = 82.97872339599999;
+		$span_percentages['col-md-9'] = 74.468085099;
+		$span_percentages['col-md-8'] = 65.95744680199999;
+		$span_percentages['col-md-7'] = 57.446808505;
+		$span_percentages['col-md-6'] = 48.93617020799999;
+		$span_percentages['col-md-5'] = 40.425531911;
+		$span_percentages['col-md-4'] = 31.914893614;
+		$span_percentages['col-md-3'] = 23.404255317;
+		$span_percentages['col-md-2'] = 14.89361702;
+		$span_percentages['col-md-1'] = 6.382978723;
 		$span_percentages['container'] = 99.99999998999999;
 		
 		$area_width_number = 0;
-		$area_width_number = ($fixed_span12*$span_percentages[$area_width])/100;
+		$area_width_number = ($fixed_col_md_12*$span_percentages[$area_width])/100;
 				
 		if($area_width_number)
 			$content_width_number = ($area_width_number*$span_percentages['span'.$col_factor])/100;

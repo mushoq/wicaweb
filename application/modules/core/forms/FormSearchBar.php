@@ -36,7 +36,7 @@ class Core_Form_FormSearchBar extends Zend_Form
 		//search field
 		$searchField = New Zend_Form_Element_Text('nameField');
 		$searchField->setRequired(true);
-		$searchField->setAttrib('class', 'input-large');					
+		$searchField->setAttrib('class', 'form-control');					
 		
 		//Submit Button
 		$submit = New Zend_Form_Element_Button('submit_search_form');

@@ -261,6 +261,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 		$website_data = $website_aux->find('wc_website',array('id'=>$website_id));
 		$this->view->website_data = $website_data;
 		$this->view->cms_links = $cms_arr;
+                $this->view->website_id = $id->website_id;
 	}
 	
 	/**
@@ -697,7 +698,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 		$section = new Core_Model_Section();
                 $section_temp = new Core_Model_SectionTemp();	
                                 $subsection = new Zend_Form_Element_Button('subsection_of');
-                $subsection->setAttrib('class', 'btn');
+                $subsection->setAttrib('class', 'btn btn-default');
 
                 if($section_parent_id)
                 {

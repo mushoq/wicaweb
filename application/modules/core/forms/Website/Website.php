@@ -49,7 +49,8 @@ class Core_Form_Website_Website extends Zend_Form
 			$options_language[$l->id] = $l->name;
 		}
 		$language->setMultiOptions($options_language);
-		$language->setAttrib('style', 'width:100%');
+		$language->setAttrib('class', 'form-control');
+                
 		
 		//template
 		$template = New Zend_Form_Element_Hidden('template_id');
@@ -67,7 +68,7 @@ class Core_Form_Website_Website extends Zend_Form
 // 			$options_template[$t->id] = $t->name;
 // 		}
 // 		$template->setMultiOptions($options_template);
-// 		$template->setAttrib('style', 'width:100%');
+// 		$template->setAttrib('class', 'form-control');
 		
 		//name
 		$name = New Zend_Form_Element_Text('name');
@@ -75,7 +76,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$name->setRequired(true);
 		$name->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$name->setFilters(array( new Zend_Filter_StringTrim()));
-		$name->setAttrib('style', 'width:100%');		
+		$name->setAttrib('class', 'form-control');		
 
 		//description
 		$description = New Zend_Form_Element_Textarea('description');
@@ -83,7 +84,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$description->setRequired(true);
 		$description->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$description->setAttribs(array('cols' => 40, 'rows' => 5));
-		$description->setAttrib('style', 'width:100%');
+		$description->setAttrib('class', 'form-control');
 		
 		//keywords
 		$keywords = New Zend_Form_Element_Textarea('keywords');
@@ -91,7 +92,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$keywords->setRequired(true);
 		$keywords->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$keywords->setAttribs(array('cols' => 40, 'rows' => 5));
-		$keywords->setAttrib('style', 'width:100%');
+		$keywords->setAttrib('class', 'form-control');
 		
 		//website Url
 		$website_url = New Zend_Form_Element_Text('website_url');
@@ -99,7 +100,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$website_url->setRequired(true);
 		$website_url->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$website_url->setFilters(array( new Zend_Filter_StringTrim()));
-		$website_url->setAttrib('style', 'width:100%');
+		$website_url->setAttrib('class', 'form-control');
 		
 		//default page
 		$default_page = New Zend_Form_Element_Hidden('default_page');
@@ -115,7 +116,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$logo->setDestination(APPLICATION_PATH. '/../public/uploads/tmp');
 		$logo->addValidator('Count', false, 1);
 		$logo->addValidator('Extension', false, 'jpg,png,gif,jpeg');
-		$logo->setAttrib('style', 'width:100%');
+		/*$logo->setAttrib('class', 'form-control');*/
 		
 		//Icono
 		$icon = New Zend_Form_Element_File('icon');
@@ -123,7 +124,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$icon->setDestination(APPLICATION_PATH. '/../public/uploads/tmp');
 		$icon->addValidator('Count', false, 1);
 		$icon->addValidator('Extension', false, 'jpg,png,gif,jpeg,ico');
-		$icon->setAttrib('style', 'width:100%');
+		/*$icon->setAttrib('class', 'form-control');*/
 		
 		//Info Email
 		$info_email = New Zend_Form_Element_Text('info_email');
@@ -132,13 +133,14 @@ class Core_Form_Website_Website extends Zend_Form
 		$info_email->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$info_email->addValidator(new Zend_Validate_EmailAddress());
 		$info_email->setFilters(array( new Zend_Filter_StringTrim()));
-		$info_email->setAttrib('style', 'width:100%');
+		$info_email->setAttrib('class', 'form-control');
 		
 		//Time zone
 		$time_zone = New Zend_Form_Element_Select('time_zone');
 		$time_zone->setLabel($lang->translate('Time Zone').':');
 		$time_zone->setRequired(true);
 		$time_zone->getDecorator('label')->setOption('requiredPrefix', ' * ');
+                $time_zone->setAttrib('class', 'form-control');
 		
 		$options_time_zone = array();
 		for($i=-12; $i<15; $i++){
@@ -152,6 +154,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$date_format->setLabel($lang->translate('Date Format').':');
 		$date_format->setRequired(true);
 		$date_format->getDecorator('label')->setOption('requiredPrefix', ' * ');
+                $date_format->setAttrib('class', 'form-control');
 		//TODO: Change for date_format values
 		
 		$options_date_format = array('dd/mm/yyyy' => 'dd/mm/yyyy',
@@ -176,6 +179,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$number_format->setLabel($lang->translate('Number Format').':');
 		$number_format->setRequired(true);
 		$number_format->getDecorator('label')->setOption('requiredPrefix', ' * ');
+                $number_format->setAttrib('class', 'form-control');
 		//TODO: Change for number_format values
 		$options_number_format = array('1' => '123.X','2' => '123.XX','3' => '123.XXX','4' => '123.XXXX');
 		$number_format->setMultiOptions($options_number_format);
@@ -186,7 +190,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$copyright->setRequired(true);
 		$copyright->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$copyright->setFilters(array( new Zend_Filter_StringTrim()));
-		$copyright->setAttrib('style', 'width:100%');
+		$copyright->setAttrib('class', 'form-control');
 		
 		
 		//Publication Aprove
@@ -231,7 +235,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$sitemap_level->setRequired(true);
 		$sitemap_level->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$sitemap_level->setFilters(array( new Zend_Filter_StringTrim()));
-		$sitemap_level->setAttrib('style', 'width:100%');
+		$sitemap_level->setAttrib('class', 'form-control');
 		
 		//Dictionary level
 		$dictionary = New Zend_Form_Element_Hidden('dictionary');
@@ -286,7 +290,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$section_comments = New Zend_Form_Element_Select('$section_comments');
 		$section_comments->setLabel($lang->translate('Comments Place').':');
 		$section_comments->setRequired(true);
-		$section_comments->setAttrib('style', 'width:100%');
+		$section_comments->setAttrib('class', 'form-control');
 		$section_comments->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$section_comments->setMultiOptions($comments_enum);
 		
@@ -301,7 +305,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$section_images_number->setLabel($lang->translate('Section Images Number').':');
 		$section_images_number->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$section_images_number->setFilters(array( new Zend_Filter_StringTrim()));
-		$section_images_number->setAttrib('style', 'width:100%');
+		$section_images_number->setAttrib('class', 'form-control');
 		
 		//Section storage
 		$section_storage = New Zend_Form_Element_Hidden('section_storage');
@@ -322,7 +326,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$watermark->setDestination(APPLICATION_PATH. '/../public/uploads/tmp');
 		$watermark->addValidator('Count', false, 1);
 		$watermark->addValidator('Extension', false, 'jpg,png,gif,jpeg');
-		$watermark->setAttrib('style', 'width:100%');
+		
 		
 		//Watermark Pos
 		$watermark_pos = New Zend_Form_Element_Hidden('watermark_pos');
@@ -340,25 +344,25 @@ class Core_Form_Website_Website extends Zend_Form
 		$smtp_hostname = New Zend_Form_Element_Text('smtp_hostname');
 		$smtp_hostname->setLabel($lang->translate('Hostname').':');
 		$smtp_hostname->setFilters(array( new Zend_Filter_StringTrim()));
-		$smtp_hostname->setAttrib('style', 'width:100%');
+		$smtp_hostname->setAttrib('class', 'form-control');
 		
 		//Port
 		$smtp_port = New Zend_Form_Element_Text('smtp_port');
 		$smtp_port->setLabel($lang->translate('Port').':');
 		$smtp_port->setFilters(array( new Zend_Filter_StringTrim()));
-		$smtp_port->setAttrib('style', 'width:100%');
+		$smtp_port->setAttrib('class', 'form-control');
 		
 		//Username
 		$smtp_username = New Zend_Form_Element_Text('smtp_username');
 		$smtp_username->setLabel($lang->translate('Username').':');
 		$smtp_username->setFilters(array( new Zend_Filter_StringTrim()));
-		$smtp_username->setAttrib('style', 'width:100%');
+		$smtp_username->setAttrib('class', 'form-control');
 		
 		//Password
 		$smtp_password = New Zend_Form_Element_Password('smtp_password');
 		$smtp_password->setLabel($lang->translate('Password').':');
 		$smtp_password->setFilters(array( new Zend_Filter_StringTrim()));
-		$smtp_password->setAttrib('style', 'width:100%');
+		$smtp_password->setAttrib('class', 'form-control');
                 $smtp_password->renderPassword = true;
 		
 		//Submit Button
@@ -382,17 +386,17 @@ class Core_Form_Website_Website extends Zend_Form
 		$img_logo = New Zend_Form_Element_Image('img_logo');
 		$img_logo->setAttrib('onclick', 'return false;');
 		$img_logo->setAttrib('style', 'width: 200px;');
-		$img_logo->setAttrib('class', 'preview_img hide');
+		$img_logo->setAttrib('class', 'preview_img');
 		
 		$img_icon = New Zend_Form_Element_Image('img_icon');
 		$img_icon->setAttrib('onclick', 'return false;');
 		$img_icon->setAttrib('style', 'width: 16px;');
-		$img_icon->setAttrib('class', 'preview_icon hide');
+		$img_icon->setAttrib('class', 'preview_icon');
 		
 		$img_watermark = New Zend_Form_Element_Image('img_watermark');
 		$img_watermark->setAttrib('onclick', 'return false;');
 		$img_watermark->setAttrib('style', 'width: 200px;');
-		$img_watermark->setAttrib('class', 'preview_img hide');
+		$img_watermark->setAttrib('class', 'preview_img');
 		
 		//Website status
 		$note_website_status = new Core_Form_FormLabel('note_website_status');
@@ -403,7 +407,7 @@ class Core_Form_Website_Website extends Zend_Form
 		$website_status = New Zend_Form_Element_Select('website_status');
 		$website_status->setLabel($lang->translate('Status').':');
 		$website_status->setRequired(true);
-		$website_status->setAttrib('style', 'width:100%');
+		$website_status->setAttrib('class', 'form-control');
 		$website_status->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$website_status_type = $website_type;
 		$website_status->setMultiOptions($website_status_type);
@@ -415,13 +419,13 @@ class Core_Form_Website_Website extends Zend_Form
 		$offline_text->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$offline_text->setAttribs(array('cols' => 40, 'rows' => 5));
 		$offline_text->setFilters(array( new Zend_Filter_StringTrim()));
-		$offline_text->setAttrib('style', 'width:100%');
+		$offline_text->setAttrib('class', 'form-control');
 		
 		//Offline_img
 		$img_offline = New Zend_Form_Element_Image('img_offline');
 		$img_offline->setAttrib('onclick', 'return false;');
 		$img_offline->setAttrib('style', 'width: 100px;');
-		$img_offline->setAttrib('class', 'preview_img hide');
+		$img_offline->setAttrib('class', 'preview_img');
 		
 		$offline_image = New Zend_Form_Element_File('offline_image');
 		$offline_image->setLabel($lang->translate('Offline Image').':');
@@ -437,13 +441,13 @@ class Core_Form_Website_Website extends Zend_Form
 		$coming_soon_text->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$coming_soon_text->setAttribs(array('cols' => 40, 'rows' => 5));
 		$coming_soon_text->setFilters(array( new Zend_Filter_StringTrim()));
-		$coming_soon_text->setAttrib('style', 'width:100%');
+		$coming_soon_text->setAttrib('class', 'form-control');
 		
 		//coming soon img
 		$img_coming_soon = New Zend_Form_Element_Image('img_coming_soon');
 		$img_coming_soon->setAttrib('onclick', 'return false;');
 		$img_coming_soon->setAttrib('style', 'width: 100px;');
-		$img_coming_soon->setAttrib('class', 'preview_img hide');
+		$img_coming_soon->setAttrib('class', 'preview_img');
 		
 		$coming_soon_image = New Zend_Form_Element_File('coming_soon_image');
 		$coming_soon_image->setLabel($lang->translate('Coming Soon Image').':');
@@ -455,22 +459,22 @@ class Core_Form_Website_Website extends Zend_Form
 		//google analytics
 		$expiration_time = New Zend_Form_Element_Text('section_expiration_time');
 		$expiration_time->setLabel($lang->translate('Expiration Time').':');
-		$expiration_time->setAttrib('style', 'width:100%');		
+		$expiration_time->setAttrib('class', 'form-control');		
 		
 		//google analytics
 		$analytics = New Zend_Form_Element_Text('analytics');
 		$analytics->setLabel($lang->translate('Google Analytics ID').':');
-		$analytics->setAttrib('style', 'width:100%');
+		$analytics->setAttrib('class', 'form-control');
 
 		//Loaded image max height
 		$max_height = New Zend_Form_Element_Text('max_height');
 		$max_height->setLabel($lang->translate('Loaded image max height').':');
-		$max_height->setAttrib('style', 'width:100%');
+		$max_height->setAttrib('class', 'form-control');
 				
 		//Loaded image max width
 		$max_width = New Zend_Form_Element_Text('max_width');
 		$max_width->setLabel($lang->translate('Loaded image max width').':');
-		$max_width->setAttrib('style', 'width:100%');		
+		$max_width->setAttrib('class', 'form-control');		
 		
 		//add elements to the form
 		$this->addElements(array(

@@ -6,53 +6,49 @@
 	$user_name_info =$id->user_name_info;
 	$website_name_info = $id->website_name_info;
 ?>
-<div class="span4 first_row_header">
-		<img src="/images/logo_wica.png" alt="WicaWeb 2.0 beta" height="66px" width="159px"/>
+<div class="col-md-4">
+    <img src="/images/controlPanel/logo-wicaweb.png" alt="WicaWeb 2.0 beta" style="height: 80px;"/>
 </div>
-<div class="span4 center">
+<div class="col-md-4 text-center center">
 	&nbsp;
 </div>
-<div class="span4 third_row_header pull-right">
-	<ul class="nav pull-right right">				
-		<li class="active">
+<div class="col-md-4 pull-right text-right">
+	
                     <a href='/core/user_user/changepass?id=<?php echo $id->user_id; ?>' >
 	      	        <?php echo ($this->escape($lang->translate
                             ('Change Password'),'UTF-8')); ?>
-	      	        <i class="icon-user"></i> 
-		    </a>			
-		</li>					
-		<li class="active">
-	        <?php echo $this->escape($lang->translate('Website')).':'; ?> 
+	      	        <i class="glyphicon glyphicon-user"></i> 
+		    </a>
+    &nbsp;
+		
+	        
+		
+        
+         <!--Only admin user can generate backups
+         test to PuntoNet-->
+        <?php if ($id->user_profile == 1) { ?>
+        
+            <a href='/core/website_website/backup' >
+                <?php echo ($this->escape($lang->translate
+                    ('Generate Backup'),'UTF-8')); ?>
+                <i class="glyphicon glyphicon-download-alt"></i> 
+            </a>			
+              &nbsp;             
+        <?php } ?>
+        
+                    <a href="/core/index/logout">
+	      		<?php echo ($this->escape($lang->translate
+                                ('Log Out'),'UTF-8')); ?>
+	      		<i class="glyphicon glyphicon-off"></i> 
+		    </a> &nbsp;
+                    <p>
+	<?php echo $this->escape($lang->translate('Website')).':'; ?> 
                 <?php if(isset($website_name_info)): echo $website_name_info; else: echo""; endif; ?>
-		</li>
-		<li class="active">
+                        <br>
 		    <b>
                         <?php echo $this->escape($lang->translate('User')).': '; ?>
                         <?php if(isset($user_name_info)): echo $user_name_info; else: echo""; endif; ?>
                     </b>
-		</li>
-        </ul>
-        <ul class="nav pull-right right">
-         <!--Only admin user can generate backups
-         test to PuntoNet-->
-        <?php if ($id->user_profile == 1) { ?>
-        <li class="active">
-            <a href='/core/website_website/backup' >
-                <?php echo ($this->escape($lang->translate
-                    ('Generate Backup'),'UTF-8')); ?>
-                <i class="icon-download-alt"></i> 
-            </a>			
-        </li>                    
-        <?php } ?>
-        </ul>
-    	<ul class="nav pull-right right">
-                <li class="active">
-                    <a href="/core/index/logout">
-	      		<?php echo ($this->escape($lang->translate
-                                ('Log Out'),'UTF-8')); ?>
-	      		<i class="icon-off"></i> 
-		    </a> 			
-		</li>	
-        </ul>
+                    </p>
 </div>
 <?php endif;?>

@@ -1,5 +1,4 @@
 $(document).ready(function(){
-		
 	$("#frmLinkObjects").validate({
 		errorLabelContainer: "#alerts-inner",
 		wrapper: "div",

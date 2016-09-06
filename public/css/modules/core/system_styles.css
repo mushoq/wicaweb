@@ -1,5 +1,16 @@
 @CHARSET "UTF-8";
-
+body{
+    font-size: 13px;
+}
+a {
+    color: #666666;
+}
+a:hover {
+    color: #000000;
+}
+.nav > li > a {
+    padding: 8px 15px;
+}
 .preview_img{
 	width: 200px !important;
 }
@@ -176,7 +187,7 @@ a.website_config_header:hover{
 }
 
 .size_alerts{
-	padding: 30px;
+	padding: 30px !important;
 }
 
 ul#alerts{
@@ -199,7 +210,6 @@ ul#alerts.alerts_section_bar{
 }
 #steps{ 
 	list-style:none; 
-	width:100%; 
 	overflow:hidden;
 	margin:0px;
 	padding:0px;
@@ -226,10 +236,12 @@ ul#alerts.alerts_section_bar{
 	padding-right: 0px;
 	margin-top: 5px;
 	background-image: url("/images/background_header.png");
+        overflow: hidden;
 }
 .form-search-bar{
 	padding-right: 20px;
-	padding-top: 10px;
+	padding-top: 5px;
+        padding-bottom: 5px;
 }
 div.table-bordered-header{
 	border-style: solid;
@@ -266,9 +278,9 @@ div.table-bordered-content:hover{
 div.table-bordered-content div{
 	margin-left: 0px !important;
 	border-right: 1px solid #DDDDDD;
-	padding: 8px;
+	padding: 8px 0 0 8px;
 	text-align: center;
-	
+        
 }
 div.table-bordered-content div.last{
 	border-right: none;	
@@ -287,7 +299,6 @@ div.table-bordered{
 	margin-top: 5px;
 }
 .header_container{
-	border-radius: 4px 4px 4px 4px;
 	background-color: #dddddd;
 	margin-top: 5px;
 	background-image: url('/images/background_header.png');
@@ -317,14 +328,14 @@ div.quick_links_container ul li{
 }
 
 .section_bar_container{
-	border-radius: 0px 0px 4px 4px;
+	
 	background-color: #e0e0e0;
 	margin-top: 2px;
 	border: 1px solid #e0e0e0;
 }
 div.section_bar_container ul{
 	margin-bottom: 0px;
-	padding-top: 8px;
+	padding: 8px 10px 0px 0;
 }
 div.section_bar_container ul li{
 	background-color: #f2f2f2;
@@ -370,14 +381,23 @@ ul#control_panel_options{
 }
 
 .page-header-wica{
-	background-color: #4292D7;
-    border-radius: 4px 4px 0 0;
+    background-color: #777777;
     color: #FFFFFF;
-    padding-bottom: 5px;
-    padding-top: 5px;
-	margin-top: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px 4px 4px 4px;
+    padding: 5px 0;
 }
-
+.page-header-wica h1, .page-header-wica h3{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 30px;
+    line-height: 30px;
+}
+.page-header-wica h3{
+    font-size: 25px;
+    line-height: 25px;
+}
 table.table-bordered-wica{
 	border-radius: 0px 0px 4px 4px;
 }
@@ -405,7 +425,7 @@ table.table tr:hover{
 	background-color: #F5F5F5;
 }
 .option_bar_container{
-	border-radius: 0px 0px 4px 4px;
+	overflow: hidden;
 	background-color: #e0e0e0;
 	margin-top: 2px;
 	border: 1px solid #e0e0e0;
@@ -416,7 +436,7 @@ div.option_bar_container ul{
 }
 div.option_bar_container ul li{
 	background-color: #f2f2f2;
-	border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 0px 0px;
 	margin-right: 5px;
 }
 .table th.center, .table td.center{
@@ -452,11 +472,13 @@ ul.sections_tree{
 	list-style: none;
 	margin-left: 5px;
 	margin-right: 5px;
+        padding: 0px;
 }
 
 ul.sections_tree_internal{
 	list-style: none;
 	margin-left: 10px;
+        padding: 0px;
 }
 
 ul.sections_tree a:hover{
@@ -475,7 +497,7 @@ ul.sections_tree li.selected{
 ul.sections_tree li div.parent_section{
 	font-weight: bold;
 	border-bottom: 1px solid #dddddd;
-	padding: 2px;
+	padding: 5px;
 }
 
 ul.sections_tree li div.parent_section.selected{
@@ -552,6 +574,7 @@ img.preview_list_img.thumbnail{
 
 div.no-border{
 	border: none !important;
+        padding: 0px !important;
 }
 
 .carousel-control_preview_list {
@@ -647,12 +670,16 @@ span.section_title_tree{
 /*tools styles*/
 li.tools_list{
 	float:left;
-	margin-right: 5%;
+	margin-right: 0px;
 }
 .tools_list_container{	
 	padding-left: 3%;
 	background-color: #F0F0F0; 
 }
+
+.tools_list_container li a{
+    padding: 0 10px !important;
+}	
 
 ul.dropdown-menu.cols_tools_list{
 	min-width: 60px;
@@ -681,7 +708,6 @@ ul.dropdown-menu.align_tools_list{
 /*end tools styles*/
 
 .control-label-edit{
-	width: 105px !important;
 }
 
 .control_panel_image{
@@ -690,7 +716,7 @@ ul.dropdown-menu.align_tools_list{
 }
 
 li.control_panel_opt{
-	margin-left: 50px;
+	
 	margin-right: 50px;
 }
 div.website_picker{
@@ -788,7 +814,7 @@ ul.dropdown-menu.web_config_opt_list{
 	border-color: #585858;
 }
 div.areas_bgcolor{
-	background: #909090;
+	background: #FFFFFF;
 }
 div.areaprw_bgcolor{
 	background-color: #ffffff;
@@ -809,6 +835,7 @@ div.areaprw_bgcolor{
 	text-align: center;
 	padding: 4px 10px;
 	width: 35px !important;
+        height: 20px;
 }
 div.watermark_show_container{
 	background-color: #0074CC;
@@ -842,4 +869,76 @@ div.option_bar_container ul li.selected{
 }
 div.option_bar_container ul li.selected a{
         color: #FFFFFF;
+}
+.row-fluid{
+    overflow: hidden;
+}
+input[type="checkbox"], input[type="radio"] {
+    line-height: normal;
+    margin: 2px 4px 0;
+}
+.page-header {
+    margin:0px  0px 10px 0 !important;
+}
+.page-header a i{
+    font-size: 16px;
+    margin: 0 5px;
+}
+.page-header a:hover{
+    text-decoration: none;
+}
+.ui-sortable a i{
+    font-size: 14px;
+    margin: 0 5px;
+}
+.alert{
+    /*padding: 8px 15px !important;*/
+}
+/* YOUTUBE RESPONSIVE EMBED */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+ 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.map-container iframe, .map-container object, .map-container embed{
+	width:100%;	
+}
+/*Cycle controls | Objeto Carrusel*/
+.cycle-prev {
+    background: url(/images/arrow_left.png) no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
+    left: 0;
+}
+.cycle-next {
+    background: url(/images/arrow_right.png) no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
+    right: 0;
+}
+.cycle-prev, .cycle-next {
+	cursor: pointer;
+	height: 100%;
+	opacity: 0.3;
+	position: absolute;
+	top: 0;
+	width: 10%;
+	z-index: 800;
+	-webkit-transition: color 0.1s linear, border 0.1s linear, opacity 0.1s linear, background-color 0.1s linear;
+	-moz-transition: color 0.1s linear, border 0.1s linear, opacity 0.1s linear, background-color 0.1s linear;
+	-ms-transition: color 0.1s linear, border 0.1s linear, opacity 0.1s linear, background-color 0.1s linear;
+	-o-transition: color 0.1s linear, border 0.1s linear, opacity 0.1s linear, background-color 0.1s linear;
+	transition: color 0.1s linear, border 0.1s linear, opacity 0.1s linear, background-color 0.1s linear;
+}
+.cycle-prev:hover, .cycle-next:hover {
+    opacity: 0.8;
+}
+#navigation_info{
+    width: 450px;
 }

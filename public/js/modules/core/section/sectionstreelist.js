@@ -26,8 +26,8 @@ function toggle_section_selector(elem){
       $(elem + 'i#open_selector_' + section_id).removeClass('icon-plus');
       $(elem + 'i#open_selector_' + section_id).addClass('icon-minus');
       if(article=='no'){
-    	  $(elem + 'i#open_folder_' + section_id).removeClass('icon-folder-close');
-    	  $(elem + 'i#open_folder_' + section_id).addClass('icon-folder-open');
+    	  $(elem + 'i#open_folder_' + section_id).removeClass('glyphicon glyphicon-folder-close');
+    	  $(elem + 'i#open_folder_' + section_id).addClass('glyphicon glyphicon-folder-open');
       }
 	}
 	else {
@@ -37,7 +37,7 @@ function toggle_section_selector(elem){
 	      $(elem).parent('div').siblings('ul.section_selector_internal').addClass('hide');
           $(elem + 'i#open_selector_' + section_id).removeClass('icon-minus icon-white');     
           $(elem + 'i#open_selector_' + section_id).addClass('icon-plus');
-          $(elem + 'i#open_folder_selector_' + section_id).removeClass('icon-folder-open icon-white');
-          $(elem + 'i#open_folder_selector_' + section_id).addClass('icon-folder-close');
+          $(elem + 'i#open_folder_selector_' + section_id).removeClass('glyphicon glyphicon-folder-open icon-white');
+          $(elem + 'i#open_folder_selector_' + section_id).addClass('glyphicon glyphicon-folder-close');
 	}
 }

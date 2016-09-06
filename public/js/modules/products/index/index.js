@@ -39,7 +39,7 @@ $(document).ready(function() {
 						}, function() {
 							$( 'html, body' ).animate( {scrollTop: 0}, 0 );
 							setSectionTreeHeight();
-							setTimeout("resize_content_list()",100);
+							setTimeout("resize_content_list()",200);
 							$.getScript('/js/modules/products/products/products.js');
 						});
 					}else{
@@ -54,7 +54,7 @@ $(document).ready(function() {
 						},function(){
 							$( 'html, body' ).animate( {scrollTop: 0}, 0 );
 							setSectionTreeHeight();
-						    setTimeout("resize_content_list()",100);
+						    setTimeout("resize_content_list()",200);
 						    $.getScript('/js/modules/products/products/products.js');
 						});
 					}

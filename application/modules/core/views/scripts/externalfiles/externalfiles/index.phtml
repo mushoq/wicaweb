@@ -31,7 +31,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 </div>
 
 <div class="row-fluid">
-	<div class=" page-header-wica span12 center line">
+	<div class=" page-header-wica col-md-12 center line">
 		<h1> <?php echo $lang->translate('Upload External Files');?> </h1>
 	</div>
 </div>
@@ -44,24 +44,24 @@ $lang = Zend_Registry::get('Zend_Translate');
 				<h3> <?php echo $lang->translate('Js Files');?> </h3>
 			</div>
 			<div class="row-fluid table-bordered-header">	
-				<div class="span4"><b><?php echo $lang->translate('Name'); ?></b></div>
-				<div class="span1"><b><?php echo $lang->translate('Type'); ?></b></div>
-				<div class="span4"><b><?php echo $lang->translate('File'); ?></b></div>
-				<div class="span1"><b><?php echo $lang->translate('Order'); ?></b></div>
-				<div class="span2 last"><b><?php echo $lang->translate('Tools'); ?></b></div>
+				<div class="col-md-4"><b><?php echo $lang->translate('Name'); ?></b></div>
+				<div class="col-md-1"><b><?php echo $lang->translate('Type'); ?></b></div>
+				<div class="col-md-4"><b><?php echo $lang->translate('File'); ?></b></div>
+				<div class="col-md-1"><b><?php echo $lang->translate('Order'); ?></b></div>
+				<div class="col-md-2 last"><b><?php echo $lang->translate('Tools'); ?></b></div>
 			</div>
 			
 			<div id="sortable_js" class="line">    
 				<?php foreach ($this->external_files_js as $k => $extfile_js): ?> 
 				<div class="row-fluid table-bordered-content <?php if(($k+1)%2): echo "odd"; endif;?>" id="<?php echo $extfile_js->id; ?>">	
-					<div class="span4"><?php echo $this->escape( $extfile_js->name); ?></div>
-					<div class="span1"><?php echo $extfile_js->type?></div>
-					<div class="span4"><?php echo $extfile_js->path;?></div>
-					<div class="span1 handler move"><i class="icon-move"></i></div>
-					<div class="span2 last pointer">
+					<div class="col-md-4"><?php echo $this->escape( $extfile_js->name); ?></div>
+					<div class="col-md-1"><?php echo $extfile_js->type?></div>
+					<div class="col-md-4"><?php echo $extfile_js->path;?></div>
+					<div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div>
+					<div class="col-md-2 last pointer">
 						<?php foreach($this->external_files_links as $action_id => $opt): ?>
 							<?php if($opt['action']=='delete'): ?>
-							<a href="/core/externalfiles_externalfiles/remove?id=<?php echo $extfile_js->id;?>" title="<?php echo $lang->translate('Delete'); ?>" onclick="return confirm('Desea eliminar el archivo?')"><i class="icon-trash"></i></a>
+							<a href="/core/externalfiles_externalfiles/remove?id=<?php echo $extfile_js->id;?>" title="<?php echo $lang->translate('Delete'); ?>" onclick="return confirm('Desea eliminar el archivo?')"><i class="glyphicon glyphicon-trash"></i></a>
 							<?php endif; ?>
 						<?php endforeach; ?>
 						/
@@ -77,24 +77,24 @@ $lang = Zend_Registry::get('Zend_Translate');
 				<h3> <?php echo $lang->translate('Css Files');?> </h3>
 			</div>
 			<div class="row-fluid table-bordered-header">	
-				<div class="span4"><b><?php echo $lang->translate('Name'); ?></b></div>
-				<div class="span1"><b><?php echo $lang->translate('Type'); ?></b></div>
-				<div class="span4"><b><?php echo $lang->translate('File'); ?></b></div>
-				<div class="span1"><b><?php echo $lang->translate('Order'); ?></b></div>
-				<div class="span2 last"><b><?php echo $lang->translate('Tools'); ?></b></div>
+				<div class="col-md-4"><b><?php echo $lang->translate('Name'); ?></b></div>
+				<div class="col-md-1"><b><?php echo $lang->translate('Type'); ?></b></div>
+				<div class="col-md-4"><b><?php echo $lang->translate('File'); ?></b></div>
+				<div class="col-md-1"><b><?php echo $lang->translate('Order'); ?></b></div>
+				<div class="col-md-2 last"><b><?php echo $lang->translate('Tools'); ?></b></div>
 			</div>
 			
 			<div id="sortable_css">    
 				<?php foreach ($this->external_files_css as $k2 => $extfile_css): ?> 
 				<div class="row-fluid table-bordered-content <?php if(($k2+1)%2): echo "odd"; endif;?>" id="<?php echo $extfile_css->id; ?>">	
-					<div class="span4"><?php echo $this->escape( $extfile_css->name); ?></div>
-					<div class="span1"><?php echo $extfile_css->type?></div>
-					<div class="span4"><?php echo $extfile_css->path;?></div>
-					<div class="span1 handler move"><i class="icon-move"></i></div>
-					<div class="span2 last pointer">
+					<div class="col-md-4"><?php echo $this->escape( $extfile_css->name); ?></div>
+					<div class="col-md-1"><?php echo $extfile_css->type?></div>
+					<div class="col-md-4"><?php echo $extfile_css->path;?></div>
+					<div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div>
+					<div class="col-md-2 last pointer">
 						<?php foreach($this->external_files_links as $action_id => $opt): ?>
 							<?php if($opt['action']=='delete'): ?>
-								<a href="/core/externalfiles_externalfiles/remove?id=<?php echo $extfile_css->id;?>" title="<?php echo $lang->translate('Delete'); ?>" onclick="return confirm('Desea eliminar el archivo?')"><i class="icon-trash"></i></a>
+								<a href="/core/externalfiles_externalfiles/remove?id=<?php echo $extfile_css->id;?>" title="<?php echo $lang->translate('Delete'); ?>" onclick="return confirm('Desea eliminar el archivo?')"><i class="glyphicon glyphicon-trash"></i></a>
 							<?php endif; ?>
 						<?php endforeach; ?>
 						/

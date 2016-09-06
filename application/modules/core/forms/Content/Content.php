@@ -35,6 +35,7 @@ class Core_Form_Content_Content extends Zend_Form {
 		// Title
 		$title = new Zend_Form_Element_Text ( 'title' );
 		$title->setLabel ( $lang->translate ( 'Title' ) . ':' );
+                $title->setAttrib('class', 'form-control');
 		$title->addFilters ( array (
 				'StringTrim' 
 		) );
@@ -43,6 +44,7 @@ class Core_Form_Content_Content extends Zend_Form {
 		// Internal Name
 		$internal_name = new Zend_Form_Element_Text ( 'internal_name' );
 		$internal_name->setLabel ( '* '.$lang->translate ( 'Internal name' ) . ':' );
+                $internal_name->setAttrib('class', 'form-control');
 		$internal_name->addFilters ( array (
 				'StringTrim' 
 		) );
@@ -78,9 +80,10 @@ class Core_Form_Content_Content extends Zend_Form {
 					$textfield->addFilters ( array (
 							'StringTrim' 
 					) );
+                                        $textfield->setAttrib('class', 'form-control');
 					
 					if(((str_replace ( ' ', '_', strtolower ( $fl->name)) == 'email' || str_replace ( ' ', '_', strtolower ( $fl->name)) == 'link') && $content_type_id==3) || str_replace ( ' ', '_', strtolower ( $fl->name)) == 'number')
-					$textfield->setAttrib('class', 'hide');
+					$textfield->setAttrib('class', 'hide form-control');
 										
 					$this->addElement ( $textfield );
 					break;
@@ -99,7 +102,7 @@ class Core_Form_Content_Content extends Zend_Form {
 					$textarea->addFilters ( array (
 							'StringTrim' 
 					) );
-					
+					$textarea->setAttrib('class', 'form-control');
 					$this->addElement ( $textarea );
 					
 					break;
@@ -154,7 +157,7 @@ class Core_Form_Content_Content extends Zend_Form {
 
 					$file = new Zend_Form_Element_Button(str_replace ( ' ', '_', strtolower ( $fl->name ) ));
 					$file->setLabel($lang->translate('Search').'..');
-					$file->setAttrib('class', 'hide btn');
+					$file->setAttrib('class', 'hide btn btn-default');
 					if($fl->required == 'yes')
 						$file->setAttrib('label_name',  '* '.$lang->translate ( $fl->name ) . ':'  );
 					else 	
@@ -241,7 +244,7 @@ class Core_Form_Content_Content extends Zend_Form {
 								'ppt' => 'Power Point',
 								'other' => $lang->translate ( 'Other' )
 						) );
-						//$select->setAttrib('class', 'hide');
+						$select->setAttrib('class', 'hide form-control');
 	
 					}	
 
@@ -289,7 +292,7 @@ class Core_Form_Content_Content extends Zend_Form {
 						
 						$select->setMultiOptions ($sections_arr);						
 						
-						$select->setAttrib('class', 'hide');
+						$select->setAttrib('class', 'hide form-control');
 					}
 					
 					$this->addElement ( $select );

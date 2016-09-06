@@ -18,7 +18,8 @@ class Core_Form_Login_Login extends Zend_Form {
 		$lang = Zend_Registry::get('Zend_Translate');
 		
 		$this->setAttrib('id', 'frmLogin');
-		$this->setAttrib('class', 'well');
+		$this->setAttrib('class', 'well form-horizontal');
+                //$this->setAttrib('class', 'form-horizontal');
 		
 		$username = $this->addElement ( 'text', 'username', array (
 				'filters' => array (
@@ -38,6 +39,7 @@ class Core_Form_Login_Login extends Zend_Form {
 				),
 				'required' => true,
 				'label' => $lang->translate('User').':' ,
+                                'class'  => 'form-control',
 				'decorators' => array (
 										'ViewHelper',
 										array (array('data' => 'HtmlTag'), array (
@@ -75,6 +77,7 @@ class Core_Form_Login_Login extends Zend_Form {
 				),
 				'required' => true,
 				'label' => $lang->translate('Password').':',
+                                'class'  => 'form-control',
 				'decorators' => array (
 										array('ViewHelper'),
 										array (array('data' => 'HtmlTag'), array (
@@ -124,7 +127,7 @@ class Core_Form_Login_Login extends Zend_Form {
 						'Description',
 						array (
 								'placement' => 'prepend',
-								'class'=> 'alert alert-error' 
+								'class'=> 'alert alert-danger' 
 						) 
 				),
 				'Form' 

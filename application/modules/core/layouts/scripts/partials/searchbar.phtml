@@ -8,12 +8,13 @@
 				<div>
 					<ul id="alerts" class="center alerts_section_bar"></ul>
 				</div>
-				
-				<?php echo $form->select_search_form->renderViewHelper(); ?>
-				    	
-				<?php echo $form->nameField->renderViewHelper(); ?>
-				
-				<?php echo $form->submit_search_form->renderViewHelper(); ?>				
+				<div class="form-group">
+                                    <?php echo $form->select_search_form->renderViewHelper(); ?>
+
+                                    <?php echo $form->nameField->renderViewHelper(); ?>
+
+                                    <?php echo $form->submit_search_form->renderViewHelper(); ?>	
+                                </div>
     		</form>
 		</div>
 	<?php endif;?>

@@ -16,7 +16,7 @@ $(document).ready(function(){
 	$(".step_containers").each(function(i) {			
 		//div that wraps a step div
 		$(this).wrap("<div class='row-fluid'></div>");
-		$(this).wrap("<div id='step" + i + "' class='span12'></div>");
+		$(this).wrap("<div id='step" + i + "' class='col-md-12'></div>");
 		//div where next and previous buttons are placed
 		$(this).append("<div id='step" + i + "commands'></div>");	
 				

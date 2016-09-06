@@ -15,7 +15,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 ?>
 <div class="row-fluid line">
-	<div class="span12 page-header-wica center line">
+	<div class="col-md-12 page-header-wica center line">
 		<h1><?php echo $lang->translate('Install External Module');?></h1>
 	</div>
 </div>
@@ -25,16 +25,16 @@ $lang = Zend_Registry::get('Zend_Translate');
 </div>
 
 <div class="row-fluid">
-    <div class="span12">
+    <div class="col-md-12">
       <form id="<?php echo $this->form->getId() ?>" action="" method="<?php echo $this->form->getMethod() ?>" class="well" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >  
           <div class="row-fluid">
-                <div class="span12">
+                <div class="col-md-12">
                     <div class="row-fluid">
-                    <div class="span2">&nbsp;</div>
-                        <div class="span4 form_label">
+                    <div class="col-md-2">&nbsp;</div>
+                        <div class="col-md-4 form_label">
                             <label class="required" for="file"><?php echo  $this->form->file->getDecorator('label')->getOption('requiredPrefix').$this->form->file->getLabel(); ?></label>
                         </div>
-                        <div class="span4 form_field">
+                        <div class="col-md-4 form_field">
                             <?php echo $this->form->file->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                             <p class="help-block grey">(.zip <?php echo $lang->translate('file');?>)</p>
                         </div>
@@ -43,13 +43,13 @@ $lang = Zend_Registry::get('Zend_Translate');
           </div>
           
          <div class="row-fluid">
-                <div class="span12">
+                <div class="col-md-12">
                     <div class="row-fluid">
-                    <div class="span2">&nbsp;</div>
-                        <div class="span4 form_label">
+                    <div class="col-md-2">&nbsp;</div>
+                        <div class="col-md-4 form_label">
                             <label class="required" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
                         </div>
-                        <div class="span4 form_field">
+                        <div class="col-md-4 form_field">
                             <?php $this->form->name->setAttrib('container','collapseOptions'); echo $this->form->name->renderViewHelper();  ?>
                             <input type="hidden" id="repeated_module_name" value="<?php echo $lang->translate('The module name already exist');?>" />
                         </div>
@@ -58,13 +58,13 @@ $lang = Zend_Registry::get('Zend_Translate');
           </div>
           
           <div class="row-fluid">
-                <div class="span12">
+                <div class="col-md-12">
                     <div class="row-fluid">
-                    <div class="span2">&nbsp;</div>
-                        <div class="span4 form_label">
+                    <div class="col-md-2">&nbsp;</div>
+                        <div class="col-md-4 form_label">
                             <label class="required" for="description"><?php echo  $this->form->description->getDecorator('label')->getOption('requiredPrefix').$this->form->description->getLabel(); ?></label>
                         </div>
-                        <div class="span4 form_field">
+                        <div class="col-md-4 form_field">
                             <?php $this->form->description->setAttrib('container','collapseOptions'); echo $this->form->description->renderViewHelper();  ?>
                         </div>
                     </div>
@@ -72,13 +72,13 @@ $lang = Zend_Registry::get('Zend_Translate');
           </div>
           
           <div class="row-fluid">
-                <div class="span12">
+                <div class="col-md-12">
                     <div class="row-fluid">
-                    <div class="span2">&nbsp;</div>
-                        <div class="span4 form_label">
+                    <div class="col-md-2">&nbsp;</div>
+                        <div class="col-md-4 form_label">
                             <label class="required" for="action"><?php echo $this->form->action->getDecorator('label')->getOption('requiredPrefix').$this->form->action->getLabel(); ?></label>
                         </div>
-                        <div class="span4 form_field">
+                        <div class="col-md-4 form_field">
                             <?php $this->form->action->setAttrib('container','collapseOptions'); echo $this->form->action->renderViewHelper();  ?>
                             <p class="help-block grey"><?php echo $lang->translate('Ej. core/externalmodules_externalmodules'); ?></p>
                         </div>
@@ -87,21 +87,21 @@ $lang = Zend_Registry::get('Zend_Translate');
           </div>
 		
         <div class="row-fluid">
-                <div class="span12">
+                <div class="col-md-12">
                     <div class="row-fluid">
-                    <div class="span2">&nbsp;</div>
-                        <div class="span4 form_label">
+                    <div class="col-md-2">&nbsp;</div>
+                        <div class="col-md-4 form_label">
                             <label class="required" for="image"><?php echo  $this->form->image->getDecorator('label')->getOption('requiredPrefix').$this->form->image->getLabel(); ?></label>
                         </div>
-                        <div class="span4 form_field">
+                        <div class="col-md-4 form_field">
                             <?php echo $this->form->image->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                             <p class="help-block grey">jpg,png,gif,jpeg 128x128px</p>
                         </div>
                     </div>
                     <div class="row-fluid">
-                    <div class="span1">&nbsp;</div>
-							<div class="span5">&nbsp;</div>
-							<div class="span4 form_field">
+                    <div class="col-md-1">&nbsp;</div>
+							<div class="col-md-5">&nbsp;</div>
+							<div class="col-md-4 form_field">
 								<?php echo $this->form->preview_img->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
 							</div>
 					</div>

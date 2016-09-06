@@ -14,16 +14,16 @@
 $lang = Zend_Registry::get('Zend_Translate');
 ?>
 
-<div class="row-fluid line">
-	<div class="span12 page-header-wica center">
+<div class="col-md-12">
+	<div class="col-md-12 page-header-wica center">
 		<h1> <?php echo $lang->translate('Control Panel');?> </h1>
 	</div>
 </div>
 <div class="line-top alert_messages_container">
 	<?php echo $this->flashMessages();?>
 </div>
-
-<div class="well">
+<div class="col-md-12">
+    <div class="well">
 	<div class="row-fluid">
 		<ul id="control_panel_options" class="nav nav-pills">
 			<?php foreach($this->menu_modules as $module):?>
@@ -34,10 +34,11 @@ $lang = Zend_Registry::get('Zend_Translate');
 	
 	<div class="row-fluid">
 		<form id="<?php echo $this->select->getId() ?>" action="<?php echo $this->select->getAction(); ?>" method="<?php echo $this->select->getMethod() ?>" enctype="<?php echo $this->select->getAttrib('enctype'); ?>" >
-			<div class="form-inline website_picker">
-				<label class="required" for="section"><b><?php echo $this->select->websites->getLabel(); ?></b> </label>
-				<?php echo $this->select->websites->renderViewHelper(); ?>
+			<div class="form-group website_picker">
+				<label class="required col-md-1 form_label" for="section"><b><?php echo $this->select->websites->getLabel(); ?></b> </label>
+                                <div class="col-md-3"><?php echo $this->select->websites->renderViewHelper(); ?></div>
 			</div>
 		</form>
 	</div>
+    </div>
 </div>

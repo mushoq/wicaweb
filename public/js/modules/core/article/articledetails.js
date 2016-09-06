@@ -89,7 +89,7 @@ $(document).ready(function(){
 								id: parseInt(data['section_id'])
 							},function(){							
 								setSectionTreeHeight();
-							    setTimeout("resize_content_list()",100);
+							    setTimeout("resize_content_list()",200);
 								$.getScript('/js/modules/core/section/sectionlist.js');
 								$.getScript('/js/modules/core/section/sectiondetails.js');
 								$.getScript('/js/modules/core/article/articledetails.js');

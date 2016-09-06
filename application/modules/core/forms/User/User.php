@@ -39,7 +39,7 @@ class Core_Form_User_User extends Zend_Form
 		$name->setRequired(true);
 		$name->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$name->setFilters(array( new Zend_Filter_StringTrim()));
-		$name->setAttrib('style','width:100%');
+		$name->setAttrib('class','form-control');
 		
 		//lastname
 		$lastname = New Zend_Form_Element_Text('lastname');
@@ -47,26 +47,26 @@ class Core_Form_User_User extends Zend_Form
 		$lastname->setRequired(true);
 		$lastname->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$lastname->setFilters(array( new Zend_Filter_StringTrim()));
-		$lastname->setAttrib('style','width:100%');
+		$lastname->setAttrib('class','form-control');
 		
 		//identification
 		$identification = New Zend_Form_Element_Text('identification');
 		$identification->setLabel($lang->translate('ID').':');
 		$identification->setFilters(array( new Zend_Filter_StringTrim()));
-		$identification->setAttrib('style','width:100%');
+		$identification->setAttrib('class','form-control');
 				
 		//email
 		$email = New Zend_Form_Element_Text('email');
 		$email->setLabel($lang->translate('Email').':');
 		$email->addValidator(new Zend_Validate_EmailAddress());
 		$email->setFilters(array( new Zend_Filter_StringTrim()));
-		$email->setAttrib('style','width:100%');
+		$email->setAttrib('class','form-control');
 		
 		//phone
 		$phone = New Zend_Form_Element_Text('phone');
 		$phone->setLabel($lang->translate('Phone').':');
 		$phone->setFilters(array( new Zend_Filter_StringTrim()));
-		$phone->setAttrib('style','width:100%');
+		$phone->setAttrib('class','form-control');
 			
 		//username
 		$username = New Zend_Form_Element_Text('username');
@@ -74,15 +74,15 @@ class Core_Form_User_User extends Zend_Form
 		$username->setRequired(true);
 		$username->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$username->setFilters(array( new Zend_Filter_StringTrim()));
-		$username->setAttrib('style','width:100%');
+		$username->setAttrib('class','form-control');
 		
 		//password
 		$password = New Zend_Form_Element_Password('password');
 		$password->setLabel($lang->translate('Password').':');
+                $password->setAttrib('class','form-control');
 				
 		$password->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$password->setFilters(array( new Zend_Filter_StringTrim()));
-		$password->setAttrib('style','width:100%');
                 
                 //old_password
 		$old_password = New Zend_Form_Element_Password('old_password');
@@ -90,7 +90,7 @@ class Core_Form_User_User extends Zend_Form
 				
 		$old_password->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$old_password->setFilters(array( new Zend_Filter_StringTrim()));
-		$old_password->setAttrib('style','width:100%');
+		$old_password->setAttrib('class','form-control');
                 
                 //new_password
 		$new_password = New Zend_Form_Element_Password('new_password');
@@ -98,7 +98,7 @@ class Core_Form_User_User extends Zend_Form
 				
 		$new_password->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$new_password->setFilters(array( new Zend_Filter_StringTrim()));
-		$new_password->setAttrib('style','width:100%');
+		$new_password->setAttrib('class','form-control');
 		
 		//confirm password
 		$confirm_password = New Zend_Form_Element_Password('confirm_password');
@@ -109,7 +109,7 @@ class Core_Form_User_User extends Zend_Form
 		
 		$confirm_password->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$confirm_password->setFilters(array( new Zend_Filter_StringTrim()));
-		$confirm_password->setAttrib('style','width:100%');
+		$confirm_password->setAttrib('class','form-control');
 				
 		//profile
 		$profile = New Zend_Form_Element_Select('profile');
@@ -124,7 +124,7 @@ class Core_Form_User_User extends Zend_Form
 			$options_profile[$prf->id] = $prf->name;
 		}		
 		$profile->setMultiOptions($options_profile);
-		$profile->setAttrib('style','width:100%');
+		$profile->setAttrib('class','form-control');
 		
 		//status
 		$status = New Zend_Form_Element_Select('status');
@@ -133,7 +133,7 @@ class Core_Form_User_User extends Zend_Form
 		$status->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$options_status = $user_status;
 		$status->setMultiOptions($options_status);
-		$status->setAttrib('style','width:100%');
+		$status->setAttrib('class','form-control');
 		
 		//Submit Button
 		$submit = New Zend_Form_Element_Button('submit');
@@ -144,7 +144,7 @@ class Core_Form_User_User extends Zend_Form
 		//Cancel Button
 		$cancel = New Zend_Form_Element_Button('cancel');
 		$cancel->setLabel($lang->translate('Cancel'));
-		$cancel->setAttrib('class', 'btn');
+		$cancel->setAttrib('class', 'btn btn-default');
 		$cancel->setIgnore(true);
 		
 		//Hidden Id

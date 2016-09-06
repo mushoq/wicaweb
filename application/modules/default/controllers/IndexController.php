@@ -887,7 +887,7 @@ class Default_IndexController extends Zend_Controller_Action
     		$contents_list[0]['order_number'] = '';
     		$contents_list[0]['filename'] = 'sectemplate.phtml';
     		$contents_list[0]['area'] = 'wica_area_content';
-    		$contents_list[0]['area_width'] = 'span1';
+    		$contents_list[0]['area_width'] = 'col-md-1';
     		$contents_list[0]['column_number'] = 1;
     		$contents_list[0]['section_title'] = '';
     		$contents_list[0]['section_subtitle'] = '';

@@ -97,6 +97,81 @@ class Core_Model_Factory {
 	 * @param array $criteria
 	 * @return array
 	 */
+	public function find_union($tableName, $tableName2, $field1, $field2, $union_type, $rowFields,  $criteria = array(), $order_params = array())
+	{
+            
+		//get criteria
+		$where = '1=1 ';
+		if($criteria)
+		{	
+			foreach($criteria as $field => $value){
+				if(!$value)
+					$where .= 'and '.$field.' IS NULL ';
+				else
+					$where .= 'and '.$field.'= "'.$value.'" ';
+			}
+		}	
+		$order=NULL;
+		if($order_params)
+		{
+			foreach ($order_params as $field_order => $way){				
+				$order = $field_order.' '.$way;
+			}
+		}
+                                
+                               
+                $table = new Zend_Db_Table($tableName);	
+                                
+                $select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)
+                        ->setIntegrityCheck(false);
+                
+                $temp1 = $tableName.'.'.$field1.' = '.$tableName2.'.'.$field2;
+                switch ($union_type) {
+                    case 'normal':
+                        //$select->join($tableName2, $tableName2.'.idPerfil = '.$tableName.'.id', $rowFields);                        
+                        //$select->join('rs_local_perfiles', 'rs_locales.id = rs_local_perfiles.idLocal', array('idPerfil'=>'rs_local_perfiles.idPerfil') );   
+                        $select->join($tableName2, $temp1, $rowFields );                        
+                        break;
+                    case 'left':
+                        $select->joinLeft($tableName2, $temp1, $rowFields);
+                        break;
+                    case 'right':
+                        $select->joinRight($tableName2, $temp1, $rowFields);
+                        break;
+                }
+
+                $select->where($where);
+                $select->order($order);
+                 
+              
+		$result = $table->fetchAll($select);
+                //print_r($result); 
+                //Zend_Debug::dump($select);
+               
+
+
+		$return1 = array();
+		foreach($result as $row)
+		{
+			$temp = array();
+			foreach($row as $col=>$value)
+			{
+				$temp[$col] = utf8_encode($value);
+			}
+	
+			//convert into object
+			$obj = (object)$temp;
+			array_push($return1, $obj);
+		}
+	
+		return $return1;
+	} 
+        /**
+	 * Returns an object array with results
+	 * @param string $tableName
+	 * @param array $criteria
+	 * @return array
+	 */
 	public function findMultipleParent($tableName,$criteria = array(), $order_params = array())
 	{
 		//get criteria

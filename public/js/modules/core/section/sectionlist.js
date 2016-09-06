@@ -1,3 +1,6 @@
+$(window).load(function() {
+	setTimeout("resize_content_list()",200);
+});
 $(document).ready(function() {
 	
 	$("#sortable").sortable(
@@ -9,7 +12,7 @@ $(document).ready(function() {
 	);	
 	$("#sortable").disableSelection();
 	
-	setTimeout("resize_content_list()",100);
+	
 		
 	//loads section details to update it
 	$('[id^="tree_"]').each(function() {
@@ -33,7 +36,7 @@ $(document).ready(function() {
 					}, function() {
 						$( 'html, body' ).animate( {scrollTop: 0}, 0 );
 						setSectionTreeHeight();
-						setTimeout("resize_content_list()",100);
+						setTimeout("resize_content_list()",200);
 						$.getScript('/js/modules/core/section/sectionlist.js');
 						$.getScript('/js/modules/core/section/sectiondetails.js');
 						$.getScript('/js/modules/core/article/articledetails.js');
@@ -51,7 +54,7 @@ $(document).ready(function() {
 					},function(){
 						$( 'html, body' ).animate( {scrollTop: 0}, 0 );
 						setSectionTreeHeight();
-					    setTimeout("resize_content_list()",100);
+					    setTimeout("resize_content_list()",200);
 						$.getScript('/js/modules/core/section/sectionlist.js');
 						$.getScript('/js/modules/core/section/sectiondetails.js');
 						$.getScript('/js/modules/core/article/articledetails.js');

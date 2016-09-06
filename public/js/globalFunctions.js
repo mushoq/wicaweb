@@ -1,6 +1,23 @@
 // JavaScript Document
 $(document).ready(function(){
+    $(".btn-group > .btn").click(function(){
+        $(this).addClass("current").siblings().removeClass("active");
+    });
+    
+    $(".fancybox").fancybox();
+    $(".wicabox").fancybox();
 
+    $(".various").fancybox({
+            maxWidth	: 800,
+            maxHeight	: 600,
+            fitToView	: false,
+            width		: '70%',
+            height		: '70%',
+            autoSize	: false,
+            closeClick	: false,
+            openEffect	: 'none',
+            closeEffect	: 'none'
+    });
 });
 
 
@@ -66,8 +83,8 @@ function toggle_section_tree(elem){
       $(elem + 'i#open_' + section_id).removeClass('icon-plus');
       $(elem + 'i#open_' + section_id).addClass('icon-minus');
       if(article=='no'){
-    	  $(elem + 'i#open_folder_' + section_id).removeClass('icon-folder-close');
-    	  $(elem + 'i#open_folder_' + section_id).addClass('icon-folder-open');
+    	  $(elem + 'i#open_folder_' + section_id).removeClass('glyphicon glyphicon-folder-close');
+    	  $(elem + 'i#open_folder_' + section_id).addClass('glyphicon glyphicon-folder-open');
       }
       //check if the selected section should be marked or not
       check_mark_section(section_id);
@@ -84,8 +101,8 @@ function toggle_section_tree(elem){
       else{
           $(elem + 'i#open_' + section_id).removeClass('icon-minus icon-white');     
           $(elem + 'i#open_' + section_id).addClass('icon-plus');
-          $(elem + 'i#open_folder_' + section_id).removeClass('icon-folder-open icon-white');
-          $(elem + 'i#open_folder_' + section_id).addClass('icon-folder-close');
+          $(elem + 'i#open_folder_' + section_id).removeClass('glyphicon glyphicon-folder-open icon-white');
+          $(elem + 'i#open_folder_' + section_id).addClass('glyphicon glyphicon-folder-close');
       }
     }
 	
@@ -107,7 +124,7 @@ function mark_section_selected(elem){
 		if(article=='yes')
 			$('ul#sections_tree li div.parent_section a#'+id).parent('span').siblings('i').addClass('icon-white');
 		else
-			$('ul#sections_tree li div.parent_section a#'+id).parent('span').siblings('i').addClass('icon-folder-open icon-white');
+			$('ul#sections_tree li div.parent_section a#'+id).parent('span').siblings('i').addClass('glyphicon glyphicon-folder-open icon-white');
 
 		//open the parent sections of the selected one
 		var parent_id = $(elem).attr('section_parent');
@@ -126,7 +143,7 @@ function mark_section_selected(elem){
 			if(article=='yes')
 				$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('icon-white');
 			else
-				$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('icon-folder-open icon-white');
+				$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('glyphicon glyphicon-folder-open icon-white');
 			
 			if($(elem).attr('section_parent'))
 				mark_parent_section_selected($(elem).attr('section_parent')); //mark the parent section as selected
@@ -142,13 +159,13 @@ function mark_section_selected(elem){
 					$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('icon-white');
 					if($(this).parent('span').siblings('div').hasClass('no-icon')){ // checks if has o no children to add icon-plus or not
 						if($(this).attr('article')=='no'){
-							$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('icon-folder-open icon');
-							$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('icon-folder-close');
+							$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('glyphicon glyphicon-folder-open icon');
+							$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('glyphicon glyphicon-folder-close');
 						}
 					}
 					if($(this).parent('span').siblings('a.open_sections').children('i#open_' + $(this).attr('section_id')).hasClass('icon-plus')){
-						$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('icon-folder-open icon');
-						$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('icon-folder-close');
+						$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('glyphicon glyphicon-folder-open icon');
+						$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('glyphicon glyphicon-folder-close');
 					}
 				}
 			});
@@ -171,7 +188,7 @@ function mark_parent_section_selected(parent_id){
 			$(elem).addClass('selected');
 			$(elem).parent('span').parent('div').addClass('selected');
 			$(elem).parent('span').siblings('a.open_sections').children('i#open_' + section_id).addClass('icon-white');
-			$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('icon-folder-open icon-white');
+			$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('glyphicon glyphicon-folder-open icon-white');
 			//mark the parent section as selected
 			mark_parent_section_selected($(elem).attr('section_parent')); 
 		}
@@ -196,19 +213,19 @@ function remove_old_selected_section(elem){
 			if($(this).parent('span').siblings('div').hasClass('no-icon')){
 				//if it is article, the icon doesn't need to change
 				if(article=='no'){
-					$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('icon-folder-open');
-					$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('icon-folder-close');
+					$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('glyphicon glyphicon-folder-open');
+					$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('glyphicon glyphicon-folder-close');
 				}
 			}
 			//parent section but not opened
 			if($(this).parent('span').siblings('a.open_sections').children('i#open_' + $(this).attr('section_id')).hasClass('icon-plus')){
-				$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('icon-folder-open');
-				$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('icon-folder-close');
+				$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('glyphicon glyphicon-folder-open');
+				$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('glyphicon glyphicon-folder-close');
 			}
 			//checks if the section is a root section
 			if(!$(this).attr('section_parent') && $(this).parent('span').parent('div').siblings('ul.sections_tree_internal').hasClass('hide')){
-				$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('icon-folder-open');
-				$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('icon-folder-close');
+				$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).removeClass('glyphicon glyphicon-folder-open');
+				$(this).parent('span').siblings('i#open_folder_' + $(this).attr('section_id')).addClass('glyphicon glyphicon-folder-close');
 			}
 		}
 	});
@@ -261,7 +278,7 @@ function open_section(section_id){
 	if(article == 'yes')
 		$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('icon-white');
 	else
-		$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('icon-folder-open icon-white');
+		$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('glyphicon glyphicon-folder-open icon-white');
 	
 	//call to function that opens the parte section tree
 	open_parent_section($(elem).attr('section_parent'));
@@ -288,7 +305,7 @@ function open_parent_section(parent_id){
 			$(elem).parent('span').siblings('a.open_sections').children('i#open_' + section_id).removeClass('icon-plus');
 			$(elem).parent('span').siblings('a.open_sections').children('i#open_' + section_id).addClass('icon-minus');
 			$(elem).parent('span').siblings('a.open_sections').children('i#open_' + section_id).addClass('icon-white');
-			$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('icon-folder-open icon-white');
+			$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('glyphicon glyphicon-folder-open icon-white');
 			//mark the parent section as selected
 			open_parent_section($(elem).attr('section_parent')); 
 		}
@@ -325,7 +342,7 @@ function check_mark_section(section_id){
 			$(elem).parent('span').parent('div').addClass('selected');
 			$(elem).parent('span').siblings('a.open_sections').children('i#open_' + section_id).addClass('icon-white');
 			if(article=='no')
-				$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('icon-folder-open icon-white');
+				$(elem).parent('span').siblings('i#open_folder_' + section_id).addClass('glyphicon glyphicon-folder-open icon-white');
 		}
 	});
 }
@@ -335,9 +352,9 @@ function check_mark_section(section_id){
  */
 function resize_content_list(){
 	if($('div.table-bordered-content').length && $('div.table-bordered-content').children('div')){
-		var size = 19;
+		var size = 36;
 		$('div.table-bordered-content').each(function(){
-			size = 19;
+			size = 36;
 			$(this).children('div').each(function(){
 				if($(this).height()>size){
 					size = $(this).height();
@@ -365,7 +382,7 @@ function mark_edit_section_selected(elem){
 	if(article=='yes')
 		$('ul#sections_tree li div.parent_section a#tree_'+id).parent('span').siblings('i').addClass('icon-white');
 	else
-		$('ul#sections_tree li div.parent_section a#tree_'+id).parent('span').siblings('i').addClass('icon-folder-open icon-white');
+		$('ul#sections_tree li div.parent_section a#tree_'+id).parent('span').siblings('i').addClass('glyphicon glyphicon-folder-open icon-white');
 		
 	//open the parent sections of the selected one
 	var parent_id = $(elem).attr('section_parent');

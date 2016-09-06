@@ -127,11 +127,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		
 		// setting the right locale
 		if ($translate->isAvailable($locale->getLanguage())) {
-			$translate->setLocale($locale);
+			$translate->setLocale($website_language);
 		} else {
 			//$translate->setLocale('es');
 			$translate->setLocale('en');
-		}		
+		}
+                
+                $translate->setLocale($website_language);
 		
 		Zend_Registry::set('Zend_Translate', $translate);
                 
@@ -171,7 +173,7 @@ public function _initRoute()
 	
 		$route = new Zend_Controller_Router_Route(
 	
-				'site/:siteid/content/section/:id/:title',array(
+				'site/:siteid/section/:id/:title',array(
                                     
                                                 'siteid' => '1',
 	
@@ -188,7 +190,7 @@ public function _initRoute()
 	
 						// add this route to the front controller
 	
-						$frontController->getRouter()->addRoute('user',$route);
+						$frontController->getRouter()->addRoute('sectionSiteRoute',$route);
                                                 
                 $route2 = new Zend_Controller_Router_Route(
 	
@@ -209,9 +211,30 @@ public function _initRoute()
 	
 						// add this route to the front controller
 	
-						$frontController->getRouter()->addRoute('tinyRoute',$route2);
+						$frontController->getRouter()->addRoute('sectionRoute',$route2);
                                                 
               $route3 = new Zend_Controller_Router_Route(
+	
+				'site/:siteid/article/:id/:title',array(
+                                    
+                                                'siteid' => '1',
+	
+						'controller' => 'index',
+	
+						'module' => 'default' ,
+	
+						'action' => 'index',
+	
+						'id' => 1,
+						
+						'title' => ''));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('articleSiteRoute',$route3);
+                                                
+                $route4 = new Zend_Controller_Router_Route(
 	
 				'article/:id/:title',array(
                                     
@@ -230,7 +253,7 @@ public function _initRoute()
 	
 						// add this route to the front controller
 	
-						$frontController->getRouter()->addRoute('mediumRoute',$route3);
+						$frontController->getRouter()->addRoute('articleRoute',$route4);
                                                 
                                                 
                $products = new Zend_Controller_Router_Route(
@@ -254,7 +277,30 @@ public function _initRoute()
 	
 						// add this route to the front controller
 	
-						$frontController->getRouter()->addRoute('products',$products);
+						$frontController->getRouter()->addRoute('productsRoute',$products);
+                                                
+                $productsSite = new Zend_Controller_Router_Route(
+	
+				'site/:siteid/product/:id/:product_id/:title',array(
+                                    
+                                                'siteid' => '1',
+	
+						'controller' => 'index',
+	
+						'module' => 'default' ,
+	
+						'action' => 'index',
+	
+						'id' => 1,
+                                    
+                                                'product_id' => 1,
+						
+						'title' => ''));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('productsSiteRoute',$productsSite);
                                                 
 }
 }

@@ -6,23 +6,23 @@ $lang = Zend_Registry::get ( 'Zend_Translate' );
 $value = $this->products; ?>
 <div class="row-fluid">		
 
-	<div class="span12 no-margin overflow_hidden jump">
+	<div class="col-md-12 no-margin overflow_hidden jump">
 		<div class="row-fluid">
 			<div class="fixed_internal_content">		
 				
 				<?php 
-				$product = '<div><div class="span2 pointer">';
+				$product = '<div><div class="col-md-2 pointer">';
 				$product .= '<img id="catalog_prod_'.$value["id"].'" product_id="'.$value["id"].'" class="preview_list_img thumbnail"';
 				$product.= ' style="border: thin solid; color: black !important;"';
 				$product .= ' src="/uploads/products/' . $value['image'] .'" width="100px"/>';
 				$product .= '</div>
-							<div class="span5">
+							<div class="col-md-5">
 								<div id="catalog_prod_name_'.$value["id"].'" class="pointer row-fluid" product_id="'.$value["id"].'"><b>'.$value['name'].'</b></div>
 				                <div class="row-fluid" style="text-align:justify;"><p>'.substr($value['description'], 0, 200)."...".'</p></div>
 							</div>			
 							</div>';
 
-				$product .= '<div class="hide"><div class="span8" id="catalog_container"></div></div>';
+				$product .= '<div class="hide"><div class="col-md-8" id="catalog_container"></div></div>';
 				
 			
 				?>		

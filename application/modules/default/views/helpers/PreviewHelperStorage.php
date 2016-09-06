@@ -175,20 +175,20 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 										{
 											case 'textfield':
 															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
+																			<div class="col-md-3 form_label">
 																				<label>'.$ff->name.'</label>
 																			</div>
-																			<div class="span3 form_field">
+																			<div class="col-md-3 form_field">
 																				<input type="text" id="form_field_textfield_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'"/>
 																			</div>
 																		</div>';
 															break;
 											case 'textarea':	
 															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
+																			<div class="col-md-3 form_label">
 																				<label>'.$ff->name.'</label>
 																			</div>
-																			<div class="span3 form_field">
+																			<div class="col-md-3 form_field">
 																				<textarea id="form_field_textarea_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'" ></textarea>
 																			</div>
 																		</div>';					
@@ -196,7 +196,7 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 															
 											case 'radiobutton':
 															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
+																			<div class="col-md-3 form_label">
 																				<label>'.$ff->name.'</label>
 																			</div>';
 															
@@ -218,10 +218,10 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 												
 											case 'dropdown':
 															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
+																			<div class="col-md-3 form_label">
 																				<label>'.$ff->name.'</label>
 																			</div>
-																			<div class="span3 form_field">
+																			<div class="col-md-3 form_field">
 																				<select id="form_field_dropdown_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'">';
 															
 																$array_options = explode ( ',', $ff->options );
@@ -240,10 +240,10 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 				
 											case 'checkbox':
 															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
+																			<div class="col-md-3 form_label">
 																				<label>'.$ff->name.'</label>
 																			</div>
-																			<div class="span3 form_field">
+																			<div class="col-md-3 form_field">
 																				<input type="checkbox" id="form_field_checkbox_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'" />
 																			</div>
 																		</div>';						
@@ -251,10 +251,10 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 				
 											case 'comment':	
 															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
+																			<div class="col-md-3 form_label">
 																				&ensp;
 																			</div>
-																			<div class="span5 form_field">
+																			<div class="col-md-5 form_field">
 																				<label class="comment">'.$ff->description.'</label>
 																			</div>
 																		</div>';
@@ -262,10 +262,10 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 														
 											case 'file':	
 															$return .=	'<div class="line row-fluid">
-																			<div class="span3 form_label">
+																			<div class="col-md-3 form_label">
 																				<label>'.$ff->name.'</label>
 																			</div>
-																			<div class="span3 form_field">
+																			<div class="col-md-3 form_field">
 																				<input type="file" id="form_field_file_'.$data_content [0]->id.'" name="'.$ff->name.'" valid="'.$ff->required.'" />
 																			</div>
 																		</div>';
@@ -298,10 +298,10 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 										$_SESSION['captcha_session_'.$data_content [0]->id] =  $captchaIterator['word'];
 										
 										$return .= '<div class="line row-fluid">
-														<div class="span3 form_label">
+														<div class="col-md-3 form_label">
 															<label>'.$lang->translate('Insert the security code').'</label>
 														</div>
-														<div class="span3 form_field">
+														<div class="col-md-3 form_field">
 															'.$captcha->render().'
 															<input type ="text" id ="form_field_captcha_'.$data_content [0]->id.'" name = "form_field_captcha_'.$data_content [0]->id.'" valid="yes" class="line-top"/>
 																<label id="captcha_error_'.$data_content [0]->id.'" class="error_validation hide" for="form_field_captcha_'.$data_content [0]->id.'">'.$lang->translate('Invalid code').'</label>
@@ -352,12 +352,12 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 							</div>
 							
 							<div class="hide">
-								<form class="span8 form-horizontal margin-fancy" id="form_register_'.$area_id.'" name="form_register_'.$area_id.'" action="">
+								<form class="col-md-8 form-horizontal margin-fancy" id="form_register_'.$area_id.'" name="form_register_'.$area_id.'" action="">
 									<div class="row-fluid center">
 										<h3>'.$lang->translate("Register Form").'</h3>
 									</div><br/>
 									<div class="row-fluid">
-							      		<div class="span6">				      							      		
+							      		<div class="col-md-6">				      							      		
 							      			<div class="control-group">
 												<label class="control-label">* '.$lang->translate("Name").'</label>
 												<div class="controls">
@@ -365,7 +365,7 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 												</div>
 											</div>
 							      		</div>
-							      		<div class="span6">				      							      		
+							      		<div class="col-md-6">				      							      		
 							      			<div class="control-group">
 												<label class="control-label">* '.$lang->translate("Lastname").'</label>
 												<div class="controls">
@@ -375,7 +375,7 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 							      		</div>								      												
 									</div>
 									<div class="row-fluid">
-							      		<div class="span6">				      							      		
+							      		<div class="col-md-6">				      							      		
 							      			<div class="control-group">
 												<label class="control-label">* '.$lang->translate("Identification").'</label>
 												<div class="controls">
@@ -383,7 +383,7 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 												</div>
 											</div>
 							      		</div>
-							      		<div class="span6">				      							      		
+							      		<div class="col-md-6">				      							      		
 							      			<div class="control-group">
 												<label class="control-label">* '.$lang->translate("Email").'</label>
 												<div class="controls">
@@ -393,7 +393,7 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 							      		</div>								      												
 									</div>		
 									<div class="row-fluid">
-							      		<div class="span6">				      							      		
+							      		<div class="col-md-6">				      							      		
 							      			<div class="control-group">
 												<label class="control-label">'.$lang->translate("Phone").'</label>
 												<div class="controls">
@@ -401,7 +401,7 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 												</div>
 											</div>
 							      		</div>
-							      		<div class="span6">				      							      		
+							      		<div class="col-md-6">				      							      		
 							      			<div class="control-group">
 												<label class="control-label">* '.$lang->translate("Username").'</label>
 												<div class="controls">
@@ -411,7 +411,7 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 							      		</div>								      												
 									</div>	
 									<div class="row-fluid">
-							      		<div class="span6">				      							      		
+							      		<div class="col-md-6">				      							      		
 							      			<div class="control-group">
 												<label class="control-label">* '.$lang->translate("Password").'</label>
 												<div class="controls">
@@ -419,7 +419,7 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 												</div>
 											</div>
 							      		</div>	
-							      		<div class="span6">				      							      		
+							      		<div class="col-md-6">				      							      		
 							      			<div class="control-group">
 												<label class="control-label">* '.$lang->translate("Confirm Password").'</label>
 												<div class="controls">
@@ -439,15 +439,15 @@ class Zend_View_Helper_PreviewHelperStorage extends Zend_View_Helper_Abstract {
 							</div>
 							
 							<div class="hide">
-								<form class="span8 form-horizontal margin-fancy" id="form_forgot_'.$area_id.'" name="form_forgot_'.$area_id.'" action="">
+								<form class="col-md-8 form-horizontal margin-fancy" id="form_forgot_'.$area_id.'" name="form_forgot_'.$area_id.'" action="">
 									<div class="row-fluid center">
 										<h3>'.$lang->translate("Password Reset").'</h3>
 									</div><br/>
 									<div class="row-fluid">
-										<div class="span3">
+										<div class="col-md-3">
 							      				&ensp;
 							      		</div>
-							      		<div class="span6">
+							      		<div class="col-md-6">
 							      			<div class="control-group">
 												<label class="control-label">'.$lang->translate("Email").'</label>
 												<div class="controls">

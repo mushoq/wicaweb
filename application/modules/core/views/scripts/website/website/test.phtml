@@ -16,16 +16,16 @@ $lang = Zend_Registry::get('Zend_Translate');
 <script type="text/javascript" src="/js/modules/core/externalfiles/edit_file.js"></script>
 
 <div class="row-fluid">
-	<div class="span12">
+	<div class="col-md-12">
         <?php echo $this->flashMessages();?>
     </div>
 </div>
 
 <div class="row-fluid">
-    <div class="span12">
+    <div class="col-md-12">
     	<div class="row-fluid">
-	    	<div class="span3">&nbsp;</div>
-	    	<div class="span6 well">
+	    	<div class="col-md-3">&nbsp;</div>
+	    	<div class="col-md-6 well">
 	    		<h2 class="center"><?php echo $lang->translate('Test Code')?></h2>
                         <form style="margin-bottom: 0;">
                             <textarea id="code" name="code">
@@ -50,7 +50,7 @@ $lang = Zend_Registry::get('Zend_Translate');
                             </ul>
                         </div>
 	       </div>
-	       <div class="span3">&nbsp;</div>
+	       <div class="col-md-3">&nbsp;</div>
         </div>
     </div>
 </div>

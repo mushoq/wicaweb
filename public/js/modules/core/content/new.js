@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	$(".btn-group > .btn").click(function(){
+		$(this).addClass("current").siblings().removeClass("active");
+	});	
 		//switch types of content
 			switch( $("#content_type_id").val() ){
 			case '1'://Content Text
@@ -98,7 +101,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );
-												setTimeout("resize_content_list()",100);
+												setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -115,7 +118,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );
-											    setTimeout("resize_content_list()",100);
+											    setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -167,6 +170,13 @@ $(document).ready(function() {
 					//set value on radio aux validation
 					$("input[id^='watermarkimg']").bind("click",function(){
 									$("#watermarkimg").val($(this).attr('element_value'));
+					});
+					
+			$('#zoom').val('no');
+				$("#zoom-"+$("#zoom").val()).attr("class",'btn btn-primary active');
+					//set value on radio aux validation
+					$("input[id^='zoom']").bind("click",function(){
+									$("#zoom").val($(this).attr('element_value'));
 					});
 					
 					$( "#format option[value='no_frame']" ).attr( "selected", "selected" );
@@ -247,8 +257,8 @@ $(document).ready(function() {
 			    	});		    			    	
 				} else {
 					$("#frmContent").empty();
-					$("#frmContent").hide();
-					$("#no_flash_player").show();
+					$("#frmContent").addClass('hide');
+					$("#no_flash_player").removeClass('hide');
 				  }
                                   
 				//default watermark pos
@@ -313,8 +323,8 @@ $(document).ready(function() {
 					hide_elements_link();
 					
 					//show internal link elementes
-					$("[id^=internal_section]").show();
-					$("[id^=internal_section] label").show();
+					$("[id^=internal_section]").removeClass('hide');
+					$("[id^=internal_section] label").removeClass('hide');
 					
 					//modify rules on internal link elements
 					$("#internal_section").attr('disabled',false);
@@ -332,8 +342,8 @@ $(document).ready(function() {
 					hide_elements_link();
 					
 					//show external link elements
-					$("[id^=link]").show();
-					$("[id^=link] label").show();
+					$("[id^=link]").removeClass('hide');
+					$("[id^=link] label").removeClass('hide');
 					
 					//modify rules on external link elements
 					$("#link").attr('disabled',false);
@@ -351,8 +361,8 @@ $(document).ready(function() {
 					hide_elements_link();
 					
 					//show email elements
-					$("[id^=email]").show();
-					$("[id^=email] label").show();
+					$("[id^=email]").removeClass('hide');
+					$("[id^=email] label").removeClass('hide');
 					
 					//modify rules on email elements
 					$("#email").attr('disabled',false);
@@ -371,11 +381,11 @@ $(document).ready(function() {
 					hide_elements_link();
 					
 					//show file elements
-					$("[id^='file']").show();
-					$("[id^='file'] label").show();
-					$("[id^=file_type]").show();
-					$("[id^=file_type] label").show();
-					$("#input_file_file").show();
+					$("[id^='file']").removeClass('hide');
+					$("[id^='file'] label").removeClass('hide');
+					$("[id^=file_type]").removeClass('hide');
+					$("[id^=file_type] label").removeClass('hide');
+					$("#input_file_file").removeClass('hide');
 					
 					// modify rules on file elements
 					$("#file_type").attr('disabled',false);
@@ -493,7 +503,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );
-												setTimeout("resize_content_list()",100);
+												setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -509,7 +519,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );												
-											    setTimeout("resize_content_list()",100);
+											    setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -589,7 +599,7 @@ $(document).ready(function() {
 				$("#form_elements").append($("#header_table").val());
 				
 				//hide number field that is used on radio button element and select element
-				$("[id^='number']").hide();
+				$("[id^='number']").addClass('hide');
 				
 				// change event on element type
 				$("#element_type").bind("change",function() {
@@ -598,7 +608,7 @@ $(document).ready(function() {
 									// check if selected element id radiobutton or dropdown 
 									if ($("#element_type").val() == 'radiobutton' || $("#element_type").val() == 'dropdown') {
 										//show number field and add rules
-										$("[id^='number']").show();
+										$("[id^='number']").removeClass('hide');
 										$("#number").rules("add",{
 											required:true
 										});
@@ -606,7 +616,7 @@ $(document).ready(function() {
 										setSectionTreeHeight();
 									} else {
 										//hide number element and hide rules
-										$("[id^='number']").hide();
+										$("[id^='number']").addClass('hide');
 										$("#number").rules("remove");
 										// resize tree height according content
 										setSectionTreeHeight();
@@ -623,7 +633,7 @@ $(document).ready(function() {
 					$("#element_type").valid();
 					$("#number").valid();
 					
-					$("#alert").hide();
+					$("#alert").addClass('hide');
 					//if element is radiobutton or dropdown 
 					if ($("#element_type").val() == 'radiobutton' || $("#element_type").val() == 'dropdown') {
 						if($("#number").val() != ''  ){
@@ -666,7 +676,7 @@ $(document).ready(function() {
 
 								//click event on form element type save button 
 								$("#btn_add").bind("click",function(){
-									$("#alert").hide();
+									$("#alert").addClass('hide');
 									//validate elements form
 									if($("#elements_form").valid())
 									{
@@ -691,12 +701,12 @@ $(document).ready(function() {
 											{
 												//append as a table style
 												$("#sortable").append('<div class="row-fluid table-bordered-content even" id="element_'+count+'" element="'+count+'">' + 
-														'<div class="span4" id="td_name_'+count+'">'+form_name+'</div>' + 
-														'<div class="span3" id="td_type_'+count+'">'+$("#element_type").val()+'</div>' + 
-														'<div class="span1 handler move"><i class="icon-move"></i></div>' +
-														'<div class="span4 last pointer">' +
+														'<div class="col-md-4" id="td_name_'+count+'">'+form_name+'</div>' + 
+														'<div class="col-md-3" id="td_type_'+count+'">'+$("#element_type").val()+'</div>' + 
+														'<div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div>' +
+														'<div class="col-md-4 last pointer">' +
 														'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element icon-pencil pointer"></i></a> /' +
-														'	<i id="remove_element_'+count+'" element="'+count+'" class="remove_element icon-trash"></i>'+
+														'	<i id="remove_element_'+count+'" element="'+count+'" class="remove_element glyphicon glyphicon-trash"></i>'+
 														'</div>' + 
 												'</div>');
 												// resize tree height according content
@@ -732,8 +742,8 @@ $(document).ready(function() {
 													$("#hidden_elements_"+$(this).attr("element")).remove();
 													
 													if($("#sortable").is(':empty')){
-														$("#labl_no_elements").show();
-														$("#elements_table, #sortable").hide();
+														$("#labl_no_elements").removeClass('hide');
+														$("#elements_table, #sortable").addClass('hide');
 													}
 													// resize tree height according content
 													setSectionTreeHeight();
@@ -744,7 +754,7 @@ $(document).ready(function() {
 												
 												//edit button click event
 												$("#edit_element_"+count).bind("click",function(){
-													$("#repeat_frm_name").hide();
+													$("#repeat_frm_name").addClass('hide');
 													var element = $(this).attr('element');
 													//call edit function
 													edit_element(element, 1);
@@ -753,8 +763,8 @@ $(document).ready(function() {
 												count++;
 												
 												//show elements
-												$("#labl_no_elements").hide();
-												$("#elements_table, #sortable").show();
+												$("#labl_no_elements").addClass('hide');
+												$("#elements_table, #sortable").removeClass('hide');
 												
 												//close fancybox
 												$.fancybox.close();
@@ -765,7 +775,7 @@ $(document).ready(function() {
 											}
 										else{
 											// show message if name already exist
-											$("#repeat_frm_name").show();
+											$("#repeat_frm_name").removeClass('hide');
 										}
 									}
 								});
@@ -801,7 +811,7 @@ $(document).ready(function() {
 								$("#anchor_add").click();
 								//click event on form element type save button
 								$("#btn_add").bind("click",function(){
-									$("#repeat_frm_name").hide();
+									$("#repeat_frm_name").addClass('hide');
 									//validate elements form
 									if($("#elements_form").valid())
 									{
@@ -825,10 +835,10 @@ $(document).ready(function() {
 											{		
 												//append as a table style
 												$("#sortable").append('<div class="row-fluid table-bordered-content even" id="element_'+count+'" element="'+count+'" >' +
-														'<div class="span4" id="td_name_'+count+'">'+form_name+'</div>' +
-														'<div class="span3" id="td_type_'+count+'">'+$("#element_type").val()+'</div>' +
-														'<div class="span1 handler move"><i class="icon-move"></i></div>' +														
-														'<div class="span4 last pointer">' +
+														'<div class="col-md-4" id="td_name_'+count+'">'+form_name+'</div>' +
+														'<div class="col-md-3" id="td_type_'+count+'">'+$("#element_type").val()+'</div>' +
+														'<div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div>' +														
+														'<div class="col-md-4 last pointer">' +
 														'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element icon-pencil pointer"></i></a> /' +
 														'	<i id="remove_element_'+count+'" element="'+count+'" class="remove_element icon-trash pointer"></i>'+
 														'</div>' +
@@ -859,8 +869,8 @@ $(document).ready(function() {
 													$("#hidden_elements_"+$(this).attr("element")).remove();
 													
 													if($("#sortable").is(':empty')){
-														$("#labl_no_elements").show();
-														$("#elements_table, #sortable").hide();
+														$("#labl_no_elements").removeClass('hide');
+														$("#elements_table, #sortable").addClass('hide');
 													}
 													// resize tree height according content
 													setSectionTreeHeight();													
@@ -870,7 +880,7 @@ $(document).ready(function() {
 												
 												//edit button click event
 												$("#edit_element_"+count).bind("click",function(){
-													$("#repeat_frm_name").hide();
+													$("#repeat_frm_name").addClass('hide');
 													var element = $(this).attr('element');
 													edit_element(element, 0);							
 												});
@@ -878,8 +888,8 @@ $(document).ready(function() {
 												count++;
 												
 												//show elements
-												$("#labl_no_elements").hide();
-												$("#elements_table, #sortable").show();
+												$("#labl_no_elements").addClass('hide');
+												$("#elements_table, #sortable").removeClass('hide');
 												
 												//close fancy box
 												$.fancybox.close();
@@ -889,7 +899,7 @@ $(document).ready(function() {
 												$("#number").rules("remove");
 											}
 											else{// show message if name already exist
-													$("#repeat_frm_name").show();
+													$("#repeat_frm_name").removeClass('hide');
 												}												
 									}
 								});
@@ -938,7 +948,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );												
-												setTimeout("resize_content_list()",100);
+												setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -954,7 +964,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );												
-											    setTimeout("resize_content_list()",100);
+											    setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -1024,11 +1034,11 @@ $(document).ready(function() {
 				});
 								
 				//show elements
-				$("#input_file_flash_file").show();
-				$("#input_file_alternative_image").show();
+				$("#input_file_flash_file").removeClass('hide');
+				$("#input_file_alternative_image").removeClass('hide');
 				
-				$("#flash_file").show();
-				$("#alternative_image").show();
+				$("#flash_file").removeClass('hide');
+				$("#alternative_image").removeClass('hide');
 				
 				//add rules
 				$("#hdnNameFile_flash_file").rules("add",{
@@ -1076,7 +1086,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );												
-												setTimeout("resize_content_list()",100);
+												setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -1092,7 +1102,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );												
-											    setTimeout("resize_content_list()",100);
+											    setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -1193,7 +1203,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );
-												setTimeout("resize_content_list()",100);
+												setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -1209,7 +1219,7 @@ $(document).ready(function() {
 												setSectionTreeHeight();
 												//scroll top
 												$( 'html, body' ).animate( {scrollTop: 0}, 0 );
-											    setTimeout("resize_content_list()",100);
+											    setTimeout("resize_content_list()",200);
 												$.getScript('/js/modules/core/section/sectionlist.js');
 												$.getScript('/js/modules/core/section/sectiondetails.js');
 												$.getScript('/js/modules/core/article/articledetails.js');
@@ -1301,8 +1311,8 @@ $(document).ready(function() {
 				  }
 				  else {
 					$("#frmContent").empty();
-					$("#frmContent").hide();
-					$("#no_flash_player").show();
+					$("#frmContent").addClass('hide');
+					$("#no_flash_player").removeClass('hide');
 				  }		    	
 		    	
 				break;
@@ -1366,7 +1376,7 @@ function edit_element(element, type){
 		
 		//click event on save button
 		$("#btn_add").bind("click",function(){
-			$("#repeat_frm_name").hide();
+			$("#repeat_frm_name").addClass('hide');
 			//check if form is valid
 			if($("#elements_form").valid())
 			{
@@ -1414,7 +1424,7 @@ function edit_element(element, type){
 					}
 				else{
 						// show an error if name already exist
-						$("#repeat_frm_name").show();
+						$("#repeat_frm_name").removeClass('hide');
 					}
 			}
 		});
@@ -1429,32 +1439,32 @@ function hide_elements_link(){
 	//hide elements on link content
 	
 	//internal 
-	$("[id^=internal_section]").hide();
+	$("[id^=internal_section]").addClass('hide');
 	$("#internal_section").rules("remove");
 	$("#internal_section").attr('disabled',true);
 	$("label[for^='internal_section']").remove();
 	
 	//external link 
-	$("[id^=link]").hide();
+	$("[id^=link]").addClass('hide');
 	$("#link").rules("remove");
 	$("#link").attr('disabled',true);
 	$("label[for^='link']").remove();
 	
 	//email
-	$("[id^=email]").hide();
+	$("[id^=email]").addClass('hide');
 	$("#email").rules("remove");
 	$("#email").attr('disabled',true);
 	$("label[for^='email']").remove();
 	
 	//file
-	$("[id^=file]").hide();
-	$("label[for='file']").hide();
-	$("#input_file_file").hide();
+	$("[id^=file]").addClass('hide');
+	$("label[for='file']").addClass('hide');
+	$("#input_file_file").addClass('hide');
 	$("#hdnNameFile_file").rules("remove");
 	$("#hdnNameFile_file").attr('disabled',true);
 	$("label[for^='file']").remove();
 	
-	$("[id^=file_type]").hide();
+	$("[id^=file_type]").addClass('hide');
 	$("#file_type").rules("remove");
 	$("#file_type").attr('disabled',true);
 	$("label[for^='file_type']").remove();
@@ -1498,14 +1508,14 @@ function load_file(element_sufix, element_type)
 				}					
 				if(element_type == 'image'){
 					$('#imageprw_'+element_sufix).attr('src', "/uploads/tmp/"+response);
-					$('#imageprw_'+element_sufix).show();
+					$('#imageprw_'+element_sufix).removeClass('hide');
 				}
 				// resize tree height according content
 				setSectionTreeHeight();	
 				
 				$('#input_file_'+element_sufix).val(file);
 				$('#hdnNameFile_'+element_sufix).val(response);
-				$("#del_img_"+element_sufix).show();
+				$("#del_img_"+element_sufix).removeClass('hide');
 
 				
 			}else{//ERRORS ON THE FILE UPLOADED
@@ -1539,9 +1549,9 @@ function delete_file(index)
 					success: function(data) {
 						$("#input_file_"+index).val("");
 						$("#hdnNameFile_"+index).val("");
-						$("#del_img_"+index).hide();
+						$("#del_img_"+index).addClass('hide');
 //						$('#imageprw_'+index).attr('src', "");
-//						$('#imageprw_'+index).hide();
+//						$('#imageprw_'+index).addClass('hide');
 					}
 			});
 		}		

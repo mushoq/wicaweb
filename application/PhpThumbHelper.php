@@ -189,7 +189,7 @@ class imageRender
         $generate_params = array(
             'save_path' => APPLICATION_PATH.'/../public/uploads/cache',
             'display_path' => '/uploads/cache',
-            'error_image_path' => 'error.jpg',
+            'error_image_path' => '/images/error.png',
             'src' => APPLICATION_PATH.'/../public/uploads/content/' . $name,
         );
         
@@ -236,7 +236,8 @@ class imageRender
         if ($thumbnail['error'] == 1)
         {
 //             Kohana::log('error', 'Error generating thumbnail with phpthumb of image ' . $name . ' with params '. serialize($params));
-			echo 'Error generating thumbnail with phpthumb of image ' . $name . ' with params '. ($params);
+			echo 'Error generating thumbnail ';
+			//echo 'Error generating thumbnail with phpthumb of image ' . $name . ' with params '. ($params);
         }
         
         return $thumbnail['src'];
@@ -254,7 +255,7 @@ class imageRender
     	$generate_params = array(
     			'save_path' => APPLICATION_PATH.'/../public/uploads/cache',
     			'display_path' => '/uploads/cache',
-    			'error_image_path' => 'error.jpg',
+    			'error_image_path' => '/images/error.png',
     			'src' => APPLICATION_PATH.'/../public/uploads/products/' . $name,
     	);
     
@@ -301,7 +302,8 @@ class imageRender
     	if ($thumbnail['error'] == 1)
     	{
     		//             Kohana::log('error', 'Error generating thumbnail with phpthumb of image ' . $name . ' with params '. serialize($params));
-    		echo 'Error generating thumbnail with phpthumb of image ' . $name . ' with params '. ($params);
+    		echo 'Error generating thumbnail ';
+			//echo 'Error generating thumbnail with phpthumb of image ' . $name . ' with params '. ($params);
     	}
     
     	return $thumbnail['src'];

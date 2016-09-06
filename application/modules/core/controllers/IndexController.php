@@ -10,7 +10,7 @@
  * @author	   Santiago Arellano
  * @version    1.0
  */
-
+ 
 
 class Core_IndexController extends Zend_Controller_Action {
 	
@@ -216,12 +216,14 @@ class Core_IndexController extends Zend_Controller_Action {
 		$form2 = New Zend_Form();
 		$form2->setAttrib('name', 'select_website');
 		$form2->setAttrib('id', 'select_website');
+                $form2->setAttrib('class', 'form-inline');
 		$form2->setMethod('post');
 		$form2->setAction('/core/index/selectedwebsite');
 		
 		//create the select element
 		$websites = New Zend_Form_Element_Select('websites');
-		$websites->setLabel($lang->translate('Registered Website').':');		
+		$websites->setLabel($lang->translate('Registered Website').':');
+                $websites->setAttrib('class', 'form-control');
 		
 		//create the array to populate the select
 		$list = array();

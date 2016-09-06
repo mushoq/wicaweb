@@ -31,7 +31,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 </div>
 
 <div class="row-fluid center">
-	<div class="span12 page-header-wica">
+	<div class="col-md-12 page-header-wica">
     	<h1> <?php echo $lang->translate('Dictionary List');?> </h1>
 	</div>    
 </div>
@@ -52,7 +52,7 @@ if($this->dictionary && count($this->dictionary)>0):?>
 			<td>
 				<?php foreach($this->dictionary_links as $action_id => $opt): ?>
 				<?php if($opt['action']=='edit'): ?>
-				<a href='/core/dictionary_dictionary/edit?id=<?php echo $dictionary->id;?>' title="<?php echo $lang->translate('Update'); ?>"><i class="icon-pencil"></i></a>
+				<a href='/core/dictionary_dictionary/edit?id=<?php echo $dictionary->id;?>' title="<?php echo $lang->translate('Update'); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
 				<?php endif; ?>
 				<?php endforeach; ?>	
 			</td>

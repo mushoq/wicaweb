@@ -17,7 +17,7 @@ $(document).ready(function(){
 	$(".step_containers").each(function(i) {
 		//div that wraps a step div
 		$(this).wrap("<div class='row-fluid'></div>");
-		$(this).wrap("<div id='step" + i + "' class='span12'></div>");
+		$(this).wrap("<div id='step" + i + "' class='col-md-12'></div>");
 		//div where next and previous buttons are placed
 		$(this).append("<div id='step" + i + "commands'></div>");	
 				
@@ -81,6 +81,10 @@ $(document).ready(function(){
 	$("#cancel_button").bind('click',function(){
 		window.location = "/core/section_section/index";
 	});	
+	
+	$(".btn-group > .btn").click(function(){
+		$(this).addClass("current").siblings().removeClass("active");
+	});  
 	
 	//save section
 	$('#submit_button').bind('click', function() {

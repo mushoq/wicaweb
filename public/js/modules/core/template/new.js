@@ -218,7 +218,7 @@ function load_multiple_file(element_sufix, element_type)
 				
 				if(element_type == 'css'){
 					
-					$("#css_files_list").append("<li class='span4' id='css_file_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"'>" +
+					$("#css_files_list").append("<li class='col-md-4' id='css_file_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"'>" +
 													""+response.substring(0,30)+"...<br/>"+
 													"&ensp;media:&ensp;<input type='text' id='media_css_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"' name='media_css_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"'/>"+
 													"&ensp;<a id='delete_css_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"' title='Borrar' index='"+response+"' li='css_file_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"' >" +
@@ -227,7 +227,7 @@ function load_multiple_file(element_sufix, element_type)
 												"</li>");
 				}else
 					if(element_type == 'js'){
-						$("#js_files_list").append("<li class='span4' id='js_file_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"'>"
+						$("#js_files_list").append("<li class='col-md-4' id='js_file_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"'>"
 														+response.substring(0,30)+"..."+ 
 														"&ensp;<a id='delete_js_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"' title='Borrar' index='"+response+"' li='js_file_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"'>" +
 																"<i class='icon-trash'></i>" +
@@ -235,7 +235,7 @@ function load_multiple_file(element_sufix, element_type)
 													"</li>");
 					}else
 						if(element_type == 'images'){
-							$("#image_files_list").append("<li class='span2' id='image_file_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"'>"
+							$("#image_files_list").append("<li class='col-md-2' id='image_file_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"'>"
 																+response.substring(0,30)+"..."+  
 																"&ensp;<a id='delete_image_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"' title='Borrar' index='"+response+"' li='image_file_"+response.replace(/[^a-zA-Z 0-9]+/g,'')+"'>" +
 																	"<i class='icon-trash'></i>" +

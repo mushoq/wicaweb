@@ -31,7 +31,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 </div>
 
 <div class="row-fluid">
-	<div class=" page-header-wica span12 center line">
+	<div class=" page-header-wica col-md-12 center line">
 		<h1> <?php echo $lang->translate('Upload Template');?> </h1>
 	</div>
 </div>
@@ -59,12 +59,12 @@ $lang = Zend_Registry::get('Zend_Translate');
 						
 						<?php foreach($this->template_links as $action_id => $opt): ?>
 							<?php if($opt['action']=='edit'): ?>
-								<a href="/core/template_template/edit/id/<?php echo $template->id;?>" title="<?php echo $lang->translate('Update'); ?>"><i class="icon-pencil"></i></a>
+								<a href="/core/template_template/edit/id/<?php echo $template->id;?>" title="<?php echo $lang->translate('Update'); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
 								/
 							<?php endif; ?>
 							<?php if( ! in_array($template->id, $this->active_templates) ){ ?>
 								<?php if($opt['action']=='delete'): ?>
-									<a href="/core/template_template/delete?id=<?php echo $template->id;?>" title="<?php echo $lang->translate('Delete'); ?>"><i class="icon-trash"></i></a>
+									<a href="/core/template_template/delete?id=<?php echo $template->id;?>" title="<?php echo $lang->translate('Delete'); ?>"><i class="glyphicon glyphicon-trash"></i></a>
 									/
 								<?php endif; ?>		
 							<?php }?>				
@@ -79,7 +79,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 		 
 	<a id="anchor_render" class="hide" href="#render_template"></a>
 	<div style="display: none">
-		<div class="span12" id="render_template">
+		<div class="col-md-12" id="render_template">
 			
 		</div>
 
