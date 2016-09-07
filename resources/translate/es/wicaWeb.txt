@@ -355,6 +355,7 @@ Update article>Editar Artículo|
 Subsection>Subsección|
 Main section>Sección principal|
 All section info and its contents will be deleted. Would you like to continue?>Toda la información de la sección y sus contenidos van a ser eliminados. Desea continuar?|
+This banner will be deleted. Would you like to continue?>Se eliminará este banner. Desea continuar?|
 Current Content>Contenido Actual|
 Templates>Plantillas|
 Has Subsections>Tiene Subsecciones|

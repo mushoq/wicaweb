@@ -29,14 +29,14 @@ class Core_Form_Template_Template extends Zend_Form
 		$name->setLabel('* '.$lang->translate('Name').':');
 		$name->setRequired(true);
 		$name->setFilters(array( new Zend_Filter_StringTrim()));
-		$name->setAttrib('style','width:100%');
+		$name->setAttrib('class','form-control');
 		
 		$this->addElement ( $name );
 				
 		//Template File
 		$template_file = new Zend_Form_Element_Button('template_file');
 		$template_file->setLabel($lang->translate('Search').'..');
-		$template_file->setAttrib('class', 'btn');
+		$template_file->setAttrib('class', 'btn btn-default');
 		$template_file->setAttrib('label_name',  '* '.$lang->translate ( 'Template file' ) . ':'  );
 
 		$this->addElement($template_file);
@@ -52,7 +52,7 @@ class Core_Form_Template_Template extends Zend_Form
 		// Multiple css file upload
 		$hidden_css_file = new Zend_Form_Element_Button ( 'css_files' );
 		$hidden_css_file->setLabel($lang->translate('See Files').'..');
-		$hidden_css_file->setAttrib('class', 'btn');
+		$hidden_css_file->setAttrib('class', 'btn btn-default');
 		$hidden_css_file->setAttrib('label_name',  $lang->translate ( 'Css files' ) . ':'  );
 		
 		$this->addElement ( $hidden_css_file );		
@@ -60,7 +60,7 @@ class Core_Form_Template_Template extends Zend_Form
 		// Multiple js file upload
 		$hidden_js_file = new Zend_Form_Element_Button ( 'js_files' );
 		$hidden_js_file->setLabel($lang->translate('See Files').'..');
-		$hidden_js_file->setAttrib('class', 'btn');
+		$hidden_js_file->setAttrib('class', 'btn btn-default');
 		$hidden_js_file->setAttrib('label_name',  $lang->translate ( 'Js files' ) . ':'  );
 		
 		$this->addElement ( $hidden_js_file );		
@@ -68,7 +68,7 @@ class Core_Form_Template_Template extends Zend_Form
 		// Multiple image file upload
 		$hidden_image_file = new Zend_Form_Element_Button ( 'image_files' );
 		$hidden_image_file->setLabel($lang->translate('See Files').'..');
-		$hidden_image_file->setAttrib('class', 'btn');
+		$hidden_image_file->setAttrib('class', 'btn btn-default');
 		$hidden_image_file->setAttrib('label_name',  $lang->translate ( 'Images' ) . ':'  );
 		
 		$this->addElement ( $hidden_image_file );		
@@ -77,7 +77,7 @@ class Core_Form_Template_Template extends Zend_Form
 		//Template Image
 		$template_image = new Zend_Form_Element_Button('template_image');
 		$template_image->setLabel($lang->translate('Search').'..');
-		$template_image->setAttrib('class', 'btn');
+		$template_image->setAttrib('class', 'btn btn-default');
 		$template_image->setAttrib('label_name', $lang->translate ( 'Template image' ) . ':'  );
 		
 		$this->addElement($template_image);

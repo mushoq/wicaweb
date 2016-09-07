@@ -353,6 +353,7 @@ Update article>Update article|
 Subsection>Subsection|
 Main section>Main section|
 All section info and its contents will be deleted. Would you like to continue?>All section info and its contents will be deleted. Would you like to continue?|
+This banner will be deleted. Would you like to continue?>This banner will be deleted. Would you like to continue?|
 Current Content>Current Content|
 Templates>Templates|
 Has Subsections>Has Subsections|

@@ -32,12 +32,12 @@ class Banners_Form_Search extends Zend_Form
 		$text = New Zend_Form_Element_Text('text');
 		$text->setLabel($lang->translate('Banner name').':');
 		$text->setRequired(true);
-		$text->setAttrib('style', 'width:100%');
+		$text->setAttrib('class', 'form-control');
 		
 		//template
 		$section = New Zend_Form_Element_Select('section');
 		$section->setLabel('* '.$lang->translate('Section'));
-				
+		$section->setAttrib('class', 'form-control');		
 		/**Get values from wc_section with wica_content_area (variable) for options**/
 
 		$section_model = new Core_Model_Section();

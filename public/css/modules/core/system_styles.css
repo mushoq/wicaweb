@@ -892,7 +892,7 @@ input[type="checkbox"], input[type="radio"] {
     margin: 0 5px;
 }
 .alert{
-    /*padding: 8px 15px !important;*/
+    padding: 8px 15px;
 }
 /* YOUTUBE RESPONSIVE EMBED */
 .video-container {
@@ -947,4 +947,7 @@ input[type="checkbox"], input[type="radio"] {
 }
 #section_container label{
     font-weight: normal;
+}
+.ui-datepicker-trigger{
+    cursor: pointer;
 }

@@ -16,8 +16,8 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 <?php foreach($this->external_modules_links as $action_id => $opt): ?>
 <?php if($opt['action']=='install'): ?>
-<div class="row-fluid option_bar_container">
-	<ul class="nav nav-pills pull-right">
+<div class="container-fluid option_bar_container">
+    <ul class="nav nav-pills pull-right">
         <li>
             <a href="/core/externalmodules_externalmodules/new"><?php echo $lang->translate('Install External Module'); ?></a>
         </li>
@@ -26,17 +26,17 @@ $lang = Zend_Registry::get('Zend_Translate');
 <?php endif; ?>
 <?php endforeach; ?>
 
-<div class="line-top alert_messages_container">
+<div class="container-fluid line-top alert_messages_container">
 	<?php echo $this->flashMessages();?>
 </div>
 
-<div class="row-fluid">
-	<div class=" page-header-wica col-md-12 center line">
+<div class="container-fluid center">
+	<div class="page-header-wica center">
 		<h1> <?php echo $lang->translate('External Modules List');?> </h1>
 	</div>
 </div>
 
-<div class="row-fluid">
+<div class="container-fluid">
 <?php if($this->external_modules_list && count($this->external_modules_list)>0):?>
 			<div class="row-fluid table-bordered-header">	
 				<div class="col-md-6"><b><?php echo $lang->translate('Name'); ?></b></div>

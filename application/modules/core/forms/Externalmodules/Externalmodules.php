@@ -31,13 +31,13 @@ class Core_Form_Externalmodules_Externalmodules extends Zend_Form
 		$file->setDestination(APPLICATION_PATH. '/../public/uploads/tmp');
 		$file->addValidator('Count', false, 1);
 		$file->addValidator('Extension', false, 'zip');
-		$file->setAttrib('style','width:100%');
+		
 		
 		//name
 		$name = New Zend_Form_Element_Text('name');
 		$name->setLabel($lang->translate('Name').':');
 		$name->getDecorator('label')->setOption('requiredPrefix', ' * ');
-		$name->setAttrib('style', 'width:47%');
+		$name->setAttrib('class','form-control');
 		
 		//description
 		$description = New Zend_Form_Element_Textarea('description');
@@ -45,13 +45,13 @@ class Core_Form_Externalmodules_Externalmodules extends Zend_Form
 		$description->setRequired(true);
 		$description->setAttribs(array('cols' => 40, 'rows' => 5));
                 $description->getDecorator('label')->setOption('requiredPrefix', ' * ');
-		$description->setAttrib('style', 'width:47%');
+		$description->setAttrib('class','form-control');
 		
 		//action
 		$action = New Zend_Form_Element_Text('action');
 		$action->setLabel($lang->translate('Action').':');
 		$action->getDecorator('label')->setOption('requiredPrefix', ' * ');
-		$action->setAttrib('style', 'width:47%');
+		$action->setAttrib('class','form-control');
 		
 		//Module Image
 		$image = New Zend_Form_Element_File('image');

@@ -20,7 +20,7 @@ $comments_type = GlobalFunctions::arrayTranslate(Core_Model_Website::$comments_t
 	<?php echo $this->flashMessages();?>
 </div>
 
-<form id="<?php echo $this->form->getId() ?>" action="<?php echo $this->form->getAction() ?>" method="<?php echo $this->form->getMethod() ?>" class="form-horizontal" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >
+<form id="<?php echo $this->form->getId() ?>" action="<?php echo $this->form->getAction() ?>" method="<?php echo $this->form->getMethod() ?>" class="form-horizontal" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" autocomplete="false" >
 
     <div class="col-md-12">		
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

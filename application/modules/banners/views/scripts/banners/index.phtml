@@ -17,7 +17,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 
 
-<div class="row-fluid option_bar_container">
+<div class="container-fluid option_bar_container line">
 	<?php foreach($this->cms_links as $action_id => $opt): ?>
 	<?php if($opt['action']=='new'): ?>
 	<ul class="nav nav-pills pull-right">
@@ -36,7 +36,7 @@ $lang = Zend_Registry::get('Zend_Translate');
     <?php endforeach; ?>
 </div>
 
-<div class="line-top alert_messages_container">
+<div class="container-fluid line-top alert_messages_container">
 	<?php echo $this->flashMessages();?>
 </div>
 
@@ -62,14 +62,14 @@ $lang = Zend_Registry::get('Zend_Translate');
 </div>
 
 <script type="text/javascript" charset="utf-8">
-	var delete_question = "<?php echo $lang->translate('All section info and its contents will be deleted. Would you like to continue?');?>";
+	var delete_question = "<?php echo $lang->translate('This banner will be deleted. Would you like to continue?');?>";
 </script>
-	
-<form action="" method="post" name="frmBannersOrder" id="frmBannersOrder">
+<div class="container-fluid">	
+<form action="" class="form-horizontal" method="post" name="frmBannersOrder" id="frmBannersOrder">
 	
 	<input type="hidden" id="section_id" name="section_id" value="<?php echo $this->section_id;?>">
 	
-	<div class="row-fluid table-bordered-header">	
+	<div class="row table-bordered-header">	
 		<div class="col-md-6"><b><?php echo $lang->translate('Banner name'); ?></b></div>
 		<div class="col-md-1"><b><?php echo $lang->translate('Order'); ?></b></div>
 		<div class="col-md-4 last"><b><?php echo $lang->translate('Tools'); ?></b></div>
@@ -77,7 +77,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 	
 	<div id="sortable">
 		<?php foreach ($this->banners_list as $k => $entry): ?> 
-		<div class="row-fluid table-bordered-content <?php if(($k+1)%2): echo "odd"; endif;?>" id="<?php echo $entry['id']; ?>">	
+		<div class="row table-bordered-content <?php if(($k+1)%2): echo "odd"; endif;?>" id="<?php echo $entry['id']; ?>">	
 			<div class="col-md-6 pointer"><a class="pointer" id="edit_banner_<?php echo $entry['id'];?>" banner_id="<?php echo $entry['id'];?>"> <?php echo $entry['name']; ?> </a></div>
 			<div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div>			
 			<div class="col-md-4 last pointer">
@@ -94,7 +94,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 		<?php endforeach ?>
 	</div>
 	<?php if($this->total_sec == $this->assigned_sec): ?>
-	<div class="row-fluid">
+	<div class="row">
 		<input type="hidden" id="banner_order" name="banner_order" value="">
 		<input type="hidden" id="identifier" name="identifier" value="banners" />
 		<br>  
@@ -102,8 +102,9 @@ $lang = Zend_Registry::get('Zend_Translate');
 	</div>
 	<?php endif; ?>
 </form>	
+</div>
 <?php else: ?>	
-	<div class="row-fluid center">
+	<div class="row center">
 		<h3><?php echo $lang->translate('No Banners Found'); ?></h3>
 		<input type="hidden" id="section_id" name="section_id" value="<?php echo $this->section_id;?>">
 	</div>	

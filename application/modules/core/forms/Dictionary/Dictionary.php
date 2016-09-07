@@ -39,7 +39,7 @@ class Core_Form_Dictionary_Dictionary extends Zend_Form
 		$name->setRequired(true);
 		$name->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$name->setFilters(array( new Zend_Filter_StringTrim()));
-		$name->setAttrib('style','width:100%');
+		$name->setAttrib('class','form-control');
 		
 		//website
 		$website_id = New Zend_Form_Element_Select('website_id');
@@ -83,7 +83,7 @@ class Core_Form_Dictionary_Dictionary extends Zend_Form
 		}
 		
 		$website_id->setMultiOptions($options_website);
-		$website_id->setAttrib('style','width:100%');
+		$website_id->setAttrib('class','form-control');
 		
 		//words
 		$words = New Zend_Form_Element_Textarea('words');
@@ -91,7 +91,7 @@ class Core_Form_Dictionary_Dictionary extends Zend_Form
 		$words->setRequired(true);
 		$words->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$words->setFilters(array( new Zend_Filter_StringTrim()));
-		$words->setAttrib('style','width:100%');
+		$words->setAttrib('class','form-control');
 		$words->setAttrib('rows', '10');
 		
 		//status
@@ -101,7 +101,7 @@ class Core_Form_Dictionary_Dictionary extends Zend_Form
 		$status->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$options_status = $dictionary_status;
 		$status->setMultiOptions($options_status);
-		$status->setAttrib('style','width:100%');
+		$status->setAttrib('class','form-control');
 		
 		//Submit Button
 		$submit = New Zend_Form_Element_Button('submit');

@@ -11,8 +11,8 @@
 
 
 <?php $lang = Zend_Registry::get('Zend_Translate');?>
-<div class="row-fluid">
-	<div class="col-md-12 center page-header-wica">
+<div class="row-fluid center">
+    <div class="page-header-wica center">
 		<h1><?php echo $lang->translate('Link Banners');?></h1>
 	</div>
 </div>
@@ -23,22 +23,20 @@
 	</div>
 </div>
 
-<div class="row-fluid">
-	<div class="col-md-12 center">
-		<form id="<?php echo $this->form->getId() ?>" action="" method="<?php echo $this->form->getMethod() ?>" class="well" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >
-			<div class="row-fluid">
-                <div class="col-md-6 form_label">
-		             <label class="required" for="text"><?php echo $this->form->text->getLabel(); ?></label>
-	            </div>
-	            <div class="col-md-2 form_field">
-	                 <?php echo $this->form->text->renderViewHelper(); ?>
-	            </div>
+<div class="row">
+    <div class="col-md-12 center">
+        <form id="<?php echo $this->form->getId() ?>" action="" method="<?php echo $this->form->getMethod() ?>" class="well form-horizontal" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >
+            <div class="form-group">
+                <label class="col-sm-4 control-label form_label required" for="text"><?php echo $this->form->text->getLabel(); ?></label>
+	            
+                <div class="col-sm-4 form_field">
+                     <?php echo $this->form->text->renderViewHelper(); ?>
+                </div>
             </div>
-            <div class="row-fluid">
-                <div class="col-md-6 form_label">
-		             <label class="required" for="section"><?php echo $this->form->section->getLabel(); ?></label>
-	            </div>
-	            <div class="col-md-2 form_field">
+            <div class="form-group">
+                <label class="col-sm-4 control-label form_label required" for="section"><?php echo $this->form->section->getLabel(); ?></label>
+	            
+	            <div class="col-sm-4 form_field">
 	                 <?php echo $this->form->section->renderViewHelper(); ?>
 	            </div>
             </div>

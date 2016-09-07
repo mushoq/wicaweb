@@ -16,8 +16,8 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 <?php foreach($this->template_links as $action_id => $opt): ?>
 <?php if($opt['action']=='new'): ?>
-<div class="row-fluid option_bar_container">
-	<ul class="nav nav-pills pull-right">
+<div class="container-fluid option_bar_container">
+    <ul class="nav nav-pills pull-right">
         <li>
             <a href="/core/template_template/new"><?php echo $lang->translate('Add New Template'); ?></a>
         </li>
@@ -26,21 +26,21 @@ $lang = Zend_Registry::get('Zend_Translate');
 <?php endif; ?>
 <?php endforeach; ?>
 
-<div class="line-top alert_messages_container">
+<div class="container-fluid line-top alert_messages_container">
 	<?php echo $this->flashMessages();?>
 </div>
 
-<div class="row-fluid">
-	<div class=" page-header-wica col-md-12 center line">
+<div class="container-fluid center">
+	<div class="page-header-wica center">
 		<h1> <?php echo $lang->translate('Upload Template');?> </h1>
 	</div>
 </div>
 
-<div class="row-fluid">
+<div class="container-fluid">
 <?php if($this->templates && count($this->templates)>0):?>
 		
 	<?php if($this->templates && count($this->templates)>0):?>
-		<div class="row-fluid center line">
+		<div class="row center line">
 			<h3> <?php echo $lang->translate('Available Templates');?> </h3>
 		</div>
 	
@@ -55,7 +55,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 				<tr class="<?php if(($t+1)%2): echo "odd"; endif;?>">
 					<td  class="center"><img id="img_render_<?php echo $template->id;?>" template_id="<?php echo $template->id;?>" src="<?php echo '/uploads/template_img/'.$template->image; ?>" width="100px" /></td>
 					<td><?php echo $template->name?></td>
-					<td>
+                                        <td class="text-center">
 						
 						<?php foreach($this->template_links as $action_id => $opt): ?>
 							<?php if($opt['action']=='edit'): ?>
@@ -70,7 +70,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 							<?php }?>				
 						<?php endforeach; ?>
 						
-						<a href="/core/template_template/view/id/<?php echo $template->id;?>" title="<?php echo $lang->translate('View code'); ?>"><i class="icon-indent-left"></i></a>			
+						<a href="/core/template_template/view/id/<?php echo $template->id;?>" title="<?php echo $lang->translate('View code'); ?>"><i class="glyphicon glyphicon-indent-left"></i></a>			
 					</td>
 				</tr>	
 				<?php endforeach;?>
@@ -93,3 +93,4 @@ $lang = Zend_Registry::get('Zend_Translate');
 	</div>
 <?php endif;?>
 </div>
+<p>&nbsp;</p>

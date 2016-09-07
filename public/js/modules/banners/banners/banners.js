@@ -526,6 +526,9 @@ $(document).ready(function() {
 	//Delete banner
 	$('[id^="delete_banner_"]').each(function() {
 		$(this).bind('click', function() {
+			var question = false;
+			question = confirm(delete_question);
+			if(question){
 				$.ajax({
 					type: 'POST',
 					async: false,
@@ -546,6 +549,7 @@ $(document).ready(function() {
 						}
 					}								
 				});			
+			}
 		});	
 	});
 	

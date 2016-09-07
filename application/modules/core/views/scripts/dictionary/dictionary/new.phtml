@@ -18,75 +18,72 @@ $lang = Zend_Registry::get('Zend_Translate');
 	var dictionaryname_remote_message = "<?php echo $lang->translate('Dictionary name already exist');?>";
 </script>
 
-<div class="row-fluid">
-	<div class="col-md-12 page-header-wica center line">
+<div class="container-fluid center">
+	<div class="page-header-wica center">
 		<h1><?php echo $lang->translate('New Dictionary');?></h1>
 	</div>
 </div>
-<div class="line-top alert_messages_container">
+<div class="container-fluid line-top alert_messages_container">
       <?php echo $this->flashMessages();?>
 </div>   
 
-<div class="row-fluid">
-    <div class="col-md-12">
-      <form id="<?php echo $this->form->getId() ?>" action="" method="<?php echo $this->form->getMethod() ?>" class="well" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >  
-          <div class="row-fluid">
-                <div class="col-md-6">
-                    <div class="row-fluid">
-                        <div class="col-md-4 form_label">
-                            <label class="required" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
-                        </div>
-                        <div class="col-md-1">&nbsp;</div>
-                        <div class="col-md-4 form_field">
-                            <?php echo $this->form->name->renderViewHelper(); ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row-fluid">
-                        <div class="col-md-2 form_label">
-                            <label class="required" for="website_id"><?php echo $this->form->website_id->getDecorator('label')->getOption('requiredPrefix').$this->form->website_id->getLabel(); ?></label>
-                        </div>
-                        <div class="col-md-1">&nbsp;</div>
-                        <div class="col-md-4 form_field">
-                            <?php echo $this->form->website_id->renderViewHelper(); ?>
-                        </div>
-                    </div>
-                </div>
-          </div>
-          
-          
-          
-          <div class="row-fluid">
-                <div class="col-md-6">
-                    <div class="row-fluid">
-                        <div class="col-md-4 form_label">
-                            <label class="required" for="words"><?php echo  $this->form->words->getDecorator('label')->getOption('requiredPrefix').$this->form->words->getLabel(); ?></label>
-                        </div>
-                        <div class="col-md-1">&nbsp;</div>
-                        <div class="col-md-7 form_field">
-                        <p class="help-block grey"><?php echo $lang->translate('Insert the words separated by commas. Ej. Hello, world');?></p>
-	                       <?php echo $this->form->words->renderViewHelper(); ?>
-	                      
-	                   </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                   &nbsp;
-                </div>
-          </div>
 
-          </form>
-          <div class="row-fluid">
-				<div class="center well">
-					<div class="row-fluid">
-						
-						<?php echo $this->form->submit->renderViewHelper(); ?>
-						&nbsp;&nbsp;
-						<?php echo $this->form->cancel->renderViewHelper(); ?>
-					</div>
-				</div>
-			</div>
-      
-    </div>
+<div class="container-fluid">
+    <form id="<?php echo $this->form->getId() ?>" action="" method="<?php echo $this->form->getMethod() ?>" class="well" enctype="<?php echo $this->form->getAttrib('enctype'); ?>" >  
+      <div class="row">
+            <div class="col-md-6">
+                <div class="row-fluid">
+                   
+                    <label class="col-sm-4 control-label form_label" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
+                    
+                    
+                    <div class="col-sm-5 col-sm-offset-1 form_field">
+                        <?php echo $this->form->name->renderViewHelper(); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row-fluid">
+                    
+                    <label class="col-sm-4 control-label form_label" for="website_id"><?php echo $this->form->website_id->getDecorator('label')->getOption('requiredPrefix').$this->form->website_id->getLabel(); ?></label>
+                    
+                    
+                    <div class="col-sm-5 col-sm-offset-1 form_field">
+                        <?php echo $this->form->website_id->renderViewHelper(); ?>
+                    </div>
+                </div>
+            </div>
+      </div>
+
+
+
+      <div class="row">
+            <div class="col-md-6">
+                <div class="row-fluid">
+                    
+                    <label class="col-sm-4 control-label form_label" for="words"><?php echo  $this->form->words->getDecorator('label')->getOption('requiredPrefix').$this->form->words->getLabel(); ?></label>
+                    
+                    
+                    <div class="col-sm-7 col-sm-offset-1 form_field">
+                    <p class="help-block grey"><?php echo $lang->translate('Insert the words separated by commas. Ej. Hello, world');?></p>
+                           <?php echo $this->form->words->renderViewHelper(); ?>
+
+                       </div>
+                </div>
+            </div>
+            
+      </div>
+
+      </form>
+      <div class="row-fluid">
+                            <div class="center well">
+                                    <div class="row-fluid">
+
+                                            <?php echo $this->form->submit->renderViewHelper(); ?>
+                                            &nbsp;&nbsp;
+                                            <?php echo $this->form->cancel->renderViewHelper(); ?>
+                                    </div>
+                            </div>
+                    </div>
+
 </div>

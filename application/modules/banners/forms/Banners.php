@@ -65,7 +65,7 @@ class Banners_Form_Banners extends Zend_Form
 		}
 
 		$area->setMultiOptions($options_area);
-		$area->setAttrib('style', 'width:78%');
+		$area->setAttrib('class', 'form-control');
 		
 		//banner
 		$banner = New Zend_Form_Element_Hidden('banner_id');
@@ -76,14 +76,14 @@ class Banners_Form_Banners extends Zend_Form
 		$name->setRequired(true);
 		$name->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$name->setFilters(array( new Zend_Filter_StringTrim()));
-		$name->setAttrib('style', 'width:75%');		
+		$name->setAttrib('class', 'form-control');		
 
 		//description
 		$description = New Zend_Form_Element_Textarea('description');
 		$description->setLabel($lang->translate('Description').':');
 		$description->setRequired(true);
 		$description->setAttribs(array('cols' => 40, 'rows' => 5));
-		$description->setAttrib('style', 'width:75%');
+		$description->setAttrib('class', 'form-control');
 				
 		
 		//html Banner
@@ -93,32 +93,34 @@ class Banners_Form_Banners extends Zend_Form
 		$html->setRequired(true);
 		$html->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$html->setAttribs(array('cols' => 40, 'rows' => 5));
-		$html->setAttrib('style', 'width:75%');
+		$html->setAttrib('class', 'form-control');
 		
 		
 		//Link
 		$link = New Zend_Form_Element_Text('link');
 		$link->setLabel($lang->translate('Link').':');
 		$link->getDecorator('label')->setOption('requiredPrefix', ' * ');
-		$link->setAttrib('style', 'width:75%');
+		$link->setAttrib('class', 'form-control');
 		
 		//status
 		$status = New Zend_Form_Element_Select('status');
 		$status->setLabel($lang->translate('Status').':');
-		$status->setAttrib('style', 'width:75%');
+		$status->setAttrib('class', 'form-control');
 		$status->getDecorator('label')->setOption('requiredPrefix', ' * ');
 		$status->setMultiOptions($banner_status);
-		
+		$status->setAttrib('class', 'form-control');
 		//publish date
 		$publish_date = new Zend_Form_Element_Text('publish_date');
 		$publish_date->setLabel($lang->translate('Publish date').':');
 		$publish_date->getDecorator('label')->setOption('requiredPrefix', ' * ');
-		
+		$publish_date->setAttrib('class', 'form-control pull-left');
+                $publish_date->setAttrib('style', 'width:80%');
 		//expire date
 		$expire_date = new Zend_Form_Element_Text('expire_date');
 		$expire_date->setLabel($lang->translate('Expire date').':');
 		$expire_date->getDecorator('label')->setOption('requiredPrefix', ' * ');
-		
+		$expire_date->setAttrib('class', 'form-control pull-left');
+                $expire_date->setAttrib('style', 'width:80%');
 		//Publication type Calendar/Hits
 		$type = New Zend_Form_Element_Hidden('type');
 		$type->removeDecorator('Label');
@@ -128,7 +130,7 @@ class Banners_Form_Banners extends Zend_Form
 		$hits = New Zend_Form_Element_Text('hits');
 		$hits->setLabel($lang->translate('Hits').':');
 		$hits->getDecorator('label')->setOption('requiredPrefix', ' * ');
-
+                $hits->setAttrib('class', 'form-control');
 		//Sections
 		
 		//create the array for populate the select
@@ -145,10 +147,10 @@ class Banners_Form_Banners extends Zend_Form
 		}
 		
 		$sections = new Zend_Form_Element_Multiselect('sections');
-		$sections->setAttrib('style', 'width:78%');
+		$sections->setAttrib('class', 'form-control');;
 		$sections->setLabel($lang->translate('Assign to other section').':');
 		$sections->setMultiOptions($options_section);
-		
+		$sections->setAttrib('class', 'form-control');
 
 		//Submit Button
 		$submit = New Zend_Form_Element_Button('submit');
@@ -159,7 +161,7 @@ class Banners_Form_Banners extends Zend_Form
 		//Cancel Button
 		$cancel = New Zend_Form_Element_Button('cancel');
 		$cancel->setLabel($lang->translate('Cancel'));
-		$cancel->setAttrib('class', 'btn');
+		$cancel->setAttrib('class', 'btn btn-default');
 		$cancel->setIgnore(true);
 		
 		//Hidden Id
@@ -205,7 +207,7 @@ class Banners_Form_Banners extends Zend_Form
 				
 				$image = new Zend_Form_Element_Button('img_'.$i);
 				$image->setLabel($lang->translate('Search'));
-				$image->setAttrib('class', 'btn');
+				$image->setAttrib('class', 'btn btn-default');
 				$this->addElement($image);
 
 				
@@ -230,7 +232,7 @@ class Banners_Form_Banners extends Zend_Form
 		
 				$flash = new Zend_Form_Element_Button('flash_'.$i);
 				$flash->setLabel($lang->translate('Search'));
-				$flash->setAttrib('class', 'btn');
+				$flash->setAttrib('class', 'btn btn-default');
 				$this->addElement($flash);
 				
 				

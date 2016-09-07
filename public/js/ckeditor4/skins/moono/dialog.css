@@ -177,7 +177,7 @@ a.cke_dialog_tab_selected {
 }
 
 a.cke_dialog_tab_selected:hover,
-a.cke_dialog_tab_selected:focus,
+a.cke_dialog_tab_selected:focus
 {
     background: #ededed;
     background: linear-gradient(to bottom, #ededed 0, #fff 100%);
