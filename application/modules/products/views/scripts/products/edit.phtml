@@ -15,6 +15,8 @@
 	var max_size = "<?php echo $lang->translate('Maximum size');?>";
 	var supported_extension = "<?php echo $lang->translate('Supported files');?>";
 	var productdescription_remote_message = "<?php echo $lang->translate('Product name already exist');?>";
+        var delete_feature = "<?php echo $lang->translate('This feature will be deleted. Would you like to continue?');?>";
+        
 </script>
 
 <?php $available_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$available); ?>
@@ -22,39 +24,33 @@
 <?php $highlight_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$highlight); ?>
 <?php $status_opt = GlobalFunctions::arrayTranslate(Products_Model_Products::$status); ?>
      	   
-<div class="row-fluid line">
-	<div class="col-md-12">
-		<div class="page-header-wica center">
-			<h1><?php echo $lang->translate('Edit Product'); ?></h1>		
-		</div>
-	</div>	
+<div class="row-fluid center">
+    <div class="page-header-wica center">
+        <h1><?php echo $lang->translate('Edit Product'); ?></h1>				
+    </div>	
 </div>
 
-<div class="row-fluid line">
-	<div class="col-md-12"></div>	
-</div>
-
-<form class="well <?php echo $this->form->getAttrib('class'); ?>" id="<?php echo $this->form->getAttrib('id'); ?>" method="<?php echo $this->form->getMethod(); ?>" enctype="multipart/form-data">
+<form class="<?php echo $this->form->getAttrib('class'); ?>" id="<?php echo $this->form->getAttrib('id'); ?>" method="<?php echo $this->form->getMethod(); ?>" enctype="multipart/form-data">
 <div class="row-fluid">
-	<div class="col-md-12">
-		<div class="row-fluid">							
+	<div class="col-md-8">
+								
 			<?php echo $this->form->id->renderViewHelper(); ?>
 			<?php echo $this->form->section_id->renderViewHelper(); ?>
                         <?php echo $this->form->website_id->renderViewHelper(); ?>
-	      	<div class="control-group">
-				<label class="control-label"><?php echo $this->form->name->getLabel(); ?></label>
-				<div class="controls">
-					<?php echo $this->form->name->renderViewHelper(); ?>										
-				</div>
-			</div>
-		</div>
+	      	<div class="form-group">
+                        <label class="col-sm-4 control-label form_label"><?php echo $this->form->name->getLabel(); ?></label>
+                        <div class="col-sm-8">
+                                <?php echo $this->form->name->renderViewHelper(); ?>										
+                        </div>
+                </div>
+		
 	</div>
 </div>
 <div class="row-fluid">
 	<div class="col-md-8">				      							      		
-      	<div class="control-group">
-			<label class="control-label"><?php echo $this->form->description->getLabel(); ?></label>
-			<div class="controls">
+      	<div class="form-group">
+			<label class="col-sm-4 control-label form_label"><?php echo $this->form->description->getLabel(); ?></label>
+			<div class="col-sm-8">
 				<?php echo $this->form->description->renderViewHelper(); ?>
 			</div>
 		</div>
@@ -63,17 +59,17 @@
 
 <div class="row-fluid">
 	<div class="col-md-6">												
-		<div class="control-group">
-			<label class="control-label"><?php echo $lang->translate('Image').':' ?></label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-4 control-label form_label"><?php echo $lang->translate('Image').':' ?></label>
+			<div class="col-sm-8">
 				<input type="text" disabled="disabled" id="product_fileLabel">
 				<?php echo $this->form->product_img->renderViewHelper(); ?>
 				<input type="hidden" name="product_hdnNameFile" id="product_hdnNameFile" value=""/>
 			</div>
 		</div>		
-		<div class="control-group">
-			<label class="control-label"><?php echo $this->form->product_imageprw->getLabel(); ?></label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-4 control-label form_label"><?php echo $this->form->product_imageprw->getLabel(); ?></label>
+			<div class="col-sm-8">
 				<?php echo $this->form->product_imageprw->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
 			</div>
 		</div>		
@@ -81,9 +77,9 @@
 		<?php //echo $this->form->product_id_img->renderViewHelper(); ?>
 	</div>
         <div class="col-md-6">												
-		<div class="control-group">
-			<label class="control-label">Ficha:</label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-4 control-label form_label">Ficha:</label>
+			<div class="col-sm-8">
 				<input type="text" disabled="disabled" id="product_fichaLabel">
 				<?php echo $this->form->product_ficha->renderViewHelper(); ?>
 				<input type="hidden" name="product_hdnNameFicha" id="product_hdnNameFicha" value=""/>
@@ -95,9 +91,9 @@
 </div>
     <div class="row-fluid">
 	<div class="col-md-6">	
-		<div class="control-group">
-			<label class="control-label"><?php echo '* '.$lang->translate('Available').':'; ?></label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-4 control-label form_label"><?php echo '* '.$lang->translate('Available').':'; ?></label>
+			<div class="col-sm-8">
 				<div class="btn-group" data-toggle="buttons-radio">
 					<?php $default_available_arr = array_keys($available_opt);
 						$default_available_opt = $default_available_arr[1]; ?>							
@@ -110,9 +106,9 @@
 		</div>
 	</div>
         <div class="col-md-6">
-		<div class="control-group">
-			<label class="control-label"><?php echo '* '.$lang->translate('Feature').':'; ?></label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-4 control-label form_label"><?php echo '* '.$lang->translate('Feature').':'; ?></label>
+			<div class="col-sm-8">
 				<div class="btn-group" data-toggle="buttons-radio">
 					<?php $default_feature_arr = array_keys($feature_opt);
 						$default_feature_opt = $default_feature_arr[1]; ?>							
@@ -128,9 +124,9 @@
 
 <div class="row-fluid">
     <div class="col-md-6">
-		<div class="control-group">
-			<label class="control-label"><?php echo '* '.$lang->translate('Highlight').':'; ?></label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-4 control-label form_label"><?php echo '* '.$lang->translate('Highlight').':'; ?></label>
+			<div class="col-sm-8">
 				<div class="btn-group" data-toggle="buttons-radio">
 					<?php $default_highlight_arr = array_keys($highlight_opt);
 						$default_highlight_opt = $default_highlight_arr[1]; ?>							
@@ -143,9 +139,9 @@
 		</div>
 	</div>
 	<div class="col-md-6">	
-		<div class="control-group">
-			<label class="control-label"><?php echo '* '.$lang->translate('Status').':'; ?></label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-4 control-label form_label"><?php echo '* '.$lang->translate('Status').':'; ?></label>
+			<div class="col-sm-8">
 				<div class="btn-group" data-toggle="buttons-radio">
 					<?php $default_status_arr = array_keys($status_opt);
 						$default_status_opt = $default_status_arr[0]; ?>							
@@ -166,9 +162,9 @@
 
 <div class="row-fluid">
 	<div class="col-md-6">	
-		<div class="control-group">
-			<label class="control-label"><?php echo $lang->translate('Products catalog').':'; ?></label>
-			<div class="controls">
+		<div class="form-group">
+			<label class="col-sm-4 control-label form_label"><?php echo $lang->translate('Products catalog').':'; ?></label>
+			<div class="col-sm-8">
 				<?php echo $this->form->add_feature->renderViewHelper(); ?>
 				<a id="anchor_add_product" class="hide" href="#products_container"></a>		
 			</div>
@@ -193,7 +189,7 @@
 						<td id="tmp_product_description_<?php echo $mkey+1; ?>" name="tmp_product_description_<?php echo $mkey+1; ?>"><?php echo $product->description; ?></td>
 						<td id="tmp_product_price_<?php echo $mkey+1; ?>" name="tmp_product_price_<?php echo $mkey+1; ?>"><?php echo $product->price; ?></td>						
 						<td id="tmp_product_weight_<?php echo $mkey+1; ?>" name="tmp_product_weight_<?php echo $mkey+1; ?>"><?php echo $product->weight; ?></td>
-						<td id="actions_tmp_product_<?php echo $mkey+1; ?>" name="actions_tmp_product_<?php echo $mkey+1; ?>"><i id="edit_element_<?php echo $mkey+1; ?>" element="<?php echo $mkey+1; ?>" class="pointer glyphicon glyphicon-pencil" title="Edit"></i>|<i id="remove_element_<?php echo $mkey+1; ?>" element="<?php echo $mkey+1; ?>" class="pointer glyphicon glyphicon-trash" title="Delete"></i></td>
+                                                <td id="actions_tmp_product_<?php echo $mkey+1; ?>" name="actions_tmp_product_<?php echo $mkey+1; ?>" class="text-center"><i id="edit_element_<?php echo $mkey+1; ?>" element="<?php echo $mkey+1; ?>" class="pointer glyphicon glyphicon-pencil" title="Edit"></i> | <i id="remove_element_<?php echo $mkey+1; ?>" element="<?php echo $mkey+1; ?>" class="pointer glyphicon glyphicon-trash" title="Delete"></i></td>
 					</tr>                        
 				<?php endforeach; ?>  
 			<?php endif;?>    

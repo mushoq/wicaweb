@@ -626,8 +626,8 @@ class Products_ProductsController extends Zend_Controller_Action
 							if(isset($_POST['hdn_product_id_'][$pos]))								
 								$product_catalog_obj->id = $_POST['hdn_product_id_'][$pos];
 							$product_catalog_obj->product_id = $saved_product['id'];
-							$product_catalog_obj->code = $_POST['hdn_product_code_'][$pos];
-							$product_catalog_obj->description = $_POST['hdn_product_description_'][$pos];
+							$product_catalog_obj->code = GlobalFunctions::value_cleaner($_POST['hdn_product_code_'][$pos]);
+							$product_catalog_obj->description = GlobalFunctions::value_cleaner($_POST['hdn_product_description_'][$pos]);
 							$product_catalog_obj->price = $_POST['hdn_product_price_'][$pos];
 							$product_catalog_obj->price_sale = $_POST['hdn_product_price_sale_'][$pos];
 							$product_catalog_obj->weight = $_POST['hdn_product_weight_'][$pos];
@@ -672,8 +672,8 @@ class Products_ProductsController extends Zend_Controller_Action
 								$product_catalog_obj = $product_catalog->getNewRow('product_catalog');
 																
 								$product_catalog_obj->product_id = $saved_product['id'];
-								$product_catalog_obj->code = $_POST['hdn_product_code_'][$pos];
-								$product_catalog_obj->description = $_POST['hdn_product_description_'][$pos];
+								$product_catalog_obj->code = GlobalFunctions::value_cleaner($_POST['hdn_product_code_'][$pos]);
+								$product_catalog_obj->description = GlobalFunctions::value_cleaner($_POST['hdn_product_description_'][$pos]);
 								$product_catalog_obj->price = $_POST['hdn_product_price_'][$pos];
 								$product_catalog_obj->price_sale = $_POST['hdn_product_price_sale_'][$pos];
 								$product_catalog_obj->weight = $_POST['hdn_product_weight_'][$pos];

@@ -11,62 +11,62 @@
 		<form id="product_form" name="product_form" class="form-horizontal">
 			<div class="row-fluid">
 				<div class="col-md-6">
-					<div class="control-group">
-						<label class="control-label"> <?php echo '* '.$lang->translate('Code').':'; ?> </label>
-						<div class="controls">
-							<input type="text" id="product_code" name="product_code" class="col-md-3">	
+					<div class="form-group">
+						<label class="col-sm-4 control-label form_label"> <?php echo '* '.$lang->translate('Code').':'; ?> </label>
+						<div class="col-sm-8">
+							<input type="text" id="product_code" name="product_code" class="form-control">	
 							<label id="repeated_product_code" class="hide error" for="code" generated="true"><?php echo $lang->translate('Product code already exists'); ?></label>						
 						</div>
 					</div>
 				</div>		
 				<div class="col-md-6">
-					<div class="control-group">
-						<label class="control-label"> <?php echo $lang->translate('Description').':'; ?> </label>
-						<div class="controls">
-							<input type="text" id="product_description" name="product_description" class="col-md-3">														
+					<div class="form-group">
+						<label class="col-sm-4 control-label form_label"> <?php echo $lang->translate('Description').':'; ?> </label>
+						<div class="col-sm-8">
+							<input type="text" id="product_description" name="product_description" class="form-control">														
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row-fluid">
 				<div class="col-md-6">
-					<div class="control-group">
-						<label class="control-label"> <?php echo '* '.$lang->translate('Price').':'; ?> </label>
-						<div class="controls">
-							<input type="text" id="product_price" name="product_price" class="col-md-3">
+					<div class="form-group">
+						<label class="col-sm-4 control-label form_label"> <?php echo '* '.$lang->translate('Price').':'; ?> </label>
+						<div class="col-sm-8">
+							<input type="text" id="product_price" name="product_price" class="form-control">
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div class="control-group">
-						<label class="control-label"> <?php echo $lang->translate('Sale price').':'; ?> </label>
-						<div class="controls">
-							<input type="text" id="product_price_sale" name="product_price_sale" class="col-md-3">					
+					<div class="form-group">
+						<label class="col-sm-4 control-label form_label"> <?php echo $lang->translate('Sale price').':'; ?> </label>
+						<div class="col-sm-8">
+							<input type="text" id="product_price_sale" name="product_price_sale" class="form-control">					
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row-fluid">
 				<div class="col-md-6">
-					<div class="control-group">
-						<label class="control-label"> <?php echo $lang->translate('Weight').':'; ?> </label>
-						<div class="controls">						
-							<input type="text" id="product_weight" name="product_weight" class="col-md-3">
+					<div class="form-group">
+						<label class="col-sm-4 control-label form_label"> <?php echo $lang->translate('Weight').':'; ?> </label>
+						<div class="col-sm-8">						
+							<input type="text" id="product_weight" name="product_weight" class="form-control">
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">												
-					<div class="control-group">
-						<label class="control-label"><?php echo $lang->translate('Image').':' ?></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-4 control-label form_label"><?php echo $lang->translate('Image').':' ?></label>
+						<div class="col-sm-8">
 							<input type="text" disabled="disabled" id="catalog_fileLabel">
-							<button id="catalog_img" class="btn" type="button" name="catalog_img"><?php echo $lang->translate('Search') ?></button>
+							<button id="catalog_img" class="btn btn-default" type="button" name="catalog_img"><?php echo $lang->translate('Search') ?></button>
 							<input type="hidden" name="catalog_hdnNameFile" id="catalog_hdnNameFile" value=""/>
 						</div>
 					</div>		
-					<div class="control-group">
-						<label class="control-label"></label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-4 control-label form_label"></label>
+						<div class="col-sm-8">
 							<input id="catalog_imageprw" class="preview_img hide" type="image" onclick="return false;" alt="" src="" name="catalog_imageprw">
 						</div>
 					</div>					

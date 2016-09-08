@@ -15,7 +15,7 @@
 <?php $lang = Zend_Registry::get('Zend_Translate');?>
 
 <?php if($this->section_id!='all'): ?>
-<div class="row-fluid option_bar_container">
+<div class="container-fluid option_bar_container line">
 	<?php foreach($this->cms_links as $action_id => $opt): ?>
 	<?php if($opt['action']=='new'): ?>	
 	<ul class="nav nav-pills pull-right">
@@ -28,7 +28,7 @@
 </div>
 <?php endif; ?>    
 
-<div class="line-top alert_messages_container">
+<div class="container-fluid line-top alert_messages_container">
 	<?php echo $this->flashMessages();?>
 </div>
 
@@ -54,7 +54,7 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-	var delete_question = "<?php echo $lang->translate('All section info and its contents will be deleted. Would you like to continue?');?>";
+	var delete_question = "<?php echo $lang->translate('This product will be deleted. Would you like to continue?');?>";
 </script>
 	
 <form action="" method="post" name="frmProductsOrder" id="frmProductsOrder">

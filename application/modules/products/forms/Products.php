@@ -53,12 +53,13 @@ class Products_Form_Products extends Zend_Form
 		//name
 		$name_pro = new Zend_Form_Element_Text('name');
 		$name_pro->setLabel('* '.$lang->translate('Name').':');
+                $name_pro->setAttrib('class', 'form-control');
 		
 		//description
 		$description = new Zend_Form_Element_Textarea('description');
 		$description->setLabel($lang->translate('Description').':');
 		$description->setAttribs(array('cols' => 40, 'rows' => 5));
-		
+		$description->setAttrib('class', 'form-control');
 		
 		//image
 		/*$name = new Zend_Form_Element_Text('product_name_img');
@@ -85,7 +86,7 @@ class Products_Form_Products extends Zend_Form
 		
 		$image = new Zend_Form_Element_Button('product_img');
 		$image->setLabel($lang->translate('Search'));
-		$image->setAttrib('class', 'btn');
+		$image->setAttrib('class', 'btn btn-default');
 		$this->addElement($image);
                 
                 
@@ -101,14 +102,14 @@ class Products_Form_Products extends Zend_Form
 		
 		$ficha = new Zend_Form_Element_Button('product_ficha');
 		$ficha->setLabel($lang->translate('Search'));
-		$ficha->setAttrib('class', 'btn');
+		$ficha->setAttrib('class', 'btn btn-default');
 		$this->addElement($ficha);
 
 				
 		//available - yes / no -
 		$available = new Zend_Form_Element_Hidden('available');
 		$default_available_arr = array_keys($available_opt);
-		$available->setValue($default_available_arr[1]);
+		$available->setValue($default_available_arr[0]);
 		$available->removeDecorator('Label');
 		$available->removeDecorator('HtmlTag');
 		

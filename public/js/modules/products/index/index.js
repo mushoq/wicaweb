@@ -1,5 +1,5 @@
 $(document).ready(function() {    
-	
+	setTimeout("resize_content_list()",200);
 	//Change href attribute of website tree link in tree navigator
 	$('#website_tree_link').attr("href", "/products"); 
 		
