@@ -207,6 +207,7 @@ class Banners_BannersController extends Zend_Controller_Action
 		
 		//Section id in view
 		$this->view->section_id = $section_id;
+                
 		
 		//Get module_id by module_name
 		$module_obj = new Core_Model_Module();

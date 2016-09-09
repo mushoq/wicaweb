@@ -245,7 +245,7 @@ class Core_Form_Content_Content extends Zend_Form {
 								'other' => $lang->translate ( 'Other' )
 						) );
 						$select->setAttrib('class', 'hide form-control');
-	
+                                
 					}	
 
 					if(str_replace ( ' ', '_', strtolower ( $fl->name)) == 'element_type')
@@ -260,7 +260,9 @@ class Core_Form_Content_Content extends Zend_Form {
 								'checkbox' => $lang->translate('Checkbox'),
 								'comment' => $lang->translate('Comment'),
 								'file' => $lang->translate('File')
-						) );	
+						) );
+                                                
+                                                $select->setAttrib('class', 'form-control');
 					
 					if(str_replace ( ' ', '_', strtolower ( $fl->name)) == 'internal_section' && $content_type_id==3)
 					{

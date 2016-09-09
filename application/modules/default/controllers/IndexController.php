@@ -227,7 +227,7 @@ class Default_IndexController extends Zend_Controller_Action
     		}else
     		{
     			$this->_helper->flashMessenger->addMessage ( array (
-    					'error' => $lang->translate ( 'Some errors occurred during the process' )
+    					'danger' => $lang->translate ( 'Some errors occurred during the process' )
     			) );
     			$this->_redirect ( '#' );
     		}
@@ -255,7 +255,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    	else
 		    	{
 					$this->_helper->flashMessenger->addMessage ( array (
-							'error' => $lang->translate ( 'Your account hasn\'t been activated' )
+							'danger' => $lang->translate ( 'Your account hasn\'t been activated' )
 					) );
 					$this->_redirect ( '#' );
 		    	}		    	
@@ -981,10 +981,9 @@ class Default_IndexController extends Zend_Controller_Action
                                         }
 					
 						 
-						//get smpt credential from website information
-						$website = new Core_Model_Website();
-						$website_data = $website->find('wc_website',array('id'=>$formData['website_id']));
-
+						
+                                                $website = new Core_Model_Website();
+                                                $website_data = $website->find('wc_website',array('id'=>$formData['website_id']));
 
 						//Get id field for email/s directions to send email
 						$field = new Core_Model_Field();
@@ -999,104 +998,21 @@ class Default_IndexController extends Zend_Controller_Action
 						//Get email/s directions for current content_id
 						$content = new Core_Model_ContentField();
 						$content_email = $content->find('wc_content_field',array('field_id'=>$field_email_id,'content_id'=>$formData['form_id']));
-						
-						//create a transport to register smpt server credentials
-						if($website_data[0]->smtp_hostname){
-							$tr = new Zend_Mail_Transport_Smtp($website_data[0]->smtp_hostname,
-								array('ssl' => 'ssl',
-                                                                                'port'=>$website_data[0]->smtp_port, 
-										'auth' => 'login',
-										'username' => $website_data[0]->smtp_username,
-										'password' => $website_data[0]->smtp_password, 
-                                                                                'register'=>true));
-							
-							
-                                                        Zend_Mail::setDefaultTransport($tr);						 
-                                                        $mail = new Zend_Mail();
-                                                        $mail->setFrom($website_data[0]->info_email, utf8_decode($website_data[0]->name));
-                                                        $descripcion = '<html xmlns="http://www.w3.org/1999/xhtml">
-                                                        <head>
-                                                            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                                                            <title>Formulario Din&aacute;mica</title>
-                                                            <style type="text/css">
-                                                            body {
-                                                                background-color:#FFFFFF;
-                                                                font-family:Arial, Helvetica, sans-serif;
-                                                            }
-                                                            .texto {
-                                                                font-size:12px;
-                                                                font-weight:normal;
-                                                                color:#5B5B5B;
-                                                            }
-                                                            </style>
-                                                        </head>
-                                                        <body>
-                                                        <table width="673"  border="0" align="center" cellpadding="0" cellspacing="2">
-                                                    <tr>
-                                                            <td height="101" colspan="2"><img src="'.$website_data[0]->website_url.'/uploads/website/'.$website_data[0]->logo.'"></td>
-                                                    </tr>
-                                                <tr bgcolor="#EEEEEE">
-                                                            <td colspan="2" class="texto"><p align="center">Hola, este es un mensaje de formulario en el sitio Web '.utf8_decode($website_data[0]->name).':</font> <br>
-                                                                            </p></td>
-                                                    </tr>
-                                                <tr bgcolor="#FFFFFF" >
-
-                                                <td style="border-bottom:1px solid #EEEEEE;" width="55%" class="texto" colspan="2">'.utf8_decode($body).'</td>
-                                                </tr>
-                                                <tr> 
-                                                <td align="center" colspan="2"><font color="red" size="1">&nbsp;</font> <br>
-                                                 <font color="red" size="1">&nbsp;
-                                                 </font>
-                                                 </td>
-                                                 </tr>
-                                                <tr>
-                                                <td colspan="2" bgcolor="#323232">
-                                                &nbsp;
-                                                </td>
-                                                </tr>
-                                                </table>
-                                                <p align="center"><a style="text-decoration: none;" href="'.$website_data[0]->website_url.'"><font size="3" color="#000000">'.$website_data[0]->website_url.'</font></a></p>
-
-                                                </body>
-                                                </html>';
-                                                        $mail->setBodyHtml($descripcion);
-                                                        $mail->addTo($content_email[0]->value);
-                                                        $mail->setSubject('Formulario de sitio: '. utf8_decode($website_data[0]->name));
-                                                        $fileInfo= explode(".", $newFilename); 
-                                                        $extension = '.'.end($fileInfo); 
-                                                        if($newFilename){
-                                                        $content = file_get_contents(realpath('.').'/uploads/tmp/'.$newFilename);
-                                                            $attachment = new Zend_Mime_Part($content);
-                                                            $attachment->type        = 'application/'.$extension;
-                                                            $attachment->disposition = Zend_Mime::DISPOSITION_INLINE;
-                                                            $attachment->encoding    = Zend_Mime::ENCODING_BASE64;
-                                                            $attachment->filename    = $newFilename;
-                                                            $mail->addAttachment($attachment); 
-                                                        Zend_Session::namespaceUnset('user');
-                                                        
+						$subject = 'Formulario de sitio: '. utf8_decode($website_data[0]->name);
+                                                
+						$sended = GlobalFunctions::sendMail($formData['website_id'], $content_email[0]->value, $subject, $newFilename, $body);
+                                                if($sended == 'send'){
+                                                $this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success send')));
+                                                    echo json_encode ('success_captcha');
+                                                }else{
+                                                    $this->_helper->flashMessenger->addMessage(array('danger'=>$lang->translate('Errors sending')));
+                                                    echo json_encode ('error_sending');						
                                                 }
-                                                $sent = true;
-                                                try{
-                                                    $mail->send($tr);
-                                                } catch(Exception $e){
-                                                    $sent = false;
-                                                }
-						
-                                                if($newFilename){
-                                                    unlink(realpath('.').'/uploads/tmp/'.$newFilename);
-                                                }
-						$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success send')));
-						echo json_encode ('success_captcha');
-						}else{
-							$this->_helper->flashMessenger->addMessage(array('error'=>$lang->translate('Errors sending')));
-							echo json_encode ('error_sending');						
-						}
-
 					
 					 
 					 
 				}else{
-					 
+                                    
 					//get smpt credential from website information
 					$website = new Core_Model_Website();
 					$website_data = $website->find('wc_website',array('id'=>$formData['website_id']));
@@ -1115,103 +1031,24 @@ class Default_IndexController extends Zend_Controller_Action
                                         //Get Attached files
                                         $newFilename = $appUser->upload_file;
 					
-					//create a transport to register smpt server credentials
-					if($website_data[0]->smtp_hostname){
-						$tr = new Zend_Mail_Transport_Smtp($website_data[0]->smtp_hostname,
-								array('ssl' => 'ssl',
-                                                                                'port'=>$website_data[0]->smtp_port, 
-										'auth' => 'login',
-										'username' => $website_data[0]->smtp_username,
-										'password' => $website_data[0]->smtp_password, 
-                                                                                'register'=>true));
-							
-							
-						Zend_Mail::setDefaultTransport($tr);						 
-						$mail = new Zend_Mail();
-						$mail->setFrom($website_data[0]->info_email, utf8_decode($website_data[0]->name));
-						$descripcion = '<html xmlns="http://www.w3.org/1999/xhtml">
-                                                        <head>
-                                                            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                                                            <title>Formulario Din&aacute;mica</title>
-                                                            <style type="text/css">
-                                                            body {
-                                                                background-color:#FFFFFF;
-                                                                font-family:Arial, Helvetica, sans-serif;
-                                                            }
-                                                            .texto {
-                                                                font-size:12px;
-                                                                font-weight:normal;
-                                                                color:#5B5B5B;
-                                                            }
-                                                            </style>
-                                                        </head>
-                                                        <body>
-                                                        <table width="673"  border="0" align="center" cellpadding="0" cellspacing="2">
-                                                    <tr>
-                                                            <td height="101" colspan="2"><img src="'.$website_data[0]->website_url.'/uploads/website/'.$website_data[0]->logo.'"></td>
-                                                    </tr>
-                                                <tr bgcolor="#EEEEEE">
-                                                            <td colspan="2" class="texto"><p align="center">Hola, este es un mensaje de formulario en el sitio Web '.utf8_decode($website_data[0]->name).':</font> <br>
-                                                                            </p></td>
-                                                    </tr>
-                                                <tr bgcolor="#FFFFFF" >
-
-                                                <td style="border-bottom:1px solid #EEEEEE;" width="55%" class="texto" colspan="2">'.utf8_decode($body).'</td>
-                                                </tr>
-                                                <tr> 
-                                                <td align="center" colspan="2"><font color="red" size="1">&nbsp;</font> <br>
-                                                 <font color="red" size="1">&nbsp;
-                                                 </font>
-                                                 </td>
-                                                 </tr>
-                                                <tr>
-                                                <td colspan="2" bgcolor="#323232">
-                                                &nbsp;
-                                                </td>
-                                                </tr>
-                                                </table>
-                                                <p align="center"><a style="text-decoration: none;" href="'.$website_data[0]->website_url.'"><font size="3" color="#000000">'.$website_data[0]->website_url.'</font></a></p>
-
-                                                </body>
-                                                </html>';
-                                                        $mail->setBodyHtml($descripcion);
-						$mail->addTo($content_email[0]->value, 'User');
-						$mail->setSubject('Formulario de sitio: '. $website_data[0]->name);
-                                                $fileInfo= explode(".", $newFilename); 
-                                                $extension = '.'.end($fileInfo); 
-                                                if($newFilename){
-                                                $content = file_get_contents(realpath('.').'/uploads/tmp/'.$newFilename);
-                                                    $attachment = new Zend_Mime_Part($content);
-                                                    $attachment->type        = 'application/'.$extension;
-                                                    $attachment->disposition = Zend_Mime::DISPOSITION_INLINE;
-                                                    $attachment->encoding    = Zend_Mime::ENCODING_BASE64;
-                                                    $attachment->filename    = $newFilename;
-                                                    $mail->addAttachment($attachment); 
-                                                Zend_Session::namespaceUnset('user');
+					$subject = 'Formulario de sitio: '. utf8_decode($website_data[0]->name);
+                                                
+                                        $sended = GlobalFunctions::sendMail($formData['website_id'], $content_email[0]->value, $subject, $newFilename, $body);
+                                                if($sended == 'send'){
+                                                $this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success send')));
+                                                    echo json_encode ('success_captcha');
+                                                }else{
+                                                    $this->_helper->flashMessenger->addMessage(array('danger'=>$lang->translate('Errors sending')));
+                                                    echo json_encode ('error_sending');						
                                                 }
-                                                $sent = true;
-                                                try{
-                                                    $mail->send($tr);
-                                                } catch(Exception $e){
-                                                    $sent = false;
-                                                }
-						if($newFilename){
-                                                    unlink(realpath('.').'/uploads/tmp/'.$newFilename);
-                                                }
-						$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success send')));
-						echo json_encode ('success_captcha');
-						
-					}else{
-						$this->_helper->flashMessenger->addMessage(array('error'=>$lang->translate('Errors sending')));
-						echo json_encode ('error_sending');						
-					}
+                                        
 				}
 			
 			}
 				
 		}else{
 			//Found coincidences with dictionary
-			$this->_helper->flashMessenger->addMessage(array('error'=>$lang->translate('Your language is inappropriate to send this form')));
+			$this->_helper->flashMessenger->addMessage(array('danger'=>$lang->translate('Your language is inappropriate to send this form')));
 			echo json_encode ('error_dictionary');
 		}
     }
@@ -1236,7 +1073,7 @@ class Default_IndexController extends Zend_Controller_Action
     	$this->_helper->viewRenderer->setNoRender();
     	
     	//error message
-    	if($this->_helper->flashMessenger->addMessage(array('error'=>$lang->translate('Errors sending'))))
+    	if($this->_helper->flashMessenger->addMessage(array('danger'=>$lang->translate('Errors sending'))))
 	    	echo json_encode ('flash_error');
     }
     
@@ -1305,7 +1142,7 @@ class Default_IndexController extends Zend_Controller_Action
     	
     	$this->_helper->layout->disableLayout ();
     	// disable autorendering for this action
-    	//$this->_helper->viewRenderer->setNoRender();
+    	$this->_helper->viewRenderer->setNoRender();
     	
     	//translate library
     	$lang = Zend_Registry::get ( 'Zend_Translate' );
@@ -1332,51 +1169,27 @@ class Default_IndexController extends Zend_Controller_Action
     			$website = new Core_Model_Website();
     			$website_data = $website->find('wc_website',array('id'=>$formData['website_id']));
     			
-    			//create a transport to register smpt server credentials
-    			if($website_data[0]->smtp_hostname){
-    				$tr = new Zend_Mail_Transport_Smtp($website_data[0]->smtp_hostname,
-    						array('ssl' => 'tls',
-    								'auth' => 'login',
-    								'username' => $website_data[0]->smtp_username,
-    								'password' => $website_data[0]->smtp_password));
- 			
-    				Zend_Mail::setDefaultTransport($tr);
-    			
-    				try{
-	    				$mail = new Zend_Mail();
-	    				$mail->setFrom('wicaweb@wicaweb.com');
-	    				$mail->setBodyHtml('<br><br> '.utf8_decode($lang->translate("To complete this registry is necessary to do")).'
-	    						<a href="'.$website_data[0]->website_url.'/index?email='.urlencode($public_user_obj->email).'&key='.urlencode($public_user_obj->activation_key).'" style="cursor: pointer;"> '.utf8_decode($lang->translate("click here")).' </a>
-	    						'.utf8_decode($lang->translate("to activate your account, or copy the next link on your browser")).': <br> <br>
-	    						<a href="#">'.$website_data[0]->website_url.'/index?email='.urlencode($public_user_obj->email).'&key='.urlencode($public_user_obj->activation_key).'</a>');
-	    				
-	    				$mail->addTo($formData['public_user_email_'.$formData['area']], 'User');
-	    				$mail->setSubject('subject');
-	    				$mail->send($tr);
-	    				
-	    				$this->_helper->flashMessenger->addMessage ( array (
-	    						'success' => $lang->translate ( 'Your registration has been completed, please check your email' )
-	    				) );
-	    				
-	    				echo json_encode(TRUE);  
-	    				  				
-    				}catch (Exception $e) {
-					    $this->_helper->flashMessenger->addMessage ( array (
-    							'error' => $lang->translate ( 'The activation email has not been sent')
-    					) );
-    					echo json_encode(TRUE);
-					}
-
-    			} else {
-    				$this->_helper->flashMessenger->addMessage ( array (
-    						'error' => $lang->translate ( 'The activation email has not been sent')
-    				) );
-    				echo json_encode(TRUE);
-    			}   			
+                        $body = '<br><br> '.$lang->translate("To complete this registry is necessary to do").'
+	    						<a href="'.$website_data[0]->website_url.'/default/index/index?email='.urlencode($public_user_obj->email).'&key='.urlencode($public_user_obj->activation_key).'" style="cursor: pointer;"> '.$lang->translate("click here").' </a>
+	    						'.$lang->translate("to activate your account, or copy the next link on your browser").': <br> <br>
+	    						<a href="'.$website_data[0]->website_url.'/default/index/index?email='.urlencode($public_user_obj->email).'&key='.urlencode($public_user_obj->activation_key).'">'.$website_data[0]->website_url.'/index?email='.urlencode($public_user_obj->email).'&key='.urlencode($public_user_obj->activation_key).'</a>';
+                        
+                        $sended = GlobalFunctions::sendMail($formData['website_id'], $formData['public_user_email_'.$formData['area']], 'Registration', null, $body);
+                        if($sended == 'send'){
+                            $this->_helper->flashMessenger->addMessage ( array (
+                                'success' => $lang->translate ( 'Your registration has been completed, please check your email' )
+                            ) );
+                            echo json_encode(TRUE); 
+                        }else{
+                            $this->_helper->flashMessenger->addMessage ( array (
+                                'danger' => $lang->translate ( 'The activation email has not been sent')
+                            ) );
+                            echo json_encode(TRUE);					
+                        }  			
 
     		}else{
     			$this->_helper->flashMessenger->addMessage ( array (
-    					'error' => $lang->translate ( 'Your registration has not been completed' )
+    					'danger' => $lang->translate ( 'Your registration has not been completed' )
     			) );    			
     			echo json_encode(TRUE);
     		}
@@ -1491,47 +1304,30 @@ class Default_IndexController extends Zend_Controller_Action
     			//get smpt credential from website information
     			$website = new Core_Model_Website();
     			$website_data = $website->find('wc_website',array('id'=>$this->_request->getPost ('website_id')));
-    			 
-    			//create a transport to register smpt server credentials
-    			if($website_data[0]->smtp_hostname && $website_data[0]->smtp_username && $website_data[0]->smtp_password){
-    				$tr = new Zend_Mail_Transport_Smtp($website_data[0]->smtp_hostname,
-    						array('ssl' => 'tls',
-    								'auth' => 'login',
-    								'username' => $website_data[0]->smtp_username,
-    								'password' => $website_data[0]->smtp_password));
-    				 
-    				 
-    				Zend_Mail::setDefaultTransport($tr);
-    				 
-    				try{ 
-	    				$mail = new Zend_Mail();
-	    				$mail->setFrom('wicaweb@wicaweb.com');
-	    				$mail->setBodyHtml('<br><br>'.utf8_decode($lang->translate("Your password has been reset successfully")).'<br/><br/>
+    			
+                        $body = '<br><br>'.utf8_decode($lang->translate("Your password has been reset successfully")).'<br/><br/>
 	    						'.$lang->translate("User").': '.$public_user_data[0]->username.'<br/>
 	    						'.utf8_decode($lang->translate("Password")).': '.$new_password.'<br/><br/>
 	    						'.utf8_decode($lang->translate("If you don't want to reset your password, please")).' <br> <br>
-	    						<a href="'.$website_data[0]->website_url.'/index?email='.urlencode($email).'&rollback=yes&key='.urlencode($public_user_data[0]->activation_key).'" style="cursor: pointer;"> '.utf8_decode($lang->translate("click here")).' </a>');
-	    
-	    				$mail->addTo($email, 'User');
-	    				$mail->setSubject('subject');
-	    				$mail->send($tr);
-	    				
-	    				$this->_helper->flashMessenger->addMessage ( array (
-	    						'success' => $lang->translate ( 'You will receive an email with your new password' )
-	    				) );
-	    				echo json_encode(TRUE);   
-
-    				}catch (Exception $e) {
-    					$this->_helper->flashMessenger->addMessage ( array (
-    							'error' => $lang->translate ( 'The email with your new password has not been sent')
-    					) );
-    					echo json_encode(TRUE);
-    				}    				
-    			}
+	    						<a href="'.$website_data[0]->website_url.'/default/index/index?email='.urlencode($email).'&rollback=yes&key='.urlencode($public_user_data[0]->activation_key).'" style="cursor: pointer;"> '.utf8_decode($lang->translate("click here")).' </a>';
+                        
+                        $sended = GlobalFunctions::sendMail($this->_request->getPost ('website_id'), $email, 'Restore Password', null, $body);
+                        if($sended == 'send'){
+                            $this->_helper->flashMessenger->addMessage ( array (
+                                'success' => $lang->translate ( 'You will receive an email with your new password' )
+                            ) );
+                            echo json_encode(TRUE);
+                        }else{
+                            $this->_helper->flashMessenger->addMessage ( array (
+                                'danger' => $lang->translate ( 'The email with your new password has not been sent')
+                            ) );
+                            echo json_encode(TRUE);					
+                        }
+    			
 
     		}else{
     			$this->_helper->flashMessenger->addMessage ( array (
-    					'error' => $lang->translate ( 'Some errors occurred during the process' )
+    					'danger' => $lang->translate ( 'Some errors occurred during the process' )
     			) );    			
     			echo json_encode(TRUE);
     		}
@@ -1567,7 +1363,7 @@ class Default_IndexController extends Zend_Controller_Action
 				echo json_encode(TRUE);
 	    	}else{
 				$this->_helper->flashMessenger->addMessage ( array (
-						'error' => $lang->translate ( 'Your password has not been changed' )
+						'danger' => $lang->translate ( 'Your password has not been changed' )
 				) );
 				echo json_encode(FALSE);
 	    	}

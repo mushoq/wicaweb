@@ -114,6 +114,7 @@ $comments_type = GlobalFunctions::arrayTranslate(Core_Model_Website::$comments_t
                                                         <div class=" upload_icon_container"> 
                                                                 <div class='upload_icon'><?php echo $this->form->icon->removeDecorator('HtmlTag')->removeDecorator('Label'); ?></div>
                                                                 <div class='delete_icon'><a id='delete_icon' class="pointer trash-icon"><i class='glyphicon glyphicon-trash'></i></a></div>
+                                                                <input type="hidden" name="deleted_icon" id="deleted_icon" value=""/>
                                                         </div> 
                                                         <p class="help-block grey">(jpg,png,gif,jpeg,ico)</p>
                                                 </div>
@@ -155,6 +156,8 @@ $comments_type = GlobalFunctions::arrayTranslate(Core_Model_Website::$comments_t
                                                     <div class="col-md-5">&nbsp;</div>
                                                     <div class="col-md-4 form_field">
                                                             <?php echo $this->form->img_logo->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
+                                                            <div class='delete_logo'><a id='delete_logo' class="pointer trash-icon"><i class='glyphicon glyphicon-trash'></i></a></div>
+                                                            <input type="hidden" name="deleted_logo" id="deleted_logo" value=""/>
                                                     </div>
                                             </div>
                                     </div>

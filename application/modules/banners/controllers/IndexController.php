@@ -25,6 +25,15 @@ class Banners_IndexController extends Zend_Controller_Action
 		// choose a different layout script:
 		$layout->setLayout('core');
 		
+                $lang = Zend_Registry::get('Zend_Translate');
+		
+		//check logged in user
+		if (!Zend_Auth::getInstance ()->hasIdentity ()) {
+			//translate library
+			$lang = Zend_Registry::get('Zend_Translate');			
+			throw new Zend_Exception("CUSTOM_EXCEPTION:".$lang->translate('No Access Permissions').'<br/><br/>'.'<a href="/core">'.$lang->translate('Login to the Administration').'</a>');		
+		}
+                
 		//session
 		$id = New Zend_Session_Namespace('id');
 
@@ -224,8 +233,12 @@ class Banners_IndexController extends Zend_Controller_Action
 	public function indexAction()
     {
     	
+        
+
     	$this->_helper->layout->disableLayout ();
     	$this->_helper->viewRenderer->setNoRender();
+        
+        
     	
     }
 

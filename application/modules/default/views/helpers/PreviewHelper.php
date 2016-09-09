@@ -340,8 +340,8 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 										<label class="required" for="public_password_'.$area_id.'">* '.$lang->translate("Password").'</label>
                                                                                 <input type="password" class="form-control" id="public_password_'.$area_id.'" name="public_password_'.$area_id.'" />
                                                                         </div>
-									<label  id="error_login_'.$area_id.'" name="error_login_'.$area_id.'" class="error_validation hide">'.$lang->translate("The username or password are wrong").'</label>
-									<label  id="error_login_inactive_'.$area_id.'" name="error_login_inactive_'.$area_id.'" class="error_validation hide">'.$lang->translate("This user is inactive").'</label>
+									<div id="error_login_'.$area_id.'" name="error_login_'.$area_id.'" class="error_validation hide">'.$lang->translate("The username or password are wrong").'</div>
+									<div id="error_login_inactive_'.$area_id.'" name="error_login_inactive_'.$area_id.'" class="error_validation hide">'.$lang->translate("This user is inactive").'</div>
 									<input type="button" class="btn btn-primary" id="btnLogin_'.$area_id.'" area="'.$area_id.'" name="btnLogin_'.$area_id.'" value="'.$lang->translate("Login").'"/><br/>
 									<a class="pointer" href="#form_register_'.$area_id.'" area="'.$area_id.'" id="register_'.$area_id.'">'.$lang->translate("Register").'</a><br/>
 									<a class="pointer" href="#form_forgot_'.$area_id.'" area="'.$area_id.'" id="forgot_'.$area_id.'">'.$lang->translate("Forgot your password").'?</a>
@@ -398,7 +398,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 							</div>
 							
 							<div class="hide">
-								<form class="col-md-8 form-login margin-fancy" id="form_forgot_'.$area_id.'" name="form_forgot_'.$area_id.'" action="">
+								<form class="col-md-12 form-login" id="form_forgot_'.$area_id.'" name="form_forgot_'.$area_id.'" action="">
 									<div class="text-center">
 										<h3>'.$lang->translate("Password Reset").'</h3>
 									</div><br/>

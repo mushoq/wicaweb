@@ -2127,6 +2127,104 @@ class GlobalFunctions {
             return $crum_arr;
         }
         
+        public static function sendMail($website_id, $email, $subject, $newFilename, $body)
+        {
+        
+            //get smpt credential from website information
+            $website = new Core_Model_Website();
+            $website_data = $website->find('wc_website',array('id'=>$website_id));
+            //create a transport to register smpt server credentials
+            if($website_data[0]->smtp_hostname){
+                    $tr = new Zend_Mail_Transport_Smtp($website_data[0]->smtp_hostname,
+                            array('ssl' => 'ssl',
+                                            'port'=>$website_data[0]->smtp_port, 
+                                            'auth' => 'login',
+                                            'username' => $website_data[0]->smtp_username,
+                                            'password' => $website_data[0]->smtp_password, 
+                                            'register'=>true));
+
+
+                    Zend_Mail::setDefaultTransport($tr);						 
+                    $mail = new Zend_Mail();
+                    $mail->setFrom($website_data[0]->info_email, utf8_decode($website_data[0]->name));
+                    $descripcion = '<html xmlns="http://www.w3.org/1999/xhtml">
+                    <head>
+                        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                        <title>Formulario Din&aacute;mica</title>
+                        <style type="text/css">
+                        body {
+                            background-color:#FFFFFF;
+                            font-family:Arial, Helvetica, sans-serif;
+                        }
+                        .texto {
+                            font-size:12px;
+                            font-weight:normal;
+                            color:#5B5B5B;
+                        }
+                        </style>
+                    </head>
+                    <body>
+                    <table width="673"  border="0" align="center" cellpadding="0" cellspacing="2">
+                <tr>
+                        <td height="101" colspan="2"><img src="'.$website_data[0]->website_url.'/uploads/website/'.$website_data[0]->logo.'"></td>
+                </tr>
+            <tr bgcolor="#EEEEEE">
+                        <td colspan="2" class="texto"><p align="center">Hola, este es un mensaje de formulario en el sitio Web '.utf8_decode($website_data[0]->name).':</font> <br>
+                                        </p></td>
+                </tr>
+            <tr bgcolor="#FFFFFF" >
+
+            <td style="border-bottom:1px solid #EEEEEE;" width="55%" class="texto" colspan="2">'.utf8_decode($body).'</td>
+            </tr>
+            <tr> 
+            <td align="center" colspan="2"><font color="red" size="1">&nbsp;</font> <br>
+             <font color="red" size="1">&nbsp;
+             </font>
+             </td>
+             </tr>
+            <tr>
+            <td colspan="2" bgcolor="#323232">
+            &nbsp;
+            </td>
+            </tr>
+            </table>
+            <p align="center"><a style="text-decoration: none;" href="'.$website_data[0]->website_url.'"><font size="3" color="#000000">'.$website_data[0]->website_url.'</font></a></p>
+
+            </body>
+            </html>';
+                    $mail->setBodyHtml($descripcion);
+                    $mail->addTo($email);
+                    $mail->setSubject($subject);
+                    $fileInfo= explode(".", $newFilename); 
+                    $extension = '.'.end($fileInfo); 
+                    if($newFilename){
+                    $content = file_get_contents(realpath('.').'/uploads/tmp/'.$newFilename);
+                        $attachment = new Zend_Mime_Part($content);
+                        $attachment->type        = 'application/'.$extension;
+                        $attachment->disposition = Zend_Mime::DISPOSITION_INLINE;
+                        $attachment->encoding    = Zend_Mime::ENCODING_BASE64;
+                        $attachment->filename    = $newFilename;
+                        $mail->addAttachment($attachment); 
+                    Zend_Session::namespaceUnset('user');
+
+            }
+            $sent = true; 
+            try{
+                $mail->send($tr);
+            } catch(Exception $e){
+                $sent = false;
+            }
+
+            if($newFilename){
+                unlink(realpath('.').'/uploads/tmp/'.$newFilename);
+            }
+                $send = 'send';
+            }else{
+                $send = 'error';						
+            }
+            return $send;
+        }
+        
         public static function spanishDateStr($date)
 	{
 		$timeStamp = strtotime($date);

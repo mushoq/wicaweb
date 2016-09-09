@@ -222,8 +222,4 @@ INSERT INTO `wc_field` (`id`, `content_type_id`, `name`, `type`, `required`, `or
 -- Volcar la base de datos para la tabla `wc_external_files`
 --
 
-INSERT INTO `wc_external_files` (`id`, `website_id`, `name`, `path`, `type`, `order_number`) VALUES
-(1, NULL, 'jcarousel js', 'jquery.jcarousel.min_1347989829.js', 'js', 1),
-(2, NULL, 'jcarousel css', 'skin_1347989853.css', 'css', 1),
-(3, NULL, 'productos', 'products_1347990812.js', 'js', 2),
-(4, NULL, 'jquery', 'jquery-ui-1.8.23.custom_1348005941.css', 'css', 2);
+

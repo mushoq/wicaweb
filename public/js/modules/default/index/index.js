@@ -46,9 +46,9 @@ $(document).ready(function() {
 	
 	//Loading view
 	$("#loader_spinner").bind("ajaxStart", function(){
-	    $(this).show();
+	    $(this).removeClass('hide');
 	}).bind("ajaxStop", function(){
-		$(this).hide();
+		$(this).addClass('hide');
 	});
 	
 	$("[id^='myCarousel_']").each(function(){
@@ -57,13 +57,13 @@ $(document).ready(function() {
 		});
 
 		$(this).bind("mouseenter", function(){
-			$("#carousel_left_"+this.id.replace('myCarousel_','')).show();
-			$("#carousel_right_"+this.id.replace('myCarousel_','')).show();				
+			$("#carousel_left_"+this.id.replace('myCarousel_','')).removeClass('hide');
+			$("#carousel_right_"+this.id.replace('myCarousel_','')).removeClass('hide');				
 		});
 		
 		$(this).bind("mouseleave", function(){
-			$("#carousel_left_"+this.id.replace('myCarousel_','')).hide();
-			$("#carousel_right_"+this.id.replace('myCarousel_','')).hide();				
+			$("#carousel_left_"+this.id.replace('myCarousel_','')).addClass('hide');
+			$("#carousel_right_"+this.id.replace('myCarousel_','')).addClass('hide');				
 		});
 		
 		
@@ -106,7 +106,7 @@ $(document).ready(function() {
                
 		
 		$("#btn_sub_form_"+content_id).bind("click",function(){                    
-			$("#captcha_error").hide();
+			$("#captcha_error").addClass('hide');
 			if($("#content_form_"+content_id).valid()){
 				$.ajax({
 					type: 'POST',
@@ -117,7 +117,7 @@ $(document).ready(function() {
 					success: function(data) {	
 						if(data=='error_captcha'){
 							$("#captcha_error_"+content_id).removeClass('hidden');
-                                                        $("#captcha_error_"+content_id).show();
+                                                        $("#captcha_error_"+content_id).removeClass('hide');
 						}else
 							if(data=='success_captcha' || data=='error_dictionary' || data=='error_sending'){
 								window.location.reload(true);
@@ -175,7 +175,7 @@ $(document).ready(function() {
 		});				
 		
 		$("#btnLogin_"+area).bind("click",function(){
-			$("#error_login_"+area ).hide();
+			
 			if($("#form_login_"+area).valid()){
 				$.ajax({
 					type: 'POST',
@@ -192,17 +192,51 @@ $(document).ready(function() {
 							window.location.reload(true);
 						}else{
 							if(data == 'error'){
-								$("#error_login_"+area).show();
+								$("#error_login_"+area).removeClass('hide');
 							}else
 								if(data == 'inactive'){
-									$("#error_login_inactive_"+area).show();
+									$("#error_login_inactive_"+area).removeClass('hide');
 							}
 						}
 					}
 				});
 			}
 		});
+		
+		$('#public_password_'+area).keypress(function(e) {
+        if(e.which == 13) {
+			
+			if($("#form_login_"+area).valid()){
+				$.ajax({
+					type: 'POST',
+					async: false,
+					url: '/default/index/externallogin',
+					data: {
+						username: $("#public_user_"+area).val(),
+						password: $("#public_password_"+area).val()
+					},
+					dataType: 'json',
+					
+					success: function(data) {	
+						if(data && data!='error' && data!='inactive'){
+							window.location.reload(true);
+						}else{
+							if(data == 'error'){
+								$("#error_login_"+area).removeClass('hide');
+							}else
+								if(data == 'inactive'){
+									$("#error_login_inactive_"+area).removeClass('hide');
+							}
+						}
+					}
+				});
+			}
+		
+			}
+		});
 	});
+	
+	
 	
 	
 	$("#logout_public_user").bind("click",function(){
@@ -259,7 +293,7 @@ $(document).ready(function() {
 			'onClosed':  function(){
 				$("#form_register_"+area_reg+" input[id^='public_user_']").each(function(){
 					$("input.error_validation").removeClass('error_validation');
-					$("label.error_validation").hide();
+					$("label.error_validation").addClass('hide');
 					$(this).val('');
 				});			
 			}
@@ -403,8 +437,32 @@ $(document).ready(function() {
 					}
 				});		
 			}
-		});		
+		});	
 		
+		$('#public_for_user_email_'+area).keypress(function(e) {
+			if(e.which == 13) {
+				e.preventDefault();
+				if($("#form_forgot_"+area_for).valid()){
+					$.ajax({
+						type: 'POST',
+						async: false,
+						url: '/default/index/forgotpass',
+						data: {
+							public_for_user_email: $("#public_for_user_email_"+area_for).val(),
+							website_id: $("#website_id").val()
+						},
+						dataType: 'json',
+						
+						success: function(data) {	
+							if(data){
+								window.location.reload(true);
+							}
+							$.fancybox.close();
+						}
+					});		
+				}
+			}
+		});	
 	});
 	setDefaultCalendarOldPbl($("#view_old_plublications"));	
 	
@@ -440,15 +498,15 @@ $(function() {
 
 $(window).load(function(){
 	$('#showMenu').click(function() {
-	 $('ul.sm-simple').show();
-	 $('#hideMenu').show();
-	 $('#showMenu').hide();
+	 $('ul.sm-simple').removeClass('hide');
+	 $('#hideMenu').removeClass('hide');
+	 $('#showMenu').addClass('hide');
 	});
 	
 	$('#hideMenu').click(function() {
-	 $('ul.sm-simple').hide();
-	 $('#hideMenu').hide();
-	 $('#showMenu').show();
+	 $('ul.sm-simple').addClass('hide');
+	 $('#hideMenu').addClass('hide');
+	 $('#showMenu').removeClass('hide');
 	});	
 });
 	

@@ -50,9 +50,9 @@ $(document).ready(function() {
 	
 	//Loading view
 	$("#loader_spinner").bind("ajaxStart", function(){
-	    $(this).show();
+	    $(this).removeClass('hide');
 	}).bind("ajaxStop", function(){
-		$(this).hide();
+		$(this).addClass('hide');
 	});
 	
 	mainmenu();
@@ -63,13 +63,13 @@ $(document).ready(function() {
 		});
 
 		$(this).bind("mouseenter", function(){
-			$("#carousel_left_"+this.id.replace('myCarousel_','')).show();
-			$("#carousel_right_"+this.id.replace('myCarousel_','')).show();				
+			$("#carousel_left_"+this.id.replace('myCarousel_','')).removeClass('hide');
+			$("#carousel_right_"+this.id.replace('myCarousel_','')).removeClass('hide');				
 		});
 		
 		$(this).bind("mouseleave", function(){
-			$("#carousel_left_"+this.id.replace('myCarousel_','')).hide();
-			$("#carousel_right_"+this.id.replace('myCarousel_','')).hide();				
+			$("#carousel_left_"+this.id.replace('myCarousel_','')).addClass('hide');
+			$("#carousel_right_"+this.id.replace('myCarousel_','')).addClass('hide');				
 		});
 		
 		
@@ -96,7 +96,7 @@ $(document).ready(function() {
 		});
 		
 		$("#btn_sub_form_"+content_id).bind("click",function(){
-			$("#captcha_error").hide();
+			$("#captcha_error").addClass('hide');
 			if($("#content_form_"+content_id).valid()){
 				$.ajax({
 					type: 'POST',
@@ -106,7 +106,7 @@ $(document).ready(function() {
 					data: 	$("#content_form_"+content_id).serialize(),
 					success: function(data) {	
 						if(data=='error_captcha'){
-							$("#captcha_error_"+content_id).show();
+							$("#captcha_error_"+content_id).removeClass('hide');
 						}else
 							if(data=='success_captcha'){
 								window.location.reload(true);
@@ -164,7 +164,7 @@ $(document).ready(function() {
 		});				
 		
 		$("#btnLogin_"+area).bind("click",function(){
-			$("#error_login_"+area ).hide();
+			$("#error_login_"+area ).addClass('hide');
 			if($("#form_login_"+area).valid()){
 				$.ajax({
 					type: 'POST',
@@ -181,10 +181,10 @@ $(document).ready(function() {
 							window.location.reload(true);
 						}else{
 							if(data == 'error'){
-								$("#error_login_"+area).show();
+								$("#error_login_"+area).removeClass('hide');
 							}else
 								if(data == 'inactive'){
-									$("#error_login_inactive_"+area).show();
+									$("#error_login_inactive_"+area).removeClass('hide');
 							}
 						}
 					}
@@ -216,7 +216,7 @@ $(document).ready(function() {
 			'onClosed':  function(){
 				$("#form_register_"+area_reg+" input[id^='public_user_']").each(function(){
 					$("input.error_validation").removeClass('error_validation');
-					$("label.error_validation").hide();
+					$("label.error_validation").addClass('hide');
 					$(this).val('');
 				});			
 			}

@@ -263,9 +263,9 @@ $(document).ready(function(){
 			});
 		} else {
 			$("#frmContent").empty();
-			$("#frmContent").hide();
-			$("#div_preview").hide();
-			$("#no_flash_player").show();
+			$("#frmContent").addClass('hide');
+			$("#div_preview").addClass('hide');
+			$("#no_flash_player").removeClass('hide');
 		  }
                   //default watermark pos
                 if($('#watermark_position').val()!=''){
@@ -331,8 +331,8 @@ $(document).ready(function(){
 			hide_elements_link();
 			
 			//show internal link elementes
-			$("[id^=internal_section]").show();
-			$("[id^=internal_section] label").show();
+			$("[id^=internal_section]").removeClass('hide');
+			$("[id^=internal_section] label").removeClass('hide');
 			
 			//modify rules on internal link elements
 			$("#internal_section").attr('disabled',false);
@@ -351,8 +351,8 @@ $(document).ready(function(){
 			hide_elements_link();
 			
 			//show external link elements
-			$("[id^=link]").show();
-			$("[id^=link] label").show();
+			$("[id^=link]").removeClass('hide');
+			$("[id^=link] label").removeClass('hide');
 			
 			//modify rules on external link elements
 			$("#link").attr('disabled',false);
@@ -370,8 +370,8 @@ $(document).ready(function(){
 			hide_elements_link();
 			
 			//show email elements
-			$("[id^=email]").show();
-			$("[id^=email] label").show();
+			$("[id^=email]").removeClass('hide');
+			$("[id^=email] label").removeClass('hide');
 			
 			//modify rules on email elements
 			$("#email").attr('disabled',false);
@@ -390,10 +390,10 @@ $(document).ready(function(){
 			hide_elements_link();
 			
 			//show file elements
-			$("[id^='file']").show();
-			$("[id^='file'] label").show();
-			$("[id^=file_type]").show();
-			$("[id^=file_type] label").show();
+			$("[id^='file']").removeClass('hide');
+			$("[id^='file'] label").removeClass('hide');
+			$("[id^=file_type]").removeClass('hide');
+			$("[id^=file_type] label").removeClass('hide');
 			
 			// modify rules on file elements
 			$("#file_type").attr('disabled',false);
@@ -414,7 +414,7 @@ $(document).ready(function(){
 				
 			});
 			
-			$("#input_file_file").show();
+			$("#input_file_file").removeClass('hide');
 			// add ajax upload image
 			load_file('file','file');
 
@@ -431,8 +431,8 @@ $(document).ready(function(){
 			hide_elements_link();
 			
 			//show internal link elementes
-			$("[id^=internal_section]").show();
-			$("[id^=internal_section] label").show();
+			$("[id^=internal_section]").removeClass('hide');
+			$("[id^=internal_section] label").removeClass('hide');
 			
 			//modify rules on internal link elements
 			$("#internal_section").attr('disabled',false);
@@ -449,8 +449,8 @@ $(document).ready(function(){
 			//hide other options elements
 			hide_elements_link();
 			//show external link elements
-			$("[id^=link]").show();
-			$("[id^=link] label").show();
+			$("[id^=link]").removeClass('hide');
+			$("[id^=link] label").removeClass('hide');
 			//modify rules on external link elements
 			$("#link").attr('disabled',false);
 			$("#link").rules("add",{
@@ -466,8 +466,8 @@ $(document).ready(function(){
 			//hide other options elements
 			hide_elements_link();
 			//show email elements
-			$("[id^=email]").show();
-			$("[id^=email] label").show();
+			$("[id^=email]").removeClass('hide');
+			$("[id^=email] label").removeClass('hide');
 			//modify rules on email elements
 			$("#email").attr('disabled',false);
 			$("#email").rules("add",{
@@ -484,10 +484,10 @@ $(document).ready(function(){
 //			//hide other options elements
 //			hide_elements_link();
 //			//show file elements
-//			$("[+id^='file']").show();
-//			$("[id^='file'] label").show();
-//			$("[id^=file_type]").show();
-//			$("[id^=file_type] label").show();
+//			$("[+id^='file']").removeClass('hide');
+//			$("[id^='file'] label").removeClass('hide');
+//			$("[id^=file_type]").removeClass('hide');
+//			$("[id^=file_type] label").removeClass('hide');
 //			
 //			$("#input_file_file").val($("#hdnNameFile_file").val());
 //			// modify rules on file elements
@@ -502,7 +502,7 @@ $(document).ready(function(){
 //				
 //			});
 //			
-//			$("#input_file_file").show();
+//			$("#input_file_file").removeClass('hide');
 //			
 //			load_file('file','file');
 //			//auto height containers
@@ -702,7 +702,9 @@ $(document).ready(function(){
 			$('#internal_name').val($(this).val());
 		});		
 		// add fancy box feature
-		$("#anchor_add").fancybox();
+		$("#anchor_add").fancybox({
+			maxWidth	: 600	
+		});
 		var count = 0;
 		// appent header of table where elements will be added
 		$("#form_elements").append($("#header_table").val());
@@ -727,8 +729,8 @@ $(document).ready(function(){
 							'<div class="col-md-2" id="td_type_'+i+'">'+data[i]['type']+'</div>' +
 							'<div class="col-md-2 handler move"><i class="glyphicon glyphicon-move"></i></div>' +
 							'<div class="col-md-3 last pointer">'+
-							'	<a id="aux_edit_element_'+i+'" href="#formContent"></a><a id="edit_element_'+i+'" number="'+length+'" element="'+i+'"><i class="edit_element icon-pencil pointer"></i></a> / ' +
-							'	<i id="remove_element_'+i+'" element="'+i+'" class="remove_element icon-trash pointer"></i>'+
+							'	<a id="aux_edit_element_'+i+'" href="#formContent"></a><a id="edit_element_'+i+'" number="'+length+'" element="'+i+'"><i class="edit_element glyphicon glyphicon-pencil pointer"></i></a> / ' +
+							'	<a id="remove_element_'+i+'" number="'+length+'" element="'+i+'"><i class="remove_element glyphicon glyphicon-trash pointer"></i></a>'+
 							'</div>' +
 						'</div>');
 						
@@ -769,8 +771,8 @@ $(document).ready(function(){
 							setSectionTreeHeight();	
 							
 							if($("#sortable").is(':empty')){
-								$("#labl_no_elements").show();
-								$("#elements_table, #sortable").hide();
+								$("#labl_no_elements").removeClass('hide');
+								$("#elements_table, #sortable").addClass('hide');
 							}
 						});
 						//add fancybox feature 
@@ -787,8 +789,8 @@ $(document).ready(function(){
 					}
 				
 				if(!$("#sortable").is(':empty')){
-					$("#labl_no_elements").hide();
-					$("#elements_table, #sortable").show();
+					$("#labl_no_elements").addClass('hide');
+					$("#elements_table, #sortable").removeClass('hide');
 					//auto height containers
 					autoHeightContent();
 					// resize tree height according content
@@ -798,24 +800,25 @@ $(document).ready(function(){
 			}
 		});
 		//hide number field that is used on radio button element and select element
-		$("[id^='number']").hide();
+		$("[id^='number']").addClass('hide');
 		// change event on element type
 		$("#element_type").bind("change",function() {
 					// check if selected element id radiobutton or dropdown 
 					if ($("#element_type").val() == 'radiobutton' || $("#element_type").val() == 'dropdown') {
 						//show number field and add rules
-						$("[id^='number']").show();
+						$("[id^='number']").removeClass('hide');
 						$("#number").rules("add",{
 							required:true
 						});
 					} else {
 						//hide number element and hide rules
-						$("[id^='number']").hide();
+						$("[id^='number']").addClass('hide');
 						$("#number").rules("remove");
 					}
 				});
 		//click even on add button
 		$("#add").bind("click", function() {
+				
 			//add rules on dropdown element type
 			$("#element_type").rules("add",{
 				required:true
@@ -824,7 +827,7 @@ $(document).ready(function(){
 			$("#element_type").valid();
 			$("#number").valid();			
 			
-			$("#alert").hide();
+			$("#alert").addClass('hide');
 			//if element is radiobutton or dropdown 
 			if ($("#element_type").val() == 'radiobutton' || $("#element_type").val() == 'dropdown') {
 				if($("#number").val() != ''  ){
@@ -837,6 +840,9 @@ $(document).ready(function(){
 							return $("#number").val();
 							}	
 					}, function(){
+						$(".btn-group > .btn").click(function(){
+							$(this).addClass("current").siblings().removeClass("active");
+						});
 						//validate elements form
 						$("#elements_form").validate({
 							wrapper: "span",
@@ -862,7 +868,7 @@ $(document).ready(function(){
 						//simulate anchor click to display fancybox
 						$("#anchor_add").click();
 						$("#btn_add").bind("click",function(){
-							$("#alert").hide();
+							$("#alert").addClass('hide');
 							//validate elements form
 							if($("#elements_form").valid())
 							{
@@ -891,8 +897,8 @@ $(document).ready(function(){
 											'<div class="col-md-2" id="td_type_'+count+'">'+$("#element_type").val()+'</div>' +
 											'<div class="col-md-2 handler move"><i class="glyphicon glyphicon-move"></i></div>' +
 											'<div class="col-md-3 last pointer">' +
-											'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element icon-pencil pointer" ></i></a> / ' +
-											'	<img id="remove_element_'+count+'" element="'+count+'" class="remove_element icon-trash pointer" ></i>' +
+											'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element glyphicon glyphicon-pencil pointer" ></i></a> / ' +
+											'	<a id="remove_element_'+count+'" element="'+count+'"><i class="remove_element glyphicon glyphicon-trash pointer"></i></a>'+
 											'</div>' +
 									'</div>');
 									// add sortable feature 
@@ -934,15 +940,15 @@ $(document).ready(function(){
 											setSectionTreeHeight();	
 											
 											if($("#sortable").is(':empty')){
-												$("#labl_no_elements").show();
-												$("#elements_table, #sortable").hide();
+												$("#labl_no_elements").removeClass('hide');
+												$("#elements_table, #sortable").addClass('hide');
 											}
 										});
 										//add fancybox feature 
 										$("#aux_edit_element_"+count).fancybox();
 										//edit button click event
 										$("#edit_element_"+count).bind("click",function(){
-											$("#repeat_frm_name").hide();
+											$("#repeat_frm_name").addClass('hide');
 											var element = $(this).attr('element');
 											//call edit function
 											edit_element(element, 1);
@@ -950,8 +956,8 @@ $(document).ready(function(){
 										
 										count++;
 										//show elements
-										$("#labl_no_elements").hide();
-										$("#elements_table, #sortable").show();
+										$("#labl_no_elements").addClass('hide');
+										$("#elements_table, #sortable").removeClass('hide');
 										//close fancybox
 										$.fancybox.close();
 										//remove rules
@@ -959,7 +965,7 @@ $(document).ready(function(){
 										$("#number").rules("remove");										
 									}
 								else{// show message if name already exist
-									$("#repeat_frm_name").show();
+									$("#repeat_frm_name").removeClass('hide');
 								}
 							}
 						});
@@ -976,6 +982,9 @@ $(document).ready(function(){
 							return $("#number").val();
 							}
 					}, function(){
+						$(".btn-group > .btn").click(function(){
+							$(this).addClass("current").siblings().removeClass("active");
+						});
 						//validate element form
 						$("#elements_form").validate({
 							wrapper: "span",
@@ -997,7 +1006,7 @@ $(document).ready(function(){
 						$("#anchor_add").click();
 						//click event on form element type save button
 						$("#btn_add").bind("click",function(){
-							$("#repeat_frm_name").hide();
+							$("#repeat_frm_name").addClass('hide');
 							//validate elements form
 							if($("#elements_form").valid())
 							{
@@ -1025,8 +1034,8 @@ $(document).ready(function(){
 											'<div class="col-md-2" id="td_type_'+count+'">'+$("#element_type").val()+'</div>'+
 											'<div class="col-md-2 handler move"><i class="glyphicon glyphicon-move"></i></div>' +
 											'<div class="col-md-3 last">' +
-											'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element icon-pencil pointer" ></i></a> / ' +
-											'	<img id="remove_element_'+count+'" element="'+count+'" class="remove_element icon-trash pointer" ></i>' +
+											'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element glyphicon glyphicon-pencil pointer" ></i></a> / ' +
+											'	<a id="remove_element_'+count+'" element="'+count+'"><i class="remove_element glyphicon glyphicon-trash pointer"></i></a>'+
 											'</div>' +
 									'</div>');												
 									
@@ -1063,23 +1072,23 @@ $(document).ready(function(){
 											setSectionTreeHeight();	
 											
 											if($("#sortable").is(':empty')){
-												$("#labl_no_elements").show();
-												$("#elements_table, #sortable").hide();
+												$("#labl_no_elements").removeClass('hide');
+												$("#elements_table, #sortable").addClass('hide');
 											}
 										});
 										//add fancybox feature 
 										$("#aux_edit_element_"+count).fancybox();
 										//edit button click event
 										$("#edit_element_"+count).bind("click",function(){
-											$("#repeat_frm_name").hide();
+											$("#repeat_frm_name").addClass('hide');
 											var element = $(this).attr('element');
 											edit_element(element, 0);							
 										});
 										
 										count++;
 										//show elements
-										$("#labl_no_elements").hide();
-										$("#elements_table, #sortable").show();
+										$("#labl_no_elements").addClass('hide');
+										$("#elements_table, #sortable").removeClass('hide');
 										//close fancy box
 										$.fancybox.close();
 										//remove rules
@@ -1087,7 +1096,7 @@ $(document).ready(function(){
 										$("#number").rules("remove");										
 									
 									}else{// show message if name already exist
-										$("#repeat_frm_name").show();
+										$("#repeat_frm_name").removeClass('hide');
 									}												
 							}
 						});
@@ -1235,14 +1244,14 @@ $(document).ready(function(){
 			$('#internal_name').val($(this).val());
 		});
 		//show elements
-		$("#input_file_flash_file").show();
-		$("#input_file_alternative_image").show();
+		$("#input_file_flash_file").removeClass('hide');
+		$("#input_file_alternative_image").removeClass('hide');
 		
 		$("#input_file_flash_file").val($("#hdnNameFile_flash_file").val());
 		$("#input_file_alternative_image").val($("#hdnNameFile_alternative_image").val());
 		
-		$("#flash_file").show();
-		$("#alternative_image").show();
+		$("#flash_file").removeClass('hide');
+		$("#alternative_image").removeClass('hide');
 		
 		//add rules
 		$("#hdnNameFile_flash_file").rules("add",{
@@ -1509,13 +1518,13 @@ $(document).ready(function(){
 				});
 	
 				$(this).bind("mouseenter", function(){
-					$("#carousel_left_"+this.id.replace('myCarousel_','')).show();
-					$("#carousel_right_"+this.id.replace('myCarousel_','')).show();				
+					$("#carousel_left_"+this.id.replace('myCarousel_','')).removeClass('hide');
+					$("#carousel_right_"+this.id.replace('myCarousel_','')).removeClass('hide');				
 				});
 				
 				$(this).bind("mouseleave", function(){
-					$("#carousel_left_"+this.id.replace('myCarousel_','')).hide();
-					$("#carousel_right_"+this.id.replace('myCarousel_','')).hide();				
+					$("#carousel_left_"+this.id.replace('myCarousel_','')).addClass('hide');
+					$("#carousel_right_"+this.id.replace('myCarousel_','')).addClass('hide');				
 				});
 				
 				
@@ -1613,9 +1622,9 @@ $(document).ready(function(){
 		  }
 		  else {
 			$("#frmContent").empty();
-			$("#frmContent").hide();
-			$("#div_preview").hide();
-			$("#no_flash_player").show();
+			$("#frmContent").addClass('hide');
+			$("#div_preview").addClass('hide');
+			$("#no_flash_player").removeClass('hide');
 		  }					
 		break;	
 	}		
@@ -1637,6 +1646,9 @@ function edit_element(element, type){
 			return $("#edit_element_"+element).attr('number');
 			}
 	}, function(){
+		$(".btn-group > .btn").click(function(){
+			$(this).addClass("current").siblings().removeClass("active");
+		});
 		//validation
 		$("#elements_form").validate({
 			wrapper: "span",
@@ -1673,7 +1685,7 @@ function edit_element(element, type){
 		$("#aux_edit_element_"+element).click();
 		//click event on save button
 		$("#btn_add").bind("click",function(){
-			$("#repeat_frm_name").hide();
+			$("#repeat_frm_name").addClass('hide');
 			//check if form is valid
 			if($("#elements_form").valid())
 			{
@@ -1721,7 +1733,7 @@ function edit_element(element, type){
 					}
 				else{
 					// show an error if name already exist
-						$("#repeat_frm_name").show();
+						$("#repeat_frm_name").removeClass('hide');
 					}
 			}
 		});
@@ -1737,32 +1749,32 @@ function hide_elements_link(){
 	//hide elements on link content
 	
 	//internal 
-	$("[id^=internal_section]").hide();
+	$("[id^=internal_section]").addClass('hide');
 	$("#internal_section").rules("remove");
 	$("#internal_section").attr('disabled',true);
 	$("label[for^='internal_section']").remove();
 	
 	//external link 
-	$("[id^=link]").hide();
+	$("[id^=link]").addClass('hide');
 	$("#link").rules("remove");
 	$("#link").attr('disabled',true);
 	$("label[for^='link']").remove();
 	
 	//email
-	$("[id^=email]").hide();
+	$("[id^=email]").addClass('hide');
 	$("#email").rules("remove");
 	$("#email").attr('disabled',true);
 	$("label[for^='email']").remove();
 	
 	//file
-	$("[id^=file]").hide();
-	$("label[for='file']").hide();
-	$("#input_file_file").hide();
+	$("[id^=file]").addClass('hide');
+	$("label[for='file']").addClass('hide');
+	$("#input_file_file").addClass('hide');
 	$("#hdnNameFile_file").rules("remove");
 	$("#hdnNameFile_file").attr('disabled',true);
 	$("label[for^='file']").remove();
 	
-	$("[id^=file_type]").hide();
+	$("[id^=file_type]").addClass('hide');
 	$("#file_type").rules("remove");
 	$("#file_type").attr('disabled',true);
 	$("label[for^='file_type']").remove();
@@ -1809,7 +1821,7 @@ function load_file(element_sufix, element_type)
 				}					
 				if(element_type == 'image'){
 					$('#imageprw_'+element_sufix).attr('src', "/uploads/tmp/"+response);
-					$('#imageprw_'+element_sufix).show();
+					$('#imageprw_'+element_sufix).removeClass('hide');
 					setTimeout(function(){
 						//resize tree height according content
 						setSectionTreeHeight();		
@@ -1820,7 +1832,7 @@ function load_file(element_sufix, element_type)
 				
 				$('#input_file_'+element_sufix).val(file);
 				$('#hdnNameFile_'+element_sufix).val(response);
-				$("#del_img_"+element_sufix).show();
+				$("#del_img_"+element_sufix).removeClass('hide');
 				
 
 				
@@ -1853,9 +1865,9 @@ function delete_file(index)
 					success: function(data) {
 						$("#input_file_"+index).val("");
 						$("#hdnNameFile_"+index).val("");
-						$("#del_img_"+index).hide();
+						$("#del_img_"+index).addClass('hide');
 //						$('#imageprw_'+index).attr('src', "");
-//						$('#imageprw_'+index).hide();
+//						$('#imageprw_'+index).addClass('hide');
 					}
 			});
 		}		

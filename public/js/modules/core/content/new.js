@@ -592,7 +592,9 @@ $(document).ready(function() {
 				});
 	
 				// add fancy box feature
-				$("#anchor_add").fancybox();
+				$("#anchor_add").fancybox({
+					maxWidth	: 600	
+				});
 				var count = 0;
 				
 				// appent header of table where elements will be added
@@ -625,6 +627,10 @@ $(document).ready(function() {
 				
 				//click even on add button
 				$("#add").bind("click", function() {
+					
+					$(".btn-group > .btn").click(function(){
+						$(this).addClass("current").siblings().removeClass("active");
+					});	
 					//add rules on dropdown element type
 					$("#element_type").rules("add",{
 						required:true
@@ -647,6 +653,9 @@ $(document).ready(function() {
 									return $("#number").val();
 									}	
 							}, function(){
+								$(".btn-group > .btn").click(function(){
+									$(this).addClass("current").siblings().removeClass("active");
+								});
 								//validate elements form
 								$("#elements_form").validate({
 									wrapper: "span",
@@ -705,7 +714,7 @@ $(document).ready(function() {
 														'<div class="col-md-3" id="td_type_'+count+'">'+$("#element_type").val()+'</div>' + 
 														'<div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div>' +
 														'<div class="col-md-4 last pointer">' +
-														'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element icon-pencil pointer"></i></a> /' +
+														'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element glyphicon glyphicon-pencil pointer"></i></a> /' +
 														'	<i id="remove_element_'+count+'" element="'+count+'" class="remove_element glyphicon glyphicon-trash"></i>'+
 														'</div>' + 
 												'</div>');
@@ -792,6 +801,9 @@ $(document).ready(function() {
 									return $("#number").val();
 									}
 							}, function(){
+								$(".btn-group > .btn").click(function(){
+									$(this).addClass("current").siblings().removeClass("active");
+								});
 								//validate element form
 								$("#elements_form").validate({
 									wrapper: "span",
@@ -839,8 +851,8 @@ $(document).ready(function() {
 														'<div class="col-md-3" id="td_type_'+count+'">'+$("#element_type").val()+'</div>' +
 														'<div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div>' +														
 														'<div class="col-md-4 last pointer">' +
-														'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element icon-pencil pointer"></i></a> /' +
-														'	<i id="remove_element_'+count+'" element="'+count+'" class="remove_element icon-trash pointer"></i>'+
+														'	<a id="aux_edit_element_'+count+'" href="#formContent"></a> <a id="edit_element_'+count+'" number="'+$("#number").val()+'" element="'+count+'"><i class="edit_element glyphicon glyphicon-pencil pointer"></i></a> /' +
+														'	<i id="remove_element_'+count+'" element="'+count+'" class="remove_element  glyphicon glyphicon-trash pointer"></i>'+
 														'</div>' +
 												'</div>');												
 												// resize tree height according content
@@ -1338,6 +1350,9 @@ function edit_element(element, type){
 			return $("#edit_element_"+element).attr('number');
 			}
 	}, function(){
+		$(".btn-group > .btn").click(function(){
+			$(this).addClass("current").siblings().removeClass("active");
+		});
 		//validation
 		$("#elements_form").validate({
 			wrapper: "span",

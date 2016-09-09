@@ -438,7 +438,7 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     				}
     			}
     			else{ //if there is no uploaded image it sets the current image or null in case that any image was uploaded before
-    				if($arr_data['logo']){
+    				if($arr_data['logo'] && $formData['deleted_logo']==''){
     					$logo = $arr_data['logo'];
     				}
     				else{

@@ -471,6 +471,23 @@ $(document).ready(function(){
 		});
 	});
 	
+	//delete icon
+	$('#delete_logo').bind('click',function(){
+		$("#img_logo").attr('src','');
+		$("#img_logo").attr('alt','');
+		$('#img_logo').hide();
+		$('#website_logo').html('');
+		$('div.upload_logo').html('<input id="MAX_FILE_SIZE" type="hidden" value="2097152" name="MAX_FILE_SIZE"><input id="logo" type="file" style="width:100%" name="logo">');
+		$('#deleted_logo').val('delete');
+		
+		$("#logo").bind("change",function(){
+			readURL_icon(this,'img_'+$(this).attr('id'));
+			
+			$('#deleted_logo').val('');
+			$('#img_logo').show();
+		});
+	});
+	
 	//website name in icon
 	$('#name').bind('change',function(){
 		if($("#img_icon").attr('src')!='')

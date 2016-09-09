@@ -11,18 +11,17 @@
 
 
 <?php $lang = Zend_Registry::get('Zend_Translate');?>
-<h1></h1>
 
-<div>
+ <div class="">
 
 <form class="form-horizontal" id="elements_form" action="">
 <?php if($this->element_type == 'radiobutton' || $this->element_type == 'dropdown'):?>
 
-	<div class="col-md-5 margin-fancy">	
-		<div class="control-group">
-			<label class="span label_frm_cnt" for="frm_name"><?php echo '* '.$lang->translate('Name').":";?></label>
-			<div class="col-md-3">
-				<input type="text" id="frm_name" name="frm_name" />
+	<div class="col-md-12">	
+		<div class="form-group">
+			<label class="col-sm-4 control-label" for="frm_name"><?php echo '* '.$lang->translate('Name').":";?></label>
+			<div class="col-sm-8">
+                            <input type="text" id="frm_name" class="form-control" name="frm_name" />
 				<span>
 					<label id="repeat_frm_name" class=" hide" for="frm_name" ><b><?php echo $lang->translate('The name of element already exist')?></b></label>
 				</span>								
@@ -30,11 +29,11 @@
 		</div>	
 	</div>
 
-	<div class="col-md-5 margin-fancy">	
-		<div class="control-group">
-			<label class="span label_frm_cnt" for="frm_description"><?php echo $lang->translate('Description').":";?></label>
-			<div class="col-md-3">
-				<textarea id="frm_description" name="frm_description" cols="50" rows="5"> </textarea>								
+	<div class="col-md-12">		
+		<div class="form-group">
+			<label class="col-sm-4 control-label" for="frm_description"><?php echo $lang->translate('Description').":";?></label>
+			<div class="col-sm-8">
+				<textarea id="frm_description" class="form-control" name="frm_description" cols="50" rows="5"> </textarea>								
 			</div>
 		</div>	
 	</div>	
@@ -44,11 +43,11 @@
 	
 	while($band <= $this->number){
 	?>
-		<div class="col-md-5 margin-fancy">	
-			<div class="control-group">
-				<label class="span label_frm_cnt" for="<?php echo "frm_options_".$band; ?>"><?php echo '* '.$lang->translate('Option')." ".$band.":";?></label>
-				<div class="col-md-3">
-					<input type="text" id="<?php echo "frm_option_".$band; ?>" name="<?php echo "frm_option_".$band; ?>" />								
+		<div class="col-md-12">		
+			<div class="form-group">
+				<label class="col-sm-4 control-label" for="<?php echo "frm_options_".$band; ?>"><?php echo '* '.$lang->translate('Option')." ".$band.":";?></label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="<?php echo "frm_option_".$band; ?>" name="<?php echo "frm_option_".$band; ?>" />								
 				</div>
 			</div>	
 		</div>		
@@ -57,10 +56,10 @@
 	}
 	?>
 	
-	<div class="col-md-5 margin-fancy">	
-		<div class="control-group">
-			<label class="span label_frm_cnt" ><?php echo $lang->translate('Required').":";?></label>
-			<div class="col-md-3">
+	<div class="col-md-12">		
+		<div class="form-group">
+			<label class="col-sm-4 control-label" ><?php echo $lang->translate('Required').":";?></label>
+			<div class="col-sm-8">
 				<div class="btn-group" data-toggle="buttons-radio">
 					<input type="button" class="btn btn-primary" id="frm_required_yes" name="frm_required" value="<?php echo $lang->translate('Yes');?>" element_value="yes" />
 					<input type="button" class="btn btn-primary active" id="frm_required_no" name="frm_required" value="<?php echo $lang->translate('No');?>" element_value="no" />
@@ -69,32 +68,32 @@
 		</div>	
 	</div>	
 <?php else: ?>
-	<div class="col-md-5 margin-fancy">	
-		<div class="control-group">
-			<label class="span label_frm_cnt" for="frm_name"><?php echo '* '.$lang->translate('Name').":";?></label>
-			<div class="col-md-3">
-				<input type="text" id="frm_name" name="frm_name" />
+	<div class="col-md-12">		
+		<div class="form-group">
+			<label class="col-sm-4 control-label" for="frm_name"><?php echo '* '.$lang->translate('Name').":";?></label>
+			<div class="col-sm-8">
+                            <input type="text" id="frm_name" class="form-control" name="frm_name" />
 				<span>
-					<label id="repeat_frm_name" class=" hide" for="frm_name" ><b><?php echo $lang->translate('The name of element already exist')?></b></label>
+					<label id="repeat_frm_name" class="form-control hide" for="frm_name" ><b><?php echo $lang->translate('The name of element already exist')?></b></label>
 				</span>								
 			</div>
 		</div>	
 	</div>
 	
-	<div class="col-md-5 margin-fancy">	
-		<div class="control-group">
-			<label class="span label_frm_cnt" for="frm_description"><?php echo $lang->translate('Description').":";?></label>
-			<div class="col-md-3">
-				<textarea id="frm_description" name="frm_description" cols="50" rows="5"> </textarea>								
+	<div class="col-md-12">		
+		<div class="form-group">
+			<label class="col-sm-4 control-label" for="frm_description"><?php echo $lang->translate('Description').":";?></label>
+			<div class="col-sm-8">
+				<textarea id="frm_description" class="form-control" name="frm_description" cols="50" rows="5"> </textarea>								
 			</div>
 		</div>	
 	</div>	
 		
 
-	<div class="col-md-5 margin-fancy">	
-		<div class="control-group">
-			<label class="span label_frm_cnt" ><?php echo $lang->translate('Required').":";?></label>
-			<div class="col-md-3">
+	<div class="col-md-12">		
+		<div class="form-group">
+			<label class="col-sm-4 control-label" ><?php echo $lang->translate('Required').":";?></label>
+			<div class="col-sm-8">
 				<div class="btn-group" data-toggle="buttons-radio">
 					<input type="button" class="btn btn-primary" id="frm_required_yes" name="frm_required" value="<?php echo $lang->translate('Yes');?>" element_value="yes" />
 					<input type="button" class="btn btn-primary active" id="frm_required_no" name="frm_required" value="<?php echo $lang->translate('No');?>" element_value="no" />
@@ -106,7 +105,7 @@
 	
 
 <?php endif;?>
-<div class="col-md-5 margin-fancy" align="center">
+<div class="col-md-12 text-capitalize" align="center">
 	<input type="button" id="btn_add" class="btn btn-success" value="Guardar" >
 </div>
 </form>

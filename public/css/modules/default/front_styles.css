@@ -18,12 +18,12 @@
 .right{
 	text-align: right;
 }
-
-ul.header-website{
-	float: left;
-	list-style-type:none;
+#header{
+    padding-top: 10px;
 }
-
+#header_name{
+    padding-bottom: 10px;
+}
 div.title{
 	padding-top: 25px;
 }
@@ -93,6 +93,10 @@ label.error_validation{
 
 label.error_validation{
 	color: #B94A48;
+}
+div.error_validation{
+	color: #B94A48;
+	font-weight:bold;
 }
 
 .overflow_hidden{
@@ -239,4 +243,18 @@ img.preview_list_img.thumbnail {
 	width:100px;
 	margin:0 auto;
 	margin-top:5px;	
+}
+.footer, .mushoq{
+    color: #999999;
+    font-size: 12px;
+}
+.mushoq a{
+    display: block;
+    overflow: hidden;
+    float: right;
+    width: 93px;
+    height: 0px;
+    padding-top: 9px;
+    margin:5px 0 0 3px;
+    background: url(/images/mushoq.png) no-repeat;
 }
