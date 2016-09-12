@@ -167,7 +167,7 @@ a.website_config_header:hover{
 	padding-top: 5px;
 }
 .accordion-heading{
-	background-color: #4292D7;
+	background-color: #FF970E;
 	border-radius: 4px 4px 0px 0px;
 }
 .accordion-inner{
@@ -344,7 +344,7 @@ div.section_bar_container ul li{
 }
 
 div.section_bar_container ul li.selected{
-	background-color: #4292D7;
+	background-color: #FF970E;
 }
 
 div.section_bar_container ul li.selected a{
@@ -352,7 +352,7 @@ div.section_bar_container ul li.selected a{
 }
 
 div.section_bar_container ul li.selected a:hover{
-	background-color: #3181C6;
+	background-color: #FF970E;
 }
 
 .link-container{
@@ -501,7 +501,7 @@ ul.sections_tree li div.parent_section{
 }
 
 ul.sections_tree li div.parent_section.selected{
-	background-color: #4292D7;
+	background-color: #FF970E;
 	font-weight: bold;
 }
 
@@ -646,7 +646,7 @@ ul.sections_selector_tree li div.parent_section{
 }
 
 ul.sections_selector_tree li div.parent_section.selected{
-	background-color: #4292D7;
+	background-color: #FF970E;
 	font-weight: bold;
 }
 
@@ -865,7 +865,7 @@ div#preview_words ul li{
 	background-position: -388px -48px;
 }
 div.option_bar_container ul li.selected{
-        background-color: #4292D7;
+        background-color: #FF970E;
 }
 div.option_bar_container ul li.selected a{
         color: #FFFFFF;
