@@ -40,11 +40,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                 <div class="row">
                                         <div class="col-md-6">
                                                 <div class="row form-group">
-                                                        <div class="col-md-4 form_label">
-                                                                <label class="required" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
-                                                        </div>
-                                                        <div class="col-md-1">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                                <label class="col-sm-4 control-label form_label required" for="name"><?php echo  $this->form->name->getDecorator('label')->getOption('requiredPrefix').$this->form->name->getLabel(); ?></label>
+                                                       
+                                                        
+                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                 <?php $this->form->name->setAttrib('container','collapseOptions'); echo $this->form->name->renderViewHelper(); ?>
                                                                 <input type="hidden" id="repeated_website_name" value="<?php echo $lang->translate('The website name already exist');?>" />
                                                         </div>
@@ -52,11 +52,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                         </div>
                                         <div class="col-md-6">
                                                 <div class="row form-group">
-                                                        <div class="col-md-4 form_label">
-                                                                <label class="required" for="info_email"><?php echo $this->form->info_email->getDecorator('label')->getOption('requiredPrefix').$this->form->info_email->getLabel(); ?> <i class="glyphicon glyphicon-question-sign" title="<?php echo $lang->translate('Notification mail'); ?>"></i></label>
-                                                        </div>
-                                                        <div class="col-md-1">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                                <label class="col-sm-4 control-label form_label required" for="info_email"><?php echo $this->form->info_email->getDecorator('label')->getOption('requiredPrefix').$this->form->info_email->getLabel(); ?> <i class="glyphicon glyphicon-question-sign" title="<?php echo $lang->translate('Notification mail'); ?>"></i></label>
+                                                        
+                                                        
+                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                 <?php $this->form->info_email->setAttrib('container','collapseOptions'); echo $this->form->info_email->renderViewHelper(); ?>
                                                         </div>
                                                 </div>
@@ -65,31 +65,31 @@ $default_no = $default_confirm_arr[1]; //NO
                                 <div class="row">
                                         <div class="col-md-6">
                                                 <div class="row form-group">
-                                                        <div class="col-md-4 form_label">
-                                                                <label class="required" for="description"><?php echo  $this->form->description->getDecorator('label')->getOption('requiredPrefix').$this->form->description->getLabel(); ?></label>
-                                                        </div>
-                                                        <div class="col-md-1">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                                <label class="col-sm-4 control-label form_label required" for="description"><?php echo  $this->form->description->getDecorator('label')->getOption('requiredPrefix').$this->form->description->getLabel(); ?></label>
+                                                       
+                                                        
+                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                 <?php $this->form->description->setAttrib('container','collapseOptions'); echo $this->form->description->renderViewHelper(); ?>
                                                         </div>
                                                 </div>
                                         </div>
                                         <div class="col-md-6">
                                                 <div class="row form-group">
-                                                        <div class="col-md-4 form_label">
-                                                                <label class="required" for="copyright"><?php echo $this->form->copyright->getDecorator('label')->getOption('requiredPrefix').$this->form->copyright->getLabel(); ?></label>
-                                                        </div>
-                                                        <div class="col-md-1">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                                <label class="col-sm-4 control-label form_label required" for="copyright"><?php echo $this->form->copyright->getDecorator('label')->getOption('requiredPrefix').$this->form->copyright->getLabel(); ?></label>
+                                                        
+                                                        
+                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                 <?php $this->form->copyright->setAttrib('container','collapseOptions'); echo $this->form->copyright->renderViewHelper(); ?>
                                                         </div>
                                                 </div>
                                                 <div class="row form-group">
-                                                        <div class="col-md-4 form_label">
-                                                                <label class="required" for="language_id"><?php echo $this->form->language_id->getDecorator('label')->getOption('requiredPrefix').$this->form->language_id->getLabel(); ?></label>
-                                                        </div>
-                                                        <div class="col-md-1">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                                <label class="col-sm-4 control-label form_label required" for="language_id"><?php echo $this->form->language_id->getDecorator('label')->getOption('requiredPrefix').$this->form->language_id->getLabel(); ?></label>
+                                                       
+                                                        
+                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                 <?php $this->form->language_id->setAttrib('container','collapseOptions'); echo $this->form->language_id->renderViewHelper(); ?>
                                                         </div>
                                                 </div>
@@ -98,22 +98,22 @@ $default_no = $default_confirm_arr[1]; //NO
                                 <div class="row">
                                         <div class="col-md-6">
                                                 <div class="row form-group">
-                                                        <div class="col-md-4 form_label">
-                                                                <label class="required" for="keywords"><?php echo  $this->form->keywords->getDecorator('label')->getOption('requiredPrefix').$this->form->keywords->getLabel(); ?></label>
-                                                        </div>
-                                                        <div class="col-md-1">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                                <label class="col-sm-4 control-label form_label required" for="keywords"><?php echo  $this->form->keywords->getDecorator('label')->getOption('requiredPrefix').$this->form->keywords->getLabel(); ?></label>
+                                                        
+                                                        
+                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                 <?php $this->form->keywords->setAttrib('container','collapseOptions'); echo $this->form->keywords->renderViewHelper(); ?>
                                                         </div>
                                                 </div>
                                         </div>
                                         <div class="col-md-6">
                                                 <div class="row form-group">
-                                                        <div class="col-md-4 form_label">
-                                                                <label class="required" for="icon"><?php echo $this->form->icon->getLabel(); ?></label>
-                                                        </div>
-                                                        <div class="col-md-1">&nbsp;</div>
-                                                        <div class="col-md-5 form_field">
+                                                        
+                                                                <label class="col-sm-4 control-label form_label required" for="icon"><?php echo $this->form->icon->getLabel(); ?></label>
+                                                        
+                                                        
+                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                 <div class=" upload_icon_container"> 
                                                                         <div class='upload_icon'><?php echo $this->form->icon->removeDecorator('HtmlTag')->removeDecorator('Label'); ?></div>
                                                                         <div class='delete_icon'><a id='delete_icon' class="pointer trash-icon"><i class='glyphicon glyphicon-trash'></i></a></div>
@@ -122,8 +122,8 @@ $default_no = $default_confirm_arr[1]; //NO
                                                         </div>
                                                 </div>
                                                 <div class="row form-group">
-                                                        <div class="col-md-5">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                        <div class="col-sm-4 col-sm-offset-5 form_field ">
                                                                 <?php echo $this->form->img_icon->removeDecorator('HtmlTag')->removeDecorator('Label'); ?><p id="website_icon"></p>
                                                         </div>
                                                 </div>
@@ -133,11 +133,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                 <div class="row">
                                         <div class="col-md-6">
                                                 <div class="row form-group">
-                                                        <div class="col-md-4 form_label">
-                                                                <label class="required" for="website_url"><?php echo $this->form->website_url->getDecorator('label')->getOption('requiredPrefix').$this->form->website_url->getLabel(); ?></label>
-                                                        </div>
-                                                        <div class="col-md-1">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                                <label class="col-sm-4 control-label form_label required" for="website_url"><?php echo $this->form->website_url->getDecorator('label')->getOption('requiredPrefix').$this->form->website_url->getLabel(); ?></label>
+                                                      
+                                                        
+                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                 <?php $this->form->website_url->setAttrib('container','collapseOptions'); echo $this->form->website_url->renderViewHelper(); ?>
                                                                 <p class="help-block grey">www.google.com</p>
                                                         </div>
@@ -145,18 +145,18 @@ $default_no = $default_confirm_arr[1]; //NO
                                         </div>
                                         <div class="col-md-6">
                                                 <div class="row form-group">
-                                                        <div class="col-md-4 form_label">
-                                                                <label class="required" for="logo"><?php echo $this->form->logo->getLabel(); ?></label>
-                                                        </div>
-                                                        <div class="col-md-1">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                                <label class="col-sm-4 control-label form_label required" for="logo"><?php echo $this->form->logo->getLabel(); ?></label>
+                                                        
+                                                        
+                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                 <?php echo $this->form->logo->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                                                                 <p class="help-block grey">(jpg,png,gif,jpeg)</p>
                                                         </div>
                                                 </div>
                                                 <div class="row form-group">
-                                                        <div class="col-md-5">&nbsp;</div>
-                                                        <div class="col-md-4 form_field">
+                                                        
+                                                        <div class="col-sm-4 col-sm-offset-5 form_field ">
                                                                 <?php echo $this->form->img_logo->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                                                         </div>
                                                 </div>
@@ -229,11 +229,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     <div class="col-md-3">&nbsp;</div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="number_format"><?php echo  $this->form->number_format->getDecorator('label')->getOption('requiredPrefix').$this->form->number_format->getLabel(); ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="number_format"><?php echo  $this->form->number_format->getDecorator('label')->getOption('requiredPrefix').$this->form->number_format->getLabel(); ?></label>
+                                                                  
+                                                                    
+                                                                    <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                             <?php $this->form->number_format->setAttrib('container','collapseFormats'); echo $this->form->number_format->renderViewHelper(); ?>
                                                                     </div>
                                                             </div>
@@ -244,11 +244,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     <div class="col-md-3">&nbsp;</div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="time_zone"><?php echo  $this->form->time_zone->getDecorator('label')->getOption('requiredPrefix').$this->form->time_zone->getLabel(); ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="time_zone"><?php echo  $this->form->time_zone->getDecorator('label')->getOption('requiredPrefix').$this->form->time_zone->getLabel(); ?></label>
+                                                                   
+                                                                    
+                                                                    <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                             <?php $this->form->time_zone->setAttrib('container','collapseFormats'); echo $this->form->time_zone->renderViewHelper(); ?>
                                                                     </div>
                                                             </div>
@@ -259,11 +259,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     <div class="col-md-3">&nbsp;</div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="date_format"><?php echo  $this->form->date_format->getDecorator('label')->getOption('requiredPrefix').$this->form->date_format->getLabel(); ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="date_format"><?php echo  $this->form->date_format->getDecorator('label')->getOption('requiredPrefix').$this->form->date_format->getLabel(); ?></label>
+                                                                  
+                                                                    
+                                                                    <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                             <?php $this->form->date_format->setAttrib('container','collapseFormats'); echo $this->form->date_format->renderViewHelper(); ?>
                                                                     </div>
                                                             </div>
@@ -274,11 +274,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     <div class="col-md-3">&nbsp;</div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="hour_format"><?php echo '* '.$lang->translate('Hour Format').':'; ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">                    
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="hour_format"><?php echo '* '.$lang->translate('Hour Format').':'; ?></label>
+                                                                    
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field">                    
                                                     <div class="btn-group" role="group" data-toggle="buttons-radio">
                                                         <?php 	$options_hour_format = Core_Model_Website::$hour_format;
                                                                         $default_hourformat_arr = array_keys($options_hour_format);
@@ -318,11 +318,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                             <div class="row line">
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="private_section"><?php echo '* '.$lang->translate('Use Private Sections').':'; ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="private_section"><?php echo '* '.$lang->translate('Use Private Sections').':'; ?></label>
+                                                                  
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                             <div class="btn-group" data-toggle="buttons-radio">
                                                         <?php foreach($confirm as $k => $opt): ?>
                                                         <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="private_section_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -334,11 +334,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     </div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="section_feature"><?php echo '* '.$lang->translate('Use Feature Section').':'; ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="section_feature"><?php echo '* '.$lang->translate('Use Feature Section').':'; ?></label>
+                                                                    
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                             <div class="btn-group" data-toggle="buttons-radio">
                                                         <?php foreach($confirm as $k => $opt): ?>
                                                         <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="section_feature_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -353,11 +353,11 @@ $default_no = $default_confirm_arr[1]; //NO
 
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="section_highlight"><?php echo '* '.$lang->translate('Use Highlight Section').':' ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="section_highlight"><?php echo '* '.$lang->translate('Use Highlight Section').':' ?></label>
+                                                                   
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                             <div class="btn-group" data-toggle="buttons-radio">
                                                         <?php foreach($confirm as $k => $opt): ?>
                                                         <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="section_highlight_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -369,11 +369,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     </div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="section_images_number"><?php echo  $this->form->section_images_number->getDecorator('label')->getOption('requiredPrefix').$this->form->section_images_number->getLabel(); ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field ">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="section_images_number"><?php echo  $this->form->section_images_number->getDecorator('label')->getOption('requiredPrefix').$this->form->section_images_number->getLabel(); ?></label>
+                                                                    
+                                                                    
+                                                                    <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                             <ul class="nav tools_list_container">
                                                                                     <li class="dropdown website_config_list">
                                                                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="section_img_num_container" title="<?php echo $lang->translate('Section Images Number'); ?>">
@@ -403,11 +403,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                             <div class="row line">
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="dictionary"><?php echo '* '.$lang->translate('Use Dictionary in FrontEnd').':' ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="dictionary"><?php echo '* '.$lang->translate('Use Dictionary in FrontEnd').':' ?></label>
+                                                                  
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                             <div class="btn-group" data-toggle="buttons-radio">
                                                         <?php foreach($confirm as $k => $opt): ?>
                                                         <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="dictionary_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -419,11 +419,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     </div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="section_author"><?php echo  '* '.$lang->translate('Use Section Author').':'; ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="section_author"><?php echo  '* '.$lang->translate('Use Section Author').':'; ?></label>
+                                                                   
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                             <div class="btn-group" data-toggle="buttons-radio">
                                                         <?php foreach($confirm as $k => $opt): ?>
                                                         <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="section_author_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -437,11 +437,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                             <div class="row">
                                                     <div class="col-md-6 line">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="sitemap_level"><?php echo $this->form->sitemap_level->getDecorator('label')->getOption('requiredPrefix').$this->form->sitemap_level->getLabel(); ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="sitemap_level"><?php echo $this->form->sitemap_level->getDecorator('label')->getOption('requiredPrefix').$this->form->sitemap_level->getLabel(); ?></label>
+                                                                   
+                                                                    
+                                                                    <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                             <ul class="nav tools_list_container">
                                                                                     <li class="dropdown website_config_list">
                                                                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="sitemap_container" title="<?php echo $lang->translate('Sitemap Levels'); ?>">
@@ -469,11 +469,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     </div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="prints"><?php echo  '* '.$lang->translate('Count Prints').':'; ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="prints"><?php echo  '* '.$lang->translate('Count Prints').':'; ?></label>
+                                                                   
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                             <div class="btn-group" data-toggle="buttons-radio">
                                                         <?php foreach($confirm as $k => $opt): ?>
                                                         <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="prints_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -487,11 +487,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                             <div class="row">
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="publication_approve"><?php echo  '* '.$lang->translate('Publication Approval').':'; ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="publication_approve"><?php echo  '* '.$lang->translate('Publication Approval').':'; ?></label>
+                                                                  
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                             <div class="btn-group" data-toggle="buttons-radio">
                                                         <?php foreach($confirm as $k => $opt): ?>
                                                         <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="publication_approve_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -527,11 +527,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     <div class="col-md-3">&nbsp;</div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="section_comments_management"><?php echo  '* '.$lang->translate('Comments Management').':'; ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="section_comments_management"><?php echo  '* '.$lang->translate('Comments Management').':'; ?></label>
+                                                                   
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                             <div class="btn-group" data-toggle="buttons-radio">
                                                         <?php foreach($confirm as $k => $opt): ?>
                                                         <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="section_comments_management_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -547,11 +547,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     <div class="col-md-3">&nbsp;</div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="section_comments"><?php echo  $this->form->section_comments->getDecorator('label')->getOption('requiredPrefix').$this->form->section_comments->getLabel(); ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field ">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="section_comments"><?php echo  $this->form->section_comments->getDecorator('label')->getOption('requiredPrefix').$this->form->section_comments->getLabel(); ?></label>
+                                                                    
+                                                                    
+                                                                    <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                             <?php $this->form->section_comments->setAttrib('container','collapseCommentsManagement'); echo $this->form->section_comments->renderViewHelper(); ?>
                                                                     </div>
                                                             </div>
@@ -562,11 +562,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                     <div class="col-md-3">&nbsp;</div>
                                                     <div class="col-md-6">
                                                             <div class="row form-group">
-                                                                    <div class="col-md-4 form_label">
-                                                                            <label class="required" for="section_comments_type"><?php echo  '* '.$lang->translate('Comments Type').':'; ?></label>
-                                                                    </div>
-                                                                    <div class="col-md-1">&nbsp;</div>
-                                                                    <div class="col-md-4 form_field form-inline">
+                                                                    
+                                                                            <label class="col-sm-4 control-label form_label required" for="section_comments_type"><?php echo  '* '.$lang->translate('Comments Type').':'; ?></label>
+                                                                   
+                                                                    
+                                                                    <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                             <div class="btn-group" data-toggle="buttons-radio">
                                                         <?php foreach($comments_type as $k => $opt): ?>
                                                         <input type="button" class="btn btn-primary" id="section_comments_type_btn_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -602,22 +602,22 @@ $default_no = $default_confirm_arr[1]; //NO
                                         <div class="row">
                                                 <div class="col-md-6">
                                                         <div class="row form-group">
-                                                                <div class="col-md-4 form_label">
-                                                                        <label class="required" for="smtp_hostname"><?php echo  $this->form->smtp_hostname->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_hostname->getLabel(); ?></label>
-                                                                </div>
-                                                                <div class="col-md-1">&nbsp;</div>
-                                                                <div class="col-md-4 form_field ">
+                                                                
+                                                                        <label class="col-sm-4 control-label form_label required" for="smtp_hostname"><?php echo  $this->form->smtp_hostname->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_hostname->getLabel(); ?></label>
+                                                               
+                                                                
+                                                                <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                         <?php $this->form->smtp_hostname->setAttrib('container','collapseSMTPConfig'); echo $this->form->smtp_hostname->renderViewHelper(); ?>
                                                                 </div>
                                                         </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                         <div class="row form-group">
-                                                                <div class="col-md-4 form_label">
-                                                                        <label class="required" for="smtp_username"><?php echo  $this->form->smtp_username->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_username->getLabel(); ?></label>
-                                                                </div>
-                                                                <div class="col-md-1">&nbsp;</div>
-                                                                <div class="col-md-4 form_field">
+                                                                
+                                                                        <label class="col-sm-4 control-label form_label required" for="smtp_username"><?php echo  $this->form->smtp_username->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_username->getLabel(); ?></label>
+                                                               
+                                                                
+                                                                <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                         <?php $this->form->smtp_username->setAttrib('container','collapseSMTPConfig'); echo $this->form->smtp_username->renderViewHelper(); ?>
                                                                 </div>
                                                         </div>
@@ -626,22 +626,22 @@ $default_no = $default_confirm_arr[1]; //NO
                                         <div class="row">
                                                 <div class="col-md-6">
                                                         <div class="row form-group">
-                                                                <div class="col-md-4 form_label">
-                                                                        <label class="required" for="smtp_port"><?php echo  $this->form->smtp_port->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_port->getLabel(); ?></label>
-                                                                </div>
-                                                                <div class="col-md-1">&nbsp;</div>
-                                                                <div class="col-md-4 form_field ">
+                                                                
+                                                                        <label class="col-sm-4 control-label form_label required" for="smtp_port"><?php echo  $this->form->smtp_port->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_port->getLabel(); ?></label>
+                                                                
+                                                                
+                                                                <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                         <?php $this->form->smtp_port->setAttrib('container','collapseSMTPConfig'); echo $this->form->smtp_port->renderViewHelper(); ?>
                                                                 </div>
                                                         </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                         <div class="row">
-                                                                <div class="col-md-4 form_label">
-                                                                        <label class="required" for="smtp_password"><?php echo  $this->form->smtp_password->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_password->getLabel(); ?></label>
-                                                                </div>
-                                                                <div class="col-md-1">&nbsp;</div>
-                                                                <div class="col-md-4 form_field">
+                                                                
+                                                                        <label class="col-sm-4 control-label form_label required" for="smtp_password"><?php echo  $this->form->smtp_password->getDecorator('label')->getOption('requiredPrefix').$this->form->smtp_password->getLabel(); ?></label>
+                                                              
+                                                                
+                                                                <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                         <?php $this->form->smtp_password->setAttrib('container','collapseSMTPConfig'); echo $this->form->smtp_password->renderViewHelper(); ?>
                                                                 </div>
                                                         </div>
@@ -670,11 +670,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                 <div class="row">
                                                         <div class="col-md-6">
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="section_rss"><?php echo  '* '.$lang->translate('RSS Sections').':'; ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field form-inline">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="section_rss"><?php echo  '* '.$lang->translate('RSS Sections').':'; ?></label>
+                                                                        
+                                                                        
+                                                                        <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                                 <div class="btn-group" data-toggle="buttons-radio">
                                                             <?php foreach($confirm as $k => $opt): ?>
                                                             <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="section_rss_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -686,11 +686,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                         </div>
                                                         <div class="col-md-6">
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="watermark"><?php echo  $this->form->watermark->getDecorator('label')->getOption('requiredPrefix').$this->form->watermark->getLabel(); ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field ">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="watermark"><?php echo  $this->form->watermark->getDecorator('label')->getOption('requiredPrefix').$this->form->watermark->getLabel(); ?></label>
+                                                                        
+                                                                        
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <?php echo $this->form->watermark->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                                                                                 <p class="help-block grey">(jpg,png,gif,jpeg)</p>
                                                                         </div>
@@ -700,11 +700,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                 <div class="row line">
                                                         <div class="col-md-6">
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="tiny_url"><?php echo  '* '.$lang->translate('Tiny Url').':'; ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field form-inline">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="tiny_url"><?php echo  '* '.$lang->translate('Tiny Url').':'; ?></label>
+                                                                      
+                                                                        
+                                                                        <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                                 <div class="btn-group" data-toggle="buttons-radio">
                                                             <?php foreach($confirm as $k => $opt): ?>
                                                             <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="tiny_url_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -715,11 +715,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                                 </div>
 
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="friendly_url"><?php echo '* '.$lang->translate('Friendly Url').':'; ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field form-inline">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="friendly_url"><?php echo '* '.$lang->translate('Friendly Url').':'; ?></label>
+                                                                     
+                                                                        
+                                                                        <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                                 <div class="btn-group" data-toggle="buttons-radio">
                                                             <?php foreach($confirm as $k => $opt): ?>
                                                             <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="friendly_url_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -730,11 +730,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                                 </div>
 
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="log"><?php echo '* '.$lang->translate('Logs').':' ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field form-inline">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="log"><?php echo '* '.$lang->translate('Logs').':' ?></label>
+                                                                       
+                                                                        
+                                                                        <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                                 <div class="btn-group" data-toggle="buttons-radio">
                                                             <?php foreach($confirm as $k => $opt): ?>
                                                             <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="log_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -745,11 +745,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                                 </div>
 
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="section_expiration"><?php echo  '* '.$lang->translate('Use Expiration Time').':'; ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field form-inline">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="section_expiration"><?php echo  '* '.$lang->translate('Use Expiration Time').':'; ?></label>
+                                                                      
+                                                                        
+                                                                        <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                                 <div class="btn-group" data-toggle="buttons-radio">
                                                             <?php foreach($confirm as $k => $opt): ?>
                                                             <input type="button" class="btn btn-primary <?php if($default_no == $k): echo 'active '; endif; ?>" id="section_expiration_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -760,11 +760,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                                 </div>
 
                                                                 <div id="section_storage_container" class="row form-group hide">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="section_storage"><?php echo  '* '.$lang->translate('Section Storage').':' ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field form-inline">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="section_storage"><?php echo  '* '.$lang->translate('Section Storage').':' ?></label>
+                                                                       
+                                                                        
+                                                                        <div class="col-sm-4 col-sm-offset-1 form_field"> 
                                                                                 <div class="btn-group" data-toggle="buttons-radio">
                                                             <?php foreach($confirm as $k => $opt): ?>
                                                             <input type="button" class="btn btn-primary" id="section_storage_<?php echo $k; ?>" value="<?php echo $opt; ?>" option="<?php echo $k; ?>">                           
@@ -775,10 +775,10 @@ $default_no = $default_confirm_arr[1]; //NO
                                                                 </div>
 
                                                                 <div id="section_expiration_time_container" class="row form-group hide">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="section_expiration_time"><?php echo  '* '.$lang->translate('Expiration Time').':' ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="section_expiration_time"><?php echo  '* '.$lang->translate('Expiration Time').':' ?></label>
+                                                                      
+                                                                        
                                                                         <div class="col-md-3 form_field">
                                                                                 <?php $this->form->section_expiration_time->setAttrib('container','collapseOther'); echo $this->form->section_expiration_time->renderViewHelper(); ?> 
 
@@ -786,40 +786,40 @@ $default_no = $default_confirm_arr[1]; //NO
                                                                 </div>									
 
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="analytics"><?php echo  $lang->translate('Google Analytics ID').':'; ?> <a href="http://www.google.com/analytics" target="_blank"><i class="glyphicon glyphicon-question-sign"></i></a></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="analytics"><?php echo  $lang->translate('Google Analytics ID').':'; ?> <a href="http://www.google.com/analytics" target="_blank"><i class="glyphicon glyphicon-question-sign"></i></a></label>
+                                                                       
+                                                                        
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <?php $this->form->analytics->setAttrib('container','collapseOther'); echo $this->form->analytics->renderViewHelper(); ?>
                                                                         </div>
                                                                 </div>	
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="max_height"><?php echo  $lang->translate('Loaded image max height').':'; ?> </label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="max_height"><?php echo  $lang->translate('Loaded image max height').':'; ?> </label>
+                                                                        
+                                                                        
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <?php $this->form->max_height->setAttrib('container','collapseOther'); echo $this->form->max_height->renderViewHelper(); ?>
                                                                         </div>
                                                                 </div>	
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="max_width"><?php echo  $lang->translate('Loaded image max width').':'; ?> </label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="max_width"><?php echo  $lang->translate('Loaded image max width').':'; ?> </label>
+                                                                        
+                                                                        
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <?php $this->form->max_width->setAttrib('container','collapseOther'); echo $this->form->max_width->renderViewHelper(); ?>
                                                                         </div>
                                                                 </div>																			
                                                         </div>
                                                         <div class="col-md-6">
                                                                 <div class="row line-top form-group hide" id="watermark_pos_container">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="watermark_pos"><?php echo  $lang->translate('Watermark Location').':'; ?> </label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="watermark_pos"><?php echo  $lang->translate('Watermark Location').':'; ?> </label>
+                                                                       
+                                                                        
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <input type="button" id="wmk_pos_TL" class="btn btn-default watermark_pos_selector" value="" pos="TL">
                                                                                 <input type="button" id="wmk_pos_TR" class="btn btn-default watermark_pos_selector" value="" pos="TR"> <br/>
                                                                                 <input type="button" id="wmk_pos_L" class="btn btn-default watermark_pos_selector" value="" pos="L">
@@ -832,8 +832,8 @@ $default_no = $default_confirm_arr[1]; //NO
                                                                         <?php echo $this->form->watermark_pos->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                                                                 </div>
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-5">&nbsp;</div>
-                                                                        <div class="col-md-6 form_field watermark_show_container hide">
+                                                                        
+                                                                        <div class="col-sm-4 col-sm-offset-5 form_field watermark_show_container hide">
                                                                                 <?php echo $this->form->img_watermark->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                                                                         </div>
                                                                 </div>
@@ -863,11 +863,11 @@ $default_no = $default_confirm_arr[1]; //NO
                                                 <div class="row">
                                                         <div class="col-md-6">
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="website_status"><?php echo  $this->form->website_status->getDecorator('label')->getOption('requiredPrefix').$this->form->website_status->getLabel(); ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field ">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="website_status"><?php echo  $this->form->website_status->getDecorator('label')->getOption('requiredPrefix').$this->form->website_status->getLabel(); ?></label>
+                                                                        
+                                                                        
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <?php $this->form->website_status->setAttrib('container','collapseStates'); echo $this->form->website_status->renderViewHelper(); ?>
                                                                         </div>
                                                                 </div>
@@ -879,29 +879,29 @@ $default_no = $default_confirm_arr[1]; //NO
                                                 <div class="row">
                                                         <div class="col-md-6">
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="offline_text"><?php echo  $this->form->offline_text->getDecorator('label')->getOption('requiredPrefix').$this->form->offline_text->getLabel(); ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field ">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="offline_text"><?php echo  $this->form->offline_text->getDecorator('label')->getOption('requiredPrefix').$this->form->offline_text->getLabel(); ?></label>
+                                                                        
+                                                                        
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <?php $this->form->offline_text->setAttrib('container','collapseStates'); echo $this->form->offline_text->renderViewHelper(); ?>
                                                                         </div>
                                                                 </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="offline_image"><?php echo  $this->form->offline_image->getLabel(); ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="offline_image"><?php echo  $this->form->offline_image->getLabel(); ?></label>
+                                                                      
+                                                                        
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <?php echo $this->form->offline_image->removeDecorator('HtmlTag')->removeDecorator('Label');  ?>
                                                                                 <p class="help-block grey">(jpg,png,gif,jpeg)</p>
                                                                         </div>
                                                                 </div>
-                                                                <div class="row">
-                                                                        <div class="col-md-5">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field">
+                                                                <div class="row form-group">
+                                                                        
+                                                                        <div class="col-sm-4 col-sm-offset-5 form_field ">
                                                                                 <?php echo $this->form->img_offline->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                                                                         </div>
                                                                 </div>
@@ -910,29 +910,29 @@ $default_no = $default_confirm_arr[1]; //NO
                                                 <div class="row">
                                                         <div class="col-md-6">
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="coming_soon_text"><?php echo  $this->form->coming_soon_text->getDecorator('label')->getOption('requiredPrefix').$this->form->coming_soon_text->getLabel(); ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field ">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="coming_soon_text"><?php echo  $this->form->coming_soon_text->getDecorator('label')->getOption('requiredPrefix').$this->form->coming_soon_text->getLabel(); ?></label>
+                                                                        
+                                                                        
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <?php $this->form->coming_soon_text->setAttrib('container','collapseStates'); echo $this->form->coming_soon_text->renderViewHelper(); ?>
                                                                         </div>
                                                                 </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-4 form_label">
-                                                                                <label class="required" for="coming_soon_image"><?php echo  $this->form->coming_soon_image->getLabel(); ?></label>
-                                                                        </div>
-                                                                        <div class="col-md-1">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field">
+                                                                        
+                                                                                <label class="col-sm-4 control-label form_label required" for="coming_soon_image"><?php echo  $this->form->coming_soon_image->getLabel(); ?></label>
+                                                                        
+                                                                       
+                                                                        <div class="col-sm-6 col-sm-offset-1 form_field ">
                                                                                 <?php echo $this->form->coming_soon_image->removeDecorator('HtmlTag')->removeDecorator('Label');  ?>
                                                                                 <p class="help-block grey">(jpg,png,gif,jpeg)</p>
                                                                         </div>
                                                                 </div>
                                                                 <div class="row form-group">
-                                                                        <div class="col-md-5">&nbsp;</div>
-                                                                        <div class="col-md-4 form_field">
+                                                                        
+                                                                        <div class="col-sm-4 col-sm-offset-5 form_field ">
                                                                                 <?php echo $this->form->img_coming_soon->removeDecorator('HtmlTag')->removeDecorator('Label'); ?>
                                                                         </div>
                                                                 </div>

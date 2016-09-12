@@ -138,7 +138,8 @@ class Default_IndexController extends Zend_Controller_Action
 		    		{
 		    			$sections_arr[] = array('id'=>$sec->id,
 		    					'section_parent_id'=>$sec->section_parent_id,
-		    					'title'=>$sec->title
+		    					'title'=>$sec->title,
+                                                        'homepage'=>$sec->homepage
 		    			);
 		    		}
 		    	}

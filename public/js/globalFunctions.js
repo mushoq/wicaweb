@@ -236,11 +236,13 @@ function remove_old_selected_section(elem){
  * set section tree height according to the content height in each page
  */
 function setSectionTreeHeight(){
-	var height_bar = 0;
-	height_bar = $('#section_content').height();
-	
-	if(height_bar>0)
-		$('#section_tree_container').css('min-height',(height_bar-20));
+	if ($(window).width() > 969) {
+		var height_bar = 0;
+		height_bar = $('#section_content').height();
+		
+		if(height_bar>0)
+			$('#section_tree_container').css('min-height',(height_bar-20));
+	}
 }
 
 /**
