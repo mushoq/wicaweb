@@ -235,7 +235,7 @@ ul#alerts.alerts_section_bar{
 	padding-left: 0px;
 	padding-right: 0px;
 	margin-top: 5px;
-	background-image: url("/images/background_header.png");
+	background:#D6D6D6 url("/images/background_header.png") repeat-x;
         overflow: hidden;
 }
 .form-search-bar{
@@ -301,7 +301,7 @@ div.table-bordered{
 .header_container{
 	background-color: #dddddd;
 	margin-top: 5px;
-	background-image: url('/images/background_header.png');
+	background:#D6D6D6 url("/images/background_header.png") repeat-x;
 }
 .first_row_header{
 	padding-left: 10px;
