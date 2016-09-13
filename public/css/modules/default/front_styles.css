@@ -97,6 +97,7 @@ label.error_validation{
 div.error_validation{
 	color: #B94A48;
 	font-weight:bold;
+        padding-bottom: 10px;
 }
 
 .overflow_hidden{
@@ -255,6 +256,6 @@ img.preview_list_img.thumbnail {
     width: 93px;
     height: 0px;
     padding-top: 9px;
-    margin:5px 0 0 3px;
+    margin:4px 0 0 3px;
     background: url(/images/mushoq.png) no-repeat;
 }

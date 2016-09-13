@@ -1306,11 +1306,11 @@ class Default_IndexController extends Zend_Controller_Action
     			$website = new Core_Model_Website();
     			$website_data = $website->find('wc_website',array('id'=>$this->_request->getPost ('website_id')));
     			
-                        $body = '<br><br>'.utf8_decode($lang->translate("Your password has been reset successfully")).'<br/><br/>
+                        $body = '<br><br>'.$lang->translate("Your password has been reset successfully").'<br/><br/>
 	    						'.$lang->translate("User").': '.$public_user_data[0]->username.'<br/>
-	    						'.utf8_decode($lang->translate("Password")).': '.$new_password.'<br/><br/>
-	    						'.utf8_decode($lang->translate("If you don't want to reset your password, please")).' <br> <br>
-	    						<a href="'.$website_data[0]->website_url.'/default/index/index?email='.urlencode($email).'&rollback=yes&key='.urlencode($public_user_data[0]->activation_key).'" style="cursor: pointer;"> '.utf8_decode($lang->translate("click here")).' </a>';
+	    						'.$lang->translate("Password").': '.$new_password.'<br/><br/>
+	    						'.$lang->translate("If you don't want to reset your password, please").' <br> <br>
+	    						<a href="'.$website_data[0]->website_url.'/default/index/index?email='.urlencode($email).'&rollback=yes&key='.urlencode($public_user_data[0]->activation_key).'" style="cursor: pointer;"> '.$lang->translate("click here").' </a>';
                         
                         $sended = GlobalFunctions::sendMail($this->_request->getPost ('website_id'), $email, 'Restore Password', null, $body);
                         if($sended == 'send'){
