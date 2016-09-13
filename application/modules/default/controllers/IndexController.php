@@ -1211,15 +1211,24 @@ class Default_IndexController extends Zend_Controller_Action
     	//translate library
     	$lang = Zend_Registry::get ( 'Zend_Translate' );
     	$email = $this->_request->getPost ('public_user_email_'.$this->_request->getPost ('area'));
-    	 
+        $id = $this->_request->getPost ('public_user_id_'.$this->_request->getPost ('area'));
+        if($id){
+            $public_user = new Core_Model_PublicUser();
+            $public_user_data = $public_user->find('wc_public_user',array('email'=>$email));
+            if($public_user_data){
+                    echo json_encode(FALSE);
+            }else{
+                    echo json_encode(TRUE);
+            }
+        } 
     	if($this->_request->getPost ()){
-    		$public_user = new Core_Model_PublicUser();
-    		$public_user_data = $public_user->find('wc_public_user',array('email'=>$email));
-    		if($public_user_data){
-    			echo json_encode(FALSE);
-    		}else{
-    			echo json_encode(TRUE);
-    		}
+            $public_user = new Core_Model_PublicUser();
+            $public_user_data = $public_user->find('wc_public_user',array('email'=>$email));
+            if($public_user_data){
+                    echo json_encode(FALSE);
+            }else{
+                    echo json_encode(TRUE);
+            }
     	}    	
     }
     /**
@@ -1229,13 +1238,11 @@ class Default_IndexController extends Zend_Controller_Action
     	
     	$this->_helper->layout->disableLayout ();
         if(isset($_SESSION['external_user'])){
-            //profile, facturacion, clubpuntonet, atc, servicio al cliente, postventa
-            $userProfile = 'masivo';
-            if($userProfile == 'masivo'){
-                $menu_modules = array('0'=>'profile','1'=>'facturas', '2'=>'clubpuntonet', '3'=>'atc', '4'=>'Servicio al Cliente', '5'=>'postventa' );
-            } else {
-                $menu_modules = array('0'=>'profile','1'=>'atc', '2'=>'facturas' );    
-            }$this->view->menu_modules = $menu_modules;
+            $this->_helper->layout->disableLayout ();
+            $public_user = new Core_Model_PublicUser();
+            $public_user_data = $public_user->find('wc_public_user',array('id'=>$_SESSION['external_user']));   
+            $this->view->user_data = $public_user_data[0];
+            print_r($public_user_data[0]);
         } else {
             $this->_helper->viewRenderer->setNoRender();
             echo $this->view->previewHelper(null,null,$this->view->area);

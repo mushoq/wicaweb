@@ -14,31 +14,54 @@
 $lang = Zend_Registry::get('Zend_Translate');
 ?>
 
-<div class="row-fluid line">
-	<div class="col-md-12 page-header-wica center">
-		<h1> <?php echo $lang->translate('Cliente Home');?> </h1>
+<div class="row line">
+	<div class="col-md-12 page-header-wica">
+		<h1> <?php echo $lang->translate('Profile');?> </h1>
 	</div>
 </div>
 <div class="line-top alert_messages_container">
 	<?php echo $this->flashMessages();?>
 </div>
 
-<div class="well">
-	<div class="row-fluid">
-            <div class="col-md-12">
-                UD. Se encuentra en mora
-            </div>
-		<ul id="control_panel_options" class="nav nav-pills">
-			<?php foreach($this->menu_modules as $module):?>
-				<li class="control_panel_opt">
-                                    <a id="<?php echo $module?>" class="pointer center"><?php if($module):?>
-                                        <img alt="<?php echo $lang->translate($module);?>" src="/images/controlPanel/<?php echo $module;?>" class="control_panel_image">
-                                            <?php endif;?>
-                                        <br>
-                                                <?php echo $lang->translate($module);?>
-                                    </a>
-                                </li>       
-			<?php endforeach;?>
-		</ul>
-	</div>	
+<div class="well" id="edit_profile_profile" area="profile">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <form class="form-login margin-fancy " id="form_register_profile" name="form_register_profile" action="">
+                <div class="form-group col-md-6">
+                    <label for="public_user_name_profile">* <?php echo $lang->translate("Name"); ?></label>
+                    <input type="text" class="form-control" id="public_user_name_profile" name="public_user_name_profile" value="<?php echo $this->user_data->name?>" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="public_user_last_name_profile">* <?php echo $lang->translate("Lastname"); ?></label>
+                    <input type="text" class="form-control" id="public_user_last_name_profile" name="public_user_last_name_profile" value="<?php echo $this->user_data->lastname?>" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="public_user_identification_profile">* <?php echo $lang->translate("Identification"); ?></label>
+                    <input type="text" class="form-control" id="public_user_identification_profile" name="public_user_identification_profile" value="<?php echo $this->user_data->identification?>" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="public_user_email_profile">* <?php echo $lang->translate("Email"); ?></label>
+                    <input type="text" class="form-control email" id="public_user_email_profile" name="public_user_email_profile" value="<?php echo $this->user_data->email?>" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="public_user_phone_profile"><?php echo $lang->translate("Phone"); ?></label>
+                    <input type="text" class="form-control" id="public_user_phone_profile" name="public_user_phone_profile" value="<?php echo $this->user_data->phone?>" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="public_user_username_profile">* <?php echo $lang->translate("Username"); ?></label>
+                    <input type="text" class="form-control" id="public_user_username_profile" name="public_user_username_profile" value="<?php echo $this->user_data->username?>" />
+                </div>
+
+                <div class="text-center col-md-12">
+                    <div class="text-center col-md-12"><a id="change_psw" class="pointer"><?php echo  $lang->translate('Change password'); ?></a></div>
+                        <input class="btn btn-primary" type="button" id="btn_register_user_profile" name="btn_register_user_profile" value="<?php echo $lang->translate("Update"); ?>" />
+                        <input type="hidden" id="website_id" name="website_id" value="<?php echo $front_ids->website_id; ?>" />
+                        <input type="hidden" id="area" name="area" value="profile" />
+                        <input type="hidden" id="public_user_id_profile" name="public_user_id_profile" value="<?php echo $this->user_data->id?>" />
+                        <input type="hidden" id="error_email_profile" name="error_email_profile" value="<?php echo  $lang->translate('The email address already has been registered'); ?>" />
+                        <input type="hidden" id="error_username_profile" name="error_username_profile" value="<?php echo  $lang->translate('The username already has been registered'); ?>" />
+                </div>																																				
+            </form>
+        </div>
+    </div>
 </div>

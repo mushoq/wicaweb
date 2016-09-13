@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
 	//change password
-	if($("#change_psw").val()==1){
+	
+	$("#change_psw").bind("click",function(){
 		$("#anchor_change_psw").fancybox();
 		$("#anchor_change_psw").click();
 		
@@ -41,7 +42,7 @@ $(document).ready(function() {
 			}
 		});		
 		
-	}
+	});
 	
 	
 	//Loading view
@@ -51,36 +52,6 @@ $(document).ready(function() {
 		$(this).addClass('hide');
 	});
 	
-	$("[id^='myCarousel_']").each(function(){
-		$(this).carousel({
-			interval : 8000
-		});
-
-		$(this).bind("mouseenter", function(){
-			$("#carousel_left_"+this.id.replace('myCarousel_','')).removeClass('hide');
-			$("#carousel_right_"+this.id.replace('myCarousel_','')).removeClass('hide');				
-		});
-		
-		$(this).bind("mouseleave", function(){
-			$("#carousel_left_"+this.id.replace('myCarousel_','')).addClass('hide');
-			$("#carousel_right_"+this.id.replace('myCarousel_','')).addClass('hide');				
-		});
-		
-		
-		$("#carousel_left_"+this.id.replace('myCarousel_','')).bind("click", function() {
-			$(this).carousel('prev');
-		});
-
-		$("#carousel_right_"+this.id.replace('myCarousel_','')).bind("click", function() {
-			$(this).carousel('next');
-		});				
-	});
-        if(document.getElementById("myCarousel_4") !== null){
-            $("#myCarousel_4").carousel('next');
-            }            
-       
-        
-                
 	//search form contents
 	$("[id^='content_form_']").each(function(){
 		var content_id = $(this).attr('content_id');
@@ -279,6 +250,7 @@ $(document).ready(function() {
 	
 	
 	$("[id^='register_']").each(function(){
+		
 		var area_reg = $(this).attr('area');
 		$("[id^='register_']").fancybox({
 			fitToView	: false,
@@ -387,6 +359,83 @@ $(document).ready(function() {
 		});
 	});
 	
+	$("[id^='edit_profile_']").each(function(){
+		var area_reg = 'profile';
+		//Validation
+		$("#form_register_"+area_reg).validate({
+			wrapper: "span",
+			onfocusout: false,
+			onkeyup: false,					
+            rules: {
+           	
+            }
+		});	
+
+		$("#public_user_email_"+area_reg).rules('add',{
+			remote:{//check if email already exist
+				url: "/default/index/checkregistermail",
+				type: "POST",
+				async:false,
+				data:{
+					area: area_reg
+				}
+			},			
+			required: true,
+    		email:true,
+			messages:{
+				remote: $("#error_email_"+area_reg).val()
+			}
+		});	
+		$("#public_user_username_"+area_reg).rules('add',{
+			remote:{//check if username already exist
+				url: "/default/index/checkusername",
+				type: "POST",
+				async: false,
+				data:{
+					area: area_reg
+				}
+			},			
+			required: true,
+			minlength: 6,
+			alphaNumeric: true,
+			messages:{
+				remote: $("#error_username_"+area_reg).val()
+			}
+		});			
+		
+		$("#public_user_name_"+area_reg).rules('add',{
+			required: true
+		});
+		$("#public_user_last_name_"+area_reg).rules('add',{
+			required: true
+		});		
+		$("#public_user_identification_"+area_reg).rules('add',{
+			required: true
+		});	
+		
+		
+		$("#btn_register_user_"+area_reg).bind("click",function(){
+			alert('simon');
+			$("#public_user_email_"+area_reg).valid();
+			$("#public_user_username_"+area_reg).valid();
+			if($("#form_register_"+area_reg).valid()){
+				$.ajax({
+					type: 'POST',
+					async: false,
+					url: '/default/index/register',
+					data: $("#form_register_"+area_reg).serialize(),
+					dataType: 'json',
+					
+					success: function(data) {	
+						if(data){
+							window.location.reload(true);
+						}
+						$.fancybox.close();
+					}
+				});		
+			}
+		});
+	});
 
 	$("[id^='forgot_']").each(function(){
 		var area_for = $(this).attr('area');
