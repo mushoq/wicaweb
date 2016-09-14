@@ -66,7 +66,7 @@ $(document).ready(function(){
 	//listeners
 	$('#password_checkbox').bind('click',function(){
 		if($(this).is(':checked')){
-			$('#password_container').show();
+			$('#password_container').removeClass('hide');
 			//add rules
 			$('#password').rules('add',{
 				required: true,

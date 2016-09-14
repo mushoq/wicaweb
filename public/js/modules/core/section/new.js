@@ -70,7 +70,7 @@ $(document).ready(function(){
                                 $("#step" + j).hide();
                                 $("#step"+(j+1)).hide();
                                 $("#step"+(j+2)).hide();                                
-                                $("#step" + (j - 1)).show();                                
+                                $("#step" + (j - 1)).removeClass('hide');                                
                                 selectStep(j - 1);
                         }                        
                 });                
@@ -256,7 +256,7 @@ function createNextButton(i) {
                                 
                                 if(!$('#parent_show_menu').val() || $('#parent_show_menu').val()=='yes'){                        
                                         $('#menu_opt_container').removeClass("hide");
-                                        $('#menu_opt_container').show();
+                                        $('#menu_opt_container').removeClass('hide');
                                         $('#menu').val('');                        
                                         $("#menu").rules("add", {
                                                  required: true
@@ -272,7 +272,7 @@ function createNextButton(i) {
                                 
                                 if(!$('#parent_show_menu2').val() || $('#parent_show_menu2').val()=='yes'){                        
                                         $('#menu2_opt_container').removeClass("hide");
-                                        $('#menu2_opt_container').show();
+                                        $('#menu2_opt_container').removeClass('hide');
                                         $('#menu2').val('');                        
                                         $("#menu2").rules("add", {
                                                  required: true
@@ -355,7 +355,7 @@ function createNextButton(i) {
                                 addNextButton(i,stepName);
                                 selectStep(i + 1);
                         }else{
-                                $("#error_container").show();
+                                $("#error_container").removeClass('hide');
                         }
                 }else{
                         addNextButton(i,stepName);
@@ -366,7 +366,7 @@ function createNextButton(i) {
 
 function addNextButton(i, stepName){
         $("#" + stepName).hide();
-        $("#step" + (i + 1)).show();        
+        $("#step" + (i + 1)).removeClass('hide');        
         
         $("[id^='type_']").each(function(){                
                 $(this).bind('click',function(){                        
@@ -440,7 +440,7 @@ function createPrevButton(i) {
         $("#" + stepName + "Prev").bind("click", function() {                                        
                 $("#error_container").hide();
                 $("#" + stepName).hide();
-                $("#step" + (i - 1)).show();                
+                $("#step" + (i - 1)).removeClass('hide');                
                 selectStep(i - 1);                        
         });
 }
@@ -511,10 +511,10 @@ function load_picture(element_sufix)
                                         });
                                 }                                                                
                                 $('#imageprw_'+element_sufix).attr('src', "/uploads/tmp/"+response);
-                                $('#imageprw_'+element_sufix).show();                                                                                
+                                $('#imageprw_'+element_sufix).removeClass('hide');                                                                                
                                 $('#fileLabel_'+element_sufix).val(file);
                                 $('#hdnNameFile_'+element_sufix).val(response);
-                                $("#del_img_"+element_sufix).show();
+                                $("#del_img_"+element_sufix).removeClass('hide');
                                 
                         }else{//ERRORS ON THE FILE UPLOADED
                                 if(response == 1){

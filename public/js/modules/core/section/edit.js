@@ -25,7 +25,7 @@ $(document).ready(function(){
 			createNextButton(i);
 			selectStep(i);
 		}else {			
-			$("#step" + i).hide();
+			$("#step" + i).addClass('hide');
 			createPrevButton(i);
 			createNextButton(i);
 		}
@@ -43,24 +43,24 @@ $(document).ready(function(){
 				j = parseInt(this.id.replace('bar_step_','')); 
 				if($('#frmSection').valid())
 				{		
-					$("#error_container").hide();					
+					$("#error_container").addClass('hide');					
 					if(j==0){				
 						//0, 2, 3
-						$("#step"+j).hide();
-						$("#step"+(j+2)).hide();
-						$("#step"+(j+3)).hide();
+						$("#step"+j).addClass('hide');
+						$("#step"+(j+2)).addClass('hide');
+						$("#step"+(j+3)).addClass('hide');
 						
 					}else if(j==1){
 						//0, 1 , 3
-						$("#step"+j).hide();
-						$("#step"+(j-1)).hide();
-						$("#step"+(j+2)).hide();
+						$("#step"+j).addClass('hide');
+						$("#step"+(j-1)).addClass('hide');
+						$("#step"+(j+2)).addClass('hide');
 						
 					}else if(j==2){	
 						//0, 1, 2
-						$("#step"+j).hide();
-						$("#step"+(j-2)).hide();
-						$("#step"+(j-1)).hide();
+						$("#step"+j).addClass('hide');
+						$("#step"+(j-2)).addClass('hide');
+						$("#step"+(j-1)).addClass('hide');
 						
 					}					
 					addNextButton(j,"step" + (j-1));
@@ -68,10 +68,10 @@ $(document).ready(function(){
 				}
 			}else{
 				j = 1;				
-				$("#step" + j).hide();
-				$("#step"+(j+1)).hide();
-				$("#step"+(j+2)).hide();				
-				$("#step" + (j - 1)).show();				
+				$("#step" + j).addClass('hide');
+				$("#step"+(j+1)).addClass('hide');
+				$("#step"+(j+2)).addClass('hide');				
+				$("#step" + (j - 1)).removeClass('hide');				
 				selectStep(j - 1);
 			}			
 		});		
@@ -194,7 +194,7 @@ function createNextButton(i) {
 		if(!$('#parent_show_menu').val() || $('#parent_show_menu').val()=='yes'){
 			if($('#area option:selected').attr('type')=='variable'){
 				if($("#menu").val()=='yes' || $("#menu").val()=='no')
-					$('#menu_opt_container').show();
+					$('#menu_opt_container').removeClass('hide');
 			}
 		}
                 
@@ -202,7 +202,7 @@ function createNextButton(i) {
 		if(!$('#parent_show_menu2').val() || $('#parent_show_menu2').val()=='yes'){
 			if($('#area option:selected').attr('type')=='variable'){
 				if($("#menu2").val()=='yes' || $("#menu2").val()=='no')
-					$('#menu2_opt_container').show();
+					$('#menu2_opt_container').removeClass('hide');
 			}
 		}                
 		
@@ -267,7 +267,7 @@ function createNextButton(i) {
 				
 				if(!$('#parent_show_menu').val() || $('#parent_show_menu').val()=='yes'){			
 					$('#menu_opt_container').removeClass("hide");
-					$('#menu_opt_container').show();
+					$('#menu_opt_container').removeClass('hide');
 					$('#menu').val('');			
 					$("#menu").rules("add", {
 						 required: true
@@ -284,7 +284,7 @@ function createNextButton(i) {
                                 //for menu2
                                 if(!$('#parent_show_menu2').val() || $('#parent_show_menu2').val()=='yes'){			
 					$('#menu2_opt_container').removeClass("hide");
-					$('#menu2_opt_container').show();
+					$('#menu2_opt_container').removeClass('hide');
 					$('#menu2').val('');			
 					$("#menu2").rules("add", {
 						 required: true
@@ -301,7 +301,7 @@ function createNextButton(i) {
 			}else{
 				if(!$('#parent_show_menu').val() || $('#parent_show_menu').val()=='yes'){
 					if($('#menu_opt_container').css('display')!='none'){
-						$('#menu_opt_container').hide();				
+						$('#menu_opt_container').addClass('hide');				
 					}
 					
 					$('#menu').val('no');
@@ -318,7 +318,7 @@ function createNextButton(i) {
                                 //for menu2
                                 if(!$('#parent_show_menu2').val() || $('#parent_show_menu2').val()=='yes'){
 					if($('#menu2_opt_container').css('display')!='none'){
-						$('#menu2_opt_container').hide();				
+						$('#menu2_opt_container').addClass('hide');				
 					}
 					
 					$('#menu2').val('no');
@@ -365,11 +365,11 @@ function createNextButton(i) {
 		if(i==0){
 			//BASIC										
 			if($('#frmSection').valid()){				
-				$("#error_container").hide();
+				$("#error_container").addClass('hide');
 				addNextButton(i,stepName);
 				selectStep(i + 1);
 			}else{
-				$("#error_container").show();
+				$("#error_container").removeClass('hide');
 			}
 		}else{
 			addNextButton(i,stepName);
@@ -379,8 +379,8 @@ function createNextButton(i) {
 }
 
 function addNextButton(i, stepName){
-	$("#" + stepName).hide();
-	$("#step" + (i + 1)).show();
+	$("#" + stepName).addClass('hide');
+	$("#step" + (i + 1)).removeClass('hide');
 	
 	$("[id^='type_']").each(function(){		
 		$(this).bind('click',function(){			
@@ -447,7 +447,7 @@ function addNextButton(i, stepName){
 	
 	$("[id^='file_img_']").each(function(){
 		if($(this).val()){
-			$("#del_img_"+this.id.replace("file_img_","")).show();
+			$("#del_img_"+this.id.replace("file_img_","")).removeClass('hide');
 			delete_picture(this.id.replace("file_img_",""));
 		}
 	});
@@ -461,9 +461,9 @@ function createPrevButton(i) {
 	$("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Prev' class='btn btn-primary prev'>"+back_step+"</a>");		
 
 	$("#" + stepName + "Prev").bind("click", function() {					
-		$("#error_container").hide();
-		$("#" + stepName).hide();
-		$("#step" + (i - 1)).show();		
+		$("#error_container").addClass('hide');
+		$("#" + stepName).addClass('hide');
+		$("#step" + (i - 1)).removeClass('hide');		
 		selectStep(i - 1);			
 	});
 }
@@ -534,7 +534,7 @@ function load_picture(element_sufix)
 					});
 				}							
 				$('#imageprw_'+element_sufix).attr('src', "/uploads/tmp/"+response);
-				$('#imageprw_'+element_sufix).show();										
+				$('#imageprw_'+element_sufix).removeClass('hide');										
 				$('#fileLabel_'+element_sufix).val(file);
 				$('#hdnNameFile_'+element_sufix).val(response);
 				
@@ -572,9 +572,9 @@ function delete_picture(index)
 						$("#file_img_"+index).val("");
 						$("#id_img_"+index).val("");
 						$("#hdnNameFile_"+index).val("");
-						$("#del_img_"+index).hide();
+						$("#del_img_"+index).addClass('hide');
 						$('#imageprw_'+index).attr('src', "");
-						$('#imageprw_'+index).hide();
+						$('#imageprw_'+index).addClass('hide');
 					}
 			});
 		}		

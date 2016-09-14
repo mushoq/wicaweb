@@ -70,7 +70,7 @@ $(document).ready(function(){
 				$("#step" + j).hide();
 				$("#step"+(j+1)).hide();
 				$("#step"+(j+2)).hide();				
-				$("#step" + (j - 1)).show();				
+				$("#step" + (j - 1)).removeClass('hide');				
 				selectStep(j - 1);
 			}			
 		});		
@@ -221,7 +221,7 @@ function createNextButton(i) {
 				addNextButton(i,stepName);
 				selectStep(i + 1);
 			}else{
-				$("#error_container").show();
+				$("#error_container").removeClass('hide');
 			}
 		}else{
 			addNextButton(i,stepName);
@@ -232,7 +232,7 @@ function createNextButton(i) {
 
 function addNextButton(i, stepName){
 	$("#" + stepName).hide();
-	$("#step" + (i + 1)).show();	
+	$("#step" + (i + 1)).removeClass('hide');	
 	
 	$("[id^='type_']").each(function(){		
 		$(this).bind('click',function(){			
@@ -296,7 +296,7 @@ function createPrevButton(i) {
 	$("#" + stepName + "Prev").bind("click", function() {					
 		$("#error_container").hide();
 		$("#" + stepName).hide();
-		$("#step" + (i - 1)).show();		
+		$("#step" + (i - 1)).removeClass('hide');		
 		selectStep(i - 1);			
 	});
 }
@@ -339,15 +339,15 @@ function selectStep(i) {
 function checkOptions(obj, btnOrden){
    
     if($("#" + obj).val()=='yes'){
-         //$("#" + btnOrden).show();
+         //$("#" + btnOrden).removeClass('hide');
          if(obj=='highlight'){
-             $("#position_highlight").show();
+             $("#position_highlight").removeClass('hide');
          }
     }
     $('#' + obj + '_yes').bind('click', function(){
-         //$("#" + btnOrden).show();
+         //$("#" + btnOrden).removeClass('hide');
           if(obj=='highlight'){
-             $("#position_highlight").show();
+             $("#position_highlight").removeClass('hide');
          }
     });
      $('#' + obj + '_no').bind('click', function(){

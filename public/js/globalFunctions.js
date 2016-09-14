@@ -36,7 +36,7 @@ function readURL(input, preview) {
             $('#'+preview)
                 .attr('src', e.target.result)
                 .width(200);
-            $('#'+preview).show();
+            $('#'+preview).removeClass('hide');
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -59,7 +59,7 @@ function readURL_icon(input, preview) {
                 .attr('src', e.target.result)
                 .width(16)
             	.height(16);
-            $('#'+preview).show();
+            $('#'+preview).removeClass('hide');
         };
 
         reader.readAsDataURL(input.files[0]);

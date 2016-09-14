@@ -185,7 +185,7 @@
                                   <div class="form-group">
                                                 <label class="col-sm-3 control-label"><?php echo '* '.$lang->translate('Area').':'; ?></label>
                                                 <div class="col-sm-8">
-                                                        <select id="area" name="area">
+                                                    <select id="area" name="area" class="form-control">
                                                                 <option value=""><?php echo $lang->translate('Selected'); ?></option>
                                                                 <?php  foreach ($this->template_areas as $ky => $tpl ): ?>
                                                                 <option value="<?php echo $tpl->id; ?>" type="<?php echo $tpl->type; ?>" <?php if($tpl->id==$this->idArea){ ?> selected="selected" <?php } ?> ><?php echo $tpl->name; ?></option>
@@ -199,7 +199,7 @@
                     
                             <div class="col-md-6" id="menus">
                                 <?php echo $this->form->parent_show_menu->renderViewHelper(); ?>                         
-                         <div class="col-md-6 hide" id="menu_opt_container">        
+                         <div class="col-md-12 hide" id="menu_opt_container">        
                                         <div class="form-group">
                                                 <label class="col-sm-3 control-label"><?php echo '* '.$lang->translate('Show in menu').':'; ?></label>
                                                 <div class="col-sm-8">

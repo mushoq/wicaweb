@@ -27,8 +27,8 @@ $(document).ready(function(){
 		});
 
 		$(this).bind("mouseenter", function(){
-			$("#carousel_left_"+this.id.replace('myCarousel_','')).show();
-			$("#carousel_right_"+this.id.replace('myCarousel_','')).show();				
+			$("#carousel_left_"+this.id.replace('myCarousel_','')).removeClass('hide');
+			$("#carousel_right_"+this.id.replace('myCarousel_','')).removeClass('hide');				
 		});
 		
 		$(this).bind("mouseleave", function(){

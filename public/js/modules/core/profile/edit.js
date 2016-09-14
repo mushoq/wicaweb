@@ -45,7 +45,7 @@ $(document).ready(function(){
 			}
 		},
 		invalidHandler: function() {			
-			$("#error_container").show();
+			$("#error_container").removeClass('hide');
 		}
 	});
 	
@@ -224,7 +224,7 @@ function createNextButton(i) {
 			if(sections_fl){
 				
 				$('#messages').hide();
-				$('#web_container').show();
+				$('#web_container').removeClass('hide');
 				$('#websites').html(html);
 				$('#section_container').html('');																				
 				
@@ -339,7 +339,7 @@ function createNextButton(i) {
 					});
 				}else{	
 					//if there is not CMS module selected
-					$('#messages').show();
+					$('#messages').removeClass('hide');
 					$('#web_container').hide();
 					$('#websites').html('');
 					$('#section_container').html('');
@@ -361,7 +361,7 @@ function createNextButton(i) {
 
 function addNextButton(i, stepName){
 	$("#" + stepName).hide();
-	$("#step" + (i + 1)).show();
+	$("#step" + (i + 1)).removeClass('hide');
 
 }
 
@@ -372,7 +372,7 @@ function createPrevButton(i) {
 	$("#" + stepName + "Prev").bind("click", function() {					
 		$("#error_container").hide();
 		$("#" + stepName).hide();
-		$("#step" + (i - 1)).show();		
+		$("#step" + (i - 1)).removeClass('hide');		
 		selectStep(i - 1);
 	});
 }
