@@ -99,6 +99,14 @@ div.error_validation{
 	font-weight:bold;
         padding-bottom: 10px;
 }
+label.error_captcha{
+	color: #B94A48;
+}
+div.error_captcha{
+	color: #B94A48;
+	font-weight:bold;
+        padding-bottom: 10px;
+}
 
 .overflow_hidden{
 	overflow: hidden;

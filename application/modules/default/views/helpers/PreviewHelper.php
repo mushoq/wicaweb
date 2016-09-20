@@ -306,7 +306,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									if($data_content_field[2]->value=='yes')
 									{
 										$return .= '<div id="recaptcha" class="form-group text-center">
-                                                                                                <label id="captcha_error_'.$data_content [0]->id.'" class="error_validation hidden" for="form_field_captcha_'.$data_content [0]->id.'">'.$lang->translate('Please check the reCAPTCHA verification ').'</label>
+                                                                                                <label id="mushoq_error_'.$data_content [0]->id.'" class="error_captcha hide" for="form_field_captcha_'.$data_content [0]->id.'">'.$lang->translate('Please check the reCAPTCHA verification ').'</label>
                                                                                                 <div class="g-recaptcha text-center center-block" style="width: 304px; height: 78px;margin: 0 auto" data-sitekey="6LfGUiUTAAAAAPZNmgcZjc27DHEQwr9Pzu47I-qu"></div>
                                                                                             </div>';
 									}

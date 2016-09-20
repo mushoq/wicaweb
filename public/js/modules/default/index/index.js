@@ -87,8 +87,7 @@ $(document).ready(function() {
 					data: $("#content_form_"+content_id).serialize(),
 					success: function(data) {	
 						if(data=='error_captcha'){
-							$("#captcha_error_"+content_id).removeClass('hidden');
-                                                        $("#captcha_error_"+content_id).removeClass('hide');
+                                                        $("#mushoq_error_"+content_id).removeClass('hide');
 						}else
 							if(data=='success_captcha' || data=='error_dictionary' || data=='error_sending'){
 								window.location.reload(true);
