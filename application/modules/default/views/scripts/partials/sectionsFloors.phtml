@@ -1,0 +1,18 @@
+
+ 
+<?php
+foreach($this->section_floors as $key => $subsection){
+    $this->col_number = $subsection['col_number'];
+    $this->section_title = $subsection['section_title'];
+    $this->section_subtitle = $subsection['section_subtitle'];
+    $this->title = $subsection['title'];
+    $this->subtitle = $subsection['subtitle'];
+    $this->obra = $subsection['publish_date'];
+    $this->venta = $subsection['expire_date'];
+    $this->section_id = $subsection['id'];
+    $this->contents = $subsection['contents'];
+    $this->section_images = $subsection['section_images'];
+    $this->articles = $subsection['articles'];
+    include($subsection['section_filename_tpl']);
+}
+?>

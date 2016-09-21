@@ -519,6 +519,88 @@ class Default_IndexController extends Zend_Controller_Action
 		    				$article_arr[] = array('section_id'=>$section->id, 'article_id'=>$art->id, 'title'=>$art->title, 'synopsis'=>$art->synopsis, 'image'=>$art->image, 'feature'=>$art->feature, 'publish_date'=>$art->publish_date, 'expire_date'=>$art->expire_date);
 		    			}
 		    		}
+                                
+                                $section_images = NULL;
+                                $section_image = new Core_Model_Content();
+                                $images = $section_image->find('wc_section_image', array('section_id' =>$section->id));
+
+                                if (count($images) > 0) {
+                                    foreach($images as $image){
+                                        if (isset($image->file_name)) {
+                                            $section_images[] = $image->file_name;
+                                        }
+                                    }
+                                }
+
+                                $section_floors = array();
+                                if($section->section_template_id == 8){
+                                    $subsections = $section_obj->find('wc_section', array('section_parent_id'=>$section->id, 'website_id'=>$front_ids->website_id));  
+                                    foreach($subsections as $key => $subsection){
+                                        $section_tpl = $section_template->find('wc_section_template',array('id'=>$subsection->section_template_id));
+                                        /* CONTENTS */
+                                        $subsection_contents = $content->getContentsBySection($subsection->id, $front_ids->website_id, null, null, array());
+                                        //contents per section
+                                        $subsection_content_arr = array();
+                                        if(count($subsection_contents)>0)
+                                        {	    			
+                                                foreach ($subsection_contents as $key => $v)
+                                                {
+                                                        $subsection_content_arr[] = array('section_id'=>$subsection->id,'content_id'=>$v->id,'title'=>$v->title,'section'=>$v->section_name,'internal_name'=>$v->internal_name, 'columns'=>$v->column_number);
+                                                }	    			
+                                        }
+                                        $subsection_images = NULL;
+                                        
+                                        $subsection_image = $section_image->find('wc_section_image', array('section_id' =>$subsection->id));
+
+                                        if (count($subsection_image) > 0) {
+                                            foreach($subsection_image as $image){
+                                                if (isset($image->file_name)) {
+                                                    $subsection_images[] = $image->file_name;
+                                                }
+                                            }
+                                        }
+                                        $subsection_article_arr = array();
+                                        $subsection_articles_list = $section_obj->find('wc_section', array('section_parent_id'=>$subsection->id,'article'=>'yes'), array('order_number'=>'ASC'));
+                                        if(count($subsection_articles_list)>0)
+                                        {
+                                                foreach ($subsection_articles_list as &$art)
+                                                {
+                                                        $art->title = GlobalFunctions::truncate($art->title, 100, false);
+                                                        $art->synopsis = GlobalFunctions::truncate($art->synopsis, 240, false);
+
+                                                        //search for an image	    				
+                                                        $pictures_list = $content->getContentsBySection($art->id, $front_ids->website_id, null, 2);
+
+
+                                                        if(count($pictures_list)>0)
+                                                        {
+                                                                $data_content_field = $content_field->find ( 'wc_content_field', array ('content_id' => $pictures_list[0]->id) );
+                                                                $art->image = $data_content_field[4]->value;
+                                                        }
+                                                        else
+                                                        {
+                                                                $art->image = null;
+                                                        }
+                                                        $subsection_article_arr[] = array('section_id'=>$subsection->id, 'article_id'=>$art->id, 'title'=>$art->title, 'synopsis'=>$art->synopsis, 'image'=>$art->image, 'feature'=>$art->feature, 'publish_date'=>$art->publish_date, 'expire_date'=>$art->expire_date);
+                                                }
+                                                
+                                        }
+                                        $section_floors[] = array(
+                                            'section_filename_tpl'=>$section_tpl[0]->file_name,
+                                            'col_number'=>$section_tpl[0]->column_number,
+                                            'section_title'=>$subsection->title,
+                                            'section_subtitle'=>$subsection->subtitle,
+                                            'title'=>$section->title,
+                                            'subtitle'=>$section->subtitle,
+                                            'publish_date'=>$subsection->publish_date,
+                                            'expire_date'=>$subsection->expire_date,
+                                            'section_id'=>$subsection->id,
+                                            'contents'=>$subsection_content_arr,
+                                            'section_images'=>$subsection_images,
+                                            'articles'=>$subsection_article_arr,
+                                        );
+                                    }
+                                }
 		    		$crums = GlobalFunctions::getCrums($section->id);
 		    		//contents list
 		    		$contents_list[$section->id]['order_number'] = $section->order_number;
@@ -539,6 +621,8 @@ class Default_IndexController extends Zend_Controller_Action
                                 $contents_list[$section->id]['products'] = $products;
                                 $contents_list[$section->id]['product_catalog'] = $product_arr;
                                 $contents_list[$section->id]['crums'] = $crums;
+                                $contents_list[$section->id]['section_images'] = $section_images;
+                                $contents_list[$section->id]['section_floors'] = $section_floors;
 		    		
 		    		/******
 		    		 * External module contents within section selected
@@ -686,6 +770,8 @@ class Default_IndexController extends Zend_Controller_Action
 		    			$contents_list[$section->id]['article'] = $article_arr;
 		    			$contents_list[$section->id]['products'] = $products;
                                         $contents_list[$section->id]['crums'] = $crums;
+                                        $contents_list[$section->id]['section_images'] = $section_images;
+                                        $contents_list[$section->id]['section_floors'] = $section_floors;
 		    			/******
 		    			 * External module contents within section selected
 		    			*/
