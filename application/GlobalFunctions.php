@@ -1027,7 +1027,7 @@ class GlobalFunctions {
 		}
 		
 		//fixed span value
-		$fixed_col_md_12 = 1200;
+		$fixed_col_md_12 = 1250;
 		
 		//var with the fixed percentages of the corresponding span values
 		$span_percentages = array();
@@ -1049,7 +1049,7 @@ class GlobalFunctions {
 		$area_width_number = ($fixed_col_md_12*$span_percentages[$area_width])/100;
 				
 		if($area_width_number)
-			$content_width_number = ($area_width_number*$span_percentages['span'.$col_factor])/100;
+			$content_width_number = ($area_width_number*$span_percentages['col-md-'.$col_factor])/100;
 		
 		$content_width_number = ($content_width_number-30);
 		

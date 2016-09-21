@@ -1889,6 +1889,9 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		$section_tmp = $section->getNewRow('wc_section_temp');
 		
 		$stored_section_data = array();
+                
+                $order_sections = $section->find('wc_section', array('section_parent_id'=>$formData['section_parent_id'], 'article'=>'no'));
+                $order_number = count($order_sections) + 1;
 		
 		if($publication_approved == 'yes' && $publication_status == 'published')	
 		{			
@@ -1929,7 +1932,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 				$section_act->updated_by_id = NULL;
 				$section_act->creation_date = date('Y-m-d h%i%s');
 				$section_act->last_update_date = NULL;
-				$section_act->order_number = NULL;
+				$section_act->order_number = $order_number;
 			}
 			if($publication_approved == 'yes' && $publication_status == 'published')
 			{
@@ -1996,7 +1999,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 						$section_tmp->updated_by_id = NULL;
 						$section_tmp->creation_date = date('Y-m-d h%i%s');
 						$section_tmp->last_update_date = NULL;
-						$section_tmp->order_number = NULL;
+						$section_tmp->order_number = $order_number;
 					}
 					if($publication_approved == 'yes' && $publication_status == 'published')
 					{
@@ -2054,7 +2057,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 						$section_act->updated_by_id = NULL;
 						$section_act->creation_date = date('Y-m-d h%i%s');
 						$section_act->last_update_date = NULL;
-						$section_act->order_number = NULL;
+						$section_act->order_number = $order_number;
 					}
 					if($publication_approved == 'yes' && $publication_status == 'published')
 					{
@@ -2114,7 +2117,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 						$section_tmp->updated_by_id = NULL;
 						$section_tmp->creation_date = date('Y-m-d h%i%s');
 						$section_tmp->last_update_date = NULL;
-						$section_tmp->order_number = NULL;
+						$section_tmp->order_number = $order_number;
 					}
 					if($publication_approved == 'yes' && $publication_status == 'published')
 					{
@@ -2176,7 +2179,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 						$section_tmp->updated_by_id = NULL;
 						$section_tmp->creation_date = date('Y-m-d h%i%s');
 						$section_tmp->last_update_date = NULL;
-						$section_tmp->order_number = NULL;
+						$section_tmp->order_number = $order_number;
 					}
 					if($publication_approved == 'yes' && $publication_status == 'published')
 					{

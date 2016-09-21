@@ -264,207 +264,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
                 $this->view->website_id = $id->website_id;
 	}
 	
-	/**
-	 * Saves article order
-	 */
-/*	public function saveorderAction()
-	{
-		//translate library
-		$lang = Zend_Registry::get('Zend_Translate');
-		
-		$this->_helper->layout->disableLayout ();
-		// disable autorendering for this action
-		$this->_helper->viewRenderer->setNoRender();
-		
-	if ($this->getRequest()->isPost())
-		{
-			//retrieved data from post
-			$formData  = $this->_request->getPost();
-							
-			$session_id = New Zend_Session_Namespace('id');
-
-			if($formData['identifier']=='sections')
-			{
-				$section = new Core_Model_Section();
-				$section_temp = new Core_Model_SectionTemp();
-				
-				//Save sections		
-				$order_list = GlobalFunctions::value_cleaner($formData['section_order']);
-				
-				$order_arr = explode(',', $order_list);					
-				$count = 1;
-				
-				if(count($order_arr)>0)
-				{
-					//save sections according order
-					foreach ($order_arr as $order)												
-					{	
-						if($order)
-						{
-							$options = explode('_', $order);
-							$section_id = $options[1];
-							$is_temp = $options[0];
-							
-							if($is_temp)
-							{
-								$stored_section_data = $section_temp->find('wc_section_temp', array('section_id'=>$section_id));
-								$section_obj = $section->getNewRow('wc_section_temp');
-								$section_obj->id = $stored_section_data[0]->id;
-								$section_obj->section_parent_id = $stored_section_data[0]->section_parent_id;
-								$section_obj->section_id = $stored_section_data[0]->section_id;
-								$section_obj->section_parent_id = $stored_section_data[0]->section_parent_id;
-								$section_obj->website_id = $stored_section_data[0]->website_id;
-								$section_obj->section_template_id = $stored_section_data[0]->section_template_id;
-								$section_obj->internal_name = GlobalFunctions::value_cleaner($stored_section_data[0]->internal_name);
-								$section_obj->title = GlobalFunctions::value_cleaner($stored_section_data[0]->title);
-								$section_obj->subtitle = GlobalFunctions::value_cleaner($stored_section_data[0]->subtitle);
-								$section_obj->title_browser = GlobalFunctions::value_cleaner($stored_section_data[0]->title_browser);
-								$section_obj->synopsis = $stored_section_data[0]->synopsis;
-								$section_obj->keywords = GlobalFunctions::value_cleaner($stored_section_data[0]->keywords);
-								$section_obj->type = GlobalFunctions::value_cleaner($stored_section_data[0]->type);
-								$section_obj->created_by_id = $stored_section_data[0]->created_by_id;
-								$section_obj->updated_by_id = $session_id->user_id;
-								$section_obj->creation_date = $stored_section_data[0]->creation_date;
-								$section_obj->last_update_date = date('Y-m-d h%i%s');
-								$section_obj->approved = GlobalFunctions::value_cleaner($stored_section_data[0]->approved);
-								$section_obj->author = GlobalFunctions::value_cleaner($stored_section_data[0]->author);
-								$section_obj->publication_status = GlobalFunctions::value_cleaner($stored_section_data[0]->publication_status);
-								$section_obj->feature = GlobalFunctions::value_cleaner($stored_section_data[0]->feature);
-								$section_obj->highlight = GlobalFunctions::value_cleaner($stored_section_data[0]->highlight);
-								$section_obj->publish_date = $stored_section_data[0]->publish_date;
-								$section_obj->expire_date = $stored_section_data[0]->expire_date;
-								$section_obj->show_publish_date = GlobalFunctions::value_cleaner($stored_section_data[0]->show_publish_date);
-								$section_obj->rss_available = GlobalFunctions::value_cleaner($stored_section_data[0]->rss_available);
-								$section_obj->external_link = GlobalFunctions::value_cleaner($stored_section_data[0]->external_link);
-								$section_obj->target = GlobalFunctions::value_cleaner($stored_section_data[0]->target);
-								$section_obj->comments = GlobalFunctions::value_cleaner($stored_section_data[0]->comments);
-								$section_obj->external_comment_script = GlobalFunctions::value_cleaner($stored_section_data[0]->external_comment_script);
-								$section_obj->display_menu = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu);
-								$section_obj->homepage = GlobalFunctions::value_cleaner($stored_section_data[0]->homepage);
-								$section_obj->order_number = GlobalFunctions::value_cleaner($count);
-								$section_obj->article = GlobalFunctions::value_cleaner($stored_section_data[0]->article);
-								$serial_id = $section->save('wc_section_temp',$section_obj);
-								$count++;
-							}
-							else
-							{
-								$stored_section_data = $section->find('wc_section', array('id'=>$section_id));
-								//$section_obj = $stored_section_data[0];
-								$section_obj = $section->getNewRow('wc_section');
-								$section_obj->id = $stored_section_data[0]->id;
-								$section_obj->section_parent_id = $stored_section_data[0]->section_parent_id;
-								$section_obj->website_id = $stored_section_data[0]->website_id;
-								$section_obj->section_template_id = $stored_section_data[0]->section_template_id;
-								$section_obj->internal_name = GlobalFunctions::value_cleaner($stored_section_data[0]->internal_name);
-								$section_obj->title = GlobalFunctions::value_cleaner($stored_section_data[0]->title);
-								$section_obj->subtitle = GlobalFunctions::value_cleaner($stored_section_data[0]->subtitle);
-								$section_obj->title_browser = GlobalFunctions::value_cleaner($stored_section_data[0]->title_browser);
-								$section_obj->synopsis = $stored_section_data[0]->synopsis;
-								$section_obj->keywords = GlobalFunctions::value_cleaner($stored_section_data[0]->keywords);
-								$section_obj->type = GlobalFunctions::value_cleaner($stored_section_data[0]->type);
-								$section_obj->created_by_id = $stored_section_data[0]->created_by_id;
-								$section_obj->updated_by_id = $session_id->user_id;
-								$section_obj->creation_date = $stored_section_data[0]->creation_date;
-								$section_obj->last_update_date = date('Y-m-d h%i%s');
-								$section_obj->approved = GlobalFunctions::value_cleaner($stored_section_data[0]->approved);
-								$section_obj->author = GlobalFunctions::value_cleaner($stored_section_data[0]->author);
-								$section_obj->publication_status = GlobalFunctions::value_cleaner($stored_section_data[0]->publication_status);
-								$section_obj->feature = GlobalFunctions::value_cleaner($stored_section_data[0]->feature);
-								$section_obj->highlight = GlobalFunctions::value_cleaner($stored_section_data[0]->highlight);
-								$section_obj->publish_date = $stored_section_data[0]->publish_date;
-								$section_obj->expire_date = $stored_section_data[0]->expire_date;
-								$section_obj->show_publish_date = GlobalFunctions::value_cleaner($stored_section_data[0]->show_publish_date);
-								$section_obj->rss_available = GlobalFunctions::value_cleaner($stored_section_data[0]->rss_available);
-								$section_obj->external_link = GlobalFunctions::value_cleaner($stored_section_data[0]->external_link);
-								$section_obj->target = GlobalFunctions::value_cleaner($stored_section_data[0]->target);
-								$section_obj->comments = GlobalFunctions::value_cleaner($stored_section_data[0]->comments);
-								$section_obj->external_comment_script = GlobalFunctions::value_cleaner($stored_section_data[0]->external_comment_script);
-								$section_obj->display_menu = GlobalFunctions::value_cleaner($stored_section_data[0]->display_menu);
-								$section_obj->homepage = GlobalFunctions::value_cleaner($stored_section_data[0]->homepage);
-								$section_obj->order_number = GlobalFunctions::value_cleaner($count);
-								$section_obj->article = GlobalFunctions::value_cleaner($stored_section_data[0]->article);
-								$serial_id = $section->save('wc_section',$section_obj);						
-								$count++;
-							}
-						}
-					}
-				}
-				if($session_id->section_id)
-					$arr_success = array('serial'=>$session_id->section_id);
-				else
-					$arr_success = array('serial'=>'saved');
-			}
-			else			
-			{
-				//Save contents
-				$order_list = GlobalFunctions::value_cleaner($formData['content_order']);
-				$order_arr = explode(',', $order_list);
-				$count = 1;
-				
-				//save contents according order
-				if(count($order_arr)>0)
-				{
-					//save sections according order
-					foreach ($order_arr as $order)												
-					{	
-						if($order)
-						{
-							$options = explode('_', $order);
-							$content_id = $options[1];
-							$is_temp = $options[0];
-							
-							if($is_temp)
-							{
-								$content_temp = new Core_Model_ContentTemp();
-								$content_obj_temp = $content_temp->find('wc_content_temp', array('content_id'=>$content_id));
-								
-								$section_temp = new Core_Model_SectionTemp();
-								$section_obj_temp = $section_temp->find('wc_section_temp', array('section_id' => $session_id->section_id));
-								
-								if(count($content_obj_temp)>0 && count($section_obj_temp))
-								{
-									$content_by_section_temp = new Core_Model_ContentBySectionTemp();
-									$content_by_section_data_temp = $content_by_section_temp->find('wc_content_by_section_temp', array('section_temp_id'=> $section_obj_temp[0]->id, 'content_temp_id'=> $content_obj_temp[0]->id));
-									$content_by_section_obj_temp = $content_by_section_temp->getNewRow('wc_content_by_section_temp');
-									$content_by_section_obj_temp->id = $content_by_section_data_temp[0]->id;
-									$content_by_section_obj_temp->content_by_section_id = $content_by_section_data_temp[0]->content_by_section_id;
-									$content_by_section_obj_temp->section_temp_id = $content_by_section_data_temp[0]->section_temp_id;
-									$content_by_section_obj_temp->content_temp_id = $content_by_section_data_temp[0]->content_temp_id;
-									$content_by_section_obj_temp->weight = $count;
-									$content_by_section_obj_temp->column_number = $formData['content_columns_'.$content_id];
-									$content_by_section_obj_temp->align = $formData['content_align_'.$content_id];
-									$content_by_section_temp->save('wc_content_by_section_temp',$content_by_section_obj_temp);
-									$count++;
-								}
-							}
-							else
-							{
-								$content_by_section = new Core_Model_ContentBySection();
-								$content_by_section_data = $content_by_section->find('wc_content_by_section', array('section_id'=> $session_id->section_id, 'content_id'=> $content_id));
-								$content_by_section_obj = $content_by_section->getNewRow('wc_content_by_section');
-								$content_by_section_obj->id = $content_by_section_data[0]->id;
-								$content_by_section_obj->section_id = $content_by_section_data[0]->section_id;
-								$content_by_section_obj->content_id = $content_by_section_data[0]->content_id;
-								$content_by_section_obj->weight = $count;
-								$content_by_section_obj->column_number = $formData['content_columns_'.$content_id];
-								$content_by_section_obj->align = $formData['content_align_'.$content_id];							
-								$content_by_section->save('wc_content_by_section',$content_by_section_obj);
-								$count++;
-							}
-						}
-					}
-				
-					if($session_id->section_id)
-						$arr_success = array('serial'=>$session_id->section_id);
-					else
-						$arr_success = array('serial'=>'saved');
-				}
-			}	
-						
-			echo json_encode($arr_success);
-			$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success saved order')));					
-		}
-	}*/
+	
 	
 	/**
 	 * Creates an article according website configuration
@@ -781,6 +581,9 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 		
 		$stored_section_data = array();
 		$homepage_opt = 'no';
+                
+                $order_sections = $article->find('wc_section', array('section_parent_id'=>$formData['section_parent_id'], 'article'=>'yes'));
+                $order_number = count($order_sections) + 1;
 		
 	if($publication_approved == 'yes' && $publication_status == 'published')
 		{
@@ -821,7 +624,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 				$article_act->updated_by_id = NULL;
 				$article_act->creation_date = date('Y-m-d h%i%s');
 				$article_act->last_update_date = NULL;
-                            $article_act->order_number = 1;
+                            $article_act->order_number = $order_number;
 			}
 			if($publication_approved == 'yes' && $publication_status == 'published')
 			{
@@ -898,7 +701,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 						$article_tmp->updated_by_id = NULL;
 						$article_tmp->creation_date = date('Y-m-d h%i%s');
 						$article_tmp->last_update_date = NULL;
-						$article_tmp->order_number = NULL;
+						$article_tmp->order_number = $order_number;
 					}
 					if($publication_approved == 'yes' && $publication_status == 'published')
 					{
@@ -958,7 +761,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 						$article_act->updated_by_id = NULL;
 						$article_act->creation_date = date('Y-m-d h%i%s');
 						$article_act->last_update_date = NULL;
-						$article_act->order_number = NULL;
+						$article_act->order_number = $order_number;
 					}
 					if($publication_approved == 'yes' && $publication_status == 'published')
 					{
@@ -1020,7 +823,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 						$article_tmp->updated_by_id = NULL;
 						$article_tmp->creation_date = date('Y-m-d h%i%s');
 						$article_tmp->last_update_date = NULL;
-						$article_tmp->order_number = NULL;
+						$article_tmp->order_number = $order_number;
 					}
 					if($publication_approved == 'yes' && $publication_status == 'published')
 					{
@@ -1084,7 +887,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 						$article_tmp->updated_by_id = NULL;
 						$article_tmp->creation_date = date('Y-m-d h%i%s');
 						$article_tmp->last_update_date = NULL;
-						$article_tmp->order_number = NULL;
+						$article_tmp->order_number = $order_number;
 					}
 					if($publication_approved == 'yes' && $publication_status == 'published')
 					{
@@ -1118,62 +921,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 			}
 		}
 		
-		/*$article_obj = $article->getNewRow('wc_section');
-		if($article_id)
-		{
-			$stored_article_data = $article->find('wc_section', array('id'=>$article_id));
-			$article_obj->id = $stored_article_data[0]->id;
-			$article_obj->section_parent_id = $stored_article_data[0]->section_parent_id;
-			$article_obj->website_id = $stored_article_data[0]->website_id;
-		}
-		else
-		{
-			$article_obj->section_parent_id = $formData['section_parent_id'];
-			$article_obj->website_id = $id->website_id;
-		}
 		
-		$article_obj->section_template_id = $formData['section_template_id'];
-		$article_obj->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
-		$article_obj->title = GlobalFunctions::value_cleaner($formData['title']);
-		$article_obj->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
-		$article_obj->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
-		$article_obj->synopsis = $formData['synopsis'];
-		$article_obj->keywords = GlobalFunctions::value_cleaner($formData['keywords']);
-		$article_obj->type = GlobalFunctions::value_cleaner($formData['type']);
-		if($article_id)
-		{
-			$article_obj->created_by_id = $stored_article_data[0]->created_by_id;
-			$article_obj->updated_by_id = $id->user_id;
-			$article_obj->creation_date = $stored_article_data[0]->creation_date;
-			$article_obj->last_update_date = date('Y-m-d h%i%s');
-			$article_obj->order_number = $stored_article_data[0]->order_number;
-		}
-		else
-		{
-			$article_obj->created_by_id = $id->user_id;
-			$article_obj->updated_by_id = NULL;
-			$article_obj->creation_date = date('Y-m-d h%i%s');
-			$article_obj->last_update_date = NULL;
-			$article_obj->order_number = NULL;
-		}
-		$article_obj->approved = GlobalFunctions::value_cleaner($formData['approved']);
-		$article_obj->author = GlobalFunctions::value_cleaner($formData['author']);
-		$article_obj->publication_status = GlobalFunctions::value_cleaner($formData['publication_status']);
-		$article_obj->feature = GlobalFunctions::value_cleaner($formData['feature']);
-		$article_obj->highlight = GlobalFunctions::value_cleaner($formData['highlight']);
-		$article_obj->publish_date = GlobalFunctions::setFormattedDate($formData['publish_date']);
-		$article_obj->expire_date = GlobalFunctions::setFormattedDate($formData['expire_date']);
-		$article_obj->show_publish_date = GlobalFunctions::value_cleaner($formData['show_publish_date']);
-		$article_obj->rss_available = GlobalFunctions::value_cleaner($formData['rss_available']);
-		$article_obj->external_link = 'no';
-		$article_obj->target = 'self';
-		$article_obj->comments = GlobalFunctions::value_cleaner($formData['comments']);
-		$article_obj->external_comment_script = NULL;
-		$article_obj->display_menu = 'no';
-		$article_obj->homepage = 'no';
-		$article_obj->article = 'yes';		
-		//Save article data
-		$article_id = $article->save('wc_section',$article_obj);*/
 		
 		//succes or error messages displayed on screen
 		if($id->section_id)

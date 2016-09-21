@@ -534,7 +534,7 @@ class Default_IndexController extends Zend_Controller_Action
 
                                 $section_floors = array();
                                 if($section->section_template_id == 8){
-                                    $subsections = $section_obj->find('wc_section', array('section_parent_id'=>$section->id, 'website_id'=>$front_ids->website_id));  
+                                    $subsections = $section_obj->find('wc_section', array('section_parent_id'=>$section->id, 'website_id'=>$front_ids->website_id),array('order_number'=>'ASC'));  
                                     foreach($subsections as $key => $subsection){
                                         $section_tpl = $section_template->find('wc_section_template',array('id'=>$subsection->section_template_id));
                                         /* CONTENTS */
@@ -801,12 +801,12 @@ class Default_IndexController extends Zend_Controller_Action
 			/******
 			 * Ordering section contents array according section order
 			 */
-//	    	$sort_col = array();
-//	    	foreach ($contents_list as $key=> $row)
-//	    	{
-//	    		$sort_col[$key] = $row['order_number'];
-//	    	}    	
-//	    	array_multisort($sort_col, SORT_ASC, $contents_list);    		
+	    	$sort_col = array();
+	    	foreach ($contents_list as $key=> $row)
+	    	{
+	    		$sort_col[$key] = $row['order_number'];
+	    	}    	
+	    	array_multisort($sort_col, SORT_ASC, $contents_list);    		
     	}    		
     	
     	$this->view->section_contents = $contents_list;
