@@ -1,38 +1,30 @@
+<?php $content_field = new Core_Model_ContentField();?>
 <?php $count_contents = 0; ?>
 <?php if(!$this->private || ($this->private && isset($_SESSION['external_user']))): ?>	
-
-
+<div class="carrusel" id="section-<?php echo $this->contents[0]['section_id'];?>">
 <?php $ite = 0; ?>
-<div id="myCarousel_4" class="carousel slide">
-    <div class="carousel-inner">
+<div class="cycle-template">
+    <div class="cycle-prev" id="prev-<?php echo $this->contents[0]['section_id'];?>"></div>
+    <div class="cycle-next" id="next-<?php echo $this->contents[0]['section_id'];?>"></div>
+    <div class="cycle-pager"></div>
 <?php foreach($this->contents as $key => $value): ?>
-	<?php $section_cols = $this->col_number; ?>
-	<?php $used_cols = $value['columns']; ?>	
-	<?php $row_factor = 12 / $section_cols; ?>
-	<?php if($used_cols): ?>
-	<?php $col_factor = $row_factor * $used_cols; ?>
-	<?php else: ?>
-	<?php $col_factor = 12; ?>
-	<?php endif; ?>
-	<?php $ite+= $used_cols; ?>
-
-					
-        <?php if($value['content_id'] && $value['section_id']): ?>	
-        <?php 	if($this->isstorage == 'yes'):?>									
-        <?php 		echo $this->previewHelperStorage($value['section_id'], $value['content_id']); ?>
-        <?php 	else:?>
-        <?php 		echo $this->previewHelper($value['section_id'], $value['content_id']); ?>
-        <?php 	endif;?>
-        <?php endif; ?>
-        <?php if(isset($value['content'])): ?>
-        <?php 	echo $value['content']; ?>
-        <?php endif; ?>
-
-        <?php $count_contents++;?>	
+    <article>
+    <?php echo $this->previewHelper($value['section_id'], $value['content_id']); ?>
+        	
+        <?php $count_contents++;?>
+    </article>
 <?php endforeach; ?>
+    
     </div>
-    <!-- Carousel nav -->
-            <a id="carousel_left_4" class="carousel-control left hide" href="#myCarousel_4" data-slide="prev">&lsaquo;</a>
-            <a id="carousel_right_4" class="carousel-control right hide" href="#myCarousel_4" data-slide="next">&rsaquo;</a>
-</div>
 <?php endif; ?>
+    
+</div>
+<script type="text/javascript">
+$('.cycle-template').cycle({
+    speed: 1000,
+    timeout: 4000,
+    fx: "fade",
+    swipe:true,
+    slides : "> article"
+});
+</script>
