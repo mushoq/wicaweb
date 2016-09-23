@@ -107,27 +107,27 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 									
                                                                         if($data_content_field [3]->value){
                                                                             
-                                                                            $hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0));
+                                                                            $hrefImg = ($data_content_field[7]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0));
                                                                             $return .= $data_content_field [3]->value? '<a target="' . $data_content_field [2]->value . '" href="' .  $data_content_field [3]->value  . '"><img' : '<a class="wicabox" title="'.$data_content_field [0]->value.'" rel="wicabox'.$section_id.'" id="content'.$data_content [0]->id.'" href="'. $hrefImg .'" ><img';					
                                                                         }elseif($widthImg > $content_width){
                                                                             
-                                                                            $hrefImg = ($data_content_field[8]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('width' =>$widthImg,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):'/uploads/content/'.$data_content_field[4]->value;
+                                                                            $hrefImg = ($data_content_field[7]->value =='yes')?imageRender::cache_image($data_content_field [4]->value, array('watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)):'/uploads/content/'.$data_content_field[4]->value;
                                                                             $return .= '<a class="wicabox" rel="imagesGroup" href="'.$hrefImg.'"><img';					
                                                                             
                                                                         }else{
                                                                              $return .= '<img';					
                                                                         }
 									
-									if( $data_content_field[7]->value == 'no'){
-                                                                            if($data_content_field[8]->value =='yes'){
+									if( $data_content_field[6]->value == 'no'){
+                                                                            if($data_content_field[7]->value =='yes'){
                                                                                 $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$widthImg,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)) .'" ';
                                                                             }else{
-                                                                            $return .= ' src="/uploads/content/'.$data_content_field[4]->value.'" ';
+                                                                                $return .= ' src="/uploads/content/'.$data_content_field[4]->value.'" ';
                                                                             }
 									}else{
-                                                                            if($data_content_field[8]->value =='yes'){
+                                                                            if($data_content_field[7]->value =='yes'){
                                                                                 $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>$watermark_data['file'], 'watermark_pos'=>$data_content_field[9]->value)) .'" ';
-                                            }                               else{
+                                                                            }else{
                                                                                 $return .= ' src="'. imageRender::cache_image($data_content_field [4]->value, array('width' =>$content_width,'watermark' =>0, 'watermark_pos'=>0)) .'" ';
                                                                             }                               
 									}

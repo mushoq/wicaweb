@@ -73,11 +73,13 @@
 	<?php endif; ?>
 	<?php $ite+= $used_cols; ?>
 		<div class="noticia col-md-12 col-md-12 no-margin jump">
+                    <?php if($value['image'] != ''){?>
                     <div class="col-md-3">
                         <a href="/article/<?php echo $value['article_id']; ?>/<?php echo strtolower(GlobalFunctions::formatFilename($value['title']))?>">
                             <img src="<?php echo imageRender::cache_image($value['image'], array('width' =>'400', 'height'=>'300'));?>" class="img-responsive"/>
                         </a>
                     </div>
+                    <?php } ?>
                     <?php $fecha = explode("-", $value['publish_date']); ?>
                     <?php echo $value['publish_date'];?>
                     <h2>
