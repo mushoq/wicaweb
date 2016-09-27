@@ -216,7 +216,7 @@ INSERT INTO `wc_field` (`id`, `content_type_id`, `name`, `type`, `required`, `or
   (35,7,'Save image','button','no',1),
   (36,2,'Watermarkimg','radio','no',9),
   (37,2,'Watermark position','radio','no',10),
-	(38,2,'Zoom','radio','no',11);
+  (38,2,'Zoom','radio','no',11);
 
 
 --

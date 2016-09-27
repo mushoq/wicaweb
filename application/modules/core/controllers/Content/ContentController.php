@@ -738,11 +738,6 @@ class Core_Content_ContentController extends Zend_Controller_Action {
                                                         $content_field_obj7->content_id=$multipleId[$key] ['id'];
                                                         $content_field_obj7->value= $resizeimg;
                                                         $saved_content_field7 = $content_field->save ( 'wc_content_field', $content_field_obj7 );
-                                                        $content_field_obj8 = $content_field->getNewRow ( 'wc_content_field' );
-                                                        $content_field_obj8->field_id=38;
-                                                        $content_field_obj8->content_id=$multipleId[$key] ['id'];
-                                                        $content_field_obj8->value= $zoom;
-                                                        $saved_content_field8 = $content_field->save ( 'wc_content_field', $content_field_obj8 );
                                                         $content_field_obj9 = $content_field->getNewRow ( 'wc_content_field' );
                                                         $content_field_obj9->field_id=36;
                                                         $content_field_obj9->content_id=$multipleId[$key] ['id'];
@@ -753,6 +748,11 @@ class Core_Content_ContentController extends Zend_Controller_Action {
                                                         $content_field_obj10->content_id=$multipleId[$key] ['id'];
                                                         $content_field_obj10->value= $watermarkposition;
                                                         $saved_content_field10 = $content_field->save ( 'wc_content_field', $content_field_obj10 );
+                                                        $content_field_obj8 = $content_field->getNewRow ( 'wc_content_field' );
+                                                        $content_field_obj8->field_id=38;
+                                                        $content_field_obj8->content_id=$multipleId[$key] ['id'];
+                                                        $content_field_obj8->value= $zoom;
+                                                        $saved_content_field8 = $content_field->save ( 'wc_content_field', $content_field_obj8 );
                                                        
                                                         GlobalFunctions::removeOldFiles ( $name, APPLICATION_PATH . '/../public/uploads/tmp/' );
 

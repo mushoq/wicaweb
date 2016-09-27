@@ -156,7 +156,7 @@ $(document).ready(function() {
 						$("#target").val($(this).attr('element_value'));
 					});		
 					
-					$("#resizeimg").val('no');
+					$("#resizeimg").val('yes');
 					
 					$("#resizeimg-"+$("#resizeimg").val()).attr("class",'btn btn-primary active');
 					//set value on radio aux validation
