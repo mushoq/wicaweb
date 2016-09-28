@@ -592,6 +592,7 @@ class Default_IndexController extends Zend_Controller_Action
                                             'section_subtitle'=>$subsection->subtitle,
                                             'title'=>$section->title,
                                             'subtitle'=>$section->subtitle,
+                                            'synopsis'=>$subsection->synopsis,
                                             'publish_date'=>$subsection->publish_date,
                                             'expire_date'=>$subsection->expire_date,
                                             'section_id'=>$subsection->id,
