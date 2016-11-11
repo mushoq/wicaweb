@@ -2099,18 +2099,20 @@ class GlobalFunctions {
 
             $crum = array();
             $seccion = $obj->find('wc_section',array('id'=>$idSeccion));
-            //return $seccion[0];
+            
             $crum[] = $seccion[0];
-            while(!is_null($seccion[0]->section_parent_id)){
-                $seccion = $obj->find('wc_section',array('id'=>$seccion[0]->section_parent_id));
-                //if($area_data[0]->name == 'wica_area_content')       
-                    $crum[] = $seccion[0];
-            }
+            while(count($seccion)>0){
+                    
+                    $seccion = $obj->find('wc_section',array('id'=>$seccion[0]->section_parent_id));
+                    if(count($seccion)>0)
+                        $crum[] = $seccion[0];
+            }  
+            
             $crum = array_reverse($crum);
 
             $crum_arr = array();    	
             //sections list array
-            if($crum)
+            if($crum) 
             {
                     foreach ($crum as $sec)
                     {

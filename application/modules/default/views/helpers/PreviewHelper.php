@@ -176,7 +176,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 					case 'link' :					
 									switch ($data_content_field [0]->value) {
 										case 'internal_link' :
-											return '<div align="'.$content_by_section_data[0]->align.'"><a href="/default/index/index?id=' . $data_content_field [1]->value . '" >'.$data_content[0]->title.'</a></div>';
+											return '<div align="'.$content_by_section_data[0]->align.'"><a href="/section/' . $data_content_field [1]->value . '/'.strtolower(GlobalFunctions::formatFilename($data_content_field [6]->value)).'" >'.$data_content_field [6]->value.'</a></div>';
 											break;
 										case 'external_link' :
 											return '<div align="'.$content_by_section_data[0]->align.'"><a href="http://' . str_replace ('http://', '', $data_content_field [2]->value) . '" >'.$data_content[0]->title.'</a></div>';
