@@ -104,6 +104,7 @@ class GlobalFunctions {
 		$filename = strtr($filename, utf8_decode($tofind), $replace);
                 $filename = str_replace("/-", "", $filename);
                 $filename = str_replace("/", "", $filename);
+                $filename = str_replace("--", "-", $filename);
 		$filename = strtolower($filename);
 		return utf8_encode($filename);
 	}

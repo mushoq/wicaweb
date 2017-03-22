@@ -63,13 +63,16 @@ class Core_Model_Factory {
 					$where .= 'and '.$field.' = "'.$value.'" ';
 			}
 		}	
-		$order=NULL;
-		if($order_params)
-		{
-			foreach ($order_params as $field_order => $way){				
-				$order = $field_order.' '.$way;
-			}
-		}
+		$order = NULL;
+                if ($order_params) {
+                    foreach ($order_params as $field_order => $way) {
+                        if ( empty( $order ) ) {
+                            $order = array($field_order . ' ' . $way);
+                        }else{
+                        array_push($order, $field_order . ' ' . $way);
+                        }
+                    }
+                }
 
 		$table = new Zend_Db_Table($tableName);	
 		$result = $table->fetchAll($where, $order);
@@ -111,13 +114,16 @@ class Core_Model_Factory {
 					$where .= 'and '.$field.'= "'.$value.'" ';
 			}
 		}	
-		$order=NULL;
-		if($order_params)
-		{
-			foreach ($order_params as $field_order => $way){				
-				$order = $field_order.' '.$way;
-			}
-		}
+		$order = NULL;
+                if ($order_params) {
+                    foreach ($order_params as $field_order => $way) {
+                        if ( empty( $order ) ) {
+                            $order = array($field_order . ' ' . $way);
+                        }else{
+                        array_push($order, $field_order . ' ' . $way);
+                        }
+                    }
+                }
                                 
                                
                 $table = new Zend_Db_Table($tableName);	
@@ -188,13 +194,16 @@ class Core_Model_Factory {
 			}
                         $where .= ' and article = "yes" ';
 		}	
-		$order=NULL;
-		if($order_params)
-		{
-			foreach ($order_params as $field_order => $way){				
-				$order = $field_order.' '.$way;
-			}
-		}
+		$order = NULL;
+                if ($order_params) {
+                    foreach ($order_params as $field_order => $way) {
+                        if ( empty( $order ) ) {
+                            $order = array($field_order . ' ' . $way);
+                        }else{
+                        array_push($order, $field_order . ' ' . $way);
+                        }
+                    }
+                }
 
 		$table = new Zend_Db_Table($tableName);	
 		$result = $table->fetchAll($where, $order);
@@ -237,13 +246,16 @@ class Core_Model_Factory {
 					$where .= 'and '.$field.' = "'.$value.'" ';
 			}
 		}	
-		$order=NULL;
-		if($order_params)
-		{
-			foreach ($order_params as $field_order => $way){				
-				$order = $field_order.' '.$way;
-			}
-		}
+		$order = NULL;
+                if ($order_params) {
+                    foreach ($order_params as $field_order => $way) {
+                        if ( empty( $order ) ) {
+                            $order = array($field_order . ' ' . $way);
+                        }else{
+                        array_push($order, $field_order . ' ' . $way);
+                        }
+                    }
+                }
 		$table = new Zend_Db_Table($tableName);	
 		$result = $table->fetchAll($where, $order, $limit1, $limit2);
 		$return = array();

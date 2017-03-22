@@ -61,7 +61,7 @@ $(document).ready(function(){
 	});
 	
 	//hide elements
-	$('#password_container').hide();
+	$('#password_container').addClass('hide');
 	
 	//listeners
 	$('#password_checkbox').bind('click',function(){
@@ -82,7 +82,7 @@ $(document).ready(function(){
 			});
 		}
 		else{
-			$('#password_container').hide();
+			$('#password_container').addClass('hide');
 			//remove rules
 			$('#password').rules('remove');
 			$('#confirm_password').rules('remove');	

@@ -24,7 +24,7 @@ $(document).ready(function(){
 			createNextButton(i);
 			selectStep(i);
 		}else {
-			$("#step" + i).hide();
+			$("#step" + i).addClass('hide');
 			createPrevButton(i);
 			createNextButton(i);
 		}
@@ -63,7 +63,7 @@ function createNextButton(i) {
 			$('#alerts').html('<a class="close pointer" id="close_icon">×</a>');
 			$('#close_icon').bind('click',function(){
 				$('#alerts').html('');
-				$('#error_container').hide();
+				$('#error_container').addClass('hide');
 			});
 			
 			//add rule for section is required
@@ -72,7 +72,7 @@ function createNextButton(i) {
 			});
 			
 			if($('#frmCreateProfile').valid()){		
-				$("#error_container").hide();
+				$("#error_container").addClass('hide');
 				$('#frmCreateProfile').submit();
 			}
 			
@@ -127,7 +127,7 @@ function createNextButton(i) {
 		$('#alerts').html('<a class="close pointer" id="close_icon">×</a>');
 		$('#close_icon').bind('click',function(){
 			$('#alerts').html('');
-			$('#error_container').hide();
+			$('#error_container').addClass('hide');
 		});
 		
 		if(i==0){
@@ -192,7 +192,7 @@ function createNextButton(i) {
 			html+='</select>';
 							
 			if($('#frmCreateProfile').valid()){		
-				$("#error_container").hide();
+				$("#error_container").addClass('hide');
 				addNextButton(i,stepName);
 				selectStep(i + 1);
 			}
@@ -223,7 +223,7 @@ function createNextButton(i) {
 			
 			if(sections_fl){
 				
-				$('#messages').hide();
+				$('#messages').addClass('hide');
 				$('#web_container').removeClass('hide');
 				$('#websites').html(html);
 				$('#section_container').html('');																				
@@ -340,14 +340,14 @@ function createNextButton(i) {
 				}else{	
 					//if there is not CMS module selected
 					$('#messages').removeClass('hide');
-					$('#web_container').hide();
+					$('#web_container').addClass('hide');
 					$('#websites').html('');
 					$('#section_container').html('');
 					$('#section_sel').val('valid');
 				}
 				
 				if($('#frmCreateProfile').valid()){		
-					$("#error_container").hide();
+					$("#error_container").addClass('hide');
 					addNextButton(i,stepName);
 					selectStep(i + 1);
 				}
@@ -360,7 +360,7 @@ function createNextButton(i) {
 	}
 
 function addNextButton(i, stepName){
-	$("#" + stepName).hide();
+	$("#" + stepName).addClass('hide');
 	$("#step" + (i + 1)).removeClass('hide');
 
 }
@@ -370,8 +370,8 @@ function createPrevButton(i) {
 	$("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Prev' class='btn btn-primary prev'>< "+back_step+"</a>");		
 
 	$("#" + stepName + "Prev").bind("click", function() {					
-		$("#error_container").hide();
-		$("#" + stepName).hide();
+		$("#error_container").addClass('hide');
+		$("#" + stepName).addClass('hide');
 		$("#step" + (i - 1)).removeClass('hide');		
 		selectStep(i - 1);
 	});

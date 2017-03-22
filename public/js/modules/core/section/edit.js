@@ -259,7 +259,12 @@ function createNextButton(i) {
 					});
 				}
 			});
-		});	
+		});
+                $("[id^='target_']").each(function(){		
+						$(this).bind('click',function(){			
+							$("#target").val(this.id.replace('target_',''));
+						});
+					});
 		
 		//menu
 		$("#area").bind("change",function(){
