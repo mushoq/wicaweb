@@ -841,6 +841,7 @@ CREATE  TABLE IF NOT EXISTS `wc_section_image` (
   `section_id` BIGINT NOT NULL ,
   `name` VARCHAR(100) NULL ,
   `file_name` VARCHAR(100) NOT NULL ,
+  `numImageSection` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`, `section_id`) ,
   INDEX `fk_section_image_section1` (`section_id` ASC) ,
   CONSTRAINT `fk_section_image_section1`

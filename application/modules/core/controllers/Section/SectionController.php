@@ -588,7 +588,6 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		$id = New Zend_Session_Namespace('id');
 		$id->__unset('section_id');
 		$id->__unset('section_temp');
-                //die('simon');
 	}
 	
 	/**
@@ -807,7 +806,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 		{
 			$search_temp = $this->_request->getParam ('is_section_temp');
 		}
-		
+		$this->view->website_id = $website_id;
 		//will contain section object data as array
 		$section_arr = array();
 					
@@ -861,7 +860,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			}			
 			//get number of columns on template
 			$section_template = new Core_Model_SectionTemplate();			
-			$section_template_data = $section_template->find("wc_section_template", array('id' => $parent_section[0]->section_template_id), array('name'=>'ASC'));
+			$section_template_data = $section_template->find("wc_section_template", array('id' => $parent_section[0]->section_template_id));
 			$this->view->columns = $section_template_data[0]->column_number;
 
 			//parent section as array to display data on view
@@ -1689,11 +1688,11 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			//load the current image
 			foreach ($section_image_arr as $k => $obj)
 			{				
-				$section_arr['name_img_'.($k+1)] = $obj->name;
-				$section_arr['file_img_'.($k+1)] = $obj->file_name;
-				$section_arr['id_img_'.($k+1)] = $obj->id;
+                                $section_arr['name_img_'.($obj->numImageSection)] = $obj->name;
+				$section_arr['file_img_'.($obj->numImageSection)] = $obj->file_name;
+				$section_arr['id_img_'.($obj->numImageSection)] = $obj->id;
 	
-				$image_preview = New Zend_Form_Element_Image('imageprw_'.($k+1));
+				$image_preview = New Zend_Form_Element_Image('imageprw_'.($obj->numImageSection));
 				$image_preview->setImage('/uploads/content/'.$obj->file_name);
 				$image_preview->setLabel($obj->name);
 				$image_preview->setAttrib('style', 'width:150px;');
@@ -2307,15 +2306,18 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					
 			if($publication_approved == 'yes' && $publication_status == 'published')
 			{
-				$section_image_obj = $section_image->getNewRow('wc_section_image');
+                            $section_image_obj = $section_image_temp->getNewRow('wc_section_image_temp');
+                            //$section_image_obj = $section_image->getNewRow('wc_section_image');
 			}
 			else
 			{
-				$section_image_obj = $section_image_temp->getNewRow('wc_section_image_temp');
+                            $section_image_obj = $section_image->getNewRow('wc_section_image');
+			    //$section_image_obj = $section_image_temp->getNewRow('wc_section_image_temp');
 			}
 			
 			for ($i=1; $i<=$formData['section_images'];$i++)
 			{	
+                            $section_image_obj = null;
 				//checks if image is new or already exists
 				if($formData['id_img_'.$i])
 				{
@@ -2390,6 +2392,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 				if($formData['id_img_'.$i] || $formData['hdnNameFile_'.$i])					
 				{
 					$section_image_obj->name = GlobalFunctions::value_cleaner($formData['name_img_'.$i]);
+                                        $section_image_obj->numImageSection = $i;
 					// Save data
 					if($publication_approved == 'yes' && $publication_status == 'published')
 					{
