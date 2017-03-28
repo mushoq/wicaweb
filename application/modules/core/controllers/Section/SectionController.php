@@ -2317,7 +2317,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			
 			for ($i=1; $i<=$formData['section_images'];$i++)
 			{	
-                            $section_image_obj = null;
+                            $section_image_obj = new stdClass();
 				//checks if image is new or already exists
 				if($formData['id_img_'.$i])
 				{
