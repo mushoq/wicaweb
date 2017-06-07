@@ -302,6 +302,29 @@ public function _initRoute()
 	
 						$frontController->getRouter()->addRoute('productsSiteRoute',$productsSite);
                                                 
+                if($_SERVER['REQUEST_URI'] != '/core' && $_SERVER['REQUEST_URI'] != '/banners'){                            
+                        $route4 = new Zend_Controller_Router_Route(
+	
+				':section_name',array(
+                                    
+                                                'siteid' => '1',
+	
+						'controller' => 'index',
+	
+						'module' => 'default' ,
+	
+						'action' => 'index',
+	
+						'id' => 1,
+						
+						'section_name' => ''));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('ruta4',$route4);
+                    }
+                                                
 }
 }
 class ModuleLayoutLoader extends Zend_Controller_Action_Helper_Abstract// looks up layout by module in application.ini

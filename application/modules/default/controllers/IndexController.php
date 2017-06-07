@@ -123,10 +123,27 @@ class Default_IndexController extends Zend_Controller_Action
 		    	$section = new Core_Model_Section();
 		    	//find existent sections on db according website and to be displayed on menu
 		    	$sections_list = $section->personalized_find('wc_section',array(array('website_id','=',$front_ids->website_id), array('display_menu','=','yes'), array('approved','=','yes'), array('publication_status','=','published')),'order_number');
-		
+                        
 		    	//section_id passed in URL
-		    	if($this->_getParam('id')){
-                            $section_id = $this->_getParam('id');
+                        
+                        
+		    	if($this->_getParam('section_name')){
+                            $sections_list_all = $section->personalized_find('wc_section',array(array('website_id','=',$front_ids->website_id), array('approved','=','yes'), array('publication_status','=','published')),'order_number');
+                            $section_name = $this->_getParam('section_name');
+                            foreach ($sections_list_all as $sec)
+		    		{
+                                
+                                //echo GlobalFunctions::formatFilename($sec->title).'<br>';
+		    			if(GlobalFunctions::formatFilename($sec->title) == $section_name){
+                                            $section_id = $sec->id;
+                                        }
+		    		}
+                                if(!$section_id){
+                                    $this->_helper->redirector ( 'error','page' );
+                                }
+                                
+                        }elseif($this->_getParam('id')){
+                             $section_id = $this->_getParam('id');
                         }else{
                             $section_id = 1;
                         }
@@ -304,8 +321,24 @@ class Default_IndexController extends Zend_Controller_Action
     	$this->view->areas = $area_tpl;
           	
     	//section_id passed in URL
-    	if($this->_getParam('id')){
-            $section_id = $this->_getParam('id');
+    	if($this->_getParam('section_name')){
+            $section = new Core_Model_Factory();
+            $sections_list_all = $section->personalized_find('wc_section',array(array('website_id','=',$front_ids->website_id), array('approved','=','yes'), array('publication_status','=','published')),'order_number');
+            $section_name = $this->_getParam('section_name');
+            foreach ($sections_list_all as $sec)
+            {
+
+            //echo GlobalFunctions::formatFilename($sec->title).'<br>';
+                    if(GlobalFunctions::formatFilename($sec->title) == $section_name){
+                        $section_id = $sec->id;
+                    }
+            }
+            if(!$section_id){
+                $this->_helper->redirector ( 'error','page' );
+            }
+
+        }elseif($this->_getParam('id')){
+             $section_id = $this->_getParam('id');
         }else{
             $section_id = 1;
         }

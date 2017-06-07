@@ -445,7 +445,7 @@ class GlobalFunctions {
                                             if($item['homepage'] == 'yes'){
                                                 $html.= '<a href="/">';
                                             }else{
-                                                $html.= '<a href="/section/'.$item['id'].'/'.strtolower(self::formatFilename($item['title'])).'">';
+                                                $html.= '<a href="/'.self::formatFilename($item['title']).'">';
                                             }
 						
 					else 
@@ -487,7 +487,7 @@ class GlobalFunctions {
 				if(isset($item['title'])){
                                     //new route with the new parameter : siteid 
 					if(!$storage)
-						$html.= '<a href="/site/'.$front_ids->website_id.'/content/section/'.$item['id'].'/'.strtolower(str_replace(' ','_',$item['title'])).'">';
+						$html.= '<a href="/'.self::formatFilename($item['title']).'">';
 					else 
 						$html.= '<a href="/indexold_indexold/index?id='.$item['id'].'">';
 					//$html.= !isset($item['children'])? '<a class="dropdown-toggle" data-toggle="dropdown" href="#menu'.$item['id'].'">' : '<a>';
