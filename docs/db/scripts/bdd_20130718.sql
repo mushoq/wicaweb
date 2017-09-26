@@ -406,11 +406,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `banner_counts`
+-- Table `wc_banner_counts`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `banner_counts` ;
+DROP TABLE IF EXISTS `wc_banner_counts` ;
 
-CREATE  TABLE IF NOT EXISTS `banner_counts` (
+CREATE  TABLE IF NOT EXISTS `wc_banner_counts` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `banner_id` INT NOT NULL ,
   `count_hits` BIGINT NOT NULL ,

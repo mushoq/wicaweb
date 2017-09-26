@@ -114,8 +114,8 @@ class Externaluser_Model_Externaluser extends Core_Model_Factory
 	
 			foreach ($module_descriptions_banners_list as $mdbl)
 			{
-				$banner_item = $banner_obj->find('banner', array('id' => $mdbl->row_id));
-				$banner_counts_itm = $banner_counts_obj->find('banner_counts', array('banner_id' => $mdbl->row_id));
+				$banner_item = $banner_obj->find('wc_banner', array('id' => $mdbl->row_id));
+				$banner_counts_itm = $banner_counts_obj->find('wc_banner_counts', array('banner_id' => $mdbl->row_id));
 				if(count($banner_item)>0 && count($banner_counts_itm)>0)
 				{
 					$banner_field_arr = array(get_object_vars($banner_item[0]));

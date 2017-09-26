@@ -113,7 +113,7 @@ $(document).ready(function(){
 		}			
 		else{
 			$('#submit_link_search_form').focus();
-			$('#alerts-inner').removeClass('hide');
+			$('#alerts-inner').show();
 			if($('#section_id').val()==''){
 				$('#related_section').addClass('error_validation');
 			}

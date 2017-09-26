@@ -150,7 +150,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 
 
 
-<div class="container-fluid">
+<div id="html_container" class="container-fluid">
         <div id="name_row-fluid" class="col-md-4 col-md-offset-4">
             <div class="form-group">		
 				<label class="col-sm-4 control-label form_label" for="html"><?php echo $this->form->html->getDecorator('label')->getOption('requiredPrefix').$this->form->html->getLabel(); ?></label>
@@ -199,7 +199,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 		</div>
 </div>
 
-<div class="container-fluid">
+    <div class="container-fluid">
         <div id="name_row-fluid" class="col-md-4 col-md-offset-4">
             <div class="form-group">		
 				<label class="col-sm-4 control-label form_label" for="expire_date"><?php echo $this->form->expire_date->getDecorator('label')->getOption('requiredPrefix').$this->form->expire_date->getLabel(); ?></label>
@@ -210,7 +210,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 		</div>
 </div>
 </div>
-<div class="container-fluid">
+<div id="hits_container" class="container-fluid">
         <div id="name_row-fluid" class="col-md-4 col-md-offset-4">
             <div class="form-group">		
 				<label class="col-sm-4 control-label form_label" for="hits"><?php echo $this->form->hits->getDecorator('label')->getOption('requiredPrefix').$this->form->hits->getLabel(); ?></label>

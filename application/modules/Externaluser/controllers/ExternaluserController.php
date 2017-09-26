@@ -389,13 +389,13 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
 		//Create section module area model
 		$section_module_area_obj = new Core_Model_SectionModuleArea();
 		
-		if($module_description_list){
+		if($module_description_list){ 
 			//Check if is home link
 			if($section_id=='all') //Is home link
 			{
 				//Get all banners
 				$banner_obj = new Banners_Model_Banners();
-				$banners_list_obj = $banner_obj->find('banner');
+				$banners_list_obj = $banner_obj->find('wc_banner');
 				
 				//Convert objClass to normal array
 				if($banners_list_obj){
@@ -443,7 +443,7 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
 				//Get banners list data by module_area
 					$banner_obj = new Banners_Model_Banners();
 					foreach ($module_descriptions_banners_list as $mdbl){
-						$banner_item = $banner_obj->find('banner',array('id'=>$mdbl->row_id));
+						$banner_item = $banner_obj->find('wc_banner',array('id'=>$mdbl->row_id));
 						if($banner_item){
 							foreach ($banner_item as $bi){
 								$banners_list[] = get_object_vars($bi);
@@ -668,7 +668,7 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
     	
     	//Get banner data for edit
     	$banner_aux = new Banners_Model_Banners();
-    	$banner_data = $banner_aux->find('banner',array('id'=>$banner_id));
+    	$banner_data = $banner_aux->find('wc_banner',array('id'=>$banner_id));
     	
     	$arr_data = get_object_vars($banner_data[0]); //make an array of the object data
     	
@@ -788,7 +788,7 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
 
 			//create banner model
 			$banner =  new Banners_Model_Banners();
-			$banner_obj = $banner->getNewRow('banner');
+			$banner_obj = $banner->getNewRow('wc_banner');
 			 
 			//save data
 
@@ -958,7 +958,7 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
 			}
 
 			// Save data
-			$saved_banner = $banner->save('banner',$banner_obj);
+			$saved_banner = $banner->save('wc_banner',$banner_obj);
 
 			if($saved_banner){
 				
@@ -1087,10 +1087,10 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
 					//Save in banner count table
 					
 					$banner_count = new Banners_Model_BannerCount();
-					$banner_count_obj = $banner_count->getNewRow('banner_counts');
+					$banner_count_obj = $banner_count->getNewRow('wc_banner_counts');
 					$banner_count_obj->banner_id = $last_banner_id;
 					$banner_count_obj->count_hits = '0';
-					$saved_banner_count = $banner_count->save('banner_counts', $banner_count_obj);
+					$saved_banner_count = $banner_count->save('wc_banner_counts', $banner_count_obj);
 					
 					
 					//create module description model
@@ -1250,10 +1250,10 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
 	    						$options = explode('_', $order);
 	    						$banner_id = $options[0];
 
-    							$banner_data = $banner->find('banner', array('id'=>$banner_id));
+    							$banner_data = $banner->find('wc_banner', array('id'=>$banner_id));
     							
     							//Create banner object for update with new order
-    							$banner_obj = $banner->getNewRow('banner');
+    							$banner_obj = $banner->getNewRow('wc_banner');
     							$banner_obj->id = $banner_data[0]->id;
     							$banner_obj->name = GlobalFunctions::value_cleaner($banner_data[0]->name);
     							$banner_obj->description = GlobalFunctions::value_cleaner($banner_data[0]->description);
@@ -1267,7 +1267,7 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
     							$banner_obj->order_number = GlobalFunctions::value_cleaner($count);
     							$banner_obj->status = GlobalFunctions::value_cleaner($banner_data[0]->status);
  
-    							$serial_id = $banner->save('banner',$banner_obj);
+    							$serial_id = $banner->save('wc_banner',$banner_obj);
     							$count++;
     						
     					}
@@ -1432,11 +1432,11 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
 	    						
 	    						//Check if name search is empty
 	    						if($formData['text']==''){
-	    							$banner_item = $banner_obj->find('banner',array('id'=>$mdbl->row_id));
+	    							$banner_item = $banner_obj->find('wc_banner',array('id'=>$mdbl->row_id));
 	    						}
 	    						else
 	    						{
-	    							$banner_item = $banner_obj->personalized_find('banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
+	    							$banner_item = $banner_obj->personalized_find('wc_banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
 	    						}
 	    						if($banner_item){
 	    							foreach ($banner_item as &$bi){
@@ -1492,11 +1492,11 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
     					foreach ($module_descriptions_banners_list as $mdbl){
     						//Check if name search is empty
     						if($formData['text']==''){
-    							$banner_item = $banner_obj->find('banner',array('id'=>$mdbl->row_id));
+    							$banner_item = $banner_obj->find('wc_banner',array('id'=>$mdbl->row_id));
     						}
     						else
     						{
-    							$banner_item = $banner_obj->personalized_find('banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
+    							$banner_item = $banner_obj->personalized_find('wc_banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
     						}
     						if($banner_item){
     							foreach ($banner_item as $bi){
@@ -1688,14 +1688,14 @@ class Externaluser_ExternaluserController extends Zend_Controller_Action
 
     		$bannername = mb_strtolower($data['name'], 'UTF-8');
     		$id = -1;
-    		if(isset($data['id']))
+    		if(isset($data['id'])) 
     			$id= $data['id'];
     
     		$banner = new Banners_Model_Banners();
     		if(isset($id) && $id>0)
-    			$banner_array = $banner->personalized_find('banner', array(array('name', '=', $bannername),array('id', '!=', $id)));
+    			$banner_array = $banner->personalized_find('wc_banner', array(array('name', '=', $bannername),array('id', '!=', $id)));
     		else
-    			$banner_array = $banner->personalized_find('banner', array(array('name', '=', $bannername)));
+    			$banner_array = $banner->personalized_find('wc_banner', array(array('name', '=', $bannername)));
     
     		if($banner_array && count($banner_array)>0)
     			echo json_encode(false);

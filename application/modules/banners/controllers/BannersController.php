@@ -209,100 +209,50 @@ class Banners_BannersController extends Zend_Controller_Action
 		$this->view->section_id = $section_id;
                 
 		
-		//Get module_id by module_name
-		$module_obj = new Core_Model_Module();
-		$module = $module_obj->find('wc_module',array('name'=>'Banners'));
-		$module_id = $module[0]->id;
+		$banner_obj = new Banners_Model_Banners();
 		
-		/** Get banner list **/
 		
-		//Get module description by module (Banners)
-		$module_description_obj = new Core_Model_ModuleDescription();
-		$module_description_list = $module_description_obj->find('wc_module_description',array('module_id'=>$module_id));
-		
-		//Create section module area model
-		$section_module_area_obj = new Core_Model_SectionModuleArea();
-		
-		if($module_description_list){
-			//Check if is home link
-			if($section_id=='all') //Is home link
-			{
-				//Get all banners
-				$banner_obj = new Banners_Model_Banners();
-				$banners_list_obj = $banner_obj->find('banner', array('status'=>'active'));
-				
-				//Convert objClass to normal array
-				if($banners_list_obj){
-					foreach ($banners_list_obj as $bl){
-						$banners_list[] = get_object_vars($bl);
-					}
-				}
-				
-				//Banners_list to index view
-				if(isset($banners_list)){
-					$this->view->banners_list = $banners_list;
-				}
-			}
-			else //Is section tree link
-			{
-				//Get banners by section
-				foreach ($module_description_list as $md){
-					$section_module_area_item = $section_module_area_obj->find('wc_section_module_area',array('module_description_id'=>$md->id,'section_id'=>$section_id));
-					if($section_module_area_item){
-						foreach ($section_module_area_item as $sma){
-							$section_module_area_list[] = $sma;
-						}
-				
-					}
-				}
-				
-			//Get module_description_id of section_module_area
-			if(isset($section_module_area_list)){
-					
-				foreach ($section_module_area_list as $smal){
-					$module_description_banners = $module_description_obj->find('wc_module_description',array('id'=>$smal->module_description_id));
-					if($module_description_banners){
-						foreach ($module_description_banners as $mdi){
-							$module_descriptions_banners_list[] = $mdi;
-						}
-							
-					}
-				}
-					
-			}
-		
-			//Get banner data by module_description
-			if(isset($module_descriptions_banners_list)){
-					
-				//Get banners list data by module_area
-					$banner_obj = new Banners_Model_Banners();
-					foreach ($module_descriptions_banners_list as $mdbl){
-						$banner_item = $banner_obj->find('banner',array('id'=>$mdbl->row_id, 'status'=>'active'));
-						if($banner_item){
-							foreach ($banner_item as $bi){
-								$banners_list[] = get_object_vars($bi);
-							}
-					
-						}
-					}
-			}
-			
-			//Ordering banners by order_number
-			if(isset($banners_list)){
-				$sort_col_number = array();
-				foreach ($banners_list as $key=> $row) {
-					$sort_col_number[$key] = $row['order_number'];
-				}
-				array_multisort($sort_col_number, SORT_ASC, $banners_list);
-                                
-				if(isset($banners_list)){
-					$this->view->banners_list = $banners_list;
-				}
-			}
-			
-		}
+                //Check if is home link
+                if($section_id=='all') //Is home link
+                {
+                        //Get all banners
+                        
+                        $banners_list_obj = $banner_obj->find('wc_banner', array('status'=>'active'));
 
-		}	
+                        //Convert objClass to normal array
+                        if($banners_list_obj){
+                                foreach ($banners_list_obj as $bl){
+                                        $banners_list[] = get_object_vars($bl);
+                                }
+                        }
+
+                        //Banners_list to index view
+                        if(isset($banners_list)){
+                                $this->view->banners_list = $banners_list;
+                        }
+                }
+                else //Is section tree link
+                {
+                    //Get banners by section
+                    $banners_list = $banner_obj->getbannersbysection($section_id);
+                    
+                
+                    //Ordering banners by order_number
+                    if(isset($banners_list)){
+                        $sort_col_number = array();
+                        foreach ($banners_list as $key=> $row) {
+                                $sort_col_number[$key] = $row->order_number;
+                        }
+                        array_multisort($sort_col_number, SORT_ASC, $banners_list);
+
+                        if(isset($banners_list)){
+                                $this->view->banners_list = $banners_list;
+                        }
+                    }
+
+            }
+
+			
 		//Get available sections for website
 		
 		$section = new Core_Model_Section();
@@ -411,7 +361,7 @@ class Banners_BannersController extends Zend_Controller_Action
     	//Get fixed areas by template
     	 
     	$area = new Core_Model_Area();
-    	$area_data = $area->personalized_find('wc_area',array(array('template_id','=',$template_id),array('type','LIKE','fixed')));
+    	$area_data = $area->find('wc_area_banner');
     	
     	//Get sections with fixed areas  
     	
@@ -468,7 +418,7 @@ class Banners_BannersController extends Zend_Controller_Action
     
     	//Get fixed areas by template
     	$area = new Core_Model_Area();
-    	$area_data = $area->personalized_find('wc_area',array(array('template_id','=',$template_id),array('type','LIKE','fixed')));
+    	$area_data = $area->find('wc_area_banner');
     	
     	//Get request params
     	$request_params = $this->getRequest()->getParams();
@@ -502,7 +452,7 @@ class Banners_BannersController extends Zend_Controller_Action
     	
     	//Get banner data for edit
     	$banner_aux = new Banners_Model_Banners();
-    	$banner_data = $banner_aux->find('banner',array('id'=>$banner_id));
+    	$banner_data = $banner_aux->find('wc_banner',array('id'=>$banner_id));
     	
     	$arr_data = get_object_vars($banner_data[0]); //make an array of the object data
     	
@@ -528,31 +478,9 @@ class Banners_BannersController extends Zend_Controller_Action
     			break;
     	}
     	
-    	
-    	//**Get Actual area of banner**/
-    	
-    	//Get module_id by module_name
-    		
-    	$module_obj = new Core_Model_Module();
-    	$module = $module_obj->find('wc_module',array('name'=>'Banners'));
-    	$module_id = $module[0]->id;
-    	
-    	//Get module description by module (Banners)
-    	$module_description_obj = new Core_Model_ModuleDescription();
-    	$module_description = $module_description_obj->find('wc_module_description',array('module_id'=>$module_id,'row_id'=>$banner_id));
-    	$module_description_id = $module_description[0]->id;
-    	
-    	//Get section module area list by module description and section
-    	$section_module_area_obj = new Core_Model_SectionModuleArea();
-    	$section_module_area = $section_module_area_obj->find('wc_section_module_area',array('module_description_id'=>$module_description_id));  			
-
-    	if(count($section_module_area)>0)
-    	{
-    		$areas = new Core_Model_Area();
-    		$number = $areas->find('wc_area',array('id'=>$section_module_area[0]->area_id));
-    		$number_area = $number[0]->area_number;
-    	
-    	}
+    	$bannerbysection = $banner_aux->find('wc_banner_by_section', array('banner_id'=>$banner_id,'section_id'=>$section_id));
+        $number = $banner_aux->find('wc_area_banner',array('id'=>$bannerbysection[0]->area_banner_id));
+        $number_area = $number[0]->area_number;
     	
     	//Set actual area accord template areas
     	if(count($area_data)>0){
@@ -619,10 +547,10 @@ class Banners_BannersController extends Zend_Controller_Action
 		
 		if ($this->getRequest()->isPost()) {
 			$formData = $this->getRequest()->getPost();
-
+                        
 			//create banner model
 			$banner =  new Banners_Model_Banners();
-			$banner_obj = $banner->getNewRow('banner');
+			$banner_obj = $banner->getNewRow('wc_banner');
 			 
 			//save data
 
@@ -792,118 +720,42 @@ class Banners_BannersController extends Zend_Controller_Action
 			}
 
 			// Save data
-			$saved_banner = $banner->save('banner',$banner_obj);
+			$saved_banner = $banner->save('wc_banner',$banner_obj);
 
 			if($saved_banner){
 				
 				//If exist id is Update Banner
 				if(array_key_exists('id',$formData)){
-	
+                                        $banner_id = $saved_banner['id'];
+                                        
+                                        //Save in banner_by_section
+                                        $banner_by_sections = $banner->find('wc_banner_by_section', array('banner_id'=>$banner_id));
+                                        foreach($banner_by_sections as $banner_by_section){
+                                            $banner_by_section->area_banner_id = $formData['area'];
+                                            $banner->save('wc_banner_by_section', $banner_by_section);
+                                        }
+                                        
+                                        if(isset($formData['sections'])){
+                                            foreach($formData['sections'] as $another_section_id){
+                                                $banner_by_sections = $banner->find('wc_banner_by_section', array('banner_id'=>$banner_id, 'section_id'=>$another_section_id));
+                                                if(count($banner_by_sections) == 0){
+                                                    $order_number = 1;
+                                                    $lastorder = $banner->find('wc_banner_by_section', array('section_id'=>$another_section_id), array('order_number'=>'DESC'));
+                                                    if($lastorder){
+                                                        $order_number = $lastorder[0]->order_number + 1;
+                                                    }
+                                                    $banner_by_section = $banner->getNewRow('wc_banner_by_section');
+                                                    $banner_by_section->banner_id = $banner_id;
+                                                    $banner_by_section->section_id = $another_section_id;
+                                                    $banner_by_section->area_banner_id = $formData['area'];
+                                                    $banner_by_section->order_number = $order_number;
+                                                    $banner->save('wc_banner_by_section',$banner_by_section);
+                                                }
+                                                
+                                            }
+                                        }
+                                        
 					$arr_success = array('section_id'=>$section_id);
-					
-					//create section module area model
-					$section_module_area =  new Core_Model_SectionModuleArea();
-					$section_module_area_obj = $section_module_area->getNewRow('wc_section_module_area');
-					
-					//Save data of aditional sections in module area table
-					if(isset($formData['sections'])){
-						if($section_id!='all'){
-							//Have current section. Add section id to sections array
-							array_push($formData['sections'], $section_id);	
-						}
-	
-
-						//Get module_id by module_name
-						$module_obj = new Core_Model_Module();
-						$module = $module_obj->find('wc_module',array('name'=>'Banners'));
-						$module_id = $module[0]->id;
-							
-						//Get module description by module (Banners)
-						$module_description_obj = new Core_Model_ModuleDescription();
-						$module_description_item = $module_description_obj->find('wc_module_description',array('module_id'=>$module_id,'row_id'=>$formData['id']));
-						
-						//Get section module area list accord module description
-						$section_module_area_list = $section_module_area->find('wc_section_module_area',array('module_description_id'=>$module_description_item[0]->id));
-
-						//Delete all section module area list for update
-						foreach($section_module_area_list as $smal){
-							$section_module_area->delete('wc_section_module_area',array('id'=>$smal->id));
-						}
-						
-						foreach ($formData['sections'] as $section_item){
-							
-							//Check if exist in section module area						
-							$section_module_area_exist = $section_module_area->find('wc_section_module_area',array('module_description_id'=>$module_description_item[0]->id,'section_id'=>$section_item));
-							
-							if(count($section_module_area_exist)>0){
-								
-								//Save module description area with update area
-								$section_module_area_obj->id= $section_module_area_exist[0]->id;
-								$section_module_area_obj->section_id= $section_module_area_exist[0]->section_id;
-								$section_module_area_obj->area_id= $formData['area'];
-								$section_module_area_obj->module_description_id= $section_module_area_exist[0]->module_description_id;
-
-								// Save data of aditional section
-								$section_module_area->save('wc_section_module_area',$section_module_area_obj);
-								
-							}
-							else
-							{
-								//Save new module description area with new section
-								$section_module_area_obj->section_id= $section_item;
-								$section_module_area_obj->area_id= $formData['area'];
-								$section_module_area_obj->module_description_id= $module_description_item[0]->id;
-								
-								// Save data of aditional section
-								$section_module_area->save('wc_section_module_area',$section_module_area_obj);
-							}
-							
-						}
-
-					}
-					else 
-					{
-						//Not aditional banner
-						
-						/* Save only update in section module area */
-						
-						//create section module area model
-						$section_module_area =  new Core_Model_SectionModuleArea();
-						$section_module_area_obj = $section_module_area->getNewRow('wc_section_module_area');
-						
-						//Get module_id by module_name
-							
-						$module_obj = new Core_Model_Module();
-						$module = $module_obj->find('wc_module',array('name'=>'Banners'));
-						$module_id = $module[0]->id;
-						
-						//Get module description by module (Banners)
-						$module_description_obj = new Core_Model_ModuleDescription();
-						$module_description_list = $module_description_obj->find('wc_module_description',array('module_id'=>$module_id,'row_id'=>$formData['id']));
-							
-						//Get section module area by module description id for update banner
-						if($module_description_list){
-							$section_module_area_item = $section_module_area->find('wc_section_module_area',array('module_description_id'=>$module_description_list[0]->id,'section_id'=>$section_id));
-						}
-						
-						//Get section module area list accord module description
-						$section_module_area_list = $section_module_area->find('wc_section_module_area',array('module_description_id'=>$module_description_list[0]->id));
-						
-						//Delete all section module area list for update
-						foreach($section_module_area_list as $smal){
-							$section_module_area->delete('wc_section_module_area',array('id'=>$smal->id));
-						}
-						
-						if(isset($section_module_area_item)){
-							//Update section module area table
-							
-							$section_module_area_obj->section_id= $section_module_area_item[0]->section_id;
-							$section_module_area_obj->area_id= $formData['area'];
-							$section_module_area_obj->module_description_id= $section_module_area_item[0]->module_description_id;
-							
-							$section_module_area->save('wc_section_module_area',$section_module_area_obj);
-						}			
-					}
 					
 					echo json_encode($arr_success);
 					//success message
@@ -921,118 +773,45 @@ class Banners_BannersController extends Zend_Controller_Action
 					//Save in banner count table
 					
 					$banner_count = new Banners_Model_BannerCount();
-					$banner_count_obj = $banner_count->getNewRow('banner_counts');
+					$banner_count_obj = $banner_count->getNewRow('wc_banner_counts');
 					$banner_count_obj->banner_id = $last_banner_id;
 					$banner_count_obj->count_hits = '0';
-					$saved_banner_count = $banner_count->save('banner_counts', $banner_count_obj);
+					$saved_banner_count = $banner_count->save('wc_banner_counts', $banner_count_obj);
+					$order_number = 1;
+                                        $lastorder = $banner->find('wc_banner_by_section', array('section_id'=>$section_id), array('order_number'=>'DESC'));
+                                        if($lastorder){
+                                            $order_number = $lastorder[0]->order_number + 1;
+                                        }
+                                        $banner_by_section = $banner->getNewRow('wc_banner_by_section');
+                                        $banner_by_section->banner_id = $last_banner_id;
+                                        $banner_by_section->section_id = $section_id;
+                                        $banner_by_section->area_banner_id = $formData['area'];
+                                        $banner_by_section->order_number = $order_number;
+                                        $banner->save('wc_banner_by_section',$banner_by_section);
+                                        
+                                        if(isset($formData['sections'])){
+                                            foreach($formData['sections'] as $another_section_id){
+                                                $order_number = 1;
+                                                $lastorder = $banner->find('wc_banner_by_section', array('section_id'=>$another_section_id), array('order_number'=>'DESC'));
+                                                if($lastorder){
+                                                    $order_number = $lastorder[0]->order_number + 1;
+                                                }
+                                                $banner_by_section = $banner->getNewRow('wc_banner_by_section');
+                                                $banner_by_section->banner_id = $last_banner_id;
+                                                $banner_by_section->section_id = $another_section_id;
+                                                $banner_by_section->area_banner_id = $formData['area'];
+                                                $banner_by_section->order_number = $order_number;
+                                                $banner->save('wc_banner_by_section',$banner_by_section);
+                                            }
+                                        }
+                                        
+                                        
+					$arr_success = array('section_id'=>$section_id);
+                                        
+                                        echo json_encode($arr_success);
+                                        //success message
+                                        $this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success saved')));
 					
-					
-					//create module description model
-					$module_description =  new Core_Model_ModuleDescription();
-					$module_description_obj = $module_description->getNewRow('wc_module_description');
-					
-					//Get module_id by module_name
-						
-					$module_obj = new Core_Model_Module();
-					$module = $module_obj->find('wc_module',array('name'=>'Banners'));
-					$module_id = $module[0]->id;
-					
-					//Save data in module description table
-					$module_description_obj->module_id= $module_id;
-					$module_description_obj->row_id= $last_banner_id;
-					
-					// Save data
-					$saved_module_description = $module_description->save('wc_module_description',$module_description_obj);
-					
-					if($saved_module_description){
-							
-						//Get last saved module description
-						$last_module_description_id = $saved_module_description['id'];
-							
-						//create section module area model
-						$section_module_area =  new Core_Model_SectionModuleArea();
-						$section_module_area_obj = $section_module_area->getNewRow('wc_section_module_area');
-							
-							
-						//Save data in section module area table
-
-						//Check if new banner not have section id
-						if($section_id == 'all')
-						{
-									
-								//Save data of aditional sections in module area table
-								if(isset($formData['sections'])){
-									foreach ($formData['sections'] as $s){
-											
-										$section_module_area_obj = $section_module_area->getNewRow('wc_section_module_area');
-											
-										//Save data in section module area table
-											
-										$section_module_area_obj->section_id= $s;
-										$section_module_area_obj->area_id= $formData['area'];
-										$section_module_area_obj->module_description_id= $last_module_description_id;
-											
-										// Save data of aditional section
-										$saved_diferent_sections = $section_module_area->save('wc_section_module_area',$section_module_area_obj);
-									}
-								}
-								
-								if($saved_diferent_sections){
-									$arr_success = array('section_id'=>$section_id);
-									echo json_encode($arr_success);
-									//success message
-									$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success saved')));
-									
-								}
-								else
-								{
-									$this->_helper->flashMessenger->addMessage(array('error'=>$lang->translate('Errors in saving data')));
-								}
-
-						}
-						else
-						{
-							$section_module_area_obj->section_id= $section_id;
-							$section_module_area_obj->area_id= $formData['area'];
-							$section_module_area_obj->module_description_id= $last_module_description_id;
-								
-							// Save data
-							$saved_section_module_area = $section_module_area->save('wc_section_module_area',$section_module_area_obj);
-							
-							if($saved_section_module_area){
-									
-								//Save data of aditional sections in module area table
-								if(isset($formData['sections'])){
-									foreach ($formData['sections'] as $s){
-											
-										$section_module_area_obj = $section_module_area->getNewRow('wc_section_module_area');
-											
-										//Save data in section module area table
-											
-										$section_module_area_obj->section_id= $s;
-										$section_module_area_obj->area_id= $formData['area'];
-										$section_module_area_obj->module_description_id= $last_module_description_id;
-											
-										// Save data of aditional section
-										$section_module_area->save('wc_section_module_area',$section_module_area_obj);
-									}
-								}
-									
-								$arr_success = array('section_id'=>$section_id);
-								echo json_encode($arr_success);
-								//success message
-								$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success saved')));
-									
-							}
-							else
-							{
-								$this->_helper->flashMessenger->addMessage(array('error'=>$lang->translate('Errors in saving data')));
-							}
-							
-						}
-						
-
-					}
 				}	
 
 
@@ -1084,10 +863,10 @@ class Banners_BannersController extends Zend_Controller_Action
 	    						$options = explode('_', $order);
 	    						$banner_id = $options[0];
 
-    							$banner_data = $banner->find('banner', array('id'=>$banner_id));
+    							$banner_data = $banner->find('wc_banner', array('id'=>$banner_id));
     							
     							//Create banner object for update with new order
-    							$banner_obj = $banner->getNewRow('banner');
+    							$banner_obj = $banner->getNewRow('wc_banner');
     							$banner_obj->id = $banner_data[0]->id;
     							$banner_obj->name = GlobalFunctions::value_cleaner($banner_data[0]->name);
     							$banner_obj->description = GlobalFunctions::value_cleaner($banner_data[0]->description);
@@ -1101,7 +880,7 @@ class Banners_BannersController extends Zend_Controller_Action
     							$banner_obj->order_number = GlobalFunctions::value_cleaner($count);
     							$banner_obj->status = GlobalFunctions::value_cleaner($banner_data[0]->status);
  
-    							$serial_id = $banner->save('banner',$banner_obj);
+    							$serial_id = $banner->save('wc_banner',$banner_obj);
     							$count++;
     						
     					}
@@ -1161,10 +940,10 @@ class Banners_BannersController extends Zend_Controller_Action
 		$section_module_area_aux = new Core_Model_SectionModuleArea();
     	$delete_banner= $section_module_area_aux->delete('wc_section_module_area',array('module_description_id'=>$module_description_id,'section_id'=>$section_id));
         $bannerModel = new Banners_Model_Banners();
-        $inactive_banner = $bannerModel->find('banner', array('id'=>$banner_id));
+        $inactive_banner = $bannerModel->find('wc_banner', array('id'=>$banner_id));
         if( $inactive_banner){
              $inactive_banner[0]->status = 'inactive';
-             $save_banner_inactive = $bannerModel->save('banner', $inactive_banner[0]);
+             $save_banner_inactive = $bannerModel->save('wc_banner', $inactive_banner[0]);
         }
             //var_dump($save_banner_inactive);die();
     	//succes or error messages displayed on screen
@@ -1272,11 +1051,11 @@ class Banners_BannersController extends Zend_Controller_Action
 	    						
 	    						//Check if name search is empty
 	    						if($formData['text']==''){
-	    							$banner_item = $banner_obj->find('banner',array('id'=>$mdbl->row_id));
+	    							$banner_item = $banner_obj->find('wc_banner',array('id'=>$mdbl->row_id));
 	    						}
 	    						else
 	    						{
-	    							$banner_item = $banner_obj->personalized_find('banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
+	    							$banner_item = $banner_obj->personalized_find('wc_banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
 	    						}
 	    						if($banner_item){
 	    							foreach ($banner_item as &$bi){
@@ -1332,11 +1111,11 @@ class Banners_BannersController extends Zend_Controller_Action
     					foreach ($module_descriptions_banners_list as $mdbl){
     						//Check if name search is empty
     						if($formData['text']==''){
-    							$banner_item = $banner_obj->find('banner',array('id'=>$mdbl->row_id));
+    							$banner_item = $banner_obj->find('wc_banner',array('id'=>$mdbl->row_id));
     						}
     						else
     						{
-    							$banner_item = $banner_obj->personalized_find('banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
+    							$banner_item = $banner_obj->personalized_find('wc_banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
     						}
     						if($banner_item){
     							foreach ($banner_item as $bi){
@@ -1533,9 +1312,9 @@ class Banners_BannersController extends Zend_Controller_Action
     
     		$banner = new Banners_Model_Banners();
     		if(isset($id) && $id>0)
-    			$banner_array = $banner->personalized_find('banner', array(array('name', '=', $bannername),array('id', '!=', $id)));
+    			$banner_array = $banner->personalized_find('wc_banner', array(array('name', '=', $bannername),array('id', '!=', $id)));
     		else
-    			$banner_array = $banner->personalized_find('banner', array(array('name', '=', $bannername)));
+    			$banner_array = $banner->personalized_find('wc_banner', array(array('name', '=', $bannername)));
     
     		if($banner_array && count($banner_array)>0)
     			echo json_encode(false);

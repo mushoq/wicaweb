@@ -170,7 +170,56 @@ public function _initRoute()
 		// to retrive it $this->getRequest->getParam(�id)
 	
 		// in the index action of product controller
+                if(strpos($_SERVER['REQUEST_URI'], 'core') == false && $_SERVER['REQUEST_URI'] != '/banners' && $_SERVER['REQUEST_URI'] != '/products'){ 
+                    
+                        $route33 = new Zend_Controller_Router_Route(
 	
+				':section_name',array(
+                                    
+                                                'siteid' => '1',
+	
+						'controller' => 'index',
+	
+						'module' => 'default' ,
+	
+						'action' => 'index',
+	
+						'id' => 1,
+						
+						'section_name' => ''));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('ruta33',$route33);
+                                                
+                        $route34 = new Zend_Controller_Router_Route(
+	
+				':section_name/:product_name',array(
+                                    
+                                                'siteid' => '1',
+	
+						'controller' => 'index',
+	
+						'module' => 'default' ,
+	
+						'action' => 'index',
+	
+						'id' => 1,
+						
+						'section_name' => ''));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('ruta34',$route34);
+                    
+                        
+                            
+                                                
+                            
+                    
+                }
 		$route = new Zend_Controller_Router_Route(
 	
 				'site/:siteid/section/:id/:title',array(
@@ -302,28 +351,7 @@ public function _initRoute()
 	
 						$frontController->getRouter()->addRoute('productsSiteRoute',$productsSite);
                                                 
-                if($_SERVER['REQUEST_URI'] != '/core' && $_SERVER['REQUEST_URI'] != '/banners'){                            
-                        $route4 = new Zend_Controller_Router_Route(
-	
-				':section_name',array(
-                                    
-                                                'siteid' => '1',
-	
-						'controller' => 'index',
-	
-						'module' => 'default' ,
-	
-						'action' => 'index',
-	
-						'id' => 1,
-						
-						'section_name' => ''));
-	
-	
-						// add this route to the front controller
-	
-						$frontController->getRouter()->addRoute('ruta4',$route4);
-                    }
+                
                                                 
 }
 }

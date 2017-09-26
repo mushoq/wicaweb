@@ -16,6 +16,7 @@ class Banners_Model_Banners extends Core_Model_Factory
 	public static $publication_type = array('calendar'=>'Calendar','hits'=>'Hits');
 	public static $status_banner = array('active'=>'Active','inactive'=>'Inactive');
 	
+        
 	/**
 	 * This function get the last saved banner.
 	 * @param
@@ -40,6 +41,33 @@ class Banners_Model_Banners extends Core_Model_Factory
 		return $last_banner;
 	}
 	
+        public function getbannersbysection($section_id){
+            $table = Zend_Db_Table::getDefaultAdapter();
+            $sql = "SELECT
+            wc_banner.*, 
+            wc_banner_by_section.section_id,
+            wc_banner_by_section.area_banner_id,
+            wc_banner_by_section.order_number
+
+            FROM
+            wc_banner
+            INNER JOIN 
+            wc_banner_by_section
+            ON wc_banner.id = wc_banner_by_section.banner_id
+
+            WHERE
+            wc_banner_by_section.section_id = $section_id
+
+            ORDER BY
+            wc_banner_by_section.order_number"; 
+            $select = $table->query($sql);
+
+            $banners = $select->fetchAll();
+            $banners = GlobalFunctions::converttoobject($banners);
+
+            return $banners;
+        }
+        
 	/**
 	 * Renders section contents
 	 */
@@ -114,8 +142,8 @@ class Banners_Model_Banners extends Core_Model_Factory
 	
 			foreach ($module_descriptions_banners_list as $mdbl)
 			{
-				$banner_item = $banner_obj->find('banner', array('id' => $mdbl->row_id, 'status'=>'active'));
-				$banner_counts_itm = $banner_counts_obj->find('banner_counts', array('banner_id' => $mdbl->row_id));
+				$banner_item = $banner_obj->find('wc_banner', array('id' => $mdbl->row_id, 'status'=>'active'));
+				$banner_counts_itm = $banner_counts_obj->find('wc_banner_counts', array('banner_id' => $mdbl->row_id));
 				if(count($banner_item)>0 && count($banner_counts_itm)>0)
 				{
 					$banner_field_arr = array(get_object_vars($banner_item[0]));

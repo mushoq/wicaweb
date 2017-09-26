@@ -209,7 +209,7 @@ class Default_IndexController extends Zend_Controller_Action
 		}else
 		{
 			//Redirect to installation
-			$this->_helper->redirector ( 'index','index','installer' );
+			$this->_helper->_redirector->gotoUrl('/installer/index/index');
 		}
     }    
 

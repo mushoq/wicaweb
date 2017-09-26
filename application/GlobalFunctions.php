@@ -92,6 +92,23 @@ class GlobalFunctions {
 		return $array_final;
 	}
 	
+        public static function converttoobject($fetchall){
+            $return = array();
+		foreach($fetchall as $row)
+		{
+			$temp = array();
+			foreach($row as $col=>$value)
+			{
+				$temp[$col] = utf8_encode($value);
+			}
+	
+			//convert into object
+			$obj = (object)$temp;
+			array_push($return, $obj);
+		}
+                return $return;
+        }
+        
 	/**
 	 * Removes the special chars and returns the fixed filename
 	 * @param string $filename

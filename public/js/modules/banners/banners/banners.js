@@ -16,9 +16,9 @@ $(document).ready(function() {
 			id : $("#section_id").val()
 		}, function() {		
 			//Initialize Form
-			$('#frmBanners').hide();
-			$('#dates_container').hide();
-			$('#hits_container').hide();
+			$('#frmBanners').addClass('hide');
+			$('#dates_container').addClass('hide');
+			$('#hits_container').addClass('hide');
 			
 			//Show Banner type form: Picture 
 			$('#image_btn').bind('click',function(){
@@ -30,8 +30,8 @@ $(document).ready(function() {
 				{
 					$('#frmBanners').removeClass('hide');
 				}
-				$('#flash_container').hide();
-				$('#html_container').hide();
+				$('#flash_container').addClass('hide');
+				$('#html_container').addClass('hide');
 				$('#image_container').removeClass('hide');
 
 
@@ -48,8 +48,8 @@ $(document).ready(function() {
 					$('#frmBanners').removeClass('hide');
 				}
 				$('#flash_container').removeClass('hide');
-				$('#html_container').hide();
-				$('#image_container').hide();
+				$('#html_container').addClass('hide');
+				$('#image_container').addClass('hide');
 			});
 			
 			//Show Banner type form: HTML 
@@ -62,9 +62,9 @@ $(document).ready(function() {
 				{
 					$('#frmBanners').removeClass('hide');
 				}
-				$('#flash_container').hide();
+				$('#flash_container').addClass('hide');
 				$('#html_container').removeClass('hide');
-				$('#image_container').hide();
+				$('#image_container').addClass('hide');
 			});
 			
 			//Set calendars
@@ -121,7 +121,7 @@ $(document).ready(function() {
 					if($('#type').val()=='calendar'){
 						//Actions calendar
 						$('#dates_container').removeClass('hide');
-						$('#hits_container').hide();
+						$('#hits_container').addClass('hide');
 						
 						//Add validation rules
 			        	var settings = $('#frmBanners').validate().settings;
@@ -135,7 +135,7 @@ $(document).ready(function() {
 	
 					}else if($('#type').val()=='hits'){
 						//Actions hits
-						$('#dates_container').hide();
+						$('#dates_container').addClass('hide');
 						$('#hits_container').removeClass('hide');
 						//Add validation rules
 			        	var settings = $('#frmBanners').validate().settings;
@@ -247,7 +247,7 @@ $(document).ready(function() {
 			},function(){
 				
 				$.getScript('/js/modules/banners/banners/banners.js');
-				$('#frmBanners').hide();
+				$('#frmBanners').addClass('hide');
 				
 				//Show form depend banner_type
 				
@@ -261,8 +261,8 @@ $(document).ready(function() {
 					{
 						$('#frmBanners').removeClass('hide');
 					}
-					$('#flash_container').hide();
-					$('#html_container').hide();
+					$('#flash_container').addClass('hide');
+					$('#html_container').addClass('hide');
 					$('#image_container').removeClass('hide');
 				}
 				
@@ -277,8 +277,8 @@ $(document).ready(function() {
 						$('#frmBanners').removeClass('hide');
 					}
 					$('#flash_container').removeClass('hide');
-					$('#html_container').hide();
-					$('#image_container').hide();				
+					$('#html_container').addClass('hide');
+					$('#image_container').addClass('hide');				
 				}
 				
 				//If content is html	
@@ -291,16 +291,16 @@ $(document).ready(function() {
 					{
 						$('#frmBanners').removeClass('hide');
 					}
-					$('#flash_container').hide();
+					$('#flash_container').addClass('hide');
 					$('#html_container').removeClass('hide');
-					$('#image_container').hide();
+					$('#image_container').addClass('hide');
 				}
 				
 				//Show fields by publication type of banner
 				if($('#type').val()=='calendar'){
-					$('#hits_container').hide();
+					$('#hits_container').addClass('hide');
 				}else if($('#type').val()=='hits'){
-					$('#dates_container').hide();
+					$('#dates_container').addClass('hide');
 				}
 
 				
@@ -314,8 +314,8 @@ $(document).ready(function() {
 					{
 						$('#frmBanners').removeClass('hide');
 					}
-					$('#flash_container').hide();
-					$('#html_container').hide();
+					$('#flash_container').addClass('hide');
+					$('#html_container').addClass('hide');
 					$('#image_container').removeClass('hide');
 
 
@@ -332,8 +332,8 @@ $(document).ready(function() {
 						$('#frmBanners').removeClass('hide');
 					}
 					$('#flash_container').removeClass('hide');
-					$('#html_container').hide();
-					$('#image_container').hide();
+					$('#html_container').addClass('hide');
+					$('#image_container').addClass('hide');
 				});
 				
 				//Show Banner type form: HTML
@@ -346,9 +346,9 @@ $(document).ready(function() {
 					{
 						$('#frmBanners').removeClass('hide');
 					}
-					$('#flash_container').hide();
+					$('#flash_container').addClass('hide');
 					$('#html_container').removeClass('hide');
-					$('#image_container').hide();
+					$('#image_container').addClass('hide');
 				});
 				
 				//Set calendars
@@ -406,7 +406,7 @@ $(document).ready(function() {
 							//Actions calendar
 							
 							$('#dates_container').removeClass('hide');
-							$('#hits_container').hide();
+							$('#hits_container').addClass('hide');
 							
 							//Add validate rules
 				        	var settings = $('#frmBanners').validate().settings;
@@ -420,7 +420,7 @@ $(document).ready(function() {
 		
 						}else if($('#type').val()=='hits'){
 							//Actions hits
-							$('#dates_container').hide();
+							$('#dates_container').addClass('hide');
 							$('#hits_container').removeClass('hide');
 							//Add validate rules
 				        	var settings = $('#frmBanners').validate().settings;

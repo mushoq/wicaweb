@@ -387,11 +387,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `banner`
+-- Table `wc_banner`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `banner` ;
+DROP TABLE IF EXISTS `wc_banner` ;
 
-CREATE  TABLE IF NOT EXISTS `banner` (
+CREATE  TABLE IF NOT EXISTS `wc_banner` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `description` TEXT NULL ,
@@ -402,18 +402,17 @@ CREATE  TABLE IF NOT EXISTS `banner` (
   `publish_date` DATE NULL ,
   `expire_date` DATE NULL ,
   `hits` BIGINT NULL ,
-  `order_number` INT NULL ,
   `status` ENUM('active', 'inactive') NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `banner_counts`
+-- Table `wc_banner_counts`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `banner_counts` ;
+DROP TABLE IF EXISTS `wc_banner_counts` ;
 
-CREATE  TABLE IF NOT EXISTS `banner_counts` (
+CREATE  TABLE IF NOT EXISTS `wc_banner_counts` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `banner_id` INT NOT NULL ,
   `count_hits` BIGINT NOT NULL ,
@@ -421,7 +420,7 @@ CREATE  TABLE IF NOT EXISTS `banner_counts` (
   INDEX `fk_banner_hits_banner1` (`banner_id` ASC) ,
   CONSTRAINT `fk_banner_hits_banner1`
     FOREIGN KEY (`banner_id` )
-    REFERENCES `banner` (`id` )
+    REFERENCES `wc_banner` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
