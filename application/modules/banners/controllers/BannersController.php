@@ -21,9 +21,16 @@ class Banners_BannersController extends Zend_Controller_Action
 		// choose a different layout script:
 		$layout->setLayout('core');
 		
+                $lang = Zend_Registry::get('Zend_Translate');
 		//session
 		$id = New Zend_Session_Namespace('id');
-
+                
+                //check logged in user
+		if (!Zend_Auth::getInstance ()->hasIdentity ()) {
+			//translate library
+			$lang = Zend_Registry::get('Zend_Translate');			
+			throw new Zend_Exception("CUSTOM_EXCEPTION:".$lang->translate('No Access Permissions').'<br/><br/>'.'<a href="/core">'.$lang->translate('Login to the Administration').'</a>');		
+		}
 		/** sections tree**/
 		
 		//Create section and section temp model
@@ -134,7 +141,6 @@ class Banners_BannersController extends Zend_Controller_Action
 			}	
 		
 		
-		
 		// Ordering sections by article and number
 		$sort_col_number = array();
 		$sort_col_article = array();
@@ -196,6 +202,7 @@ class Banners_BannersController extends Zend_Controller_Action
 	 */
 	public function indexAction()
 	{	
+            
 		//Disable layout for action	
 		$this->_helper->layout->disableLayout ();
 		
@@ -217,14 +224,9 @@ class Banners_BannersController extends Zend_Controller_Action
                 {
                         //Get all banners
                         
-                        $banners_list_obj = $banner_obj->find('wc_banner', array('status'=>'active'));
-
-                        //Convert objClass to normal array
-                        if($banners_list_obj){
-                                foreach ($banners_list_obj as $bl){
-                                        $banners_list[] = get_object_vars($bl);
-                                }
-                        }
+                        $banners_list = $banner_obj->find('wc_banner', array('status'=>'active'));
+                        
+                        
 
                         //Banners_list to index view
                         if(isset($banners_list)){
@@ -776,6 +778,7 @@ class Banners_BannersController extends Zend_Controller_Action
 					$banner_count_obj = $banner_count->getNewRow('wc_banner_counts');
 					$banner_count_obj->banner_id = $last_banner_id;
 					$banner_count_obj->count_hits = '0';
+                                        $banner_count_obj->count_views = '0';
 					$saved_banner_count = $banner_count->save('wc_banner_counts', $banner_count_obj);
 					$order_number = 1;
                                         $lastorder = $banner->find('wc_banner_by_section', array('section_id'=>$section_id), array('order_number'=>'DESC'));
@@ -849,7 +852,7 @@ class Banners_BannersController extends Zend_Controller_Action
     			//Get banners order by form data
     			if(isset($formData['banner_order']))
     				$order_list = GlobalFunctions::value_cleaner($formData['banner_order']);
-    
+                        
     			$order_arr = explode(',', $order_list);
     			$count = 1;
     
@@ -863,24 +866,7 @@ class Banners_BannersController extends Zend_Controller_Action
 	    						$options = explode('_', $order);
 	    						$banner_id = $options[0];
 
-    							$banner_data = $banner->find('wc_banner', array('id'=>$banner_id));
-    							
-    							//Create banner object for update with new order
-    							$banner_obj = $banner->getNewRow('wc_banner');
-    							$banner_obj->id = $banner_data[0]->id;
-    							$banner_obj->name = GlobalFunctions::value_cleaner($banner_data[0]->name);
-    							$banner_obj->description = GlobalFunctions::value_cleaner($banner_data[0]->description);
-    							$banner_obj->content = $banner_data[0]->content;
-    							$banner_obj->banner_type = GlobalFunctions::value_cleaner($banner_data[0]->banner_type);
-    							$banner_obj->link = GlobalFunctions::value_cleaner($banner_data[0]->link);
-    							$banner_obj->type = GlobalFunctions::value_cleaner($banner_data[0]->type);
-    							$banner_obj->publish_date = $banner_data[0]->publish_date;
-    							$banner_obj->expire_date = $banner_data[0]->expire_date;
-    							$banner_obj->hits = $banner_data[0]->hits;
-    							$banner_obj->order_number = GlobalFunctions::value_cleaner($count);
-    							$banner_obj->status = GlobalFunctions::value_cleaner($banner_data[0]->status);
- 
-    							$serial_id = $banner->save('wc_banner',$banner_obj);
+    							$banner->updateorder($banner_id, $formData['section_id'], $count);
     							$count++;
     						
     					}
@@ -918,36 +904,24 @@ class Banners_BannersController extends Zend_Controller_Action
     	
     	//section_id of banner passed in URL
     	$section_id = $this->_getParam('section_id');
-    	 
+    	
     	//session
     	$session = new Zend_Session_Namespace('id');
 
     	/* Delete module area according section of banner */
     	
-    	//Get module_id by module_name
-    		
-    	$module_obj = new Core_Model_Module();
-    	$module = $module_obj->find('wc_module',array('name'=>'Banners'));
-    	$module_id = $module[0]->id;
-    	
-    	//Get module description id by module and banner_id
-    	$module_description_obj = new Core_Model_ModuleDescription();
-    	$module_description = $module_description_obj->find('wc_module_description',array('module_id'=>$module_id,'row_id'=>$banner_id));
-    	$module_description_id = $module_description[0]->id;
-    	
-    	
-    	//Delete module area by module description id and section id
-		$section_module_area_aux = new Core_Model_SectionModuleArea();
-    	$delete_banner= $section_module_area_aux->delete('wc_section_module_area',array('module_description_id'=>$module_description_id,'section_id'=>$section_id));
-        $bannerModel = new Banners_Model_Banners();
-        $inactive_banner = $bannerModel->find('wc_banner', array('id'=>$banner_id));
-        if( $inactive_banner){
-             $inactive_banner[0]->status = 'inactive';
-             $save_banner_inactive = $bannerModel->save('wc_banner', $inactive_banner[0]);
+    	$obj = new Banners_Model_Banners();
+        
+        $deleted = null;
+        
+        if($section_id == 'all'){
+            $obj->delete('wc_banner_counts', array('banner_id'=>$banner_id));
+            $obj->delete('wc_banner_by_section', array('banner_id'=>$banner_id));
+            $deleted = $obj->delete('wc_banner', array('id'=>$banner_id));
+        }else{
+            $deleted = $obj->delete('wc_banner_by_section', array('banner_id'=>$banner_id, 'section_id'=>$section_id));
         }
-            //var_dump($save_banner_inactive);die();
-    	//succes or error messages displayed on screen
-    	if($save_banner_inactive)
+    	if($deleted)
     	{
     		$this->_helper->flashMessenger->addMessage(array('success'=>$lang->translate('Success deleted')));
     		$arr_success = array('serial'=>$section_id);
@@ -990,148 +964,32 @@ class Banners_BannersController extends Zend_Controller_Action
     		$serial_sec = $formData ['section'];
     			
     		$banners_list = array();
-    		$section = new Core_Model_Section();
-    		$section_temp = new Core_Model_SectionTemp();
-    		$content = new Core_Model_Content();
+    		$banner_obj = new Banners_Model_Banners();
     		
-    		//**Get banners list with wica content area (variable) and search parameters **/
     		
-    		//Get module_id by module_name
-    		$module_obj = new Core_Model_Module();
-    		$module = $module_obj->find('wc_module',array('name'=>'Banners'));
-    		$module_id = $module[0]->id;
-    		
-    		//Get module description by module (Banners)
-    		$module_description_obj = new Core_Model_ModuleDescription();
-    		$module_description_list = $module_description_obj->find('wc_module_description',array('module_id'=>$module_id));
-    		
-    		//Create section module area model
-    		$section_module_area_obj = new Core_Model_SectionModuleArea();
-    		
-    		if($module_description_list){
-    			//Check if search all sections 
-    			if($formData['section']=='0') 
-    			{
-	    				//Get section module areas by module description
-	    				foreach ($module_description_list as $md){
-	    					$section_module_area_item = $section_module_area_obj->find('wc_section_module_area',array('module_description_id'=>$md->id));
-	    					if($section_module_area_item){
-	    						foreach ($section_module_area_item as $sma){
-	    							$section_module_area_list[] = $sma;
-	    						}
-	    						 
-	    					}
-	    				}
-    				
-	    				//Get module_description_id of section_module_area
-	    				if(isset($section_module_area_list)){
-	    					 
-	    					foreach ($section_module_area_list as $smal){
-	    						$module_description_banners = $module_description_obj->find('wc_module_description',array('id'=>$smal->module_description_id));
-	    						if($module_description_banners){
-	    							foreach ($module_description_banners as &$mdi){
-	    								$mdi->section_id = $smal->section_id;
-	    								$module_descriptions_banners_list[] = $mdi;
-	    							}
-	    							 
-	    						}
-	    					}
-	    					 
-	    				}
-	    				
-	    				//Get banner data by module_description
-	    				if(isset($module_descriptions_banners_list)){
-	    					 
-	    					//Get banners list data by module_area
-	    					$banner_obj = new Banners_Model_Banners();
-	    					foreach ($module_descriptions_banners_list as $mdbl){
-	    						//Get section data
-	    						$section_data = $section->find('wc_section',array('id'=>$mdbl->section_id));
-	    						$section_data = get_object_vars($section_data[0]);
-	    						
-	    						//Check if name search is empty
-	    						if($formData['text']==''){
-	    							$banner_item = $banner_obj->find('wc_banner',array('id'=>$mdbl->row_id));
-	    						}
-	    						else
-	    						{
-	    							$banner_item = $banner_obj->personalized_find('wc_banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
-	    						}
-	    						if($banner_item){
-	    							foreach ($banner_item as &$bi){
-	    	
-    									$bi->section_id = $section_data['id'];
-    									$bi->section_name =$section_data['internal_name'];
-	    								$banners_list[] = get_object_vars($bi);
-	    				
-	    							}
-	    							 
-	    						}
-	    					}
-	    				}
-	    				
-    					
-    			}
-    			else //Specified section in search
-    			{
-    				//Get section data
-    				$section_data = $section->find('wc_section',array('id'=>$formData['section'])); 
+    		if($formData['text']==''){
+                    if($formData['section']==0)
+                        $banner_item = $banner_obj->getbannersforvinculation($formData['section_tree_id'], '!=');
+                    else
+                        $banner_item = $banner_obj->getbannersforvinculation($formData['section'], '=');
+                }
+                else
+                {
+                    if($formData['section']==0)
+                        $banner_item = $banner_obj->getbannersforvinculation($formData['section_tree_id'], '!=');
+                    else
+                        $banner_item = $banner_obj->getbannersforvinculation($formData['section'], '=');
+                }
+                if($banner_item){
+                        foreach ($banner_item as &$bi){
 
-    				//Get section module areas by module description
-    				foreach ($module_description_list as $md){
-    					$section_module_area_item = $section_module_area_obj->find('wc_section_module_area',array('module_description_id'=>$md->id,'section_id'=>$formData['section']));
-    					if($section_module_area_item){
-    						foreach ($section_module_area_item as $sma){
-    							$section_module_area_list[] = $sma;
-    						}
-    			
-    					}
-    				}
-    				
-    				//Get module_description_id of section_module_area
-    				if(isset($section_module_area_list)){
-    			
-    					foreach ($section_module_area_list as $smal){
-    						$module_description_banners = $module_description_obj->find('wc_module_description',array('id'=>$smal->module_description_id));
-    						if($module_description_banners){
-    							foreach ($module_description_banners as $mdi){
-    								$module_descriptions_banners_list[] = $mdi;
-    							}
-    			
-    						}
-    					}
-    			
-    				}
-    			
-    				//Get banner data by module_description
-    				if(isset($module_descriptions_banners_list)){
-    			
-    					//Get banners list data by module_area
-    					$banner_obj = new Banners_Model_Banners();
-    					foreach ($module_descriptions_banners_list as $mdbl){
-    						//Check if name search is empty
-    						if($formData['text']==''){
-    							$banner_item = $banner_obj->find('wc_banner',array('id'=>$mdbl->row_id));
-    						}
-    						else
-    						{
-    							$banner_item = $banner_obj->personalized_find('wc_banner',array(array('id','=',$mdbl->row_id),array('name','LIKE','%'.$internal_name.'%')));
-    						}
-    						if($banner_item){
-    							foreach ($banner_item as $bi){
-  								
-    								$bi->section_id = $section_data[0]->id;
-    								$bi->section_name = $section_data[0]->internal_name;
-    								$banners_list[] = get_object_vars($bi);
-    								
-    							}
-    			
-    						}
-    					}
-    				}
-    			}
-    		}
-    		
+                                $bi->section_id = $section_data['id'];
+                                $bi->section_name =$section_data['internal_name'];
+                                $banners_list[] = get_object_vars($bi);
+
+                        }
+
+                }
     		if(count($banners_list)>0)
     		{
 	    		if(isset($banners_list)){

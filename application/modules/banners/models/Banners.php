@@ -68,113 +68,83 @@ class Banners_Model_Banners extends Core_Model_Factory
             return $banners;
         }
         
-	/**
-	 * Renders section contents
-	 */
-	public function rendercontents($section_id, $storage)
-	{
-		$banners_list = array();
-	
-		//Get module_id by module_name
-		$module_obj = new Core_Model_Module();
-		$module = $module_obj->find('wc_module',array('name'=>'Banners'));
-		$module_id = $module[0]->id;
-	
-		/** Get banner list **/
-		//Get module description by module(Banners)
-		$module_description_obj = new Core_Model_ModuleDescription();
-		$module_description_list = $module_description_obj->find('wc_module_description',array('module_id'=>$module_id));
-	
-		//Create section module area model
-		if($storage == 'no')
-			$section_module_area_obj = new Core_Model_SectionModuleArea();
-		else
-			if($storage == 'yes')
-			$section_module_area_obj = new Core_Model_SectionModuleAreaStorage();
-		
-		//Get banners by section
-		foreach ($module_description_list as $md)
-		{
-			if($storage == 'no')
-				$section_module_area_item = $section_module_area_obj->find('wc_section_module_area',array('module_description_id'=>$md->id,'section_id'=>$section_id));
-			else
-				if($storage == 'yes')
-					$section_module_area_item = $section_module_area_obj->find('wc_section_module_area_storage',array('module_description_id'=>$md->id,'section_id'=>$section_id));
-			
-			if($section_module_area_item)
-			{
-				foreach ($section_module_area_item as $sma)
-				{
-					$section_module_area_list[] = $sma;
-				}
-			}
-		}
-		 
-		//Get module_description_id of section_module_area
-		if(isset($section_module_area_list))
-		{
-			foreach ($section_module_area_list as $smal)
-			{
-				$module_description_banners = $module_description_obj->find('wc_module_description',array('id'=>$smal->module_description_id));
-				if($module_description_banners)
-				{
-					foreach ($module_description_banners as &$mdi)
-					{
-						$template_areas = new Core_Model_Area();
-						$area_tpl = $template_areas->find('wc_area',array('id'=>$smal->area_id));
-						if(count($area_tpl)>0)
-						{
-							$mdi->area = $area_tpl[0]->name;
-						}
-						$module_descriptions_banners_list[] = $mdi;
-					}
-	
-				}
-			}
-		}
-		 
-		//Get banner data by module_description
-		if(isset($module_descriptions_banners_list))
-		{
-			//Get banners list data by module_area
-			$banner_obj = new Banners_Model_Banners();
-			$banner_counts_obj = new Banners_Model_BannerCount();
-	
-			foreach ($module_descriptions_banners_list as $mdbl)
-			{
-				$banner_item = $banner_obj->find('wc_banner', array('id' => $mdbl->row_id, 'status'=>'active'));
-				$banner_counts_itm = $banner_counts_obj->find('wc_banner_counts', array('banner_id' => $mdbl->row_id));
-				if(count($banner_item)>0 && count($banner_counts_itm)>0)
-				{
-					$banner_field_arr = array(get_object_vars($banner_item[0]));
-					$banner_count_arr = array(get_object_vars($banner_counts_itm[0]));
-	
-					foreach ($banner_field_arr as $k => $bfa)
-					{
-						$banner_field_arr[$k]['area'] = $mdbl->area;
-						foreach ($banner_count_arr as $bca)
-						{
-							if($bfa['id'] == $bca['banner_id'])
-								$banner_field_arr[$k]['count_hits'] = $bca['count_hits'];
-						}
-					}
-					$banners_list[] = $banner_field_arr[0];
-				}
-			}
-		}
-	
-		//Ordering banners by order_number
-		if(isset($banners_list))
-		{
-			$sort_col_number = array();
-			foreach ($banners_list as $key=> $row)
-			{
-				$sort_col_number[$key] = $row['order_number'];
-			}
-			array_multisort($sort_col_number, SORT_ASC, $banners_list);
-		}
-	
-		return $banners_list;
-	}
+        public function getbannersbysectionandarea($section_id, $area_id){
+            $table = Zend_Db_Table::getDefaultAdapter();
+            $sql = "SELECT
+            wc_banner.*, 
+            wc_banner_by_section.section_id,
+            wc_banner_by_section.area_banner_id,
+            wc_banner_by_section.order_number,
+            wc_banner_counts.count_hits
+            FROM
+            wc_banner
+            INNER JOIN 
+            wc_banner_by_section
+            ON wc_banner.id = wc_banner_by_section.banner_id
+            INNER JOIN 
+            wc_banner_counts
+            ON wc_banner.id = wc_banner_counts.banner_id
+
+            WHERE
+            wc_banner_by_section.section_id = $section_id
+
+            ORDER BY
+            wc_banner_by_section.order_number"; 
+            $select = $table->query($sql);
+
+            $banners = $select->fetchAll();
+            $banners = GlobalFunctions::converttoobject($banners);
+
+            return $banners;
+        }
+        
+        
+        public function updatehits($banner_id){
+            $table = Zend_Db_Table::getDefaultAdapter();
+            $sql = "UPDATE wc_banner_counts 
+                SET count_hits = count_hits + 1
+                WHERE banner_id = '".$banner_id."'"; 
+            $table->query($sql);
+        }
+        
+        public function updateviews($banner_id){
+            $table = Zend_Db_Table::getDefaultAdapter();
+            $sql = "UPDATE wc_banner_counts 
+                SET count_views = count_views + 1
+                WHERE banner_id = '".$banner_id."'"; 
+            $table->query($sql);
+        }
+        public function updateorder($banner_id, $section_id, $order){
+            $table = Zend_Db_Table::getDefaultAdapter();
+            $sql = "UPDATE wc_banner_by_section 
+                SET order_number = ".$order."
+                WHERE banner_id = ".$banner_id." AND section_id = ".$section_id.""; 
+            $table->query($sql);
+        }
+        
+        public function getbannersforvinculation($section_id, $signal){
+            $table = Zend_Db_Table::getDefaultAdapter();
+            $sql = "SELECT
+            wc_banner.*, 
+            wc_banner_by_section.section_id,
+            
+            FROM
+            wc_banner
+            INNER JOIN 
+            wc_banner_by_section
+            ON wc_banner.id = wc_banner_by_section.banner_id
+            
+            WHERE
+            wc_banner_by_section.section_id $signal $section_id
+
+            ORDER BY
+            wc_banner_by_section.order_number"; 
+            $select = $table->query($sql);
+
+            $banners = $select->fetchAll();
+            $banners = GlobalFunctions::converttoobject($banners);
+
+            return $banners;
+        }
 		
 }

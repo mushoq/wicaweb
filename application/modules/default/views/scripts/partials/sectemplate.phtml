@@ -57,7 +57,7 @@
 <?php endforeach; ?>
 	<input type="hidden" id="section_cols" name="section_cols" value="<?php echo $this->col_number; ?>">
 </div>
-
+<?php echo $this->bannerHelper($this->section_id, 1); ?>
 
 <?php if($this->articles): ?>
 <?php $ite = 0; ?>

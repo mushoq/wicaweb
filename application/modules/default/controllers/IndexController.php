@@ -17,6 +17,9 @@ class Default_IndexController extends Zend_Controller_Action
 	 */
     public function init()
     {
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
 //     	GlobalFunctions::move_to_storage();
     	//Checks if WicaWeb was installed
     	$installation_file = GlobalFunctions::checkInstallationFile();

@@ -1,6 +1,6 @@
 <?php $lang = Zend_Registry::get('Zend_Translate'); ?>
 <?php foreach($this->areas as $area): ?>
-<?php 	$section_contents_tpl[$area->name] = '&nbsp;'; ?>
+<?php 	$section_contents_tpl[$area->name] = ''; ?>
 <?php endforeach; ?>
 
 <div class="line-top alert_messages_container">
@@ -93,11 +93,11 @@ $band_one_private = array();
 
 	if($this->header['name'])
             if(isset($_SESSION['external_user'])){
-		$section_contents_tpl['header_name'] .= '<div class="row-fluid right">
+		$section_contents_tpl['header_name'] = '<div class="row-fluid right">
                     <a class="pointer" id="profile" >'.$lang->translate('Welcome').', '.$_SESSION['external_user_name'].'  </a><i class="glyphicon glyphicon-user"></i>
                     <a class="pointer" id="logout_public_user">'.$lang->translate('Logout').'</a> <i class="glyphicon glyphicon-off"></i> </div>';
             } else {
-                $section_contents_tpl['header_name'] .= '<div class="row-fluid right">
+                $section_contents_tpl['header_name'] = '<div class="row-fluid right">
                     <a class="pointer" id="profile" >'.$lang->translate('Login').'  </a><i class="glyphicon glyphicon-user"></i>
                     '; 
             }

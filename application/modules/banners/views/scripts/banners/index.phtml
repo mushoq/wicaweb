@@ -22,7 +22,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 	<?php if($opt['action']=='new'): ?>
 	<ul class="nav nav-pills pull-right">
         <li>
-            <a  id="new_banner" class="pointer"><?php echo $lang->translate('New Banner'); ?></a>
+            <a  id="new_banner" class="pointer"><?php echo $lang->translate('New Banner'); ?></a> 
         </li>
     </ul>
     <?php endif; ?>
@@ -71,7 +71,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 	
 	<div class="row table-bordered-header">	
 		<div class="col-md-6"><b><?php echo $lang->translate('Banner name'); ?></b></div>
-		<div class="col-md-1"><b><?php echo $lang->translate('Order'); ?></b></div>
+		<?php if($this->section_id != 'all'){?><div class="col-md-1"><b><?php echo $lang->translate('Order'); ?></b></div><?php }?>
 		<div class="col-md-4 last"><b><?php echo $lang->translate('Tools'); ?></b></div>
 	</div>
 	
@@ -79,7 +79,7 @@ $lang = Zend_Registry::get('Zend_Translate');
 		<?php foreach ($this->banners_list as $k => $entry): ?> 
 		<div class="row table-bordered-content <?php if(($k+1)%2): echo "odd"; endif;?>" id="<?php echo $entry->id; ?>">	
 			<div class="col-md-6 pointer"><a class="pointer" id="edit_banner_<?php echo $entry->id;?>" banner_id="<?php echo $entry->id;?>"> <?php echo $entry->name; ?> </a></div>
-			<div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div>			
+                        <?php if($this->section_id != 'all'){?><div class="col-md-1 handler move"><i class="glyphicon glyphicon-move"></i></div><?php }?>			
 			<div class="col-md-4 last pointer">
 			<?php foreach($this->cms_links as $action_id => $opt): ?>
 			<?php if($opt['action']=='edit'): ?>

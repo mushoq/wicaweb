@@ -220,6 +220,29 @@ public function _initRoute()
                             
                     
                 }
+                $routebanners = new Zend_Controller_Router_Route(
+	
+				'bannerlink/:banner_id/:href',array(
+                                    
+                                                
+	
+						'controller' => 'link',
+	
+						'module' => 'banners' ,
+	
+						'action' => 'index',
+	
+						'banner_id' => 1,
+                                    
+                                                'href' => 1,
+						
+						));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('rutabanners',$routebanners);
+                                                
 		$route = new Zend_Controller_Router_Route(
 	
 				'site/:siteid/section/:id/:title',array(
