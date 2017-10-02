@@ -12,6 +12,11 @@ foreach($this->section_floors as $key => $subsection){
     $this->contents = $subsection['contents'];
     $this->section_images = $subsection['section_images'];
     $this->articles = $subsection['articles'];
+    //session storage vals
+    $session_render_vals = new Zend_Session_Namespace('render_vals_front');
+    $session_render_vals->area_width = 'col-md-12';
+    $session_render_vals->section_cols = $subsection['col_number'];
+    
     include($subsection['section_filename_tpl']);
 }
 ?>

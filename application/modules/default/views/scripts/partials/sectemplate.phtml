@@ -45,7 +45,7 @@
                 <?php 	if($this->isstorage == 'yes'):?>									
                 <?php 		echo $this->previewHelperStorage($value['section_id'], $value['content_id']); ?>
                 <?php 	else:?>
-                <?php 		echo $this->previewHelper($value['section_id'], $value['content_id']); ?>
+                <?php 		echo $this->previewHelper($value); ?>
                 <?php 	endif;?>
                 <?php endif; ?>
                 <?php if(isset($value['content'])): ?>
