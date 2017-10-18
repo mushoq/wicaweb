@@ -14,7 +14,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 	
 	function previewHelper($content, $area_id=null) 
 	{
-		
+		$lang = Zend_Registry::get ( 'Zend_Translate' );
 		if ( $content) 
 		{
 				

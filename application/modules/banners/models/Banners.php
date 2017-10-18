@@ -84,10 +84,11 @@ class Banners_Model_Banners extends Core_Model_Factory
             INNER JOIN 
             wc_banner_counts
             ON wc_banner.id = wc_banner_counts.banner_id
-
+            
             WHERE
             wc_banner_by_section.section_id = $section_id
-
+            AND
+            wc_banner_by_section.area_banner_id = $area_id
             ORDER BY
             wc_banner_by_section.order_number"; 
             $select = $table->query($sql);
