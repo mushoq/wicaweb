@@ -406,7 +406,21 @@ CREATE  TABLE IF NOT EXISTS `wc_banner` (
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `wc_banner_by_section`
+-- -----------------------------------------------------
 
+DROP TABLE IF EXISTS `wc_banner_by_section`;
+
+CREATE TABLE `wc_banner_by_section` (
+  `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+  `banner_id` INTEGER(11) NOT NULL,
+  `section_id` INTEGER(11) NOT NULL,
+  `area_banner_id` INTEGER(11) NOT NULL,
+  `order_number` INTEGER(11) DEFAULT NULL,
+  PRIMARY KEY USING BTREE (`id`) COMMENT '',
+  UNIQUE INDEX `wc_banner_by_section_idx1` USING BTREE (`banner_id`, `section_id`) COMMENT ''
+)ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table `wc_banner_counts`
 -- -----------------------------------------------------
