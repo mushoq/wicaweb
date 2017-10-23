@@ -421,23 +421,21 @@ CREATE TABLE `wc_banner_by_section` (
   PRIMARY KEY USING BTREE (`id`) COMMENT '',
   UNIQUE INDEX `wc_banner_by_section_idx1` USING BTREE (`banner_id`, `section_id`) COMMENT ''
 )ENGINE=InnoDB;
+
 -- -----------------------------------------------------
 -- Table `wc_banner_counts`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wc_banner_counts` ;
+DROP TABLE IF EXISTS `wc_banner_counts`;
 
-CREATE  TABLE IF NOT EXISTS `wc_banner_counts` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `banner_id` INT NOT NULL ,
-  `count_hits` BIGINT NOT NULL ,
-  PRIMARY KEY (`id`, `banner_id`) ,
-  INDEX `fk_banner_hits_banner1` (`banner_id` ASC) ,
-  CONSTRAINT `fk_banner_hits_banner1`
-    FOREIGN KEY (`banner_id` )
-    REFERENCES `wc_banner` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `wc_banner_counts` (
+  `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+  `banner_id` INTEGER(11) NOT NULL,
+  `count_hits` BIGINT(20) NOT NULL,
+  `count_views` INTEGER(11) DEFAULT NULL,
+  PRIMARY KEY USING BTREE (`id`, `banner_id`),
+   INDEX `fk_banner_hits_banner1` USING BTREE (`banner_id`),
+  CONSTRAINT `fk_banner_hits_banner1` FOREIGN KEY (`banner_id`) REFERENCES `wc_banner` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)ENGINE=InnoDB;
 
 
 -- -----------------------------------------------------

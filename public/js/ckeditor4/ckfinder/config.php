@@ -85,7 +85,7 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-$baseDir = '/home/santiagoe/public_html/wicaweb/public/uploads/content/';
+$baseDir = $_SERVER['DOCUMENT_ROOT'].'/uploads/content/';
 //$baseDir = resolveUrl('/public/uploads/content/');
 /*
  * ### Advanced Settings
