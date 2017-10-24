@@ -131,19 +131,14 @@ class Default_IndexController extends Zend_Controller_Action
                         
                         
 		    	if($this->_getParam('section_name')){
-                            $sections_list_all = $section->personalized_find('wc_section',array(array('website_id','=',$front_ids->website_id), array('approved','=','yes'), array('publication_status','=','published')),'order_number');
+                            $section_by_url = $section->find('wc_section',array('url'=>$this->_getParam('section_name')));
                             $section_name = $this->_getParam('section_name');
-                            foreach ($sections_list_all as $sec)
-		    		{
-                                
-                                //echo GlobalFunctions::formatFilename($sec->title).'<br>';
-		    			if(GlobalFunctions::formatFilename($sec->title) == $section_name){
-                                            $section_id = $sec->id;
-                                        }
-		    		}
-                                if(!$section_id){
-                                    $this->_helper->redirector ( 'error','page' );
-                                }
+                            $section_id = $section_by_url[0]->id;
+                            
+		    		
+                            if(!$section_id){
+                                $this->_helper->redirector ( 'error','page' );
+                            }
                                 
                         }elseif($this->_getParam('id')){
                              $section_id = $this->_getParam('id');
@@ -159,7 +154,8 @@ class Default_IndexController extends Zend_Controller_Action
 		    			$sections_arr[] = array('id'=>$sec->id,
 		    					'section_parent_id'=>$sec->section_parent_id,
 		    					'title'=>$sec->title,
-                                                        'homepage'=>$sec->homepage
+                                                        'homepage'=>$sec->homepage,
+                                                        'url'=>$sec->url
 		    			);
 		    		}
 		    	}
@@ -191,7 +187,8 @@ class Default_IndexController extends Zend_Controller_Action
 		    		{
 		    			$sections_arr2[] = array('id'=>$sec2->id,
 		    					'section_parent_id'=>$sec2->section_parent_id,
-		    					'title'=>$sec2->title
+		    					'title'=>$sec2->title,
+                                                        'url'=>$sec->url
 		    			);
 		    		}
 		    	}
@@ -326,16 +323,11 @@ class Default_IndexController extends Zend_Controller_Action
     	//section_id passed in URL
     	if($this->_getParam('section_name')){
             $section = new Core_Model_Factory();
-            $sections_list_all = $section->personalized_find('wc_section',array(array('website_id','=',$front_ids->website_id), array('approved','=','yes'), array('publication_status','=','published')),'order_number');
+            $section_by_url = $section->find('wc_section',array('url'=>$this->_getParam('section_name')));
             $section_name = $this->_getParam('section_name');
-            foreach ($sections_list_all as $sec)
-            {
+            $section_id = $section_by_url[0]->id;
 
-            //echo GlobalFunctions::formatFilename($sec->title).'<br>';
-                    if(GlobalFunctions::formatFilename($sec->title) == $section_name){
-                        $section_id = $sec->id;
-                    }
-            }
+
             if(!$section_id){
                 $this->_helper->redirector ( 'error','page' );
             }
@@ -557,7 +549,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    				{
 		    					$art->image = null;
 		    				}
-		    				$article_arr[] = array('section_id'=>$section->id, 'article_id'=>$art->id, 'title'=>$art->title, 'synopsis'=>$art->synopsis, 'image'=>$art->image, 'feature'=>$art->feature, 'publish_date'=>$art->publish_date, 'expire_date'=>$art->expire_date);
+		    				$article_arr[] = array('section_id'=>$section->id, 'article_id'=>$art->id, 'url'=>$art->url, 'title'=>$art->title, 'synopsis'=>$art->synopsis, 'image'=>$art->image, 'feature'=>$art->feature, 'publish_date'=>$art->publish_date, 'expire_date'=>$art->expire_date);
 		    			}
 		    		}
                                 
@@ -791,7 +783,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    					{
 		    						$art->image = null;
 		    					}
-		    					$article_arr[] = array('section_id'=>$section->id, 'article_id'=>$art->id, 'title'=>$art->title, 'synopsis'=>$art->synopsis, 'image'=>$art->image, 'feature'=>$art->feature, 'publish_date'=>$art->publish_date, 'expire_date'=>$art->expire_date);
+		    					$article_arr[] = array('section_id'=>$section->id, 'article_id'=>$art->id, 'url'=>$art->url, 'title'=>$art->title, 'synopsis'=>$art->synopsis, 'image'=>$art->image, 'feature'=>$art->feature, 'publish_date'=>$art->publish_date, 'expire_date'=>$art->expire_date);
 		    				}
 		    			}
 	

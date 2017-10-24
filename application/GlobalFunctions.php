@@ -462,7 +462,7 @@ class GlobalFunctions {
                                             if($item['homepage'] == 'yes'){
                                                 $html.= '<a href="/">';
                                             }else{
-                                                $html.= '<a href="/'.self::formatFilename($item['title']).'">';
+                                                $html.= '<a href="/'.$item['url'].'">';
                                             }
 						
 					else 
@@ -504,7 +504,7 @@ class GlobalFunctions {
 				if(isset($item['title'])){
                                     //new route with the new parameter : siteid 
 					if(!$storage)
-						$html.= '<a href="/'.self::formatFilename($item['title']).'">';
+						$html.= '<a href="/'.$item['url'].'">';
 					else 
 						$html.= '<a href="/indexold_indexold/index?id='.$item['id'].'">';
 					//$html.= !isset($item['children'])? '<a class="dropdown-toggle" data-toggle="dropdown" href="#menu'.$item['id'].'">' : '<a>';
@@ -2145,6 +2145,7 @@ class GlobalFunctions {
                             'section_parent_id'=>$sec->section_parent_id,
                             'title'=>$sec->title,
                             'article'=>$sec->article,
+                            'url'=>$sec->url,
                             'area' => $area
                         );
                     }

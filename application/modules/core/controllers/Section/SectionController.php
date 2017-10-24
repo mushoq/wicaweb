@@ -1241,6 +1241,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 								$section_obj->section_template_id = $stored_section_data[0]->section_template_id;
 								$section_obj->internal_name = GlobalFunctions::value_cleaner($stored_section_data[0]->internal_name);
 								$section_obj->title = GlobalFunctions::value_cleaner($stored_section_data[0]->title);
+                                                                $section_obj->url = GlobalFunctions::formatFilename($stored_section_data[0]->internal_name);
 								$section_obj->subtitle = GlobalFunctions::value_cleaner($stored_section_data[0]->subtitle);
 								$section_obj->title_browser = GlobalFunctions::value_cleaner($stored_section_data[0]->title_browser);
 								$section_obj->synopsis = $stored_section_data[0]->synopsis;
@@ -1282,6 +1283,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 								$section_obj->section_template_id = $stored_section_data[0]->section_template_id;
 								$section_obj->internal_name = GlobalFunctions::value_cleaner($stored_section_data[0]->internal_name);
 								$section_obj->title = GlobalFunctions::value_cleaner($stored_section_data[0]->title);
+                                                                $section_obj->url = GlobalFunctions::formatFilename($stored_section_data[0]->title);
 								$section_obj->subtitle = GlobalFunctions::value_cleaner($stored_section_data[0]->subtitle);
 								$section_obj->title_browser = GlobalFunctions::value_cleaner($stored_section_data[0]->title_browser);
 								$section_obj->synopsis = $stored_section_data[0]->synopsis;
@@ -1841,6 +1843,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_nothome->section_template_id = $section_home[0]->section_template_id;
 					$section_nothome->internal_name = GlobalFunctions::value_cleaner($section_home[0]->internal_name);
 					$section_nothome->title = GlobalFunctions::value_cleaner($section_home[0]->title);
+                                        $section_nothome->url = GlobalFunctions::formatFilename($section_home[0]->internal_name);
 					$section_nothome->subtitle = GlobalFunctions::value_cleaner($section_home[0]->subtitle);
 					$section_nothome->title_browser = GlobalFunctions::value_cleaner($section_home[0]->title_browser);
 					$section_nothome->synopsis = $section_home[0]->synopsis;
@@ -1912,6 +1915,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			$section_act->section_template_id = $formData['section_template_id'];
 			$section_act->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 			$section_act->title = GlobalFunctions::value_cleaner($formData['title']);
+                        $section_act->url = GlobalFunctions::formatFilename($formData['internal_name']);
 			$section_act->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 			$section_act->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 			$section_act->synopsis = $formData['synopsis'];
@@ -1979,6 +1983,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_tmp->section_template_id = $formData['section_template_id'];
 					$section_tmp->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 					$section_tmp->title = GlobalFunctions::value_cleaner($formData['title']);
+                                        $section_tmp->url = GlobalFunctions::formatFilename($formData['internal_name']);
 					$section_tmp->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 					$section_tmp->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 					$section_tmp->synopsis = $formData['synopsis'];
@@ -2037,6 +2042,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_act->section_template_id = $formData['section_template_id'];
 					$section_act->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 					$section_act->title = GlobalFunctions::value_cleaner($formData['title']);
+                                        $section_act->url = GlobalFunctions::formatFilename($formData['internal_name']);
 					$section_act->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 					$section_act->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 					$section_act->synopsis = $formData['synopsis'];
@@ -2097,6 +2103,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_tmp->section_template_id = $formData['section_template_id'];
 					$section_tmp->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 					$section_tmp->title = GlobalFunctions::value_cleaner($formData['title']);
+                                        $section_tmp->url = GlobalFunctions::formatFilename($formData['internal_name']);
 					$section_tmp->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 					$section_tmp->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 					$section_tmp->synopsis = $formData['synopsis'];
@@ -2159,6 +2166,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 					$section_tmp->section_template_id = $formData['section_template_id'];
 					$section_tmp->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 					$section_tmp->title = GlobalFunctions::value_cleaner($formData['title']);
+                                        $section_tmp->url = GlobalFunctions::formatFilename($formData['internal_name']);
 					$section_tmp->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 					$section_tmp->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 					$section_tmp->synopsis = $formData['synopsis'];
@@ -2957,13 +2965,13 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			
 			if($section_id)
 			{			
-				$data = $section->personalized_find('wc_section', array (array('id','!=',$section_id), array('internal_name','==',$internal_name_param), array('article','=','no'), array('website_id','=',$session->website_id)));
-				$data_temp = $section_temp->personalized_find('wc_section_temp', array (array('section_id','!=',$section_id), array('internal_name','==',$internal_name_param), array('article','=','no'), array('website_id','=',$session->website_id)));
+				$data = $section->personalized_find('wc_section', array (array('id','!=',$section_id), array('internal_name','==',$internal_name_param), array('website_id','=',$session->website_id)));
+				$data_temp = $section_temp->personalized_find('wc_section_temp', array (array('section_id','!=',$section_id), array('internal_name','==',$internal_name_param), array('website_id','=',$session->website_id)));
 			}
 			else
 			{
-				$data = $section->personalized_find('wc_section', array (array('internal_name','==',$internal_name_param), array('article','=','no'), array('website_id','=',$session->website_id)));
-				$data_temp = $section_temp->personalized_find('wc_section_temp', array (array('internal_name','==',$internal_name_param), array('article','=','no'), array('website_id','=',$session->website_id)));
+				$data = $section->personalized_find('wc_section', array (array('internal_name','==',$internal_name_param), array('website_id','=',$session->website_id)));
+				$data_temp = $section_temp->personalized_find('wc_section_temp', array (array('internal_name','==',$internal_name_param), array('website_id','=',$session->website_id)));
 			}
 			
 			if($data || $data_temp)
@@ -4060,6 +4068,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 						$section_obj->section_template_id = $stored_section_data[0]->section_template_id;
 						$section_obj->internal_name = GlobalFunctions::value_cleaner($stored_section_data[0]->internal_name);
 						$section_obj->title = GlobalFunctions::value_cleaner($stored_section_data[0]->title);
+                                                $section_obj->url = GlobalFunctions::formatFilename($stored_section_data[0]->internal_name);
 						$section_obj->subtitle = GlobalFunctions::value_cleaner($stored_section_data[0]->subtitle);
 						$section_obj->title_browser = GlobalFunctions::value_cleaner($stored_section_data[0]->title_browser);
 						$section_obj->synopsis = $stored_section_data[0]->synopsis;
@@ -4453,6 +4462,7 @@ class Core_Section_SectionController extends Zend_Controller_Action
 			$section_obj->section_template_id = $stored_section_data[0]->section_template_id;
 			$section_obj->internal_name = GlobalFunctions::value_cleaner($stored_section_data[0]->internal_name);
 			$section_obj->title = GlobalFunctions::value_cleaner($stored_section_data[0]->title);
+                        $section_obj->url = GlobalFunctions::formatFilename($stored_section_data[0]->internal_name);
 			$section_obj->subtitle = GlobalFunctions::value_cleaner($stored_section_data[0]->subtitle);
 			$section_obj->title_browser = GlobalFunctions::value_cleaner($stored_section_data[0]->title_browser);
 			$section_obj->synopsis = $stored_section_data[0]->synopsis;

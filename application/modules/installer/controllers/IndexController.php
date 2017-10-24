@@ -758,7 +758,7 @@ class Installer_IndexController extends Zend_Controller_Action
 					}
 
 					
-				}
+				} 
 				else{
 					$this->_helper->flashMessenger->addMessage(array('error'=>$lang->translate('Errors in saving data')));
 					$this->_helper->redirector('index','index','core');
@@ -916,6 +916,7 @@ class Installer_IndexController extends Zend_Controller_Action
 		$section_obj->section_template_id = 1;
 		$section_obj->internal_name =  GlobalFunctions::value_cleaner('HOME'.'_'.$website_id);
 		$section_obj->title = GlobalFunctions::value_cleaner('HOME');
+                $section_obj->url = GlobalFunctions::formatFilename($section_obj->internal_name);
 		$section_obj->subtitle = GlobalFunctions::value_cleaner('');
 		$section_obj->title_browser = GlobalFunctions::value_cleaner('');
 		$section_obj->synopsis = GlobalFunctions::value_cleaner('');

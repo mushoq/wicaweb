@@ -605,6 +605,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 			$article_act->section_template_id = $formData['section_template_id'];
 			$article_act->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 			$article_act->title = GlobalFunctions::value_cleaner($formData['title']);
+                        $article_act->url = GlobalFunctions::formatFilename($formData['internal_name']);
 			$article_act->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 			$article_act->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 			$article_act->synopsis = $formData['synopsis'];
@@ -682,6 +683,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 					$article_tmp->section_template_id = $formData['section_template_id'];
 					$article_tmp->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 					$article_tmp->title = GlobalFunctions::value_cleaner($formData['title']);
+                                        $article_tmp->url = GlobalFunctions::formatFilename($formData['internal_name']);
 					$article_tmp->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 					$article_tmp->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 					$article_tmp->synopsis = $formData['synopsis'];
@@ -742,6 +744,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 					$article_act->section_template_id = $formData['section_template_id'];
 					$article_act->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 					$article_act->title = GlobalFunctions::value_cleaner($formData['title']);
+                                        $article_act->url = GlobalFunctions::formatFilename($formData['internal_name']);
 					$article_act->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 					$article_act->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 					$article_act->synopsis = $formData['synopsis'];
@@ -804,6 +807,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 					$article_tmp->section_template_id = $formData['section_template_id'];
 					$article_tmp->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 					$article_tmp->title = GlobalFunctions::value_cleaner($formData['title']);
+                                        $article_tmp->url = GlobalFunctions::formatFilename($formData['internal_name']);
 					$article_tmp->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 					$article_tmp->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 					$article_tmp->synopsis = $formData['synopsis'];
@@ -868,6 +872,7 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 					$article_tmp->section_template_id = $formData['section_template_id'];
 					$article_tmp->internal_name =  GlobalFunctions::value_cleaner($formData['internal_name']);
 					$article_tmp->title = GlobalFunctions::value_cleaner($formData['title']);
+                                        $article_tmp->url = GlobalFunctions::formatFilename($formData['internal_name']);
 					$article_tmp->subtitle = GlobalFunctions::value_cleaner($formData['subtitle']);
 					$article_tmp->title_browser = GlobalFunctions::value_cleaner($formData['title_browser']);
 					$article_tmp->synopsis = $formData['synopsis'];
@@ -1055,13 +1060,13 @@ class Core_Article_ArticleController extends Zend_Controller_Action
 			
 			if($section_id)
 			{			
-				$data = $section->personalized_find ( 'wc_section', array(array('id','!=',$section_id), array('internal_name','==',$internal_name_param), array('article','=','yes'), array('website_id','=',$session->website_id)));
-				$data_temp = $section_temp->personalized_find ( 'wc_section_temp', array(array('section_id','!=',$section_id), array('internal_name','==',$internal_name_param), array('article','=','yes'), array('website_id','=',$session->website_id)));
+				$data = $section->personalized_find ( 'wc_section', array(array('id','!=',$section_id), array('internal_name','==',$internal_name_param), array('website_id','=',$session->website_id)));
+				$data_temp = $section_temp->personalized_find ( 'wc_section_temp', array(array('section_id','!=',$section_id), array('internal_name','==',$internal_name_param), array('website_id','=',$session->website_id)));
 			}
 			else
 			{
-				$data = $section->personalized_find ( 'wc_section', array(array('internal_name','==',$internal_name_param), array('article','=','yes'), array('website_id','=',$session->website_id)));				
-				$data_temp = $section_temp->personalized_find ( 'wc_section_temp', array(array('internal_name','==',$internal_name_param), array('article','=','yes'), array('website_id','=',$session->website_id)));
+				$data = $section->personalized_find ( 'wc_section', array(array('internal_name','==',$internal_name_param), array('website_id','=',$session->website_id)));				
+				$data_temp = $section_temp->personalized_find ( 'wc_section_temp', array(array('internal_name','==',$internal_name_param), array('website_id','=',$session->website_id)));
 			}
 			if($data || $data_temp)
 				echo json_encode ( FALSE );
