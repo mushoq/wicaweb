@@ -220,6 +220,49 @@ public function _initRoute()
                             
                     
                 }
+                $tinyurl = new Zend_Controller_Router_Route(
+	
+				't/:id',array(
+                                            'siteid' => '1',
+	
+                                            'controller' => 'index',
+
+                                            'module' => 'default' ,
+
+                                            'action' => 'index',
+
+                                            'id' => 1,
+
+                                            'title' => ''
+
+                                            ));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('tiny',$tinyurl);
+                $tinyurlsite = new Zend_Controller_Router_Route(
+	
+				's/:siteid/:id',array(
+                                    
+                                            'siteid' => '1',
+	
+                                            'controller' => 'index',
+
+                                            'module' => 'default' ,
+
+                                            'action' => 'index',
+
+                                            'id' => 1,
+
+                                            'title' => ''
+
+                                            ));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('tinysite',$tinyurlsite);
                 $routebanners = new Zend_Controller_Router_Route(
 	
 				'bannerlink/:banner_id/:href',array(

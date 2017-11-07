@@ -564,6 +564,8 @@ CREATE  TABLE IF NOT EXISTS `wc_public_user` (
   `old_password` VARCHAR(45) NOT NULL ,
   `status` ENUM('active', 'inactive') NOT NULL ,
   `activation_key` VARCHAR(100) NOT NULL ,
+  `enterprice` VARCHAR(100) DEFAULT NULL,
+  `birthdate` DATE DEFAULT NULL,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 

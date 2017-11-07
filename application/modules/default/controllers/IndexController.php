@@ -419,6 +419,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    	{	    		
 		    		$this->view->title_browser = str_replace('"','-',str_replace('\\','',$section->title));
                                 $this->view->synopsis_browser = strip_tags($section->synopsis);
+                                $this->view->keywords = $section->keywords;
                                 $this->view->author_browser = $section->author;
                                 $this->view->id_browser = $section->id;
                                 $this->view->article_browser = $section->article;
@@ -614,7 +615,7 @@ class Default_IndexController extends Zend_Controller_Action
                                                         {
                                                                 $art->image = null;
                                                         }
-                                                        $subsection_article_arr[] = array('section_id'=>$subsection->id, 'article_id'=>$art->id, 'title'=>$art->title, 'synopsis'=>$art->synopsis, 'image'=>$art->image, 'feature'=>$art->feature, 'publish_date'=>$art->publish_date, 'expire_date'=>$art->expire_date);
+                                                        $subsection_article_arr[] = array('section_id'=>$subsection->id, 'article_id'=>$art->id, 'url'=>$art->url, 'title'=>$art->title, 'synopsis'=>$art->synopsis, 'image'=>$art->image, 'feature'=>$art->feature, 'publish_date'=>$art->publish_date, 'expire_date'=>$art->expire_date);
                                                 }
                                                 
                                         }

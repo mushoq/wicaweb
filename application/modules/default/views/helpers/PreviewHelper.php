@@ -14,6 +14,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 	
 	function previewHelper($content, $area_id=null) 
 	{
+		
 		$lang = Zend_Registry::get ( 'Zend_Translate' );
 		if ( $content) 
 		{
@@ -76,10 +77,12 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                             return $return;
                                                             break;
 
-                            case 'image':		           
+                            case 'image':		    
+                                
                                                            $return = '<div class="front_image_container item" align="'.$content['content_by_section_data']->align.'">';
                                                             //recover render values
                                                             $session_render_vals = new Zend_Session_Namespace('render_vals_front');
+                                                            
                                                             $content_width = GlobalFunctions::getImageWithForRender($session_render_vals->area_width, $session_render_vals->section_cols, $content['content_by_section_data']->column_number);
                                                             //getWebsiste id
                                                             $id = new Zend_Session_Namespace('ids');
@@ -304,7 +307,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                             $front_ids = New Zend_Session_Namespace('ids');
 
                                                             $return .= '<div class="form-group center">								
-                                                                                            <input type="button" id="btn_sub_form_'.$content['content_id'].'" name="btn_sub_form_'.$content['content_id'].'" class="btn btn-primary" value="'.$lang->translate('Send').'"/>
+                                                                                            <input type="button" id="btn_sub_form_'.$content['content_id'].'" name="btn_sub_form_'.$content['content_id'].'" class="btn btn-template-main" value="'.$lang->translate('Send').'"/>
                                                                                             <input type="hidden" id="website_id" name="website_id" value="'.$front_ids->website_id.'" />
                                                                                             <input type="hidden" id="form_id" name="form_id" value="'.$content['content_id'].'" />		
                                                                                     </div>';
@@ -316,9 +319,20 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
 				
 		}else {
 			$front_ids = New Zend_Session_Namespace('ids');
-			$return = '<div class="row-fluid">
+			$return = '<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>'.$lang->translate('Profile').'</h1>
+            </div>
+        </div>
+    </div>
+</div><div class="row"><div class="container">
 							
-							<div id="section_login_container" class="col-md-4 col-md-offset-4">
+							<div class="col-md-4 col-md-offset-2">
+                                                            <img src="/images/candado01.png" class="img-responsive"/>
+                                                        </div>
+                                                        <div id="section_login_container" class="col-md-4">
 								<form id="form_login_'.$area_id.'" name="form_login_'.$area_id.'" action="">
 									
                                                                         <div class="form-group">
@@ -332,9 +346,9 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                         </div>
 									<div id="error_login_'.$area_id.'" name="error_login_'.$area_id.'" class="error_validation hide">'.$lang->translate("The username or password are wrong").'</div>
 									<div id="error_login_inactive_'.$area_id.'" name="error_login_inactive_'.$area_id.'" class="error_validation hide">'.$lang->translate("This user is inactive").'</div>
-									<input type="button" class="btn btn-primary" id="btnLogin_'.$area_id.'" area="'.$area_id.'" name="btnLogin_'.$area_id.'" value="'.$lang->translate("Login").'"/><br/>
-									<a class="pointer" href="#form_register_'.$area_id.'" area="'.$area_id.'" id="register_'.$area_id.'">'.$lang->translate("Register").'</a><br/>
-									<a class="pointer" href="#form_forgot_'.$area_id.'" area="'.$area_id.'" id="forgot_'.$area_id.'">'.$lang->translate("Forgot your password").'?</a>
+									<input type="button" class="btn btn-template-main" id="btnLogin_'.$area_id.'" area="'.$area_id.'" name="btnLogin_'.$area_id.'" value="'.$lang->translate("Login").'"/><br/>
+									<br><a class="pointer" href="#form_register_'.$area_id.'" area="'.$area_id.'" id="register_'.$area_id.'">'.$lang->translate("Register").'</a><br/>
+									<br><a class="pointer" href="#form_forgot_'.$area_id.'" area="'.$area_id.'" id="forgot_'.$area_id.'">'.$lang->translate("Forgot your password").'?</a>
 								</form>	
 							</div>
 							
@@ -369,6 +383,15 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                                     <input type="text" class="form-control" id="public_user_username_'.$area_id.'" name="public_user_username_'.$area_id.'" />
                                                                                 </div>
                                                                                 <div class="form-group col-md-6">
+                                                                                    <label for="public_user_enterprice_'.$area_id.'">'.$lang->translate("Enterprice").'</label>
+                                                                                    <input type="text" class="form-control" id="public_user_enterprice_'.$area_id.'" name="public_user_enterprice_'.$area_id.'" />
+                                                                                </div>
+                                                                                <div class="form-group col-md-6 has-feedback">
+                                                                                    <label for="public_user_birthdate_'.$area_id.'">'.$lang->translate("Birthdate").'</label>
+                                                                                    <input type="text" class="form-control date-calendar wicaDatepicker" readonly="readonly" id="public_user_birthdate_'.$area_id.'" name="public_user_birthdate_'.$area_id.'" />
+                                                                                    <span class="glyphicon glyphicon-calendar form-control-feedback ui-datepicker-trigger" aria-hidden="true"></span>
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
                                                                                     <label for="public_user_password_'.$area_id.'">* '.$lang->translate("Password").'</label>
                                                                                     <input type="password" class="form-control" id="public_user_password_'.$area_id.'" name="public_user_password_'.$area_id.'" />
                                                                                 </div>
@@ -378,7 +401,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                                 </div>
                                                                                 
 									<div class="text-center col-md-12">
-										<input class="btn btn-primary" type="button" id="btn_register_user_'.$area_id.'" name="btn_register_user_'.$area_id.'" value="'.$lang->translate("Send").'" />
+										<input class="btn btn-template-main" type="button" id="btn_register_user_'.$area_id.'" name="btn_register_user_'.$area_id.'" value="'.$lang->translate("Send").'" />
 										<input type="hidden" id="website_id" name="website_id" value="'.$front_ids->website_id.'" />
 										<input type="hidden" id="area" name="area" value="'.$area_id.'" />
 										<input type="hidden" id="error_email_'.$area_id.'" name="error_email_'.$area_id.'" value="'. $lang->translate('The email address already has been registered').'" />
@@ -400,11 +423,24 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                         </div>
 							      			
 									<div class="form-group text-center">
-										<input class="btn btn-primary" type="button" id="btn_send_password_user_'.$area_id.'" name="btn_send_password_user_'.$area_id.'" value="'.$lang->translate("Send").'" />
+										<input class="btn btn-template-main" type="button" id="btn_send_password_user_'.$area_id.'" name="btn_send_password_user_'.$area_id.'" value="'.$lang->translate("Send").'" />
 									</div>										
 								</form>
 							</div>								
-						</div>';
+						</div></div>
+                                                <script type="text/javascript">
+                                                    $(document).ready(function() {
+                                                        $( ".wicaDatepicker" ).datepicker({
+                                                            changeYear: true,
+                                                            yearRange: "1920:-10",
+                                                            dateFormat: "yy-mm-dd",   
+                                                            //showOn: "both",
+                                                            //buttonImage: "/images/calendar.gif", 
+                                                            //buttonImageOnly: true
+                                                        });
+                                                        
+                                                    });
+                                                </script>';
 			
 			return $return;			
 		}

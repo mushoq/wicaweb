@@ -24,7 +24,7 @@ $(document).ready(function(){
 			createNextButton(i);
 			selectStep(i);
 		}else {			
-			$("#step" + i).hide();
+			$("#step" + i).addClass('hide');
 			createPrevButton(i);
 			createNextButton(i);
 		}
@@ -42,24 +42,24 @@ $(document).ready(function(){
 				j = parseInt(this.id.replace('bar_step_','')); 
 				if($('#frmArticle').valid())
 				{		
-					$("#error_container").hide();					
+					$("#error_container").addClass('hide');					
 					if(j==0){				
 						//0, 2, 3
-						$("#step"+j).hide();
-						$("#step"+(j+2)).hide();
-						$("#step"+(j+3)).hide();
+						$("#step"+j).addClass('hide');
+						$("#step"+(j+2)).addClass('hide');
+						$("#step"+(j+3)).addClass('hide');
 						
 					}else if(j==1){
 						//0, 1 , 3
-						$("#step"+j).hide();
-						$("#step"+(j-1)).hide();
-						$("#step"+(j+2)).hide();
+						$("#step"+j).addClass('hide');
+						$("#step"+(j-1)).addClass('hide');
+						$("#step"+(j+2)).addClass('hide');
 						
 					}else if(j==2){	
 						//0, 1, 2
-						$("#step"+j).hide();
-						$("#step"+(j-2)).hide();
-						$("#step"+(j-1)).hide();
+						$("#step"+j).addClass('hide');
+						$("#step"+(j-2)).addClass('hide');
+						$("#step"+(j-1)).addClass('hide');
 						
 					}					
 					addNextButton(j,"step" + (j-1));
@@ -67,9 +67,9 @@ $(document).ready(function(){
 				}
 			}else{
 				j = 1;				
-				$("#step" + j).hide();
-				$("#step"+(j+1)).hide();
-				$("#step"+(j+2)).hide();				
+				$("#step" + j).addClass('hide');
+				$("#step"+(j+1)).addClass('hide');
+				$("#step"+(j+2)).addClass('hide');				
 				$("#step" + (j - 1)).removeClass('hide');				
 				selectStep(j - 1);
 			}			
@@ -228,7 +228,7 @@ function createNextButton(i) {
 		if(i==0){
 			//BASIC										
 			if($('#frmArticle').valid()){				
-				$("#error_container").hide();
+				$("#error_container").addClass('hide');
 				addNextButton(i,stepName);
 				selectStep(i + 1);
 			}else{
@@ -242,7 +242,7 @@ function createNextButton(i) {
 }
 
 function addNextButton(i, stepName){	
-	$("#" + stepName).hide();
+	$("#" + stepName).addClass('hide');
 	$("#step" + (i + 1)).removeClass('hide');	
 	
 	$("[id^='type_']").each(function(){		
@@ -305,8 +305,8 @@ function createPrevButton(i) {
 	$("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Prev' class='btn btn-primary prev'>"+back_step+"</a>");		
 
 	$("#" + stepName + "Prev").bind("click", function() {					
-		$("#error_container").hide();
-		$("#" + stepName).hide();
+		$("#error_container").addClass('hide');
+		$("#" + stepName).addClass('hide');
 		$("#step" + (i - 1)).removeClass('hide');		
 		selectStep(i - 1);			
 	});
@@ -370,7 +370,7 @@ function checkOptions(obj, btnOrden){
     });
      $('#' + obj + '_no').bind('click', function(){
         
-        $("#" + btnOrden).hide();
+        $("#" + btnOrden).addClass('hide');
         
           //guardar opci�n
          $.ajax({
