@@ -61,40 +61,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	 * Get file with words to translate
 	 */
 	protected function _initTranslation() {
-//		
-//		
-//		Zend_Loader::loadClass('Zend_Translate');
-//		
-//		$translate = new Zend_Translate(
-//				'array',
-//				APPLICATION_PATH.'/configs/languages/',
-//				'es',
-//				array('scan' => Zend_Translate::LOCALE_FILENAME)
-//		);
-//		
-//
-//		$id = New Zend_Session_Namespace('id');
-//		$website_language = $id->website_language;
-//		$locale = new Zend_Locale();
-//		
-//		if(isset($website_language)){
-//			$locale->setLocale($website_language);
-//		}else{
-//			$locale->setLocale(Zend_Locale::BROWSER);
-//		}
-//		$locale->setlocale(LC_ALL, 'en');
-//		
-//		// setting the right locale
-//		if ($translate->isAvailable($locale->getLanguage())) {
-//			$translate->setLocale($locale);
-//		} else {
-//			$translate->setLocale('es');
-//		}		
-//		
-//		Zend_Registry::set('Zend_Translate', $translate);
-//		
-//	
-	
+
 		
 		
 		Zend_Loader::loadClass('Zend_Translate');

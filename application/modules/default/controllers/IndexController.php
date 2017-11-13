@@ -64,6 +64,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    	$website_state_data = get_object_vars($website_state_obj[0]); //make an array of the object data
 		    	$this->view->state = $website_state_data;
 		    	
+                        $this->view->website_language = GlobalFunctions::getLanguageAbbreviationOfWebsite($front_ids->website_id);
 		    	/********
 		    	 * website template
 		    	 */

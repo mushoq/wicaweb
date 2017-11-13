@@ -1546,19 +1546,28 @@ class Core_Article_ArticleController extends Zend_Controller_Action
            $id = New Zend_Session_Namespace('id');
 		
             $section = new Core_Model_Section();
-            if(isset($post['feature'])){
-                //$articles_list = $section->find('wc_section', array('article'=>'yes', 'feature'=>'yes'), array('order_feature'=>'ASC'));
+            if(isset($post['feature'])){ 
                 $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('feature','=','yes'), array('website_id','=',$id->website_id),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_feature ASC'));
-                $typeArticle ='feature';
+                $numArti = count($articles_list);
+                if($numArti == 0 ){
+                    $articles_list = $section->find('wc_section', array('article'=>'yes', 'feature'=>'yes', 'website_id'=>$id->website_id), array('order_feature'=>'ASC'));                    
+                }                
+                $typeArticle ='feature';                
             }
-            if(isset($post['highlight'])){
-                //$articles_list = $section->find('wc_section', array('article'=>'yes', 'highlight'=>'yes'), array('order_highlight'=>'ASC'));
+            if(isset($post['highlight'])){                
                 $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('highlight','=','yes'), array('website_id','=',$id->website_id),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_highlight ASC'));
+                $numArti = count($articles_list);
+                if($numArti == 0 ){
+                    $articles_list = $section->find('wc_section', array('article'=>'yes', 'highlight'=>'yes', 'website_id'=>$id->website_id), array('order_highlight'=>'ASC'));                    
+                }
                 $typeArticle ='highlight';
             }
             if(isset($post['homepage'])){
-                //$articles_list = $section->find('wc_section', array('article'=>'yes', 'homepage_down'=>'yes'), array('order_hompeage_down'=>'ASC'));
                 $articles_list = $section->find_between('wc_section', array(array('article','=','yes'), array('homepage_down','=','yes'), array('website_id','=',$id->website_id),array(date('Y-m-d'),'BETWEEN','publish_date','expire_date')), array('order_hompeage_down ASC'));
+                $numArti = count($articles_list);
+                if($numArti == 0 ){
+                    $articles_list = $section->find('wc_section', array('article'=>'yes', 'homepage_down'=>'yes', 'website_id'=>$id->website_id), array('order_hompeage_down'=>'ASC'));                    
+                }
                 $typeArticle ='homepage';
             }
             $this->view->articles = $articles_list;

@@ -1669,6 +1669,8 @@ function edit_element(element, type){
 		//get data 
 		$("#frm_name").val($('#frm_name_'+element).val());
 		$("#frm_description").val($('#frm_description_'+element).val());
+                $('#frm_required_no').attr("class",'btn btn-primary');
+                $('#frm_required_no').attr("class",'btn btn-primary');
 		if($('#frm_required_'+element).val() == 'yes')
 			$('#frm_required_yes').attr("class",'btn btn-primary active');
 		else
