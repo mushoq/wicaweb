@@ -805,6 +805,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    			$contents_list[$section->id]['content'] = $content_arr;
 		    			$contents_list[$section->id]['article'] = $article_arr;
 		    			$contents_list[$section->id]['products'] = $products;
+                                        $contents_list[$section->id]['product_catalog'] = $product_arr;
                                         $contents_list[$section->id]['crums'] = $crums;
                                         $contents_list[$section->id]['section_images'] = $section_images;
                                         $contents_list[$section->id]['section_floors'] = $section_floors;

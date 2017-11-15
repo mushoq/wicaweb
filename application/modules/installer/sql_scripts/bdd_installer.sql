@@ -436,7 +436,7 @@ CREATE TABLE `wc_banner_counts` (
   `count_views` INTEGER(11) DEFAULT NULL,
   PRIMARY KEY USING BTREE (`id`, `banner_id`),
    INDEX `fk_banner_hits_banner1` USING BTREE (`banner_id`),
-  CONSTRAINT `fk_banner_hits_banner1` FOREIGN KEY (`banner_id`) REFERENCES `wc_banner` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_banner_hits_banner2` FOREIGN KEY (`banner_id`) REFERENCES `wc_banner` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDB;
 
 
