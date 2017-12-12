@@ -230,7 +230,7 @@ function createNextButton(i) {
 	});		
 }
 
-function addNextButton(i, stepName){
+function addNextButton(i, stepName){	
 	$("#" + stepName).addClass('hide');
 	$("#step" + (i + 1)).removeClass('hide');	
 	
@@ -275,7 +275,7 @@ function addNextButton(i, stepName){
 	if($("input[type=text][id=publish_date]").length > 0 && $("input[type=text][id=expire_date]").length > 0)
 	{
 		setDefaultCalendar($('#publish_date'),$('#expire_date'));
-                /*
+                 /*
                   * // PRENDER CUANDO SE AUMENTE CAMPOS DE HORA
                   $("#hora_inicio").rules("add", {
 				 time24: true
