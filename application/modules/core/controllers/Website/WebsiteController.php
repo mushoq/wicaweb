@@ -90,12 +90,7 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     				$logo = NULL;
     			}
                         
-                        if($uploadedData['auspiciante']){
-    				$auspiciante = GlobalFunctions::uploadFiles($uploadedData['auspiciante'], APPLICATION_PATH. '/../public/uploads/website/');
-    			}
-    			else{
-    				$auspiciante = NULL;
-    			}
+                        
     			 
     			if($uploadedData['icon']){
     				$icon = GlobalFunctions::uploadFiles($uploadedData['icon'], APPLICATION_PATH. '/../public/uploads/website/');
@@ -249,7 +244,7 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
 				
 				//Removing all temporal files
 				GlobalFunctions::removeOldFiles($uploadedData['logo'], APPLICATION_PATH. '/../public/uploads/tmp/');
-                                GlobalFunctions::removeOldFiles($uploadedData['auspiciante'], APPLICATION_PATH. '/../public/uploads/tmp/');
+                               
 				GlobalFunctions::removeOldFiles($uploadedData['icon'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['watermark'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['offline_image'], APPLICATION_PATH. '/../public/uploads/tmp/');
@@ -348,10 +343,7 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
 			$form->img_logo->setLabel($lang->translate('Current Image Logo').':');
     	}
         
-        if($arr_data['auspiciante']){
-			$form->img_auspiciante->setImage('/uploads/website/'.$arr_data['auspiciante']);
-			$form->img_auspiciante->setLabel($lang->translate('Current Image Auspiciante').':');
-    	}
+        
         
         
 		
@@ -399,8 +391,7 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
 					$arr_data['website_status'] = $wb->type;
 			}
 		}
-                        $arr_data['competition_time'] = substr($arr_data['competition_date'], -8);
-                        $arr_data['competition_date'] = GlobalFunctions::getFormattedDate($arr_data['competition_date']);
+                        
 			
                 
                 
@@ -446,23 +437,7 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
     				}
     			}
                         
-                        if($uploadedData['auspiciante']){
-    				$auspiciante = GlobalFunctions::uploadFiles($uploadedData['auspiciante'], APPLICATION_PATH. '/../public/uploads/website/');
-    				if($arr_data['auspiciante']){
-    					//delete old file if the image is replaced
-    					if(!GlobalFunctions::removeOldFiles($arr_data['auspiciante'], APPLICATION_PATH. '/../public/uploads/website/')){
-    						throw new Zend_Exception("CUSTOM_EXCEPTION:FILE NOT DELETED.");
-    					}
-    				}
-    			}
-    			else{ //if there is no uploaded image it sets the current image or null in case that any image was uploaded before
-    				if($arr_data['auspiciante']){
-    					$auspiciante = $arr_data['auspiciante'];
-    				}
-    				else{
-    					$auspiciante = NULL;
-    				}
-    			}
+                        
     			
     			if($uploadedData['icon']){
     				$icon = GlobalFunctions::uploadFiles($uploadedData['icon'], APPLICATION_PATH. '/../public/uploads/website/');
@@ -681,7 +656,7 @@ class Core_Website_WebsiteController extends Zend_Controller_Action
 				
 				//Removing all temporal files
 				GlobalFunctions::removeOldFiles($uploadedData['logo'], APPLICATION_PATH. '/../public/uploads/tmp/');
-                                GlobalFunctions::removeOldFiles($uploadedData['auspiciante'], APPLICATION_PATH. '/../public/uploads/tmp/');
+                                
 				GlobalFunctions::removeOldFiles($uploadedData['icon'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['watermark'], APPLICATION_PATH. '/../public/uploads/tmp/');
 				GlobalFunctions::removeOldFiles($uploadedData['offline_image'], APPLICATION_PATH. '/../public/uploads/tmp/');

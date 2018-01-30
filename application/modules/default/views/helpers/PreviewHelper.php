@@ -236,7 +236,7 @@ class Zend_View_Helper_PreviewHelper extends Zend_View_Helper_Abstract {
                                                                                                             {
                                                                                                                     foreach ( $array_options as $ao ) 
                                                                                                                     {
-                                                                                                                            $return .= '<label class="radio-inline"><input id="'.$ao.'" class="radio-inline" type="radio" value="'.$ao.'" name="'.strtolower ( $content['data_content_type']->name ).$content_id.'">'.$ao.'</label>';
+                                                                                                                            $return .= '<label class="radio-inline"><input id="'.$ao.'" class="radio-inline" type="radio" value="'.$ao.'" name="'.strtolower ( $content['data_content_type']->name ).$content['content_id'].'">'.$ao.'</label>';
                                                                                                                     }
                                                                                                             }
                                                                                                                 $return.= '</div>';

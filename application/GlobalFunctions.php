@@ -2232,7 +2232,6 @@ class GlobalFunctions {
                         $attachment->filename    = $newFilename;
                         $mail->addAttachment($attachment); 
                     Zend_Session::namespaceUnset('user');
-
             }
             $sent = true; 
             try{
