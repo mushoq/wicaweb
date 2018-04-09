@@ -150,7 +150,7 @@ CREATE  TABLE IF NOT EXISTS `wc_section` (
   `section_template_id` INT NOT NULL ,
   `internal_name` VARCHAR(200) NULL ,
   `title` VARCHAR(200) NOT NULL ,
-  `url` VARCHAR(300) NOT NULL ,
+  `url` VARCHAR(200) NOT NULL ,
   `subtitle` VARCHAR(45) NULL ,
   `title_browser` VARCHAR(200) NULL ,
   `synopsis` TEXT NULL ,
@@ -407,6 +407,15 @@ CREATE  TABLE IF NOT EXISTS `wc_banner` (
   `status` ENUM('active', 'inactive') NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `wc_area_banner`;
+
+CREATE TABLE `wc_area_banner` (
+  `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(40) COLLATE latin1_swedish_ci DEFAULT NULL,
+  PRIMARY KEY USING BTREE (`id`) COMMENT ''
+)
+ENGINE=InnoDB;
 
 -- -----------------------------------------------------
 -- Table `wc_banner_by_section`

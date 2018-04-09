@@ -202,7 +202,7 @@ class imageRender
         );
         
         $params = array_merge($allowed_params, $params);
-        
+        $generate_params['bg'] = 'FFFFFF';
         if ($params['width']!='0')
         {
             $generate_params['w'] = $params['width'];
@@ -268,7 +268,7 @@ class imageRender
     	);
     
     	$params = array_merge($allowed_params, $params);
-    
+        $generate_params['bg'] = 'FFFFFF';
     	if ($params['width']!='0')
     	{
     		$generate_params['w'] = $params['width'];

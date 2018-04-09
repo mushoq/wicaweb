@@ -189,7 +189,7 @@ class Default_IndexController extends Zend_Controller_Action
 		    			$sections_arr2[] = array('id'=>$sec2->id,
 		    					'section_parent_id'=>$sec2->section_parent_id,
 		    					'title'=>$sec2->title,
-                                                        'url'=>$sec->url
+                                                        'url'=>$sec2->url
 		    			);
 		    		}
 		    	}
@@ -761,7 +761,12 @@ class Default_IndexController extends Zend_Controller_Action
 		    			{
 		    				foreach ($contents as $key => $v)
 		    				{
-		    					$content_arr[] = array('section_id'=>$section->id,'content_id'=>$v->id,'title'=>$v->title,'section'=>$v->section_name,'internal_name'=>$v->internal_name,'columns'=>$v->column_number);
+		    					$data_content_type = $content->find ( 'wc_content_type', array ('id' => $v->content_type_id) );
+                                                        $data_content_field = $content->find ( 'wc_content_field', array ('content_id' => $v->id) );
+                                                        $content_by_section_data = $content->find('wc_content_by_section', array('section_id'=> $section->id, 'content_id'=> $v->id));
+
+                                                        $content_arr[] = array('section_id'=>$section->id,'content_id'=>$v->id,'title'=>$v->title,'section'=>$v->section_name,'internal_name'=>$v->internal_name, 'columns'=>$v->column_number, 
+                                                            'data_content_type'=>$data_content_type[0], 'content_by_section_data'=>$content_by_section_data[0], 'data_content_field'=>$data_content_field);
 		    				}	    				
 		    			}
 	
