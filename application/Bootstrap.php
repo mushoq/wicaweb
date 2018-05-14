@@ -138,7 +138,28 @@ public function _initRoute()
 	
 		// in the index action of product controller
                 if(strpos($_SERVER['REQUEST_URI'], 'core') == false && $_SERVER['REQUEST_URI'] != '/banners' && $_SERVER['REQUEST_URI'] != '/products'){ 
-                    
+                        $error = new Zend_Controller_Router_Route(
+	
+				'page/error',array(
+                                            'siteid' => '1',
+	
+                                            'controller' => 'error',
+
+                                            'module' => 'core' ,
+
+                                            'action' => 'index',
+
+                                            'id' => 1,
+
+                                            'title' => ''
+
+                                            ));
+	
+	
+						// add this route to the front controller
+	
+						$frontController->getRouter()->addRoute('error',$error);
+                                                
                         $route33 = new Zend_Controller_Router_Route(
 	
 				':section_name',array(
